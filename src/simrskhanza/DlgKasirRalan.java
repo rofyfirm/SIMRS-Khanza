@@ -7440,7 +7440,8 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
                 i=tbKasirRalan.getSelectedColumn();
                 if(i==0){
                     if(akses.gettindakan_ralan()==true){
-                        MnDataRalanActionPerformed(null);
+//                        MnDataRalanActionPerformed(null);
+                        TampilAlergi();
                     }
                 }else if(i==1){
                     if(akses.getberi_obat()==true){
@@ -7521,6 +7522,40 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         dokter.setLocationRelativeTo(internalFrame1);
         dokter.setVisible(true);
     }//GEN-LAST:event_BtnSeek3ActionPerformed
+
+    private void TampilAlergi() {
+        String noRawatInput = TNoRwCari.getText();
+
+        String alergiInputDariDB = Sequel.cariIsi(
+                "select pemeriksaan_ralan.alergi from pemeriksaan_ralan where pemeriksaan_ralan.no_rawat=?",
+                noRawatInput
+        );
+
+        if (alergiInputDariDB != null && !alergiInputDariDB.trim().isEmpty()) {
+            String[] daftarAlergi = alergiInputDariDB.split("\\s*,\\s*");
+            StringBuilder htmlList = new StringBuilder("<ul>");
+            for (String alergi : daftarAlergi) {
+                htmlList.append("<li>").append(alergi).append("</li>");
+            }
+            htmlList.append("</ul>");
+            String pesan = "<html>Pasien [" + TPasienCari.getText() + "]<br>"
+                    + "No RM [" + TNoRMCari.getText() + "]<br><br>"
+                    + "<b>Memiliki Riwayat Alergi:</b><br>"
+                    + htmlList.toString() + "</html>";
+            int pilihan = JOptionPane.showConfirmDialog(
+                    null,
+                    pesan,
+                    "Peringatan Alergi Pasien",
+                    JOptionPane.YES_NO_OPTION,
+                    JOptionPane.WARNING_MESSAGE // Menambahkan ikon peringatan
+            );
+            if (pilihan == JOptionPane.YES_OPTION) {
+                MnDataRalanActionPerformed(null);
+            }
+        } else {
+            MnDataRalanActionPerformed(null);
+        }
+    }
 
 private void BtnSeek4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSeek4ActionPerformed
        DlgCariPoli poli=new DlgCariPoli(null,false);
