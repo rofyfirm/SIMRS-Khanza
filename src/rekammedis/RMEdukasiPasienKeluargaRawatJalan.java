@@ -1280,7 +1280,7 @@ public final class RMEdukasiPasienKeluargaRawatJalan extends javax.swing.JDialog
             }
         });
         FormInput.add(RencanaTindakankep);
-        RencanaTindakankep.setBounds(890, 420, 60, 23);
+        RencanaTindakankep.setBounds(890, 420, 90, 23);
 
         scrollInput.setViewportView(FormInput);
 
