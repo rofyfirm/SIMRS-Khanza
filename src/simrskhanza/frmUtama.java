@@ -1814,6 +1814,7 @@ public class frmUtama extends javax.swing.JFrame {
         LblIP = new javax.swing.JLabel();
         jSeparator6 = new javax.swing.JSeparator();
         jLabel7 = new javax.swing.JLabel();
+        lblUser1 = new javax.swing.JLabel();
         PanelUtama = new javax.swing.JPanel();
         scrollPane1 = new widget.ScrollPane();
         PanelWall = new usu.widget.glass.PanelGlass();
@@ -2086,7 +2087,7 @@ public class frmUtama extends javax.swing.JFrame {
 
         tanggal.setEditable(false);
         tanggal.setForeground(new java.awt.Color(50, 70, 50));
-        tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "14/05/2026" }));
+        tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "16/08/2026" }));
         tanggal.setDisplayFormat("dd/MM/yyyy");
         tanggal.setName("tanggal"); // NOI18N
         tanggal.setOpaque(false);
@@ -7474,6 +7475,15 @@ public class frmUtama extends javax.swing.JFrame {
         jLabel7.setName("jLabel7"); // NOI18N
         jLabel7.setPreferredSize(new java.awt.Dimension(287, 23));
         internalFrame4.add(jLabel7);
+
+        lblUser1.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        lblUser1.setForeground(new java.awt.Color(50, 50, 50));
+        lblUser1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblUser1.setText("826.v1");
+        lblUser1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        lblUser1.setName("lblUser1"); // NOI18N
+        lblUser1.setPreferredSize(new java.awt.Dimension(170, 23));
+        internalFrame4.add(lblUser1);
 
         getContentPane().add(internalFrame4, java.awt.BorderLayout.PAGE_END);
 
@@ -24270,6 +24280,7 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
     private javax.swing.JLabel lblStts;
     private javax.swing.JLabel lblTgl;
     private javax.swing.JLabel lblUser;
+    private javax.swing.JLabel lblUser1;
     private usu.widget.glass.PanelGlass panelGlass1;
     private usu.widget.glass.PanelGlass panelJudul;
     private widget.InternalFrame panelMenu;
