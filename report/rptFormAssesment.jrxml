@@ -123,7 +123,7 @@
 		<band height="84" splitType="Stretch">
 			<staticText>
 				<reportElement x="0" y="52" width="554" height="23" uuid="63e53eb6-8669-4f6e-bbdb-254e68c91e2e"/>
-				<textElement textAlignment="Center">
+				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Tahoma" size="11" isBold="true"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
@@ -198,7 +198,7 @@
 				<text><![CDATA[:]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement x="90" y="-9" width="200" height="14" uuid="88370624-a26a-4fef-abcc-eaa2b3df1d53"/>
+				<reportElement x="90" y="-9" width="464" height="14" uuid="88370624-a26a-4fef-abcc-eaa2b3df1d53"/>
 				<textElement>
 					<font fontName="Tahoma" size="9"/>
 					<paragraph lineSpacing="Single"/>
@@ -222,7 +222,7 @@
 				<text><![CDATA[:]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement x="90" y="6" width="300" height="14" uuid="179d773b-2f93-49ea-9c9f-433f30a29b7a"/>
+				<reportElement x="90" y="6" width="464" height="14" uuid="179d773b-2f93-49ea-9c9f-433f30a29b7a"/>
 				<textElement>
 					<font fontName="Tahoma" size="9"/>
 					<paragraph lineSpacing="Single"/>
@@ -246,7 +246,7 @@
 				<text><![CDATA[:]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true" pattern="dd/MM/yyyy" isBlankWhenNull="true">
-				<reportElement x="90" y="21" width="150" height="14" uuid="1b26dfed-d257-4313-ab65-e6202058cd9c"/>
+				<reportElement x="90" y="21" width="464" height="14" uuid="1b26dfed-d257-4313-ab65-e6202058cd9c"/>
 				<textElement>
 					<font fontName="Tahoma" size="9"/>
 					<paragraph lineSpacing="Single"/>
@@ -280,7 +280,7 @@
 			<line>
 				<reportElement x="0" y="56" width="554" height="1" uuid="a1b2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5d"/>
 				<graphicElement>
-					<pen lineWidth="0.5"/>
+					<pen lineWidth="0.5" lineStyle="Dashed"/>
 				</graphicElement>
 			</line>
 			<staticText>
