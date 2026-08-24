@@ -16761,7 +16761,9 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
         MnPenilaianAwalMedisRalanKebidanan.setEnabled(akses.getpenilaian_awal_medis_ralan_kebidanan());      
         MnPenilaianAwalMedisIGD.setEnabled(akses.getpenilaian_awal_medis_igd());    
         MnPenilaianAwalMedisRalanBayi.setEnabled(akses.getpenilaian_awal_medis_ralan_anak()); 
-        MnPenilaianFisioterapi.setEnabled(akses.getpenilaian_fisioterapi());            
+        MnPenilaianFisioterapi.setEnabled(akses.getpenilaian_fisioterapi());
+        MnFormReAssessment.setEnabled(akses.getpenilaian_fisioterapi());
+        MnFormLembarTerapi.setEnabled(akses.getpenilaian_fisioterapi());
         ppProgramPRB.setEnabled(akses.getbpjs_program_prb());      
         ppSuplesiJasaRaharja.setEnabled(akses.getbpjs_suplesi_jasaraharja());  
         ppDataIndukKecelakaan.setEnabled(akses.getbpjs_data_induk_kecelakaan());    
