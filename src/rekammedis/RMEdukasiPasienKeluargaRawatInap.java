@@ -57,7 +57,7 @@ public class RMEdukasiPasienKeluargaRawatInap extends RMEdukasiPasienKeluargaRaw
     /** Ganti tabel query dari edukasi_pasien_keluarga_rj ke edukasi_pasien_keluarga_ri. */
     @Override
     protected String getNamaTabelEdukasi() {
-        return "edukasi_pasien_keluarga_rj";
+        return "edukasi_pasien_keluarga_ri";
     }
 
     /** Ganti nama file jasper laporan menjadi versi rawat inap. */
