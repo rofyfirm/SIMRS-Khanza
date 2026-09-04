@@ -30,7 +30,7 @@
 mpp_skrining.tanggal,mpp_skrining.param1,mpp_skrining.param2,mpp_skrining.param3,mpp_skrining.param3,
 mpp_skrining.param4,mpp_skrining.param5,mpp_skrining.param5,mpp_skrining.param6,mpp_skrining.param7,
 mpp_skrining.param8,mpp_skrining.param9,mpp_skrining.param10,mpp_skrining.param11,mpp_skrining.param12,
-mpp_skrining.param13,mpp_skrining.param14,mpp_skrining.param15,mpp_skrining.param16,mpp_skrining.nip,pegawai.nama,reg_periksa.umurdaftar,reg_periksa.sttsumur, penjab.png_jawab 
+mpp_skrining.param13,mpp_skrining.param14,mpp_skrining.param15,mpp_skrining.param16,mpp_skrining.param17,mpp_skrining.nip,pegawai.nama,reg_periksa.umurdaftar,reg_periksa.sttsumur, penjab.png_jawab 
 from reg_periksa inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis 
 inner join mpp_skrining on reg_periksa.no_rawat=mpp_skrining.no_rawat 
 inner join pegawai on mpp_skrining.nip=pegawai.nik 
@@ -166,6 +166,11 @@ inner join propinsi on pasien.kd_prop=propinsi.kd_prop]]>
 		<property name="com.jaspersoft.studio.field.label" value="param16"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="mpp_skrining"/>
 	</field>
+	<field name="param17" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="param17"/>
+		<property name="com.jaspersoft.studio.field.label" value="param17"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="mpp_skrining"/>
+	</field>
 	<field name="nip" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.name" value="nip"/>
 		<property name="com.jaspersoft.studio.field.label" value="nip"/>
@@ -192,7 +197,7 @@ inner join propinsi on pasien.kd_prop=propinsi.kd_prop]]>
 		<property name="com.jaspersoft.studio.field.tree.path" value="penjab"/>
 	</field>
 	<title>
-		<band height="759">
+		<band height="776">
 			<textField>
 				<reportElement x="0" y="44" width="555" height="14" uuid="2c2c779f-b976-4237-b015-6090c3225557"/>
 				<textElement textAlignment="Center">
@@ -202,7 +207,7 @@ inner join propinsi on pasien.kd_prop=propinsi.kd_prop]]>
 				<textFieldExpression><![CDATA["E-mail : "+$P{emailrs}]]></textFieldExpression>
 			</textField>
 			<rectangle>
-				<reportElement x="0" y="65" width="557" height="655" uuid="5efab5f7-d253-4f54-804a-1cdb91cce032"/>
+				<reportElement x="0" y="65" width="557" height="672" uuid="5efab5f7-d253-4f54-804a-1cdb91cce032"/>
 				<graphicElement>
 					<pen lineWidth="0.75"/>
 				</graphicElement>
@@ -388,7 +393,7 @@ inner join propinsi on pasien.kd_prop=propinsi.kd_prop]]>
 				<text><![CDATA[:]]></text>
 			</staticText>
 			<line>
-				<reportElement x="0" y="738" width="557" height="1" uuid="b33ba12e-e000-400c-8e7b-b8b517d15a08"/>
+				<reportElement x="0" y="755" width="557" height="1" uuid="b33ba12e-e000-400c-8e7b-b8b517d15a08"/>
 				<graphicElement>
 					<pen lineWidth="2.0" lineStyle="Solid"/>
 				</graphicElement>
@@ -1163,6 +1168,54 @@ inner join propinsi on pasien.kd_prop=propinsi.kd_prop]]>
 				<text><![CDATA[V]]></text>
 			</staticText>
 			<staticText>
+				<reportElement x="3" y="516" width="19" height="14" uuid="45e917f9-941f-4136-beb6-03edd44bb051"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[17.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="26" y="516" width="449" height="14" uuid="82ae6684-5ca2-4b7e-aed2-d1f96a9788d6"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Permintaan Surat (Visum/Assesing/Surat Lainnya)]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="489" y="519" width="9" height="9" uuid="1bded552-d364-4b91-bcf9-9db8495cd94a"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement x="526" y="519" width="9" height="9" uuid="c53a1be6-4fb1-4699-9211-e18a67b5cf76"/>
+				<graphicElement>
+					<pen lineWidth="0.5"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="486" y="516" width="14" height="14" uuid="39e5e9d2-0479-4144-b813-b0f6e93f54f0">
+					<printWhenExpression><![CDATA[($F{param17}.toString().equals("Ya") ? Boolean.TRUE:Boolean.FALSE)]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[V]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="523" y="516" width="14" height="14" uuid="c146416b-a6dd-4381-91ea-fe3181ec463a">
+					<printWhenExpression><![CDATA[($F{param17}.toString().equals("Tidak") ? Boolean.TRUE:Boolean.FALSE)]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[V]]></text>
+			</staticText>
+			<staticText>
 				<reportElement x="26" y="211" width="449" height="14" uuid="3eaf5d89-e078-4638-8429-96ea9c086117"/>
 				<textElement textAlignment="Center" verticalAlignment="Top">
 					<font fontName="Tahoma" size="9" isBold="true"/>
@@ -1307,7 +1360,7 @@ inner join propinsi on pasien.kd_prop=propinsi.kd_prop]]>
 				<text><![CDATA[9.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="26" y="550" width="449" height="39" uuid="dc95dadc-4f20-4169-8aae-1441df4548c1"/>
+				<reportElement x="26" y="567" width="449" height="39" uuid="dc95dadc-4f20-4169-8aae-1441df4548c1"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font fontName="Tahoma" size="9"/>
 					<paragraph lineSpacing="Single"/>
@@ -1329,7 +1382,7 @@ inner join propinsi on pasien.kd_prop=propinsi.kd_prop]]>
 				</graphicElement>
 			</line>
 			<line>
-				<reportElement x="23" y="209" width="1" height="305" uuid="5df12b13-882d-4be9-8a91-09d93be21bee">
+				<reportElement x="23" y="209" width="1" height="322" uuid="5df12b13-882d-4be9-8a91-09d93be21bee">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<graphicElement>
@@ -1337,7 +1390,7 @@ inner join propinsi on pasien.kd_prop=propinsi.kd_prop]]>
 				</graphicElement>
 			</line>
 			<line>
-				<reportElement x="0" y="209" width="1" height="331" uuid="ff58e4f9-942d-4b29-8b34-4430304bde88">
+				<reportElement x="0" y="209" width="1" height="348" uuid="ff58e4f9-942d-4b29-8b34-4430304bde88">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<graphicElement>
@@ -1345,7 +1398,7 @@ inner join propinsi on pasien.kd_prop=propinsi.kd_prop]]>
 				</graphicElement>
 			</line>
 			<line>
-				<reportElement x="478" y="210" width="1" height="330" uuid="9f45f9e6-498c-4fd3-8cff-b234a5c99054">
+				<reportElement x="478" y="210" width="1" height="347" uuid="9f45f9e6-498c-4fd3-8cff-b234a5c99054">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<graphicElement>
@@ -1353,7 +1406,7 @@ inner join propinsi on pasien.kd_prop=propinsi.kd_prop]]>
 				</graphicElement>
 			</line>
 			<line>
-				<reportElement x="513" y="210" width="1" height="330" uuid="e6ede758-012d-45fc-86b7-54a103d99152">
+				<reportElement x="513" y="210" width="1" height="347" uuid="e6ede758-012d-45fc-86b7-54a103d99152">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<graphicElement>
@@ -1361,7 +1414,7 @@ inner join propinsi on pasien.kd_prop=propinsi.kd_prop]]>
 				</graphicElement>
 			</line>
 			<line>
-				<reportElement x="556" y="210" width="1" height="305" uuid="1ba5e92f-9815-4025-acea-9709eabff8e0">
+				<reportElement x="556" y="210" width="1" height="322" uuid="1ba5e92f-9815-4025-acea-9709eabff8e0">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<graphicElement>
@@ -1369,13 +1422,13 @@ inner join propinsi on pasien.kd_prop=propinsi.kd_prop]]>
 				</graphicElement>
 			</line>
 			<line>
-				<reportElement x="0" y="514" width="557" height="1" uuid="d39d2950-7c3e-43ff-8a8e-8c1b960bf350"/>
+				<reportElement x="0" y="531" width="557" height="1" uuid="d39d2950-7c3e-43ff-8a8e-8c1b960bf350"/>
 				<graphicElement>
 					<pen lineWidth="0.75"/>
 				</graphicElement>
 			</line>
 			<staticText>
-				<reportElement x="360" y="610" width="179" height="21" uuid="af299f5b-295e-4c15-bf09-dec78d0a8af0"/>
+				<reportElement x="360" y="627" width="179" height="21" uuid="af299f5b-295e-4c15-bf09-dec78d0a8af0"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Tahoma" size="9"/>
 					<paragraph lineSpacing="Single"/>
@@ -1383,7 +1436,7 @@ inner join propinsi on pasien.kd_prop=propinsi.kd_prop]]>
 				<text><![CDATA[Petugas Yang Melaporkan]]></text>
 			</staticText>
 			<componentElement>
-				<reportElement x="407" y="637" width="87" height="48" isRemoveLineWhenBlank="true" uuid="4354ae93-bfa5-4f85-9627-378bddefd4e9">
+				<reportElement x="407" y="654" width="87" height="48" isRemoveLineWhenBlank="true" uuid="4354ae93-bfa5-4f85-9627-378bddefd4e9">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
 				<jr:QRCode xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" errorCorrectionLevel="H">
@@ -1391,7 +1444,7 @@ inner join propinsi on pasien.kd_prop=propinsi.kd_prop]]>
 				</jr:QRCode>
 			</componentElement>
 			<textField>
-				<reportElement x="359" y="690" width="186" height="16" uuid="9c0af79e-419f-4bd3-bce2-3889df32cfa4"/>
+				<reportElement x="359" y="707" width="186" height="16" uuid="9c0af79e-419f-4bd3-bce2-3889df32cfa4"/>
 				<textElement textAlignment="Center">
 					<font fontName="Tahoma" size="12"/>
 					<paragraph lineSpacing="Single"/>
@@ -1399,7 +1452,7 @@ inner join propinsi on pasien.kd_prop=propinsi.kd_prop]]>
 				<textFieldExpression><![CDATA[$F{nama}]]></textFieldExpression>
 			</textField>
 			<line>
-				<reportElement x="0" y="540" width="557" height="1" uuid="7051e734-f540-4959-8c9c-15180c5b191f"/>
+				<reportElement x="0" y="557" width="557" height="1" uuid="7051e734-f540-4959-8c9c-15180c5b191f"/>
 				<graphicElement>
 					<pen lineWidth="0.75"/>
 				</graphicElement>
