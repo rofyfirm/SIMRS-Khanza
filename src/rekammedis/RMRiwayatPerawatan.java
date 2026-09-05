@@ -19,6 +19,7 @@ import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
+import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.Desktop;
 import java.awt.Dimension;
@@ -339,6 +340,7 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
         chkAsuhanMedisHemodialisa = new widget.CekBox();
         chkAsuhanMedisRanapJantung = new widget.CekBox();
         chkEdukasiPasienTerintegrasiRawatJalan = new widget.CekBox();
+        chkEdukasiPasienTerintegrasiRawatInap = new widget.CekBox();
         chkPemeriksaanRalan = new widget.CekBox();
         chkPemeriksaanObstetriRalan = new widget.CekBox();
         chkPemeriksaanGenekologiRalan = new widget.CekBox();
@@ -1366,6 +1368,14 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
         chkEdukasiPasienTerintegrasiRawatJalan.setOpaque(false);
         chkEdukasiPasienTerintegrasiRawatJalan.setPreferredSize(new java.awt.Dimension(245, 22));
         FormMenu.add(chkEdukasiPasienTerintegrasiRawatJalan);
+
+        chkEdukasiPasienTerintegrasiRawatInap.setSelected(true);
+        chkEdukasiPasienTerintegrasiRawatInap.setText("Edukasi Pasien & Keluarga Rawat Inap");
+        chkEdukasiPasienTerintegrasiRawatInap.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        chkEdukasiPasienTerintegrasiRawatInap.setName("chkEdukasiPasienTerintegrasiRawatInap"); // NOI18N
+        chkEdukasiPasienTerintegrasiRawatInap.setOpaque(false);
+        chkEdukasiPasienTerintegrasiRawatInap.setPreferredSize(new java.awt.Dimension(245, 22));
+        FormMenu.add(chkEdukasiPasienTerintegrasiRawatInap);
 
         chkPemeriksaanRalan.setSelected(true);
         chkPemeriksaanRalan.setText("Pemeriksaan Ralan");
@@ -3075,418 +3085,11 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
     }//GEN-LAST:event_ChkAccorActionPerformed
 
     private void chkSemuaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_chkSemuaItemStateChanged
-        if(chkSemua.isSelected()==true){
-            chkTriase.setSelected(true);
-            chkAsuhanKeperawatanRalan.setSelected(true);
-            chkAsuhanKeperawatanRalanGigi.setSelected(true);
-            chkAsuhanKeperawatanRalanBayi.setSelected(true);
-            chkAsuhanKeperawatanRalanKandungan.setSelected(true);
-            chkAsuhanKeperawatanRanap.setSelected(true);
-            chkAsuhanKeperawatanRanapKandungan.setSelected(true);
-            chkAsuhanKeperawatanRanapNeonatus.setSelected(true);
-            chkAsuhanKeperawatanRalanPsikiatri.setSelected(true);
-            chkAsuhanMedisRalan.setSelected(true);
-            chkAsuhanMedisIGD.setSelected(true);
-            chkAsuhanMedisRalanKandungan.setSelected(true);
-            chkAsuhanMedisRalanBayi.setSelected(true);
-            chkAsuhanMedisRalanTHT.setSelected(true);
-            chkAsuhanMedisRalanPenyakitDalam.setSelected(true);
-            chkAsuhanMedisRalanMata.setSelected(true);
-            chkAsuhanMedisRalanNeurologi.setSelected(true);
-            chkAsuhanMedisRalanOrthopedi.setSelected(true);
-            chkAsuhanMedisRalanBedah.setSelected(true);
-            chkAsuhanMedisRanap.setSelected(true);
-            chkAsuhanMedisRanapKandungan.setSelected(true);
-            chkDiagnosaPenyakit.setSelected(true);
-            chkProsedurTindakan.setSelected(true);
-            chkCatatanDokter.setSelected(true);
-            chkHemodialisa.setSelected(true);
-            chkPemeriksaanRalan.setSelected(true);
-            chkPemeriksaanObstetriRalan.setSelected(true);
-            chkPemeriksaanGenekologiRalan.setSelected(true);
-            chkPemeriksaanRanap.setSelected(true);
-            chkPemeriksaanObstetriRanap.setSelected(true);
-            chkPemeriksaanGenekologiRanap.setSelected(true);
-            chkSkriningGiziLanjut.setSelected(true);
-            chkAsuhanGizi.setSelected(true);
-            chkMonitoringGizi.setSelected(true);
-            chkTindakanRalanDokter.setSelected(true);
-            chkTindakanRalanParamedis.setSelected(true);
-            chkTindakanRalanDokterParamedis.setSelected(true);
-            chkTindakanRanapDokter.setSelected(true);
-            chkTindakanRanapParamedis.setSelected(true);
-            chkTindakanRanapDokterParamedis.setSelected(true);
-            chkPenggunaanKamar.setSelected(true);
-            chkOperasiVK.setSelected(true);
-            chkPemeriksaanRadiologi.setSelected(true);
-            chkPemeriksaanLaborat.setSelected(true);
-            chkPemberianObat.setSelected(true);
-            chkPenggunaanObatOperasi.setSelected(true);
-            chkResepPulang.setSelected(true);
-            chkTambahanBiaya.setSelected(true);
-            chkPotonganBiaya.setSelected(true);
-            chkResume.setSelected(true);
-            chkBerkasDigital.setSelected(true);
-            chkUjiFungsiKFR.setSelected(true);
-            chkAsuhanKeperawatanIGD.setSelected(true);
-            chkCatatanObservasiIGD.setSelected(true);
-            chkCatatanObservasiRanap.setSelected(true);
-            chkCatatanObservasiRanapKebidanan.setSelected(true);
-            chkCatatanObservasiRanapPostPartum.setSelected(true);
-            chkCatatanKeperawatanRanap.setSelected(true);
-            chkPemantauanPEWSAnak.setSelected(true);
-            chkAsuhanFisioterapi.setSelected(true);
-            chkAsuhanPsikolog.setSelected(true);
-            chkAsuhanMedisRalanPsikiatri.setSelected(true);
-            chkAsuhanPreOperasi.setSelected(true);
-            chkAsuhanPreAnestesi.setSelected(true);
-            chkPerencanaanPemulangan.setSelected(true);
-            chkAsuhanLanjutanRisikoJatuhDewasa.setSelected(true);
-            chkAsuhanLanjutanRisikoJatuhAnak.setSelected(true);
-            chkAsuhanMedisRalanGeriatri.setSelected(true);
-            chkAsuhanTambahanGeriatri.setSelected(true);
-            chkSkriningNutrisiDewasa.setSelected(true);
-            chkHasilPemeriksaanUSG.setSelected(true);
-            chkSkriningNutrisiLansia.setSelected(true);
-            chkSkriningNutrisiAnak.setSelected(true);
-            chkKonselingFarmasi.setSelected(true);
-            chkPelayananInformasiObat.setSelected(true);
-            chkTransferAntarRuang.setSelected(true);
-            chkCatatanCekGDS.setSelected(true);
-            chkChecklistPreOperasi.setSelected(true);
-            chkSignInSebelumAnestesi.setSelected(true);
-            chkTimeOutSebelumInsisi.setSelected(true);
-            chkSignOutSebelumMenutupLuka.setSelected(true);
-            chkChecklistPostOperasi.setSelected(true);
-            chkRekonsiliasiObat.setSelected(true);
-            chkPenilaianPasienTerminal.setSelected(true);
-            chkMonitoringReaksiTranfusi.setSelected(true);
-            chkPenilaianKorbanKekerasan.setSelected(true);
-            chkAsuhanLanjutanRisikoJatuhLansia.setSelected(true);
-            chkPenilaianPasienPenyakitMenular.setSelected(true);
-            chkEdukasiPasienTerintegrasiRawatJalan.setSelected(true);
-            chkPemantauanPEWSDewasa.setSelected(true);
-            chkAsuhanTambahanBunuhDiri.setSelected(true);
-            chkAsuhanTambahanPerilakuKekerasan.setSelected(true);
-            chkAsuhanTambahanMelarikanDiri.setSelected(true);
-            chkPenilaianPasienKeracunan.setSelected(true);
-            chkAsuhanMedisRalanBedahMulut.setSelected(true);
-            chkPemantauanMOEWSObstetri.setSelected(true);
-            chkCatatanADIMEGizi.setSelected(true);
-            chkAsuhanKeperawatanRalanGeriatri.setSelected(true);
-            chkChecklistKriteriaMasukHCU.setSelected(true);
-            chkChecklistKriteriaKeluarHCU.setSelected(true);
-            chkAsuhanRisikoDekubitus.setSelected(true);
-            chkDokumentasiTindakanESWL.setSelected(true);
-            chkChecklistKriteriaMasukICU.setSelected(true);
-            chkChecklistKriteriaKeluarICU.setSelected(true);
-            chkFollowUpDBD.setSelected(true);
-            chkAsuhanLanjutanRisikoJatuhNeonatus.setSelected(true);
-            chkAsuhanLanjutanRisikoJatuhGeriatri.setSelected(true);
-            chkPemantauanEWSNeonatus.setSelected(true);
-            chkAsuhanMedisRalanKulitKelamin.setSelected(true);
-            chkPenilaianLevelKecemasanRanapAnak.setSelected(true);
-            chkAsuhanMedisHemodialisa.setSelected(true);
-            chkAsuhanLanjutanRisikoJatuhPsikiatri.setSelected(true);
-            chkAsuhanLanjutanSkriningFungsional.setSelected(true);
-            chkAsuhanMedisRalanKedokteranFisik.setSelected(true);
-            chkAsuhanMedisIGDPsikiatri.setSelected(true);
-            chkPenilaianUlangNyeri.setSelected(true);
-            chkAsuhanTerapiWicara.setSelected(true);
-            chkPengkajianRestrain.setSelected(true);
-            chkAsuhanMedisRalanParu.setSelected(true);
-            chkCatatanKeperawatanRalan.setSelected(true);
-            chkCatatanPersalinan.setSelected(true);
-            chkSkorAldrettePascaAnestesi.setSelected(true);
-            chkSkorStewardPascaAnestesi.setSelected(true);
-            chkSkorBromagePascaAnestesi.setSelected(true);
-            chkAsuhanPreInduksi.setSelected(true);
-            chkHasilPemeriksaanUSGUrologi.setSelected(true);
-            chkHasilPemeriksaanUSGGynecologi.setSelected(true);
-            chkHasilPemeriksaanEKG.setSelected(true);
-            chkPenatalaksanaanTerapiOkupasi.setSelected(true);
-            chkHasilPemeriksaanUSGNeonatus.setSelected(true);
-            chkHasilPemeriksaanEndoskopiFaringLaring.setSelected(true);
-            chkHasilPemeriksaanEndoskopiHidung.setSelected(true);
-            chkHasilPemeriksaanEndoskopiTelinga.setSelected(true);
-            chkPenilaianPasienImunitasRendah.setSelected(true);
-            chkCatatanKeseimbanganCairan.setSelected(true);
-            chkCatatanObservasiCHBP.setSelected(true);
-            chkCatatanObservasiInduksiPersalinan.setSelected(true);
-            chkKonsultasiMedik.setSelected(true);
-            chkSkriningMerokokUsiaRemaja.setSelected(true);
-            chkSkriningKekerasanPadaPerempuan.setSelected(true);
-            chkSkriningObesitas.setSelected(true);
-            chkSkriningRisikoKankerPayudara.setSelected(true);
-            chkSkriningRisikoKankerParu.setSelected(true);
-            chkSkriningGigiMulutRemaja.setSelected(true);
-            chkSkriningTBC.setSelected(true);
-            chkAsuhanMedisMCU.setSelected(true);
-            chkAsuhanKeperawatanRanapBayi.setSelected(true);
-            chkCatatanObservasiRestrainNonFarmakologi.setSelected(true);
-            chkCatatanObservasiVentilator.setSelected(true);
-            chkCatatanAnastesiSedasi.setSelected(true);
-            chkSkriningPUMA.setSelected(true);
-            chkSkriningAdiksiNikotin.setSelected(true);
-            chkSkriningThalasemia.setSelected(true);
-            chkSkriningInstrumenSDQ.setSelected(true);
-            chkSkriningInstrumenSRQ.setSelected(true);
-            chkChecklistPemberianFibrinolitik.setSelected(true);
-            chkSkriningKankerKolorektal.setSelected(true);
-            chkAsuhanPsikologiKlinis.setSelected(true);
-            chkAsuhanMedisRanapNeonatus.setSelected(true);
-            chkHasilPemeriksaanEcho.setSelected(true);
-            chkSEPBPJS.setSelected(true);
-            chkSkriningDiabetesMelitus.setSelected(true);
-            chkPenilaianBayiBaruLahir.setSelected(true);
-            chkLaporanTindakan.setSelected(true);
-            chkLayananKedokteranFisikRehabilitasi.setSelected(true);
-            chkSkriningGigiMulutBalita.setSelected(true);
-            chkSkriningAnemia.setSelected(true);
-            chkLayananProgramKFR.setSelected(true);
-            chkSkriningHipertensi.setSelected(true);
-            chkSkriningKesehatanPenglihatan.setSelected(true);
-            chkCatatanObservasiHemodialisa.setSelected(true);
-            chkSkriningGigiMulutDewasa.setSelected(true);
-            chkCatatanCairanHemodialisa.setSelected(true);
-            chkSkriningRisikoKankerServiks.setSelected(true);
-            chkSkriningGigiMulutLansia.setSelected(true);
-            chkSkriningIndraPendengaran.setSelected(true);
-            chkCatatanPengkajianPaskaOperasi.setSelected(true);
-            chkSkriningFrailtySyndrome.setSelected(true);
-            chkCatatanObservasiBayi.setSelected(true);
-            chkHasilPemeriksaanSlitLamp.setSelected(true);
-            chkHasilPemeriksaanOCT.setSelected(true);
-            chkChecklistKesiapanAnestesi.setSelected(true);
-            chkSkriningInstrumenACRS.setSelected(true);
-            chkChecklistKriteriaMasukNICU.setSelected(true);
-            chkChecklistKriteriaKeluarNICU.setSelected(true);
-            chkAsuhanMedisRanapPsikiatri.setSelected(true);
-            chkChecklistKriteriaMasukPICU.setSelected(true);
-            chkChecklistKriteriaKeluarPICU.setSelected(true);
-            chkSkriningInstrumenAMT.setSelected(true);
-            chkAsuhanMedisRalanJantung.setSelected(true);
-            chkAsuhanMedisRalanUrologi.setSelected(true);
-            chkHasilPemeriksaanTreadmill.setSelected(true);
-            chkHasilPemeriksaanEchoPediatrik.setSelected(true);
-            chkSkriningPSI.setSelected(true);
-            chkSkriningInstrumenESAT.setSelected(true);
-            chkAsuhanMedisRanapJantung.setSelected(true);
-            chkSkriningCRUB65.setSelected(true);
-            chkSkriningGiziKehamilan.setSelected(true);
-            chkKonsultasiPerawat.setSelected(true);
-            chkCatatanObservasiRuangOperasi.setSelected(true);
-            chkHasilPemeriksaanUSGAbdomen.setSelected(true);
-            chkIntervensiNyeriFarmakologi.setSelected(true);
-            chkIntervensiNyeriNonFarmakologi.setSelected(true);
-            chkChecklistKriteriaMasukIsolasi.setSelected(true);
-            chkChecklistKriteriaKeluarIsolasi.setSelected(true);
-        }else{
-            chkTriase.setSelected(false);
-            chkAsuhanKeperawatanRalan.setSelected(false);
-            chkAsuhanKeperawatanRalanGigi.setSelected(false);
-            chkAsuhanKeperawatanRalanBayi.setSelected(false);
-            chkAsuhanKeperawatanRalanKandungan.setSelected(false);
-            chkAsuhanKeperawatanRanap.setSelected(false);
-            chkAsuhanKeperawatanRanapKandungan.setSelected(false);
-            chkAsuhanKeperawatanRanapNeonatus.setSelected(false);
-            chkAsuhanKeperawatanRalanPsikiatri.setSelected(false);
-            chkAsuhanMedisRalan.setSelected(false);
-            chkAsuhanMedisIGD.setSelected(false);
-            chkAsuhanMedisRalanKandungan.setSelected(false);
-            chkAsuhanMedisRalanBayi.setSelected(false);
-            chkAsuhanMedisRalanTHT.setSelected(false);
-            chkAsuhanMedisRalanPenyakitDalam.setSelected(false);
-            chkAsuhanMedisRalanMata.setSelected(false);
-            chkAsuhanMedisRalanNeurologi.setSelected(false);
-            chkAsuhanMedisRalanOrthopedi.setSelected(false);
-            chkAsuhanMedisRalanBedah.setSelected(false);
-            chkAsuhanMedisRanap.setSelected(false);
-            chkAsuhanMedisRanapKandungan.setSelected(false);
-            chkDiagnosaPenyakit.setSelected(false);
-            chkProsedurTindakan.setSelected(false);
-            chkCatatanDokter.setSelected(false);
-            chkHemodialisa.setSelected(false);
-            chkPemeriksaanRalan.setSelected(false);
-            chkPemeriksaanObstetriRalan.setSelected(false);
-            chkPemeriksaanGenekologiRalan.setSelected(false);
-            chkPemeriksaanRanap.setSelected(false);
-            chkPemeriksaanObstetriRanap.setSelected(false);
-            chkPemeriksaanGenekologiRanap.setSelected(false);
-            chkSkriningGiziLanjut.setSelected(false);
-            chkAsuhanGizi.setSelected(false);
-            chkMonitoringGizi.setSelected(false);
-            chkTindakanRalanDokter.setSelected(false);
-            chkTindakanRalanParamedis.setSelected(false);
-            chkTindakanRalanDokterParamedis.setSelected(false);
-            chkTindakanRanapDokter.setSelected(false);
-            chkTindakanRanapParamedis.setSelected(false);
-            chkTindakanRanapDokterParamedis.setSelected(false);
-            chkPenggunaanKamar.setSelected(false);
-            chkOperasiVK.setSelected(false);
-            chkPemeriksaanRadiologi.setSelected(false);
-            chkPemeriksaanLaborat.setSelected(false);
-            chkPemberianObat.setSelected(false);
-            chkPenggunaanObatOperasi.setSelected(false);
-            chkResepPulang.setSelected(false);
-            chkTambahanBiaya.setSelected(false);
-            chkPotonganBiaya.setSelected(false);
-            chkResume.setSelected(false);
-            chkBerkasDigital.setSelected(false);
-            chkUjiFungsiKFR.setSelected(false);
-            chkAsuhanKeperawatanIGD.setSelected(false);
-            chkCatatanObservasiIGD.setSelected(false);
-            chkCatatanObservasiRanap.setSelected(false);
-            chkCatatanObservasiRanapKebidanan.setSelected(false);
-            chkCatatanObservasiRanapPostPartum.setSelected(false);
-            chkCatatanKeperawatanRanap.setSelected(false);
-            chkPemantauanPEWSAnak.setSelected(false);
-            chkAsuhanFisioterapi.setSelected(false);
-            chkAsuhanPsikolog.setSelected(false);
-            chkAsuhanMedisRalanPsikiatri.setSelected(false);
-            chkAsuhanPreOperasi.setSelected(false);
-            chkAsuhanPreAnestesi.setSelected(false);
-            chkPerencanaanPemulangan.setSelected(false);
-            chkAsuhanLanjutanRisikoJatuhDewasa.setSelected(false);
-            chkAsuhanLanjutanRisikoJatuhAnak.setSelected(false);
-            chkAsuhanMedisRalanGeriatri.setSelected(false);
-            chkAsuhanTambahanGeriatri.setSelected(false);
-            chkSkriningNutrisiDewasa.setSelected(false);
-            chkHasilPemeriksaanUSG.setSelected(false);
-            chkSkriningNutrisiLansia.setSelected(false);
-            chkSkriningNutrisiAnak.setSelected(false);
-            chkKonselingFarmasi.setSelected(false);
-            chkPelayananInformasiObat.setSelected(false);
-            chkTransferAntarRuang.setSelected(false);
-            chkCatatanCekGDS.setSelected(false);
-            chkChecklistPreOperasi.setSelected(false);
-            chkSignInSebelumAnestesi.setSelected(false);
-            chkTimeOutSebelumInsisi.setSelected(false);
-            chkSignOutSebelumMenutupLuka.setSelected(false);
-            chkChecklistPostOperasi.setSelected(false);
-            chkRekonsiliasiObat.setSelected(false);
-            chkPenilaianPasienTerminal.setSelected(false);
-            chkMonitoringReaksiTranfusi.setSelected(false);
-            chkPenilaianKorbanKekerasan.setSelected(false);
-            chkAsuhanLanjutanRisikoJatuhLansia.setSelected(false);
-            chkPenilaianPasienPenyakitMenular.setSelected(false);
-            chkEdukasiPasienTerintegrasiRawatJalan.setSelected(false);
-            chkPemantauanPEWSDewasa.setSelected(false);
-            chkAsuhanTambahanBunuhDiri.setSelected(false);
-            chkAsuhanTambahanPerilakuKekerasan.setSelected(false);
-            chkAsuhanTambahanMelarikanDiri.setSelected(false);
-            chkPenilaianPasienKeracunan.setSelected(false);
-            chkAsuhanMedisRalanBedahMulut.setSelected(false);
-            chkPemantauanMOEWSObstetri.setSelected(false);
-            chkCatatanADIMEGizi.setSelected(false);
-            chkAsuhanKeperawatanRalanGeriatri.setSelected(false);
-            chkChecklistKriteriaMasukHCU.setSelected(false);
-            chkChecklistKriteriaKeluarHCU.setSelected(false);
-            chkAsuhanRisikoDekubitus.setSelected(false);
-            chkDokumentasiTindakanESWL.setSelected(false);
-            chkChecklistKriteriaMasukICU.setSelected(false);
-            chkChecklistKriteriaKeluarICU.setSelected(false);
-            chkFollowUpDBD.setSelected(false);
-            chkAsuhanLanjutanRisikoJatuhNeonatus.setSelected(false);
-            chkAsuhanLanjutanRisikoJatuhGeriatri.setSelected(false);
-            chkPemantauanEWSNeonatus.setSelected(false);
-            chkAsuhanMedisRalanKulitKelamin.setSelected(false);
-            chkPenilaianLevelKecemasanRanapAnak.setSelected(false);
-            chkAsuhanMedisHemodialisa.setSelected(false);
-            chkAsuhanLanjutanRisikoJatuhPsikiatri.setSelected(false);
-            chkAsuhanLanjutanSkriningFungsional.setSelected(false);
-            chkAsuhanMedisRalanKedokteranFisik.setSelected(false);
-            chkAsuhanMedisIGDPsikiatri.setSelected(false);
-            chkPenilaianUlangNyeri.setSelected(false);
-            chkAsuhanTerapiWicara.setSelected(false);
-            chkPengkajianRestrain.setSelected(false);
-            chkAsuhanMedisRalanParu.setSelected(false);
-            chkCatatanKeperawatanRalan.setSelected(false);
-            chkCatatanPersalinan.setSelected(false);
-            chkSkorAldrettePascaAnestesi.setSelected(false);
-            chkSkorStewardPascaAnestesi.setSelected(false);
-            chkSkorBromagePascaAnestesi.setSelected(false);
-            chkAsuhanPreInduksi.setSelected(false);
-            chkHasilPemeriksaanUSGUrologi.setSelected(false);
-            chkHasilPemeriksaanUSGGynecologi.setSelected(false);
-            chkHasilPemeriksaanEKG.setSelected(false);
-            chkPenatalaksanaanTerapiOkupasi.setSelected(false);
-            chkHasilPemeriksaanUSGNeonatus.setSelected(false);
-            chkHasilPemeriksaanEndoskopiFaringLaring.setSelected(false);
-            chkHasilPemeriksaanEndoskopiHidung.setSelected(false);
-            chkHasilPemeriksaanEndoskopiTelinga.setSelected(false);
-            chkPenilaianPasienImunitasRendah.setSelected(false);
-            chkCatatanKeseimbanganCairan.setSelected(false);
-            chkCatatanObservasiCHBP.setSelected(false);
-            chkCatatanObservasiInduksiPersalinan.setSelected(false);
-            chkKonsultasiMedik.setSelected(false);
-            chkSkriningMerokokUsiaRemaja.setSelected(false);
-            chkSkriningKekerasanPadaPerempuan.setSelected(false);
-            chkSkriningObesitas.setSelected(false);
-            chkSkriningRisikoKankerPayudara.setSelected(false);
-            chkSkriningRisikoKankerParu.setSelected(false);
-            chkSkriningGigiMulutRemaja.setSelected(false);
-            chkSkriningTBC.setSelected(false);
-            chkAsuhanMedisMCU.setSelected(false);
-            chkAsuhanKeperawatanRanapBayi.setSelected(false);
-            chkCatatanObservasiRestrainNonFarmakologi.setSelected(false);
-            chkCatatanObservasiVentilator.setSelected(false);
-            chkCatatanAnastesiSedasi.setSelected(false);
-            chkSkriningPUMA.setSelected(false);
-            chkSkriningAdiksiNikotin.setSelected(false);
-            chkSkriningThalasemia.setSelected(false);
-            chkSkriningInstrumenSDQ.setSelected(false);
-            chkSkriningInstrumenSRQ.setSelected(false);
-            chkChecklistPemberianFibrinolitik.setSelected(false);
-            chkSkriningKankerKolorektal.setSelected(false);
-            chkAsuhanPsikologiKlinis.setSelected(false);
-            chkAsuhanMedisRanapNeonatus.setSelected(false);
-            chkHasilPemeriksaanEcho.setSelected(false);
-            chkSEPBPJS.setSelected(false);
-            chkSkriningDiabetesMelitus.setSelected(false);
-            chkPenilaianBayiBaruLahir.setSelected(false);
-            chkLaporanTindakan.setSelected(false);
-            chkLayananKedokteranFisikRehabilitasi.setSelected(false);
-            chkSkriningGigiMulutBalita.setSelected(false);
-            chkSkriningAnemia.setSelected(false);
-            chkLayananProgramKFR.setSelected(false);
-            chkSkriningHipertensi.setSelected(false);
-            chkSkriningKesehatanPenglihatan.setSelected(false);
-            chkCatatanObservasiHemodialisa.setSelected(false);
-            chkSkriningGigiMulutDewasa.setSelected(false);
-            chkCatatanCairanHemodialisa.setSelected(false);
-            chkSkriningRisikoKankerServiks.setSelected(false);
-            chkSkriningGigiMulutLansia.setSelected(false);
-            chkSkriningIndraPendengaran.setSelected(false);
-            chkCatatanPengkajianPaskaOperasi.setSelected(false);
-            chkSkriningFrailtySyndrome.setSelected(false);
-            chkCatatanObservasiBayi.setSelected(false);
-            chkHasilPemeriksaanSlitLamp.setSelected(false);
-            chkHasilPemeriksaanOCT.setSelected(false);
-            chkChecklistKesiapanAnestesi.setSelected(false);
-            chkSkriningInstrumenACRS.setSelected(false);
-            chkChecklistKriteriaMasukNICU.setSelected(false);
-            chkChecklistKriteriaKeluarNICU.setSelected(false);
-            chkAsuhanMedisRanapPsikiatri.setSelected(false);
-            chkChecklistKriteriaMasukPICU.setSelected(false);
-            chkChecklistKriteriaKeluarPICU.setSelected(false);
-            chkSkriningInstrumenAMT.setSelected(false);
-            chkAsuhanMedisRalanJantung.setSelected(false);
-            chkAsuhanMedisRalanUrologi.setSelected(false);
-            chkHasilPemeriksaanTreadmill.setSelected(false);
-            chkHasilPemeriksaanEchoPediatrik.setSelected(false);
-            chkSkriningPSI.setSelected(false);
-            chkSkriningInstrumenESAT.setSelected(false);
-            chkAsuhanMedisRanapJantung.setSelected(false);
-            chkSkriningCRUB65.setSelected(false);
-            chkSkriningGiziKehamilan.setSelected(false);
-            chkKonsultasiPerawat.setSelected(false);
-            chkCatatanObservasiRuangOperasi.setSelected(false);
-            chkHasilPemeriksaanUSGAbdomen.setSelected(false);
-            chkIntervensiNyeriFarmakologi.setSelected(false);
-            chkIntervensiNyeriNonFarmakologi.setSelected(false);
-            chkChecklistKriteriaMasukIsolasi.setSelected(false);
-            chkChecklistKriteriaKeluarIsolasi.setSelected(false);
+        boolean pilih=chkSemua.isSelected();
+        for(Component komponen : FormMenu.getComponents()){
+            if((komponen instanceof widget.CekBox)&&(komponen!=chkSemua)){
+                ((widget.CekBox)komponen).setSelected(pilih);
+            }
         }
     }//GEN-LAST:event_chkSemuaItemStateChanged
 
@@ -4196,6 +3799,7 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
     private widget.CekBox chkDiagnosaPenyakit;
     private widget.CekBox chkDokumentasiTindakanESWL;
     private widget.CekBox chkEdukasiPasienTerintegrasiRawatJalan;
+    private widget.CekBox chkEdukasiPasienTerintegrasiRawatInap;
     private widget.CekBox chkFollowUpDBD;
     private widget.CekBox chkHasilPemeriksaanEKG;
     private widget.CekBox chkHasilPemeriksaanEcho;
@@ -4781,6 +4385,7 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                     menampilkanPerencanaanPemulangan(rs.getString("no_rawat"));
                     menampilkanCatatanObservasi(rs.getString("no_rawat"));
                     menampilkanPemeriksaanRanap(rs.getString("no_rawat"));
+                    menampilkanEdukasiPasienTerintegrasiRawatInap(rs.getString("no_rawat"));
                     menampilkanKonsultasiMedik(rs.getString("no_rawat"));
                     menampilkanKonsultasiPerawat(rs.getString("no_rawat"));
                     menampilkanFollowUpDBD(rs.getString("no_rawat"));
@@ -20823,25 +20428,35 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
     }
     
     private void menampilkanEdukasiPasienTerintegrasiRawatJalan(String norawat) {
+        menampilkanEdukasiPasienKeluarga(norawat,chkEdukasiPasienTerintegrasiRawatJalan,
+                "edukasi_pasien_keluarga_rj","Edukasi Pasien & Keluarga Terintegrasi Rawat Jalan");
+    }
+    
+    private void menampilkanEdukasiPasienTerintegrasiRawatInap(String norawat) {
+        menampilkanEdukasiPasienKeluarga(norawat,chkEdukasiPasienTerintegrasiRawatInap,
+                "edukasi_pasien_keluarga_ri","Edukasi Pasien & Keluarga Terintegrasi Rawat Inap");
+    }
+    
+    private void menampilkanEdukasiPasienKeluarga(String norawat,widget.CekBox cek,String tabel,String judul) {
         try {
-            if(chkEdukasiPasienTerintegrasiRawatJalan.isSelected()==true){
+            if(cek.isSelected()==true){
                 try {
                     rs2=koneksi.prepareStatement(
-                        "select edukasi_pasien_keluarga_rj.tanggal,edukasi_pasien_keluarga_rj.bicara,edukasi_pasien_keluarga_rj.keterangan_bicara,edukasi_pasien_keluarga_rj.bahasa_sehari,"+
-                        "edukasi_pasien_keluarga_rj.perlu_penerjemah,edukasi_pasien_keluarga_rj.keterangan_penerjemah,edukasi_pasien_keluarga_rj.bahasa_isyarat,"+
-                        "edukasi_pasien_keluarga_rj.cara_belajar,edukasi_pasien_keluarga_rj.hambatan_belajar,edukasi_pasien_keluarga_rj.keterangan_hambatan_belajar,"+
-                        "edukasi_pasien_keluarga_rj.kemampuan_belajar,edukasi_pasien_keluarga_rj.keterangan_kemampuan_belajar,edukasi_pasien_keluarga_rj.penyakitnya_merupakan,"+
-                        "edukasi_pasien_keluarga_rj.keterangan_penyakitnya_merupakan,edukasi_pasien_keluarga_rj.keputusan_memilih_layanan,edukasi_pasien_keluarga_rj.keterangan_keputusan_memilih_layanan,"+
-                        "edukasi_pasien_keluarga_rj.keyakinan_terhadap_terapi,edukasi_pasien_keluarga_rj.keterangan_keyakinan_terhadap_terapi,edukasi_pasien_keluarga_rj.aspek_keyakinan_dipertimbangkan,"+
-                        "edukasi_pasien_keluarga_rj.keterangan_aspek_keyakinan_dipertimbangkan,edukasi_pasien_keluarga_rj.kesediaan_menerima_informasi,"+
-                        "edukasi_pasien_keluarga_rj.topik_edukasi_penyakit,edukasi_pasien_keluarga_rj.topik_edukasi_rencana_tindakan,edukasi_pasien_keluarga_rj.topik_edukasi_pengobatan,"+
-                        "edukasi_pasien_keluarga_rj.topik_edukasi_hasil_layanan,edukasi_pasien_keluarga_rj.nip,petugas.nama "+
-                        "from edukasi_pasien_keluarga_rj inner join petugas on edukasi_pasien_keluarga_rj.nip=petugas.nip where edukasi_pasien_keluarga_rj.no_rawat='"+norawat+"'").executeQuery();
+                        "select edukasi.tanggal,edukasi.bicara,edukasi.keterangan_bicara,edukasi.bahasa_sehari,"+
+                        "edukasi.perlu_penerjemah,edukasi.keterangan_penerjemah,edukasi.bahasa_isyarat,"+
+                        "edukasi.cara_belajar,edukasi.hambatan_belajar,edukasi.keterangan_hambatan_belajar,"+
+                        "edukasi.kemampuan_belajar,edukasi.keterangan_kemampuan_belajar,edukasi.penyakitnya_merupakan,"+
+                        "edukasi.keterangan_penyakitnya_merupakan,edukasi.keputusan_memilih_layanan,edukasi.keterangan_keputusan_memilih_layanan,"+
+                        "edukasi.keyakinan_terhadap_terapi,edukasi.keterangan_keyakinan_terhadap_terapi,edukasi.aspek_keyakinan_dipertimbangkan,"+
+                        "edukasi.keterangan_aspek_keyakinan_dipertimbangkan,edukasi.kesediaan_menerima_informasi,"+
+                        "edukasi.topik_edukasi_penyakit,edukasi.topik_edukasi_rencana_tindakan,edukasi.topik_edukasi_pengobatan,"+
+                        "edukasi.topik_edukasi_hasil_layanan,edukasi.nip,petugas.nama "+
+                        "from "+tabel+" edukasi inner join petugas on edukasi.nip=petugas.nip where edukasi.no_rawat='"+norawat+"'").executeQuery();
                     if(rs2.next()){
                         htmlContent.append(
                           "<tr class='isi'>").append( 
                             "<td valign='top' width='2%'></td>").append(        
-                            "<td valign='top' width='18%'>Edukasi Pasien & Keluarga Terintegrasi Rawat Jalan</td>").append(
+                            "<td valign='top' width='18%'>").append(judul).append("</td>").append(
                             "<td valign='top' width='1%' align='center'>:</td>").append(
                             "<td valign='top' width='79%'>").append(
                               "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"
@@ -20962,9 +20577,10 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                 }
             }
         } catch (Exception e) {
-            System.out.println("Notif Edukasi Terintegrasi Rawat Jalan : "+e);
+            System.out.println("Notif "+judul+" : "+e);
         }
     }
+    
     
     private void menampilkanTambahanBunuhDiri(String norawat) {
         try {
