@@ -63,7 +63,7 @@ public class RMEdukasiPasienKeluargaRawatInap extends RMEdukasiPasienKeluargaRaw
     /** Ganti nama file jasper laporan menjadi versi rawat inap. */
     @Override
     protected String getNamaLaporanEdukasi() {
-        return "rptFormulirEdukasiPasienRJ.jasper";
+        return "rptFormulirEdukasiPasienRI.jasper";
     }
 
     /** Ganti judul laporan menjadi "...Rawat Inap...". */
