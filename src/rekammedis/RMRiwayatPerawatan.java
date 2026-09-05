@@ -430,6 +430,8 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
         chkLayananKedokteranFisikRehabilitasi = new widget.CekBox();
         chkLayananProgramKFR = new widget.CekBox();
         chkUjiFungsiKFR = new widget.CekBox();
+        chkFormAssesment = new widget.CekBox();
+        chkLembarProgramTerapi = new widget.CekBox();
         chkHemodialisa = new widget.CekBox();
         chkSkriningNutrisiDewasa = new widget.CekBox();
         chkSkriningNutrisiLansia = new widget.CekBox();
@@ -2088,6 +2090,22 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
         chkUjiFungsiKFR.setOpaque(false);
         chkUjiFungsiKFR.setPreferredSize(new java.awt.Dimension(245, 22));
         FormMenu.add(chkUjiFungsiKFR);
+
+        chkFormAssesment.setSelected(true);
+        chkFormAssesment.setText("Form Re Assesment");
+        chkFormAssesment.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        chkFormAssesment.setName("chkFormAssesment"); // NOI18N
+        chkFormAssesment.setOpaque(false);
+        chkFormAssesment.setPreferredSize(new java.awt.Dimension(245, 22));
+        FormMenu.add(chkFormAssesment);
+
+        chkLembarProgramTerapi.setSelected(true);
+        chkLembarProgramTerapi.setText("Lembar Program Terapi");
+        chkLembarProgramTerapi.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        chkLembarProgramTerapi.setName("chkLembarProgramTerapi"); // NOI18N
+        chkLembarProgramTerapi.setOpaque(false);
+        chkLembarProgramTerapi.setPreferredSize(new java.awt.Dimension(245, 22));
+        FormMenu.add(chkLembarProgramTerapi);
 
         chkHemodialisa.setSelected(true);
         chkHemodialisa.setText("Hemodialisa");
@@ -3910,6 +3928,8 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
     private widget.CekBox chkTransferAntarRuang;
     private widget.CekBox chkTriase;
     private widget.CekBox chkUjiFungsiKFR;
+    private widget.CekBox chkFormAssesment;
+    private widget.CekBox chkLembarProgramTerapi;
     private widget.InternalFrame internalFrame1;
     private widget.InternalFrame internalFrame2;
     private widget.InternalFrame internalFrame8;
@@ -4368,9 +4388,11 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                     menampilkanAsuhanMedisRawatJalanKedokteranFisikRehabilitasi(rs.getString("no_rawat"));
                     menampilkanLayananKedokteranFisikRehabilitasi(rs.getString("no_rawat"));
                     menampilkanLayananProgramKFR(rs.getString("no_rawat"));
-                    menampilkanUjiFungsiKFR(rs.getString("no_rawat"));
+                    menampilkanUjiFungsiKFR(rs.getString("no_rawat"));                
                     menampilkanHemodialisa(rs.getString("no_rawat"));
                     menampilkanPemeriksaanRalan(rs.getString("no_rawat"));
+                    menampilkanFormAssesment(rs.getString("no_rawat"));
+                    menampilkanLembarProgramTerapi(rs.getString("no_rawat"));
                     menampilkanAsuhanKeperawatanRawatInap(rs.getString("no_rawat"));
                     menampilkanAsuhanKebidananRawatInap(rs.getString("no_rawat"));
                     menampilkanAsuhanKeperawatanRawatInapNeonatus(rs.getString("no_rawat"));
@@ -10930,6 +10952,173 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
         }
     }
 
+    private void menampilkanFormAssesment(String norawat) {
+        try {
+            if(chkFormAssesment.isSelected()==true){
+                try {
+                    rs2=koneksi.prepareStatement(
+                        "select lembar_reassesment.tanggal,lembar_reassesment.kd_dokter,dokter.nm_dokter,"+
+                        "lembar_reassesment.subjective,lembar_reassesment.objective,lembar_reassesment.assesment,"+
+                        "lembar_reassesment.goal,lembar_reassesment.tindakan,lembar_reassesment.edukasi,"+
+                        "lembar_reassesment.frekuensi,lembar_reassesment.rencana "+
+                        "from lembar_reassesment inner join dokter on lembar_reassesment.kd_dokter=dokter.kd_dokter "+
+                        "where lembar_reassesment.no_rawat='"+norawat+"' order by lembar_reassesment.tanggal").executeQuery();
+                    if(rs2.next()){
+                        htmlContent.append(
+                          "<tr class='isi'>").append(
+                            "<td valign='top' width='2%'></td>").append(
+                            "<td valign='top' width='18%'>Form Re Assesment</td>").append(
+                            "<td valign='top' width='1%' align='center'>:</td>").append(
+                            "<td valign='top' width='79%'>").append(
+                              "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"
+                        );
+                        do{
+                            htmlContent.append(
+                                 "<tr>").append(
+                                    "<td valign='top'>").append(
+                                       "YANG MELAKUKAN PEMERIKSAAN").append(
+                                       "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0px' class='tbl_form'>").append(
+                                          "<tr>").append(
+                                              "<td width='33%' border='0'>Tanggal : ").append(rs2.getString("tanggal")).append("</td>").append(
+                                              "<td width='67%' border='0'>Dokter : ").append(rs2.getString("kd_dokter")).append(" ").append(rs2.getString("nm_dokter")).append("</td>").append(
+                                          "</tr>").append(
+                                       "</table>").append(
+                                    "</td>").append(
+                                 "</tr>").append(
+                                 "<tr>").append(
+                                    "<td valign='top'>").append(
+                                       "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0px' class='tbl_form'>").append(
+                                          "<tr>").append(
+                                              "<td width='25%' border='0' valign='top'>Subjective</td>").append(
+                                              "<td width='75%' border='0' valign='top'>: ").append(rs2.getString("subjective").replaceAll("(\r\n|\r|\n|\n\r)","<br>")).append("</td>").append(
+                                          "</tr>").append(
+                                          "<tr>").append(
+                                              "<td width='25%' border='0' valign='top'>Objective</td>").append(
+                                              "<td width='75%' border='0' valign='top'>: ").append(rs2.getString("objective").replaceAll("(\r\n|\r|\n|\n\r)","<br>")).append("</td>").append(
+                                          "</tr>").append(
+                                          "<tr>").append(
+                                              "<td width='25%' border='0' valign='top'>Assesment</td>").append(
+                                              "<td width='75%' border='0' valign='top'>: ").append(rs2.getString("assesment").replaceAll("(\r\n|\r|\n|\n\r)","<br>")).append("</td>").append(
+                                          "</tr>").append(
+                                          "<tr>").append(
+                                              "<td width='25%' border='0' valign='top'>Goal</td>").append(
+                                              "<td width='75%' border='0' valign='top'>: ").append(rs2.getString("goal").replaceAll("(\r\n|\r|\n|\n\r)","<br>")).append("</td>").append(
+                                          "</tr>").append(
+                                          "<tr>").append(
+                                              "<td width='25%' border='0' valign='top'>Tindakan</td>").append(
+                                              "<td width='75%' border='0' valign='top'>: ").append(rs2.getString("tindakan").replaceAll("(\r\n|\r|\n|\n\r)","<br>")).append("</td>").append(
+                                          "</tr>").append(
+                                          "<tr>").append(
+                                              "<td width='25%' border='0' valign='top'>Edukasi</td>").append(
+                                              "<td width='75%' border='0' valign='top'>: ").append(rs2.getString("edukasi").replaceAll("(\r\n|\r|\n|\n\r)","<br>")).append("</td>").append(
+                                          "</tr>").append(
+                                          "<tr>").append(
+                                              "<td width='25%' border='0' valign='top'>Frekuensi</td>").append(
+                                              "<td width='75%' border='0' valign='top'>: ").append(rs2.getString("frekuensi").replaceAll("(\r\n|\r|\n|\n\r)","<br>")).append("</td>").append(
+                                          "</tr>").append(
+                                          "<tr>").append(
+                                              "<td width='25%' border='0' valign='top'>Rencana</td>").append(
+                                              "<td width='75%' border='0' valign='top'>: ").append(rs2.getString("rencana").replaceAll("(\r\n|\r|\n|\n\r)","<br>")).append("</td>").append(
+                                          "</tr>").append(
+                                       "</table>").append(
+                                    "</td>").append(
+                                 "</tr>"
+                            );
+                        }while(rs2.next());
+                        htmlContent.append(
+                              "</table>").append(
+                            "</td>").append(
+                          "</tr>");
+                    }
+                } catch (Exception e) {
+                    System.out.println("Notifikasi : "+e);
+                } finally{
+                    if(rs2!=null){
+                        rs2.close();
+                    }
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Notif Form Re Assesment : "+e);
+        }
+    }
+    
+    private void menampilkanLembarProgramTerapi(String norawat) {
+        try {
+            if(chkLembarProgramTerapi.isSelected()==true){
+                try {
+                    rs2=koneksi.prepareStatement(
+                        "select lembar_program_terapi.tanggal,lembar_program_terapi.kd_dokter,dokter.nm_dokter,"+
+                        "lembar_program_terapi.kd_pegawai,pegawai.nama,lembar_program_terapi.subjective,"+
+                        "lembar_program_terapi.objective,lembar_program_terapi.assesment,lembar_program_terapi.`procedure` "+
+                        "from lembar_program_terapi inner join dokter on lembar_program_terapi.kd_dokter=dokter.kd_dokter "+
+                        "inner join pegawai on lembar_program_terapi.kd_pegawai=pegawai.nik "+
+                        "where lembar_program_terapi.no_rawat='"+norawat+"' order by lembar_program_terapi.tanggal").executeQuery();
+                    if(rs2.next()){
+                        htmlContent.append(
+                          "<tr class='isi'>").append(
+                            "<td valign='top' width='2%'></td>").append(
+                            "<td valign='top' width='18%'>Lembar Program Terapi</td>").append(
+                            "<td valign='top' width='1%' align='center'>:</td>").append(
+                            "<td valign='top' width='79%'>").append(
+                              "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"
+                        );
+                        do{
+                            htmlContent.append(
+                                 "<tr>").append(
+                                    "<td valign='top'>").append(
+                                       "YANG MELAKUKAN PEMERIKSAAN").append(
+                                       "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0px' class='tbl_form'>").append(
+                                          "<tr>").append(
+                                              "<td width='33%' border='0'>Tanggal : ").append(rs2.getString("tanggal")).append("</td>").append(
+                                              "<td width='33%' border='0'>Dokter : ").append(rs2.getString("kd_dokter")).append(" ").append(rs2.getString("nm_dokter")).append("</td>").append(
+                                              "<td width='34%' border='0'>Petugas : ").append(rs2.getString("kd_pegawai")).append(" ").append(rs2.getString("nama")).append("</td>").append(
+                                          "</tr>").append(
+                                       "</table>").append(
+                                    "</td>").append(
+                                 "</tr>").append(
+                                 "<tr>").append(
+                                    "<td valign='top'>").append(
+                                       "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0px' class='tbl_form'>").append(
+                                          "<tr>").append(
+                                              "<td width='25%' border='0' valign='top'>Subjective</td>").append(
+                                              "<td width='75%' border='0' valign='top'>: ").append(rs2.getString("subjective").replaceAll("(\r\n|\r|\n|\n\r)","<br>")).append("</td>").append(
+                                          "</tr>").append(
+                                          "<tr>").append(
+                                              "<td width='25%' border='0' valign='top'>Objective</td>").append(
+                                              "<td width='75%' border='0' valign='top'>: ").append(rs2.getString("objective").replaceAll("(\r\n|\r|\n|\n\r)","<br>")).append("</td>").append(
+                                          "</tr>").append(
+                                          "<tr>").append(
+                                              "<td width='25%' border='0' valign='top'>Assesment</td>").append(
+                                              "<td width='75%' border='0' valign='top'>: ").append(rs2.getString("assesment").replaceAll("(\r\n|\r|\n|\n\r)","<br>")).append("</td>").append(
+                                          "</tr>").append(
+                                          "<tr>").append(
+                                              "<td width='25%' border='0' valign='top'>Procedure</td>").append(
+                                              "<td width='75%' border='0' valign='top'>: ").append(rs2.getString("procedure").replaceAll("(\r\n|\r|\n|\n\r)","<br>")).append("</td>").append(
+                                          "</tr>").append(
+                                       "</table>").append(
+                                    "</td>").append(
+                                 "</tr>"
+                            );
+                        }while(rs2.next());
+                        htmlContent.append(
+                              "</table>").append(
+                            "</td>").append(
+                          "</tr>");
+                    }
+                } catch (Exception e) {
+                    System.out.println("Notifikasi : "+e);
+                } finally{
+                    if(rs2!=null){
+                        rs2.close();
+                    }
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Notif Lembar Program Terapi : "+e);
+        }
+    }
+    
     private void menampilkanDiagnosa(String norawat) {
         try{
             if(chkDiagnosaPenyakit.isSelected()==true){
