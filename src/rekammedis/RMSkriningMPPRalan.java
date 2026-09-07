@@ -28,4 +28,14 @@ public class RMSkriningMPPRalan extends RMSkriningMPP {
     protected String judul() {
         return "Skrining Manager Pelayanan Pasien Rawat Jalan";
     }
+
+    @Override
+    protected RMSkriningMPPFormA formEvaluasiA() {
+        return new RMSkriningMPPFormARalan(null,false);
+    }
+
+    @Override
+    protected RMSkriningMPPFormB formEvaluasiB() {
+        return new RMSkriningMPPFormBRalan(null,false);
+    }
 }
