@@ -51,7 +51,7 @@ import kepegawaian.DlgCariPetugas;
  *
  * @author perpustakaan
  */
-public final class RMSkriningMPPFormA extends javax.swing.JDialog {
+public class RMSkriningMPPFormA extends javax.swing.JDialog {
     private final DefaultTableModel tabMode,tabModeMasalah,tabModeDetailMasalah;
     private Connection koneksi=koneksiDB.condb();
     private sekuel Sequel=new sekuel();
@@ -72,6 +72,35 @@ public final class RMSkriningMPPFormA extends javax.swing.JDialog {
     private JsonNode response;
     private FileReader myObj;
     private StringBuilder htmlContent;
+    
+    /** Nama tabel evaluasi awal MPP. Turunan untuk rawat jalan cukup
+     * menimpa metode ini, struktur tabelnya sama persis.
+     * @return  */
+    protected String tabelEvaluasi() {
+        return "mpp_evaluasi";
+    }
+    
+    /** Nama tabel masalah pada evaluasi awal MPP.
+     * @return  */
+    protected String tabelEvaluasiMasalah() {
+        return "mpp_evaluasi_masalah";
+    }
+    
+    /** Judul yang tampil pada header form. Turunan cukup menimpa metode ini.
+     * @return  */
+    protected String judul() {
+        return "Form A \u2013 Evaluasi Awal Manajer Pelayanan Pasien";
+    }
+    
+    /** Menyesuaikan nama tabel pada query dengan tabelEvaluasi() dan
+     * tabelEvaluasiMasalah(). Batas kata dipakai supaya "mpp_evaluasi"
+     * tidak ikut mengganti awalan "mpp_evaluasi_masalah".
+     * @param query
+     * @return  */
+    private String sql(String query) {
+        return query.replaceAll("\\bmpp_evaluasi\\b",tabelEvaluasi())
+                    .replaceAll("\\bmpp_evaluasi_masalah\\b",tabelEvaluasiMasalah());
+    }
     
     /** Creates new form 
      * @param parent
@@ -221,6 +250,8 @@ public final class RMSkriningMPPFormA extends javax.swing.JDialog {
         Document doc = kit.createDefaultDocument();
         LoadHTML.setDocument(doc);
         
+        
+        ((javax.swing.border.TitledBorder)internalFrame1.getBorder()).setTitle("::[ "+judul()+" ]::");
         
         ChkAccor.setSelected(false);
         isMenu();
@@ -1168,13 +1199,13 @@ public final class RMSkriningMPPFormA extends javax.swing.JDialog {
         }else if(TDokter2.getText().trim().equals("")){
             Valid.textKosong(TDokter2,"Dokter Konsulan");
         }else{
-            if(Sequel.menyimpantf("mpp_evaluasi","?,?,?,?,?,?,?,?,?,?","No.Rawat",10,new String[]{
+            if(Sequel.menyimpantf(tabelEvaluasi(),"?,?,?,?,?,?,?,?,?,?","No.Rawat",10,new String[]{
                     TNoRw.getText(),Valid.SetTgl(TglEvaluasi.getSelectedItem()+"")+" "+TglEvaluasi.getSelectedItem().toString().substring(11,19),
                     KdDok1.getText(),KdDok2.getText(),TDiagnosis.getText(),TKelompok.getText(),Assemen.getText(),Identifikasi.getText(),Perencanaan.getText(),KdPetugas.getText()
                 })==true){
                     for (i = 0; i < tbIdentifikasiMPP.getRowCount(); i++) {
                         if(tbIdentifikasiMPP.getValueAt(i,0).toString().equals("true")){
-                            Sequel.menyimpan2("mpp_evaluasi_masalah","?,?,?",3,new String[]{TNoRw.getText(),Valid.SetTgl(TglEvaluasi.getSelectedItem()+"")+" "+TglEvaluasi.getSelectedItem().toString().substring(11,19),tbIdentifikasiMPP.getValueAt(i,1).toString()});
+                            Sequel.menyimpan2(tabelEvaluasiMasalah(),"?,?,?",3,new String[]{TNoRw.getText(),Valid.SetTgl(TglEvaluasi.getSelectedItem()+"")+" "+TglEvaluasi.getSelectedItem().toString().substring(11,19),tbIdentifikasiMPP.getValueAt(i,1).toString()});
                         }
                     }
                     emptTeks();
@@ -1315,10 +1346,10 @@ public final class RMSkriningMPPFormA extends javax.swing.JDialog {
                 );
                 for (i = 0; i < tabMode.getRowCount(); i++) {
                     masalahidentifikasi="";
-                    ps2=koneksi.prepareStatement(
+                    ps2=koneksi.prepareStatement(sql(
                         "select master_masalah_mpp.kode_masalah,master_masalah_mpp.nama_masalah from master_masalah_mpp "+
                         "inner join mpp_evaluasi_masalah on mpp_evaluasi_masalah.kode_masalah=master_masalah_mpp.kode_masalah "+
-                        "where mpp_evaluasi_masalah.no_rawat=? and mpp_evaluasi_masalah.tanggal=? order by kode_masalah");
+                        "where mpp_evaluasi_masalah.no_rawat=? and mpp_evaluasi_masalah.tanggal=? order by kode_masalah"));
                     try {
                         ps2.setString(1,tbObat.getValueAt(i,0).toString());
                         ps2.setString(2,tbObat.getValueAt(i,6).toString());
@@ -1656,10 +1687,10 @@ public final class RMSkriningMPPFormA extends javax.swing.JDialog {
             param.put("finger","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh "+tbObat.getValueAt(tbObat.getSelectedRow(),19).toString()+"\nID "+(finger.equals("")?tbObat.getValueAt(tbObat.getSelectedRow(),18).toString():finger)+"\n"+Valid.SetTgl3(tbObat.getValueAt(tbObat.getSelectedRow(),6).toString()));  
            try {
                 masalahidentifikasi="";
-                ps2=koneksi.prepareStatement(
+                ps2=koneksi.prepareStatement(sql(
                     "select master_masalah_mpp.kode_masalah,master_masalah_mpp.nama_masalah from master_masalah_mpp "+
                     "inner join mpp_evaluasi_masalah on mpp_evaluasi_masalah.kode_masalah=master_masalah_mpp.kode_masalah "+
-                    "where mpp_evaluasi_masalah.no_rawat=? and mpp_evaluasi_masalah.tanggal=? order by kode_masalah");
+                    "where mpp_evaluasi_masalah.no_rawat=? and mpp_evaluasi_masalah.tanggal=? order by kode_masalah"));
                 try {
                     ps2.setString(1,tbObat.getValueAt(tbObat.getSelectedRow(),0).toString());
                     ps2.setString(2,tbObat.getValueAt(tbObat.getSelectedRow(),6).toString());
@@ -1681,7 +1712,7 @@ public final class RMSkriningMPPFormA extends javax.swing.JDialog {
                 System.out.println("Notif : "+e);
             }
             param.put("masalah",masalahidentifikasi);  
-            Valid.MyReportqry("rptCetakEvaluasiAwalMPP.jasper","report","::[ Laporan Evaluasi Awal Manajer Pelayanan Pasien ]::",
+            Valid.MyReportqry("rptCetakEvaluasiAwalMPP.jasper","report","::[ Laporan Evaluasi Awal Manajer Pelayanan Pasien ]::",sql(
                         "select reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,if(pasien.jk='L','Laki-Laki','Perempuan') as jk,pasien.tgl_lahir, " +
                         "concat(pasien.alamat,', ',kelurahan.nm_kel,', ',kecamatan.nm_kec,', ',kabupaten.nm_kab,', ',propinsi.nm_prop) as alamat,mpp_evaluasi.tanggal, " +
                         "ifnull(bangsal.nm_bangsal,'Ranap Gabung') as ruang,ifnull(kamar_inap.kd_kamar,'RG') as kamar,date_format(kamar_inap.tgl_masuk,'%d-%m-%Y') as tgl_masuk,kamar_inap.jam_masuk,"+
@@ -1700,7 +1731,7 @@ public final class RMSkriningMPPFormA extends javax.swing.JDialog {
                         "inner join kabupaten on pasien.kd_kab=kabupaten.kd_kab " +
                         "inner join propinsi on pasien.kd_prop=propinsi.kd_prop where "+
                         "mpp_evaluasi.no_rawat='"+tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()+"' and "+
-                        "mpp_evaluasi.tanggal='"+tbObat.getValueAt(tbObat.getSelectedRow(),6).toString()+"'",param);
+                        "mpp_evaluasi.tanggal='"+tbObat.getValueAt(tbObat.getSelectedRow(),6).toString()+"'"),param);
         }else{
             JOptionPane.showMessageDialog(null,"Maaf, silahkan pilih data terlebih dahulu..!!!!");
         }  
@@ -1945,7 +1976,7 @@ public final class RMSkriningMPPFormA extends javax.swing.JDialog {
         Valid.tabelKosong(tabMode);
         try{
             if(TCari.getText().equals("")){
-                ps=koneksi.prepareStatement(
+                ps=koneksi.prepareStatement(sql(
                     "select reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,if(pasien.jk='L','Laki-Laki','Perempuan') as jk,pasien.tgl_lahir, " +
                     "concat(pasien.alamat,', ',kelurahan.nm_kel,', ',kecamatan.nm_kec,', ',kabupaten.nm_kab,', ',propinsi.nm_prop) as alamat,mpp_evaluasi.tanggal, " +
                     "ifnull(bangsal.nm_bangsal,'Ranap Gabung') as ruang,ifnull(kamar_inap.kd_kamar,'RG') as kamar,kamar_inap.tgl_masuk,kamar_inap.jam_masuk,"+
@@ -1963,9 +1994,9 @@ public final class RMSkriningMPPFormA extends javax.swing.JDialog {
                     "inner join kecamatan on pasien.kd_kec=kecamatan.kd_kec " +
                     "inner join kabupaten on pasien.kd_kab=kabupaten.kd_kab " +
                     "inner join propinsi on pasien.kd_prop=propinsi.kd_prop where "+
-                    "mpp_evaluasi.tanggal between ? and ? group by mpp_evaluasi.no_rawat,mpp_evaluasi.tanggal order by mpp_evaluasi.tanggal");
+                    "mpp_evaluasi.tanggal between ? and ? group by mpp_evaluasi.no_rawat,mpp_evaluasi.tanggal order by mpp_evaluasi.tanggal"));
             }else{
-                ps=koneksi.prepareStatement(
+                ps=koneksi.prepareStatement(sql(
                     "select reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,if(pasien.jk='L','Laki-Laki','Perempuan') as jk,pasien.tgl_lahir, " +
                     "concat(pasien.alamat,', ',kelurahan.nm_kel,', ',kecamatan.nm_kec,', ',kabupaten.nm_kab,', ',propinsi.nm_prop) as alamat,mpp_evaluasi.tanggal, " +
                     "ifnull(bangsal.nm_bangsal,'Ranap Gabung') as ruang,ifnull(kamar_inap.kd_kamar,'RG') as kamar,kamar_inap.tgl_masuk,kamar_inap.jam_masuk,"+
@@ -1985,7 +2016,7 @@ public final class RMSkriningMPPFormA extends javax.swing.JDialog {
                     "inner join propinsi on pasien.kd_prop=propinsi.kd_prop where "+
                     "mpp_evaluasi.tanggal between ? and ? and (reg_periksa.no_rawat like ? or pasien.no_rkm_medis like ? or "+
                     "pasien.nm_pasien like ? or mpp_evaluasi.nip like ? or petugas.nama like ?) "+
-                    "group by mpp_evaluasi.no_rawat,mpp_evaluasi.tanggal order by mpp_evaluasi.tanggal");
+                    "group by mpp_evaluasi.no_rawat,mpp_evaluasi.tanggal order by mpp_evaluasi.tanggal"));
             }
                 
             try {
@@ -2067,10 +2098,10 @@ public final class RMSkriningMPPFormA extends javax.swing.JDialog {
             
             try {
                 Valid.tabelKosong(tabModeMasalah);
-                ps=koneksi.prepareStatement(
+                ps=koneksi.prepareStatement(sql(
                         "select master_masalah_mpp.kode_masalah,master_masalah_mpp.nama_masalah from master_masalah_mpp "+
                         "inner join mpp_evaluasi_masalah on mpp_evaluasi_masalah.kode_masalah=master_masalah_mpp.kode_masalah "+
-                        "where mpp_evaluasi_masalah.no_rawat=? and mpp_evaluasi_masalah.tanggal=? order by kode_masalah");
+                        "where mpp_evaluasi_masalah.no_rawat=? and mpp_evaluasi_masalah.tanggal=? order by kode_masalah"));
                 try {
                     ps.setString(1,tbObat.getValueAt(tbObat.getSelectedRow(),0).toString());
                     ps.setString(2,tbObat.getValueAt(tbObat.getSelectedRow(),6).toString());
@@ -2280,10 +2311,10 @@ public final class RMSkriningMPPFormA extends javax.swing.JDialog {
             DetailRencana.setText(tbObat.getValueAt(tbObat.getSelectedRow(),17).toString());
             try {
                 Valid.tabelKosong(tabModeDetailMasalah);
-                ps=koneksi.prepareStatement(
+                ps=koneksi.prepareStatement(sql(
                         "select master_masalah_mpp.kode_masalah,master_masalah_mpp.nama_masalah from master_masalah_mpp "+
                         "inner join mpp_evaluasi_masalah on mpp_evaluasi_masalah.kode_masalah=master_masalah_mpp.kode_masalah "+
-                        "where mpp_evaluasi_masalah.no_rawat=? and mpp_evaluasi_masalah.tanggal=? order by master_masalah_mpp.kode_masalah");
+                        "where mpp_evaluasi_masalah.no_rawat=? and mpp_evaluasi_masalah.tanggal=? order by master_masalah_mpp.kode_masalah"));
                 try {
                     ps.setString(1,tbObat.getValueAt(tbObat.getSelectedRow(),0).toString());
                     ps.setString(2,tbObat.getValueAt(tbObat.getSelectedRow(),6).toString());
@@ -2308,12 +2339,12 @@ public final class RMSkriningMPPFormA extends javax.swing.JDialog {
     }
 
     private void hapus() {
-        if(Sequel.queryu2tf("delete from mpp_evaluasi where no_rawat=? and tanggal=?",2,new String[]{
+        if(Sequel.queryu2tf("delete from "+tabelEvaluasi()+" where no_rawat=? and tanggal=?",2,new String[]{
             tbObat.getValueAt(tbObat.getSelectedRow(),0).toString(),tbObat.getValueAt(tbObat.getSelectedRow(),6).toString()
         })==true){
             TNoRM1.setText("");
             TPasien1.setText("");
-            Sequel.meghapus("mpp_evaluasi_masalah","no_rawat","tanggal",tbObat.getValueAt(tbObat.getSelectedRow(),0).toString(),tbObat.getValueAt(tbObat.getSelectedRow(),6).toString());
+            Sequel.meghapus(tabelEvaluasiMasalah(),"no_rawat","tanggal",tbObat.getValueAt(tbObat.getSelectedRow(),0).toString(),tbObat.getValueAt(tbObat.getSelectedRow(),6).toString());
             Valid.tabelKosong(tabModeDetailMasalah);
             ChkAccor.setSelected(false);
             isMenu();
@@ -2326,11 +2357,11 @@ public final class RMSkriningMPPFormA extends javax.swing.JDialog {
 
     private void ganti() {
         if(tbObat.getSelectedRow()>-1){
-            if(Sequel.mengedittf("mpp_evaluasi","no_rawat=? and tanggal=?","no_rawat=?,tanggal=?,kd_dokter=?,kd_konsulan=?,diagnosis=?,kelompok=?,assesmen=?,identifikasi=?,rencana=?,nip=?",12,new String[]{
+            if(Sequel.mengedittf(tabelEvaluasi(),"no_rawat=? and tanggal=?","no_rawat=?,tanggal=?,kd_dokter=?,kd_konsulan=?,diagnosis=?,kelompok=?,assesmen=?,identifikasi=?,rencana=?,nip=?",12,new String[]{
                     TNoRw.getText(),Valid.SetTgl(TglEvaluasi.getSelectedItem()+"")+" "+TglEvaluasi.getSelectedItem().toString().substring(11,19),KdDok1.getText(),KdDok2.getText(),TDiagnosis.getText(),TKelompok.getText(),
                     Assemen.getText(),Identifikasi.getText(),Perencanaan.getText(),KdPetugas.getText(),tbObat.getValueAt(tbObat.getSelectedRow(),0).toString(),tbObat.getValueAt(tbObat.getSelectedRow(),6).toString()
                  })==true){
-                    Sequel.meghapus("mpp_evaluasi_masalah","no_rawat","tanggal",tbObat.getValueAt(tbObat.getSelectedRow(),0).toString(),tbObat.getValueAt(tbObat.getSelectedRow(),6).toString());
+                    Sequel.meghapus(tabelEvaluasiMasalah(),"no_rawat","tanggal",tbObat.getValueAt(tbObat.getSelectedRow(),0).toString(),tbObat.getValueAt(tbObat.getSelectedRow(),6).toString());
                     Valid.tabelKosong(tabModeDetailMasalah);
                     tbObat.setValueAt(TNoRw.getText(),tbObat.getSelectedRow(),0);
                     tbObat.setValueAt(TNoRM.getText(),tbObat.getSelectedRow(),1);
@@ -2354,7 +2385,7 @@ public final class RMSkriningMPPFormA extends javax.swing.JDialog {
                     tbObat.setValueAt(NmPetugas.getText(),tbObat.getSelectedRow(),19);
                     for (i = 0; i < tbIdentifikasiMPP.getRowCount(); i++) {
                         if(tbIdentifikasiMPP.getValueAt(i,0).toString().equals("true")){
-                            if(Sequel.menyimpantf2("mpp_evaluasi_masalah","?,?,?",3,new String[]{TNoRw.getText(),Valid.SetTgl(TglEvaluasi.getSelectedItem()+"")+" "+TglEvaluasi.getSelectedItem().toString().substring(11,19),tbIdentifikasiMPP.getValueAt(i,1).toString()})==true){
+                            if(Sequel.menyimpantf2(tabelEvaluasiMasalah(),"?,?,?",3,new String[]{TNoRw.getText(),Valid.SetTgl(TglEvaluasi.getSelectedItem()+"")+" "+TglEvaluasi.getSelectedItem().toString().substring(11,19),tbIdentifikasiMPP.getValueAt(i,1).toString()})==true){
                                 tabModeDetailMasalah.addRow(new Object[]{tbIdentifikasiMPP.getValueAt(i,1).toString(),tbIdentifikasiMPP.getValueAt(i,2).toString()});
                             }
                         }

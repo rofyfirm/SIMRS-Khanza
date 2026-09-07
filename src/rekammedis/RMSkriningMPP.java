@@ -69,6 +69,19 @@ public class RMSkriningMPP extends javax.swing.JDialog {
         return "Skrining Manager Pelayanan Pasien";
     }
     
+    /** Form evaluasi MPP yang dibuka dari menu. Turunan untuk rawat jalan
+     * cukup menimpa kedua metode ini.
+     * @return  */
+    protected RMSkriningMPPFormA formEvaluasiA() {
+        return new RMSkriningMPPFormA(null,false);
+    }
+    
+    /**
+     * @return  */
+    protected RMSkriningMPPFormB formEvaluasiB() {
+        return new RMSkriningMPPFormB(null,false);
+    }
+    
     /** Menyesuaikan nama tabel pada query dengan tabelSkrining().
      * @param query
      * @return  */
@@ -1558,7 +1571,7 @@ public class RMSkriningMPP extends javax.swing.JDialog {
         }else{
             if(tbObat.getSelectedRow()>-1){
                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-                RMSkriningMPPFormA form=new RMSkriningMPPFormA(null,false);
+                RMSkriningMPPFormA form=formEvaluasiA();
                 form.isCek();
                 form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
                 form.emptTeks();
@@ -1577,7 +1590,7 @@ public class RMSkriningMPP extends javax.swing.JDialog {
         }else{
             if(tbObat.getSelectedRow()>-1){
                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-                RMSkriningMPPFormB form=new RMSkriningMPPFormB(null,false);
+                RMSkriningMPPFormB form=formEvaluasiB();
                 form.isCek();
                 form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
                 form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
