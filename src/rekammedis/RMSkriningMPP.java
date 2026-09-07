@@ -44,7 +44,7 @@ import kepegawaian.DlgCariPegawai;
  *
  * @author perpustakaan
  */
-public final class RMSkriningMPP extends javax.swing.JDialog {
+public class RMSkriningMPP extends javax.swing.JDialog {
     private final DefaultTableModel tabMode;
     private Connection koneksi=koneksiDB.condb();
     private sekuel Sequel=new sekuel();
@@ -55,6 +55,26 @@ public final class RMSkriningMPP extends javax.swing.JDialog {
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
     private volatile boolean ceksukses = false;
     private String param1, param2, param3, param4, param5, param6, param7, param8, param9, param10, param11, param12, param13, param14, param15, param16, param17,finger="";
+    
+    /** Nama tabel penyimpanan skrining. Turunan untuk rawat jalan cukup
+     * menimpa metode ini, struktur tabelnya sama persis.
+     * @return  */
+    protected String tabelSkrining() {
+        return "mpp_skrining";
+    }
+    
+    /** Judul yang tampil pada header form. Turunan cukup menimpa metode ini.
+     * @return  */
+    protected String judul() {
+        return "Skrining Manager Pelayanan Pasien";
+    }
+    
+    /** Menyesuaikan nama tabel pada query dengan tabelSkrining().
+     * @param query
+     * @return  */
+    private String sql(String query) {
+        return query.replace("mpp_skrining",tabelSkrining());
+    }
     
     /** Creates new form DlgRujuk
      * @param parent
@@ -103,6 +123,8 @@ public final class RMSkriningMPP extends javax.swing.JDialog {
 
         TNoRw.setDocument(new batasInput((byte)17).getKata(TNoRw));
         TCari.setDocument(new batasInput((int)100).getKata(TCari));
+        
+        ((javax.swing.border.TitledBorder)internalFrame1.getBorder()).setTitle("::[ "+judul()+" ]::");
         
         ChkInput.setSelected(false);
         isForm();
@@ -1235,7 +1257,7 @@ public final class RMSkriningMPP extends javax.swing.JDialog {
             if(Param17Ya.isSelected()==true){
                 param17="Ya";
             }
-            if(Sequel.menyimpantf("mpp_skrining","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?","No.Rawat",20,new String[]{
+            if(Sequel.menyimpantf(tabelSkrining(),"?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?","No.Rawat",20,new String[]{
                     TNoRw.getText(),Valid.SetTgl(TglSkrining.getSelectedItem()+""), param1, param2, param3, param4, param5, param6, param7,
                     param8, param9, param10, param11, param12, param13, param14, param15, param16, param17,KdPetugas.getText()
                 })==true){
@@ -1347,7 +1369,7 @@ public final class RMSkriningMPP extends javax.swing.JDialog {
                 param.put("emailrs",akses.getemailrs());   
                 param.put("logo",Sequel.cariGambar("select logo from setting")); 
                 if(TCari.getText().equals("")){
-                    Valid.MyReportqry("rptDataSkriningMPP.jasper","report","::[ Data Skrining Manajer Pelayanan Pasien ]::",
+                    Valid.MyReportqry("rptDataSkriningMPP.jasper","report","::[ Data Skrining Manajer Pelayanan Pasien ]::",sql(
                         "select reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,pasien.jk,pasien.tgl_lahir,concat(pasien.alamat,', ',kelurahan.nm_kel,', ',kecamatan.nm_kec,', ',kabupaten.nm_kab,', ',propinsi.nm_prop) as alamat,"+
                         "mpp_skrining.tanggal,mpp_skrining.param1,mpp_skrining.param2,mpp_skrining.param3,mpp_skrining.param3,"+
                         "mpp_skrining.param4,mpp_skrining.param5,mpp_skrining.param5,mpp_skrining.param6,mpp_skrining.param7,"+
@@ -1360,9 +1382,9 @@ public final class RMSkriningMPP extends javax.swing.JDialog {
                         "inner join kecamatan on pasien.kd_kec=kecamatan.kd_kec "+
                         "inner join kabupaten on pasien.kd_kab=kabupaten.kd_kab "+
                         "inner join propinsi on pasien.kd_prop=propinsi.kd_prop where "+
-                        "mpp_skrining.tanggal between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" 23:59:59' order by mpp_skrining.tanggal",param);
+                        "mpp_skrining.tanggal between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" 23:59:59' order by mpp_skrining.tanggal"),param);
                 }else{
-                    Valid.MyReportqry("rptDataSkriningMPP.jasper","report","::[ Data Skrining Manajer Pelayanan Pasien ]::",
+                    Valid.MyReportqry("rptDataSkriningMPP.jasper","report","::[ Data Skrining Manajer Pelayanan Pasien ]::",sql(
                         "select reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,pasien.jk,pasien.tgl_lahir,concat(pasien.alamat,', ',kelurahan.nm_kel,', ',kecamatan.nm_kec,', ',kabupaten.nm_kab,', ',propinsi.nm_prop) as alamat,"+
                         "mpp_skrining.tanggal,mpp_skrining.param1,mpp_skrining.param2,mpp_skrining.param3,mpp_skrining.param3,"+
                         "mpp_skrining.param4,mpp_skrining.param5,mpp_skrining.param5,mpp_skrining.param6,mpp_skrining.param7,"+
@@ -1377,7 +1399,7 @@ public final class RMSkriningMPP extends javax.swing.JDialog {
                         "inner join propinsi on pasien.kd_prop=propinsi.kd_prop where "+
                         "mpp_skrining.tanggal between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" 23:59:59' and "+
                         "(reg_periksa.no_rawat like '%"+TCari.getText().trim()+"%' or pasien.no_rkm_medis like '%"+TCari.getText().trim()+"%' or pasien.nm_pasien like '%"+TCari.getText().trim()+"%' or "+
-                        "mpp_skrining.nip like '%"+TCari.getText().trim()+"%' or pegawai.nama like '%"+TCari.getText().trim()+"%') order by mpp_skrining.tanggal",param);
+                        "mpp_skrining.nip like '%"+TCari.getText().trim()+"%' or pegawai.nama like '%"+TCari.getText().trim()+"%') order by mpp_skrining.tanggal"),param);
                 }   
         }
         this.setCursor(Cursor.getDefaultCursor());
@@ -1508,7 +1530,7 @@ public final class RMSkriningMPP extends javax.swing.JDialog {
             param.put("logo",Sequel.cariGambar("select logo from setting"));
             finger=Sequel.cariIsi("select sha1(sidikjari) from sidikjari inner join pegawai on pegawai.id=sidikjari.id where pegawai.nik=?",KdPetugas.getText());
             param.put("finger","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh "+NmPetugas.getText()+"\nID "+(finger.equals("")?TPasien.getText():finger)+"\n"+TglSkrining.getSelectedItem());  
-            Valid.MyReportqry("rptCetakSkriningMPP.jasper","report","::[ Laporan Skrining Manager Pelayanan Pasien ]::",
+            Valid.MyReportqry("rptCetakSkriningMPP.jasper","report","::[ Laporan Skrining Manager Pelayanan Pasien ]::",sql(
                         "select reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,pasien.jk,pasien.tgl_lahir,concat(pasien.alamat,', ',kelurahan.nm_kel,', ',kecamatan.nm_kec,', ',kabupaten.nm_kab,', ',propinsi.nm_prop) as alamat,"+
                         "mpp_skrining.tanggal,mpp_skrining.param1,mpp_skrining.param2,mpp_skrining.param3,mpp_skrining.param3,"+
                         "mpp_skrining.param4,mpp_skrining.param5,mpp_skrining.param5,mpp_skrining.param6,mpp_skrining.param7,"+
@@ -1521,7 +1543,7 @@ public final class RMSkriningMPP extends javax.swing.JDialog {
                         "inner join kelurahan on pasien.kd_kel=kelurahan.kd_kel "+
                         "inner join kecamatan on pasien.kd_kec=kecamatan.kd_kec "+
                         "inner join kabupaten on pasien.kd_kab=kabupaten.kd_kab "+
-                        "inner join propinsi on pasien.kd_prop=propinsi.kd_prop where mpp_skrining.no_rawat='"+tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()+"'",param);
+                        "inner join propinsi on pasien.kd_prop=propinsi.kd_prop where mpp_skrining.no_rawat='"+tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()+"'"),param);
         }
     }//GEN-LAST:event_MnCetakLembarSkriningActionPerformed
 
@@ -1748,7 +1770,7 @@ public final class RMSkriningMPP extends javax.swing.JDialog {
         Valid.tabelKosong(tabMode);
         try{
             if(TCari.getText().equals("")){
-                ps=koneksi.prepareStatement(
+                ps=koneksi.prepareStatement(sql(
                         "select reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,pasien.jk,pasien.tgl_lahir,concat(pasien.alamat,', ',kelurahan.nm_kel,', ',kecamatan.nm_kec,', ',kabupaten.nm_kab,', ',propinsi.nm_prop) as alamat,"+
                         "mpp_skrining.tanggal,mpp_skrining.param1,mpp_skrining.param2,mpp_skrining.param3,mpp_skrining.param3,"+
                         "mpp_skrining.param4,mpp_skrining.param5,mpp_skrining.param5,mpp_skrining.param6,mpp_skrining.param7,"+
@@ -1761,9 +1783,9 @@ public final class RMSkriningMPP extends javax.swing.JDialog {
                         "inner join kecamatan on pasien.kd_kec=kecamatan.kd_kec "+
                         "inner join kabupaten on pasien.kd_kab=kabupaten.kd_kab "+
                         "inner join propinsi on pasien.kd_prop=propinsi.kd_prop where "+
-                        "mpp_skrining.tanggal between ? and ? order by mpp_skrining.tanggal");
+                        "mpp_skrining.tanggal between ? and ? order by mpp_skrining.tanggal"));
             }else{
-                ps=koneksi.prepareStatement(
+                ps=koneksi.prepareStatement(sql(
                         "select reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,pasien.jk,pasien.tgl_lahir,concat(pasien.alamat,', ',kelurahan.nm_kel,', ',kecamatan.nm_kec,', ',kabupaten.nm_kab,', ',propinsi.nm_prop) as alamat,"+
                         "mpp_skrining.tanggal,mpp_skrining.param1,mpp_skrining.param2,mpp_skrining.param3,mpp_skrining.param3,"+
                         "mpp_skrining.param4,mpp_skrining.param5,mpp_skrining.param5,mpp_skrining.param6,mpp_skrining.param7,"+
@@ -1777,7 +1799,7 @@ public final class RMSkriningMPP extends javax.swing.JDialog {
                         "inner join kabupaten on pasien.kd_kab=kabupaten.kd_kab "+
                         "inner join propinsi on pasien.kd_prop=propinsi.kd_prop where "+
                         "mpp_skrining.tanggal between ? and ? and (reg_periksa.no_rawat like ? or pasien.no_rkm_medis like ? or "+
-                        "pasien.nm_pasien like ? or mpp_skrining.nip like ? or pegawai.nama like ?) order by mpp_skrining.tanggal");
+                        "pasien.nm_pasien like ? or mpp_skrining.nip like ? or pegawai.nama like ?) order by mpp_skrining.tanggal"));
             }
                 
             try {
@@ -2015,7 +2037,7 @@ public final class RMSkriningMPP extends javax.swing.JDialog {
     }
 
     private void hapus() {
-        if(Sequel.queryu2tf("delete from mpp_skrining where no_rawat=? and tanggal=?",2,new String[]{
+        if(Sequel.queryu2tf("delete from "+tabelSkrining()+" where no_rawat=? and tanggal=?",2,new String[]{
             tbObat.getValueAt(tbObat.getSelectedRow(),0).toString(),tbObat.getValueAt(tbObat.getSelectedRow(),6).toString()
         })==true){
             tabMode.removeRow(tbObat.getSelectedRow());
@@ -2095,7 +2117,7 @@ public final class RMSkriningMPP extends javax.swing.JDialog {
         if(Param17Ya.isSelected()==true){
             param17="Ya";
         }  
-        if(Sequel.mengedittf("mpp_skrining","no_rawat=? and tanggal=?","no_rawat=?,tanggal=?,param1=?,param2=?,param3=?,param4=?,param5=?,param6=?,param7=?,param8=?,param9=?,param10=?,param11=?,param12=?,param13=?,param14=?,param15=?,param16=?,param17=?,nip=?",22,new String[]{
+        if(Sequel.mengedittf(tabelSkrining(),"no_rawat=? and tanggal=?","no_rawat=?,tanggal=?,param1=?,param2=?,param3=?,param4=?,param5=?,param6=?,param7=?,param8=?,param9=?,param10=?,param11=?,param12=?,param13=?,param14=?,param15=?,param16=?,param17=?,nip=?",22,new String[]{
                 TNoRw.getText(),Valid.SetTgl(TglSkrining.getSelectedItem()+""), param1, param2, param3, param4, param5, param6, param7,param8, param9, param10, param11, param12, param13, param14, param15, param16, param17,
                 KdPetugas.getText(),tbObat.getValueAt(tbObat.getSelectedRow(),0).toString(),tbObat.getValueAt(tbObat.getSelectedRow(),6).toString()
             })==true){
