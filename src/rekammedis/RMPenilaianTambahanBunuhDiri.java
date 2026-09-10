@@ -1802,7 +1802,8 @@ public final class RMPenilaianTambahanBunuhDiri extends javax.swing.JDialog {
                     "from penilaian_tambahan_bunuh_diri inner join reg_periksa on penilaian_tambahan_bunuh_diri.no_rawat=reg_periksa.no_rawat "+
                     "inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis inner join dokter on reg_periksa.kd_dokter=dokter.kd_dokter "+
                     "inner join petugas on penilaian_tambahan_bunuh_diri.nip=petugas.nip inner join poliklinik on reg_periksa.kd_poli=poliklinik.kd_poli "+
-                    "where reg_periksa.no_rawat='"+tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()+"'",param);
+                    "where reg_periksa.no_rawat='"+tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()+"' "+
+                    "and penilaian_tambahan_bunuh_diri.tanggal='"+tbObat.getValueAt(tbObat.getSelectedRow(),5).toString()+"'",param);
         }
     }//GEN-LAST:event_MnPenilaianTambahanBunuhDiriActionPerformed
 
@@ -2465,19 +2466,20 @@ public final class RMPenilaianTambahanBunuhDiri extends javax.swing.JDialog {
     }
 
     private void ganti() {
-        if(Sequel.mengedittf("penilaian_tambahan_bunuh_diri","no_rawat=?","no_rawat=?,tanggal=?,nip=?,statik_hidup_sendiri=?,statik_skorhidup_sendiri=?,statik_upaya_suicide=?,"+
+        if(Sequel.mengedittf("penilaian_tambahan_bunuh_diri","no_rawat=? and tanggal=?","no_rawat=?,tanggal=?,nip=?,statik_hidup_sendiri=?,statik_skorhidup_sendiri=?,statik_upaya_suicide=?,"+
                 "statik_skorupaya_suicide=?,statik_keluarga_suicide=?,statik_skorkeluarga_suicide=?,statik_diagnosa_gangguan_jiwa=?,statik_skordiagnosa_gangguan_jiwa=?,statik_disabilitas_berat=?,"+
                 "statik_skordisabilitas_berat=?,statik_berpisah=?,statik_skorberpisah=?,statik_kehilangan_kerja=?,statik_skorkehilangan_kerja=?,statik_skortotal=?,dinamis_ide_bunuh_diri=?,"+
                 "dinamis_skoride_bunuh_diri=?,dinamis_maksud_suicide=?,dinamis_skormaksud_suicide=?,dinamis_stress_berat=?,dinamis_skorstress_berat=?,dinamis_keputusasaan=?,dinamis_skorkeputusasaan=?,"+
                 "dinamis_kejadian_signifikan=?,dinamis_skorkejadian_signifikan=?,dinamis_kehilangan_kontrol=?,dinamis_skorkehilangan_kontrol=?,dinamis_penggunaan_napza=?,dinamis_skorpenggunaan_napza=?,"+
-                "dinamis_skortotal=?,faktor_faktor_pencegahan=?,total_skor=?,level_skor=?",37,new String[]{
+                "dinamis_skortotal=?,faktor_faktor_pencegahan=?,total_skor=?,level_skor=?",38,new String[]{
                 TNoRw.getText(),Valid.SetTgl(Tanggal.getSelectedItem()+"")+" "+Jam.getSelectedItem()+":"+Menit.getSelectedItem()+":"+Detik.getSelectedItem(),KdPetugas.getText(),
                 FaktorStatik1.getSelectedItem().toString(),SkorStatik1.getText(),FaktorStatik2.getSelectedItem().toString(),SkorStatik2.getText(),FaktorStatik3.getSelectedItem().toString(),SkorStatik3.getText(),
                 FaktorStatik4.getSelectedItem().toString(),SkorStatik4.getText(),FaktorStatik5.getSelectedItem().toString(),SkorStatik5.getText(),FaktorStatik6.getSelectedItem().toString(),SkorStatik6.getText(), 
                 FaktorStatik7.getSelectedItem().toString(),SkorStatik7.getText(),TotalStatik.getText(),FaktorDinamis1.getSelectedItem().toString(),SkorDinamis1.getText(), 
                 FaktorDinamis2.getSelectedItem().toString(),SkorDinamis2.getText(),FaktorDinamis3.getSelectedItem().toString(),SkorDinamis3.getText(),FaktorDinamis4.getSelectedItem().toString(),SkorDinamis4.getText(), 
                 FaktorDinamis5.getSelectedItem().toString(),SkorDinamis5.getText(),FaktorDinamis6.getSelectedItem().toString(),SkorDinamis6.getText(),FaktorDinamis7.getSelectedItem().toString(),SkorDinamis7.getText(), 
-                TotalDinamis.getText(),FaktorPencegahan.getText(),SkorTotal.getText(),Level.getText(),tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()
+                TotalDinamis.getText(),FaktorPencegahan.getText(),SkorTotal.getText(),Level.getText(),tbObat.getValueAt(tbObat.getSelectedRow(),0).toString(),
+                tbObat.getValueAt(tbObat.getSelectedRow(),5).toString()
             })==true){
             tbObat.setValueAt(TNoRw.getText(),tbObat.getSelectedRow(),0);
             tbObat.setValueAt(TNoRM.getText(),tbObat.getSelectedRow(),1);
@@ -2525,8 +2527,8 @@ public final class RMPenilaianTambahanBunuhDiri extends javax.swing.JDialog {
     }
 
     private void hapus() {
-        if(Sequel.queryu2tf("delete from penilaian_tambahan_bunuh_diri where no_rawat=?",1,new String[]{
-            tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()
+        if(Sequel.queryu2tf("delete from penilaian_tambahan_bunuh_diri where no_rawat=? and tanggal=?",2,new String[]{
+            tbObat.getValueAt(tbObat.getSelectedRow(),0).toString(),tbObat.getValueAt(tbObat.getSelectedRow(),5).toString()
         })==true){
             tabMode.removeRow(tbObat.getSelectedRow());
             emptTeks();
