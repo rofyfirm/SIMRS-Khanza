@@ -77,8 +77,9 @@ public final class InventoryTelaahResep extends javax.swing.JDialog {
             "Status","T.R.Tepat Iden Pasien","Ket T.R.Tepat Iden Pasien","T.R.Tepat Obat","Ket T.R.Tepat Obat",
             "T.R.Tepat Dosis","Ket T.R.Tepat Dosis","T.R.Tepat Cara Pemberian","Ket T.R.Tepat Cara Pemberian",
             "T.R.Tepat Waktu Pemberian","Ket T.R.Tepat Waktu Pemberian","T.R.Ada/Tidak Duplikasi","Ket T.R.Ada/Tidak Duplikasi",
-            "T.R.Interaksi Obat","Ket T.R.Interaksi Obat","T.R.Kontra Indikasi","Ket T.R.Kontra Indikasi","T.O.Tepat Pasien",
-            "T.O.Tepat Obat","T.O.Tepat Dosis","T.O.Tepat Cara Pemberian","T.O.Tepat Waktu Pemberian","NIP","Petugas Farmasi"
+            "T.R.Interaksi Obat","Ket T.R.Interaksi Obat","T.R.Kontra Indikasi","Ket T.R.Kontra Indikasi","T.R.Obat High Alert",
+            "Ket T.R.Obat High Alert","T.O.Tepat Pasien","T.O.Tepat Obat","T.O.Tepat Dosis","T.O.Tepat Cara Pemberian",
+            "T.O.Tepat Waktu Pemberian","NIP","Petugas Farmasi"
         }){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
         };
@@ -88,7 +89,7 @@ public final class InventoryTelaahResep extends javax.swing.JDialog {
         tbObat.setPreferredScrollableViewportSize(new Dimension(500,500));
         tbObat.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-        for (i = 0; i < 35; i++) {
+        for (i = 0; i < 37; i++) {
             TableColumn column = tbObat.getColumnModel().getColumn(i);
             if(i==0){
                 column.setPreferredWidth(85);
@@ -147,18 +148,22 @@ public final class InventoryTelaahResep extends javax.swing.JDialog {
             }else if(i==27){
                 column.setPreferredWidth(118);
             }else if(i==28){
-                column.setPreferredWidth(91);
+                column.setPreferredWidth(105);
             }else if(i==29){
-                column.setPreferredWidth(82);
+                column.setPreferredWidth(124);
             }else if(i==30){
-                column.setPreferredWidth(84);
+                column.setPreferredWidth(91);
             }else if(i==31){
-                column.setPreferredWidth(136);
+                column.setPreferredWidth(82);
             }else if(i==32){
-                column.setPreferredWidth(144);
+                column.setPreferredWidth(84);
             }else if(i==33){
-                column.setPreferredWidth(80);
+                column.setPreferredWidth(136);
             }else if(i==34){
+                column.setPreferredWidth(144);
+            }else if(i==35){
+                column.setPreferredWidth(80);
+            }else if(i==36){
                 column.setPreferredWidth(150);
             }
         }
@@ -174,6 +179,7 @@ public final class InventoryTelaahResep extends javax.swing.JDialog {
         KetResepTidakDuplikasiObat.setDocument(new batasInput((byte)30).getKata(KetResepTidakDuplikasiObat));
         KetResepInteraksiObat.setDocument(new batasInput((byte)30).getKata(KetResepInteraksiObat));
         KetResepKontraIndikasiObat.setDocument(new batasInput((byte)30).getKata(KetResepKontraIndikasiObat));
+        KetResepObatHighAlert.setDocument(new batasInput((byte)30).getKata(KetResepObatHighAlert));
         TCari.setDocument(new batasInput((int)100).getKata(TCari));
         
         ChkInput.setSelected(false);
@@ -270,10 +276,12 @@ public final class InventoryTelaahResep extends javax.swing.JDialog {
         ResepTidakDuplikasiObat = new widget.ComboBox();
         ResepInteraksiObat = new widget.ComboBox();
         ResepKontraIndikasiObat = new widget.ComboBox();
+        ResepObatHighAlert = new widget.ComboBox();
         KetResepTepatWaktuPemberian = new widget.TextBox();
         KetResepTidakDuplikasiObat = new widget.TextBox();
         KetResepInteraksiObat = new widget.TextBox();
         KetResepKontraIndikasiObat = new widget.TextBox();
+        KetResepObatHighAlert = new widget.TextBox();
         jLabel25 = new widget.Label();
         jLabel30 = new widget.Label();
         jLabel31 = new widget.Label();
@@ -282,6 +290,8 @@ public final class InventoryTelaahResep extends javax.swing.JDialog {
         jLabel33 = new widget.Label();
         jLabel34 = new widget.Label();
         jLabel35 = new widget.Label();
+        jLabel43 = new widget.Label();
+        jLabel44 = new widget.Label();
         jLabel36 = new widget.Label();
         jLabel37 = new widget.Label();
         ObatTepatPasien = new widget.ComboBox();
@@ -545,7 +555,7 @@ public final class InventoryTelaahResep extends javax.swing.JDialog {
 
         PanelInput.setName("PanelInput"); // NOI18N
         PanelInput.setOpaque(false);
-        PanelInput.setPreferredSize(new java.awt.Dimension(192, 354));
+        PanelInput.setPreferredSize(new java.awt.Dimension(192, 414));
         PanelInput.setLayout(new java.awt.BorderLayout(1, 1));
 
         ChkInput.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/143.png"))); // NOI18N
@@ -576,7 +586,7 @@ public final class InventoryTelaahResep extends javax.swing.JDialog {
 
         FormInput.setBackground(new java.awt.Color(250, 255, 245));
         FormInput.setName("FormInput"); // NOI18N
-        FormInput.setPreferredSize(new java.awt.Dimension(100, 332));
+        FormInput.setPreferredSize(new java.awt.Dimension(100, 392));
         FormInput.setLayout(null);
 
         jLabel4.setText("No.Rawat :");
@@ -846,6 +856,17 @@ public final class InventoryTelaahResep extends javax.swing.JDialog {
         FormInput.add(ResepKontraIndikasiObat);
         ResepKontraIndikasiObat.setBounds(434, 270, 80, 23);
 
+        ResepObatHighAlert.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Ya", "Tidak" }));
+        ResepObatHighAlert.setSelectedIndex(1);
+        ResepObatHighAlert.setName("ResepObatHighAlert"); // NOI18N
+        ResepObatHighAlert.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                ResepObatHighAlertKeyPressed(evt);
+            }
+        });
+        FormInput.add(ResepObatHighAlert);
+        ResepObatHighAlert.setBounds(434, 330, 80, 23);
+
         KetResepTepatWaktuPemberian.setFocusTraversalPolicyProvider(true);
         KetResepTepatWaktuPemberian.setName("KetResepTepatWaktuPemberian"); // NOI18N
         KetResepTepatWaktuPemberian.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -885,6 +906,16 @@ public final class InventoryTelaahResep extends javax.swing.JDialog {
         });
         FormInput.add(KetResepKontraIndikasiObat);
         KetResepKontraIndikasiObat.setBounds(374, 300, 140, 23);
+
+        KetResepObatHighAlert.setFocusTraversalPolicyProvider(true);
+        KetResepObatHighAlert.setName("KetResepObatHighAlert"); // NOI18N
+        KetResepObatHighAlert.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                KetResepObatHighAlertKeyPressed(evt);
+            }
+        });
+        FormInput.add(KetResepObatHighAlert);
+        KetResepObatHighAlert.setBounds(374, 360, 140, 23);
 
         jLabel25.setText("Keterangan :");
         jLabel25.setName("jLabel25"); // NOI18N
@@ -929,6 +960,17 @@ public final class InventoryTelaahResep extends javax.swing.JDialog {
         jLabel35.setName("jLabel35"); // NOI18N
         FormInput.add(jLabel35);
         jLabel35.setBounds(295, 270, 140, 23);
+
+        jLabel43.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel43.setText("9. Obat High Alert");
+        jLabel43.setName("jLabel43"); // NOI18N
+        FormInput.add(jLabel43);
+        jLabel43.setBounds(295, 330, 140, 23);
+
+        jLabel44.setText("Keterangan :");
+        jLabel44.setName("jLabel44"); // NOI18N
+        FormInput.add(jLabel44);
+        jLabel44.setBounds(290, 360, 80, 23);
 
         jLabel36.setText("Pengkajian Resep :");
         jLabel36.setName("jLabel36"); // NOI18N
@@ -1078,13 +1120,14 @@ public final class InventoryTelaahResep extends javax.swing.JDialog {
         }else if(Nip.getText().trim().equals("")||NamaPetugas.getText().trim().equals("")){
             Valid.textKosong(Nip,"Petugas");
         }else{
-            if(Sequel.menyimpantf("telaah_farmasi","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?","Data",23,new String[]{
+            if(Sequel.menyimpantf("telaah_farmasi","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?","Data",25,new String[]{
                 NoResep.getText(),ResepTepatIdentifikasiPasien.getSelectedItem().toString(),KetResepTepatIdetifikasiPasien.getText(), 
                 ResepTepatObat.getSelectedItem().toString(),KetResepTepatObat.getText(),ResepTepatDosis.getSelectedItem().toString(), 
                 KetResepTepatDosis.getText(),ResepTepatCaraPemberian.getSelectedItem().toString(),KetResepTepatCaraPemberian.getText(), 
                 ResepTepatWaktuPemberian.getSelectedItem().toString(),KetResepTepatWaktuPemberian.getText(),ResepTidakDuplikasiObat.getSelectedItem().toString(), 
                 KetResepTidakDuplikasiObat.getText(),ResepInteraksiObat.getSelectedItem().toString(),KetResepInteraksiObat.getText(), 
-                ResepKontraIndikasiObat.getSelectedItem().toString(),KetResepKontraIndikasiObat.getText(),ObatTepatPasien.getSelectedItem().toString(),
+                ResepKontraIndikasiObat.getSelectedItem().toString(),KetResepKontraIndikasiObat.getText(),ResepObatHighAlert.getSelectedItem().toString(),
+                KetResepObatHighAlert.getText(),ObatTepatPasien.getSelectedItem().toString(),
                 ObatTepatObat.getSelectedItem().toString(),ObatTepatDosis.getSelectedItem().toString(),ObatTepatCaraPemberian.getSelectedItem().toString(), 
                 ObatTepatWaktuPemberian.getSelectedItem().toString(),Nip.getText()
             })==true){
@@ -1203,7 +1246,8 @@ public final class InventoryTelaahResep extends javax.swing.JDialog {
                     "telaah_farmasi.resep_tepat_cara_pemberian,telaah_farmasi.resep_ket_tepat_cara_pemberian,telaah_farmasi.resep_tepat_waktu_pemberian,"+
                     "telaah_farmasi.resep_ket_tepat_waktu_pemberian,telaah_farmasi.resep_ada_tidak_duplikasi_obat,telaah_farmasi.resep_ket_ada_tidak_duplikasi_obat,"+
                     "telaah_farmasi.resep_interaksi_obat,telaah_farmasi.resep_ket_interaksi_obat,telaah_farmasi.resep_kontra_indikasi_obat,"+
-                    "telaah_farmasi.resep_ket_kontra_indikasi_obat,telaah_farmasi.obat_tepat_pasien,telaah_farmasi.obat_tepat_obat,"+
+                    "telaah_farmasi.resep_ket_kontra_indikasi_obat,telaah_farmasi.resep_obat_high_alert,telaah_farmasi.resep_ket_obat_high_alert,"+
+                    "telaah_farmasi.obat_tepat_pasien,telaah_farmasi.obat_tepat_obat,"+
                     "telaah_farmasi.obat_tepat_dosis,telaah_farmasi.obat_tepat_cara_pemberian,telaah_farmasi.obat_tepat_waktu_pemberian,"+
                     "telaah_farmasi.nip,petugas.nama "+
                     "from telaah_farmasi inner join resep_obat on telaah_farmasi.no_resep=resep_obat.no_resep "+
@@ -1405,8 +1449,16 @@ public final class InventoryTelaahResep extends javax.swing.JDialog {
         Valid.pindah(evt,KetResepInteraksiObat,KetResepKontraIndikasiObat);
     }//GEN-LAST:event_ResepKontraIndikasiObatKeyPressed
 
+    private void ResepObatHighAlertKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_ResepObatHighAlertKeyPressed
+        Valid.pindah(evt,KetResepKontraIndikasiObat,KetResepObatHighAlert);
+    }//GEN-LAST:event_ResepObatHighAlertKeyPressed
+
+    private void KetResepObatHighAlertKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KetResepObatHighAlertKeyPressed
+        Valid.pindah(evt,ResepObatHighAlert,ObatTepatPasien);
+    }//GEN-LAST:event_KetResepObatHighAlertKeyPressed
+
     private void ObatTepatPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_ObatTepatPasienKeyPressed
-        Valid.pindah(evt,KetResepKontraIndikasiObat,ObatTepatObat);
+        Valid.pindah(evt,KetResepObatHighAlert,ObatTepatObat);
     }//GEN-LAST:event_ObatTepatPasienKeyPressed
 
     private void ObatTepatObatKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_ObatTepatObatKeyPressed
@@ -1454,7 +1506,7 @@ public final class InventoryTelaahResep extends javax.swing.JDialog {
     }//GEN-LAST:event_KetResepInteraksiObatKeyPressed
 
     private void KetResepKontraIndikasiObatKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KetResepKontraIndikasiObatKeyPressed
-        Valid.pindah(evt,ResepKontraIndikasiObat,ObatTepatPasien);
+        Valid.pindah(evt,ResepKontraIndikasiObat,ResepObatHighAlert);
     }//GEN-LAST:event_KetResepKontraIndikasiObatKeyPressed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
@@ -1528,6 +1580,7 @@ public final class InventoryTelaahResep extends javax.swing.JDialog {
     private widget.TextBox JK;
     private widget.TextBox KetResepInteraksiObat;
     private widget.TextBox KetResepKontraIndikasiObat;
+    private widget.TextBox KetResepObatHighAlert;
     private widget.TextBox KetResepTepatCaraPemberian;
     private widget.TextBox KetResepTepatDosis;
     private widget.TextBox KetResepTepatIdetifikasiPasien;
@@ -1547,6 +1600,7 @@ public final class InventoryTelaahResep extends javax.swing.JDialog {
     private javax.swing.JPanel PanelInput;
     private widget.ComboBox ResepInteraksiObat;
     private widget.ComboBox ResepKontraIndikasiObat;
+    private widget.ComboBox ResepObatHighAlert;
     private widget.ComboBox ResepTepatCaraPemberian;
     private widget.ComboBox ResepTepatDosis;
     private widget.ComboBox ResepTepatIdentifikasiPasien;
@@ -1594,6 +1648,8 @@ public final class InventoryTelaahResep extends javax.swing.JDialog {
     private widget.Label jLabel40;
     private widget.Label jLabel41;
     private widget.Label jLabel42;
+    private widget.Label jLabel43;
+    private widget.Label jLabel44;
     private widget.Label jLabel6;
     private widget.Label jLabel7;
     private widget.Label jLabel8;
@@ -1614,7 +1670,8 @@ public final class InventoryTelaahResep extends javax.swing.JDialog {
                 "telaah_farmasi.resep_tepat_cara_pemberian,telaah_farmasi.resep_ket_tepat_cara_pemberian,telaah_farmasi.resep_tepat_waktu_pemberian,"+
                 "telaah_farmasi.resep_ket_tepat_waktu_pemberian,telaah_farmasi.resep_ada_tidak_duplikasi_obat,telaah_farmasi.resep_ket_ada_tidak_duplikasi_obat,"+
                 "telaah_farmasi.resep_interaksi_obat,telaah_farmasi.resep_ket_interaksi_obat,telaah_farmasi.resep_kontra_indikasi_obat,"+
-                "telaah_farmasi.resep_ket_kontra_indikasi_obat,telaah_farmasi.obat_tepat_pasien,telaah_farmasi.obat_tepat_obat,"+
+                "telaah_farmasi.resep_ket_kontra_indikasi_obat,telaah_farmasi.resep_obat_high_alert,telaah_farmasi.resep_ket_obat_high_alert,"+
+                "telaah_farmasi.obat_tepat_pasien,telaah_farmasi.obat_tepat_obat,"+
                 "telaah_farmasi.obat_tepat_dosis,telaah_farmasi.obat_tepat_cara_pemberian,telaah_farmasi.obat_tepat_waktu_pemberian,"+
                 "telaah_farmasi.nip,petugas.nama "+
                 "from telaah_farmasi inner join resep_obat on telaah_farmasi.no_resep=resep_obat.no_resep "+
@@ -1652,7 +1709,8 @@ public final class InventoryTelaahResep extends javax.swing.JDialog {
                         rs.getString("resep_tepat_cara_pemberian"),rs.getString("resep_ket_tepat_cara_pemberian"),rs.getString("resep_tepat_waktu_pemberian"),
                         rs.getString("resep_ket_tepat_waktu_pemberian"),rs.getString("resep_ada_tidak_duplikasi_obat"),rs.getString("resep_ket_ada_tidak_duplikasi_obat"),
                         rs.getString("resep_interaksi_obat"),rs.getString("resep_ket_interaksi_obat"),rs.getString("resep_kontra_indikasi_obat"),
-                        rs.getString("resep_ket_kontra_indikasi_obat"),rs.getString("obat_tepat_pasien"),rs.getString("obat_tepat_obat"),rs.getString("obat_tepat_dosis"),
+                        rs.getString("resep_ket_kontra_indikasi_obat"),rs.getString("resep_obat_high_alert"),rs.getString("resep_ket_obat_high_alert"),
+                        rs.getString("obat_tepat_pasien"),rs.getString("obat_tepat_obat"),rs.getString("obat_tepat_dosis"),
                         rs.getString("obat_tepat_cara_pemberian"),rs.getString("obat_tepat_waktu_pemberian"),rs.getString("nip"),rs.getString("nama")
                     });
                 }
@@ -1689,6 +1747,8 @@ public final class InventoryTelaahResep extends javax.swing.JDialog {
         KetResepInteraksiObat.setText("");
         ResepKontraIndikasiObat.setSelectedIndex(1);
         KetResepKontraIndikasiObat.setText("");
+        ResepObatHighAlert.setSelectedIndex(1);
+        KetResepObatHighAlert.setText("");
         ObatTepatPasien.setSelectedIndex(0);
         ObatTepatObat.setSelectedIndex(0);
         ObatTepatDosis.setSelectedIndex(0);
@@ -1720,13 +1780,15 @@ public final class InventoryTelaahResep extends javax.swing.JDialog {
             KetResepInteraksiObat.setText(tbObat.getValueAt(tbObat.getSelectedRow(),25).toString());
             ResepKontraIndikasiObat.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),26).toString());
             KetResepKontraIndikasiObat.setText(tbObat.getValueAt(tbObat.getSelectedRow(),27).toString());
-            ObatTepatPasien.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),28).toString());
-            ObatTepatObat.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),29).toString());
-            ObatTepatDosis.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),30).toString());
-            ObatTepatCaraPemberian.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),31).toString());
-            ObatTepatWaktuPemberian.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),32).toString());
-            Nip.setText(tbObat.getValueAt(tbObat.getSelectedRow(),33).toString());
-            NamaPetugas.setText(tbObat.getValueAt(tbObat.getSelectedRow(),34).toString());
+            ResepObatHighAlert.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),28).toString());
+            KetResepObatHighAlert.setText(tbObat.getValueAt(tbObat.getSelectedRow(),29).toString());
+            ObatTepatPasien.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),30).toString());
+            ObatTepatObat.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),31).toString());
+            ObatTepatDosis.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),32).toString());
+            ObatTepatCaraPemberian.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),33).toString());
+            ObatTepatWaktuPemberian.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),34).toString());
+            Nip.setText(tbObat.getValueAt(tbObat.getSelectedRow(),35).toString());
+            NamaPetugas.setText(tbObat.getValueAt(tbObat.getSelectedRow(),36).toString());
         }
     }
     private void isRawat() {
@@ -1759,7 +1821,7 @@ public final class InventoryTelaahResep extends javax.swing.JDialog {
         if(ChkInput.isSelected()==true){
             ChkInput.setVisible(false);
             if(this.getHeight()>600){
-                PanelInput.setPreferredSize(new Dimension(WIDTH,354));
+                PanelInput.setPreferredSize(new Dimension(WIDTH,414));
             }else{
                 PanelInput.setPreferredSize(new Dimension(WIDTH,this.getHeight()-230));
             }   
@@ -1804,13 +1866,15 @@ public final class InventoryTelaahResep extends javax.swing.JDialog {
         if(Sequel.mengedittf("telaah_farmasi","no_resep=?","no_resep=?,resep_identifikasi_pasien=?,resep_ket_identifikasi_pasien=?,resep_tepat_obat=?,resep_ket_tepat_obat=?,"+
                 "resep_tepat_dosis=?,resep_ket_tepat_dosis=?,resep_tepat_cara_pemberian=?,resep_ket_tepat_cara_pemberian=?,resep_tepat_waktu_pemberian=?,resep_ket_tepat_waktu_pemberian=?,"+
                 "resep_ada_tidak_duplikasi_obat=?,resep_ket_ada_tidak_duplikasi_obat=?,resep_interaksi_obat=?,resep_ket_interaksi_obat=?,resep_kontra_indikasi_obat=?,"+
-                "resep_ket_kontra_indikasi_obat=?,obat_tepat_pasien=?,obat_tepat_obat=?,obat_tepat_dosis=?,obat_tepat_cara_pemberian=?,obat_tepat_waktu_pemberian=?,nip=?",24,new String[]{
+                "resep_ket_kontra_indikasi_obat=?,resep_obat_high_alert=?,resep_ket_obat_high_alert=?,obat_tepat_pasien=?,obat_tepat_obat=?,obat_tepat_dosis=?,"+
+                "obat_tepat_cara_pemberian=?,obat_tepat_waktu_pemberian=?,nip=?",26,new String[]{
                 NoResep.getText(),ResepTepatIdentifikasiPasien.getSelectedItem().toString(),KetResepTepatIdetifikasiPasien.getText(), 
                 ResepTepatObat.getSelectedItem().toString(),KetResepTepatObat.getText(),ResepTepatDosis.getSelectedItem().toString(), 
                 KetResepTepatDosis.getText(),ResepTepatCaraPemberian.getSelectedItem().toString(),KetResepTepatCaraPemberian.getText(), 
                 ResepTepatWaktuPemberian.getSelectedItem().toString(),KetResepTepatWaktuPemberian.getText(),ResepTidakDuplikasiObat.getSelectedItem().toString(), 
                 KetResepTidakDuplikasiObat.getText(),ResepInteraksiObat.getSelectedItem().toString(),KetResepInteraksiObat.getText(), 
-                ResepKontraIndikasiObat.getSelectedItem().toString(),KetResepKontraIndikasiObat.getText(),ObatTepatPasien.getSelectedItem().toString(),
+                ResepKontraIndikasiObat.getSelectedItem().toString(),KetResepKontraIndikasiObat.getText(),ResepObatHighAlert.getSelectedItem().toString(),
+                KetResepObatHighAlert.getText(),ObatTepatPasien.getSelectedItem().toString(),
                 ObatTepatObat.getSelectedItem().toString(),ObatTepatDosis.getSelectedItem().toString(),ObatTepatCaraPemberian.getSelectedItem().toString(), 
                 ObatTepatWaktuPemberian.getSelectedItem().toString(),Nip.getText(),tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()
             })==true){
