@@ -3528,7 +3528,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     param.put("propinsirs",akses.getpropinsirs());
                     param.put("tanggal",TglPeresepan);
                     param.put("norawat",NoRawat);
-                    param.put("pasien",Pasien);
+                    param.put("pasien",Pasien+" ("+Sequel.cariIsi("select concat(reg_periksa.umurdaftar,' ',reg_periksa.sttsumur) from reg_periksa where reg_periksa.no_rawat=?",NoRawat)+")");
                     param.put("norm",NoRM);
                     param.put("peresep",DokterPeresep);
                     param.put("noresep",NoResep);
@@ -3644,7 +3644,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     param.put("propinsirs",akses.getpropinsirs());
                     param.put("tanggal",TglPeresepan);
                     param.put("norawat",NoRawat);
-                    param.put("pasien",Pasien);
+                    param.put("pasien",Pasien+" ("+Sequel.cariIsi("select concat(reg_periksa.umurdaftar,' ',reg_periksa.sttsumur) from reg_periksa where reg_periksa.no_rawat=?",NoRawat)+")");
                     param.put("norm",NoRM);
                     param.put("peresep",DokterPeresep);
                     param.put("noresep",NoResep);
