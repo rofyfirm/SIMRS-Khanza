@@ -40,6 +40,7 @@ import fungsi.akses;
 import fungsi.lokasidepoutama;
 import fungsi.cacherawatinap;
 import fungsi.pengaturankamarinap;
+import fungsi.catatanpasien;
 import inventory.DlgCariObat2;
 import inventory.DlgCariObat3;
 import inventory.DlgInputStokPasien;
@@ -384,6 +385,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         WindowDiagnosaAkhir.setSize(630,80);
         WindowDiagnosaMasuk.setSize(630,80);
         WindowRanapGabung.setSize(630,120);
+        DlgCatatan.setSize(595,34);
         
                 
         CmbTahun.setSelectedItem(now.substring(0,4));
@@ -401,6 +403,10 @@ public class DlgKamarInap extends javax.swing.JDialog {
         
         if(pengaturankamarinap.getAktifkanDiagnosaAkhir().equals("")){
             pengaturankamarinap.SetKamarInap();
+        }
+        
+        if(catatanpasien.getTampilkanCatatan().equals("")){
+            catatanpasien.SetCatatanPasien();
         }
     }
 
@@ -728,6 +734,9 @@ public class DlgKamarInap extends javax.swing.JDialog {
         BtnHapusGabung = new widget.Button();
         NoRawatGabung = new widget.TextBox();
         btnPasienRanapGabung1 = new widget.Button();
+        DlgCatatan = new javax.swing.JDialog();
+        internalFrame10 = new widget.InternalFrame();
+        LabelCatatan = new widget.Label();
         DlgSakit2 = new javax.swing.JDialog();
         internalFrame7 = new widget.InternalFrame();
         panelBiasa4 = new widget.PanelBiasa();
@@ -4819,6 +4828,36 @@ public class DlgKamarInap extends javax.swing.JDialog {
 
         WindowRanapGabung.getContentPane().add(internalFrame6, java.awt.BorderLayout.CENTER);
 
+        DlgCatatan.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        DlgCatatan.setName("DlgCatatan"); // NOI18N
+        DlgCatatan.setUndecorated(true);
+        DlgCatatan.setResizable(false);
+
+        internalFrame10.setBorder(null);
+        internalFrame10.setName("internalFrame10"); // NOI18N
+        internalFrame10.setWarnaAtas(new java.awt.Color(100, 100, 10));
+        internalFrame10.setWarnaBawah(new java.awt.Color(100, 100, 10));
+        internalFrame10.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                internalFrame10MouseClicked(evt);
+            }
+        });
+        internalFrame10.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
+
+        LabelCatatan.setForeground(new java.awt.Color(255, 255, 255));
+        LabelCatatan.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        LabelCatatan.setText("Catatan");
+        LabelCatatan.setName("LabelCatatan"); // NOI18N
+        LabelCatatan.setPreferredSize(new java.awt.Dimension(580, 23));
+        LabelCatatan.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                LabelCatatanMouseClicked(evt);
+            }
+        });
+        internalFrame10.add(LabelCatatan);
+
+        DlgCatatan.getContentPane().add(internalFrame10, java.awt.BorderLayout.CENTER);
+
         DlgSakit2.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         DlgSakit2.setName("DlgSakit2"); // NOI18N
         DlgSakit2.setUndecorated(true);
@@ -6131,6 +6170,21 @@ public class DlgKamarInap extends javax.swing.JDialog {
                             norawatgabung="";
                         }
                     }
+                }else{
+                    i=tbKamIn.getSelectedColumn();
+                    if(i==2){
+                        if(catatanpasien.getTampilkanCatatan().equals("Yes")){
+                            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                            LabelCatatan.setText(Sequel.cariIsi("select catatan_pasien.catatan from catatan_pasien where catatan_pasien.no_rkm_medis=?",TNoRMCari.getText()));
+                            if(!LabelCatatan.getText().equals("")){
+                                DlgCatatan.setLocationRelativeTo(internalFrame1);
+                                DlgCatatan.setVisible(true);
+                            }else{
+                                DlgCatatan.setVisible(false);
+                            }
+                            this.setCursor(Cursor.getDefaultCursor());
+                        }
+                    }
                 }
             }
             if(evt.getClickCount()==2){
@@ -6229,6 +6283,14 @@ public class DlgKamarInap extends javax.swing.JDialog {
             }
         }
     }//GEN-LAST:event_tbKamInMouseClicked
+
+    private void LabelCatatanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LabelCatatanMouseClicked
+        DlgCatatan.dispose();
+    }//GEN-LAST:event_LabelCatatanMouseClicked
+
+    private void internalFrame10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_internalFrame10MouseClicked
+        DlgCatatan.dispose();
+    }//GEN-LAST:event_internalFrame10MouseClicked
 
     private void tbKamInKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbKamInKeyPressed
         if(tabMode.getRowCount()!=0){
@@ -19626,8 +19688,10 @@ public class DlgKamarInap extends javax.swing.JDialog {
     private widget.Tanggal DTPCari4;
     private widget.TextBox DiagnosaAkhirSementara;
     private widget.TextBox DiagnosaAwalSementara;
+    private javax.swing.JDialog DlgCatatan;
     private javax.swing.JDialog DlgSakit2;
     private widget.TextBox JamMasuk;
+    private widget.Label LabelCatatan;
     private widget.Label LCount;
     private widget.Label LblStts;
     private javax.swing.JMenu MenuBPJS;
@@ -19880,6 +19944,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
     private widget.TextBox diagnosaakhir;
     private widget.TextBox diagnosaawal;
     private widget.InternalFrame internalFrame1;
+    private widget.InternalFrame internalFrame10;
     private widget.InternalFrame internalFrame2;
     private widget.InternalFrame internalFrame3;
     private widget.InternalFrame internalFrame5;
