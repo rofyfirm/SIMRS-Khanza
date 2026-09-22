@@ -28,4 +28,9 @@ public class RMSkriningMPPFormBRalan extends RMSkriningMPPFormB {
     protected String judul() {
         return "Form B \u2013 Catatan Implementasi Manager Pelayanan Pasien Rawat Jalan";
     }
+
+    @Override
+    protected String laporanCatatan() {
+        return "rptDataMPPCatatanRalan.jasper";
+    }
 }

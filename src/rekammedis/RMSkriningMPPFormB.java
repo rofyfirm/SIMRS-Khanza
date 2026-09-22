@@ -70,6 +70,12 @@ public class RMSkriningMPPFormB extends javax.swing.JDialog {
         return "Form B \u2013 Catatan Implementasi Manager Pelayanan Pasien";
     }
     
+    /** Nama file laporan cetak data catatan implementasi MPP.
+     * @return  */
+    protected String laporanCatatan() {
+        return "rptDataMPPCatatan.jasper";
+    }
+    
     /** Menyesuaikan nama tabel pada query dengan tabelCatatan().
      * @param query
      * @return  */
@@ -832,7 +838,7 @@ public class RMSkriningMPPFormB extends javax.swing.JDialog {
                 param.put("logo",Sequel.cariGambar("select logo from setting")); 
             tgl=" mpp_evaluasi_catatan.tgl_implementasi between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" 23:59:59' ";
             if(TCari.getText().trim().equals("")){
-                Valid.MyReportqry("rptDataMPPCatatan.jasper","report","::[ Data Evaluasi Catatan MPP ]::",sql(
+                Valid.MyReportqry(laporanCatatan(),"report","::[ Data Evaluasi Catatan MPP ]::",sql(
                      "select mpp_evaluasi_catatan.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,pasien.jk,pasien.tgl_lahir,"+
                      "concat(pasien.alamat,', ',kelurahan.nm_kel,', ',kecamatan.nm_kec,', ',kabupaten.nm_kab,', ',propinsi.nm_prop) as alamat, "+
                      "mpp_evaluasi_catatan.tgl_implementasi,mpp_evaluasi_catatan.masalah,mpp_evaluasi_catatan.tinjut, "+
@@ -847,7 +853,7 @@ public class RMSkriningMPPFormB extends javax.swing.JDialog {
                      "inner join propinsi on pasien.kd_prop=propinsi.kd_prop "+
                      "where "+tgl+" order by mpp_evaluasi_catatan.no_rawat"),param);
             }else{
-                Valid.MyReportqry("rptDataMPPCatatan.jasper","report","::[ Data Evaluasi Catatan MPP ]::",sql(
+                Valid.MyReportqry(laporanCatatan(),"report","::[ Data Evaluasi Catatan MPP ]::",sql(
                      "select mpp_evaluasi_catatan.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,pasien.jk,pasien.tgl_lahir,"+
                      "concat(pasien.alamat,', ',kelurahan.nm_kel,', ',kecamatan.nm_kec,', ',kabupaten.nm_kab,', ',propinsi.nm_prop) as alamat, "+
                      "mpp_evaluasi_catatan.tgl_implementasi,mpp_evaluasi_catatan.masalah,mpp_evaluasi_catatan.tinjut, "+
