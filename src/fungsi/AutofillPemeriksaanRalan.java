@@ -18,26 +18,36 @@ import javax.swing.text.JTextComponent;
  *         .jalankan();
  * </pre>
  *
- * Nama kolom harus benar-benar ada di tabel pemeriksaan_ralan. Karena diambil
- * dalam satu query, satu nama kolom yang salah membatalkan seluruh pengisian.
+ * Untuk rawat inap gunakan AutofillPemeriksaanRanap, yang memakai builder yang
+ * sama tetapi membaca tabel pemeriksaan_ranap.
+ *
+ * Nama kolom harus benar-benar ada di tabel sumber. Karena diambil dalam satu
+ * query, satu nama kolom yang salah membatalkan seluruh pengisian.
  */
 public final class AutofillPemeriksaanRalan {
-    private final String noRawat;
+    private final String tabel,noRawat;
     private final List<String> kolom=new ArrayList<>();
     private final List<JTextComponent> field=new ArrayList<>();
 
-    private AutofillPemeriksaanRalan(String noRawat){
+    private AutofillPemeriksaanRalan(String tabel,String noRawat){
+        this.tabel=tabel;
         this.noRawat=noRawat;
     }
 
     /** @param noRawat no_rawat yang datanya dicari di pemeriksaan_ralan
      * @return  */
     public static AutofillPemeriksaanRalan dari(String noRawat){
-        return new AutofillPemeriksaanRalan(noRawat);
+        return new AutofillPemeriksaanRalan("pemeriksaan_ralan",noRawat);
     }
 
-    /** Isi field dengan nilai dari kolom pemeriksaan_ralan.
-     * @param namaKolom nama kolom di tabel pemeriksaan_ralan
+    /** Dipakai AutofillPemeriksaanRanap. Sengaja tidak public supaya tabel
+     * sumber hanya pemeriksaan_ralan atau pemeriksaan_ranap. */
+    static AutofillPemeriksaanRalan dariTabel(String tabel,String noRawat){
+        return new AutofillPemeriksaanRalan(tabel,noRawat);
+    }
+
+    /** Isi field dengan nilai dari kolom tabel sumber.
+     * @param namaKolom nama kolom di tabel sumber
      * @param target field yang diisi
      * @return  */
     public AutofillPemeriksaanRalan isi(String namaKolom,JTextComponent target){
@@ -53,7 +63,7 @@ public final class AutofillPemeriksaanRalan {
         // Koneksi dipakai bersama seluruh aplikasi, jadi hanya statement dan
         // resultset yang ditutup.
         try(PreparedStatement ps=koneksiDB.condb().prepareStatement(
-                "select "+String.join(",",kolom)+" from pemeriksaan_ralan where no_rawat=?")){
+                "select "+String.join(",",kolom)+" from "+tabel+" where no_rawat=?")){
             ps.setString(1,noRawat);
             try(ResultSet rs=ps.executeQuery()){
                 if(rs.next()){
@@ -64,7 +74,7 @@ public final class AutofillPemeriksaanRalan {
                 }
             }
         }catch(Exception e){
-            System.out.println("Notif Autofill Pemeriksaan Ralan : "+e);
+            System.out.println("Notif Autofill "+tabel+" : "+e);
         }
     }
 }
