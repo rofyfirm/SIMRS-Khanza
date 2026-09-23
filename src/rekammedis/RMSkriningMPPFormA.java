@@ -91,7 +91,36 @@ public class RMSkriningMPPFormA extends javax.swing.JDialog {
     protected String judul() {
         return "Form A \u2013 Evaluasi Awal Manajer Pelayanan Pasien";
     }
-    
+
+    /** Nama file laporan cetak Form A.
+     * @return  */
+    protected String laporanEvaluasi() {
+        return "rptCetakEvaluasiAwalMPP.jasper";
+    }
+
+    /** Query cetak Form A tanpa klausa where. Rawat inap menampilkan kamar,
+     * turunan rawat jalan menimpa metode ini untuk menampilkan poliklinik.
+     * @return  */
+    protected String sqlCetakEvaluasi() {
+        return "select reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,if(pasien.jk='L','Laki-Laki','Perempuan') as jk,pasien.tgl_lahir, " +
+               "concat(pasien.alamat,', ',kelurahan.nm_kel,', ',kecamatan.nm_kec,', ',kabupaten.nm_kab,', ',propinsi.nm_prop) as alamat,mpp_evaluasi.tanggal, " +
+               "ifnull(bangsal.nm_bangsal,'Ranap Gabung') as ruang,ifnull(kamar_inap.kd_kamar,'RG') as kamar,date_format(kamar_inap.tgl_masuk,'%d-%m-%Y') as tgl_masuk,kamar_inap.jam_masuk,"+
+               "mpp_evaluasi.kd_dokter,dokterpj.nm_dokter as dpjp,mpp_evaluasi.kd_konsulan,dokterkonsulen.nm_dokter as konsulan, " +
+               "mpp_evaluasi.diagnosis,mpp_evaluasi.kelompok,mpp_evaluasi.assesmen,mpp_evaluasi.identifikasi,mpp_evaluasi.rencana,mpp_evaluasi.nip,petugas.nama "+
+               "from reg_periksa inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
+               "inner join mpp_evaluasi on mpp_evaluasi.no_rawat=reg_periksa.no_rawat " +
+               "left join kamar_inap on reg_periksa.no_rawat=kamar_inap.no_rawat "+
+               "left join kamar on kamar_inap.kd_kamar=kamar.kd_kamar "+
+               "left join bangsal on kamar.kd_bangsal=bangsal.kd_bangsal "+
+               "inner join dokter as dokterpj on mpp_evaluasi.kd_dokter=dokterpj.kd_dokter " +
+               "inner join dokter as dokterkonsulen on mpp_evaluasi.kd_konsulan=dokterkonsulen.kd_dokter " +
+               "inner join petugas on mpp_evaluasi.nip=petugas.nip " +
+               "inner join kelurahan on pasien.kd_kel=kelurahan.kd_kel " +
+               "inner join kecamatan on pasien.kd_kec=kecamatan.kd_kec " +
+               "inner join kabupaten on pasien.kd_kab=kabupaten.kd_kab " +
+               "inner join propinsi on pasien.kd_prop=propinsi.kd_prop ";
+    }
+
     /** Menyesuaikan nama tabel pada query dengan tabelEvaluasi() dan
      * tabelEvaluasiMasalah(). Batas kata dipakai supaya "mpp_evaluasi"
      * tidak ikut mengganti awalan "mpp_evaluasi_masalah".
@@ -1712,24 +1741,8 @@ public class RMSkriningMPPFormA extends javax.swing.JDialog {
                 System.out.println("Notif : "+e);
             }
             param.put("masalah",masalahidentifikasi);  
-            Valid.MyReportqry("rptCetakEvaluasiAwalMPP.jasper","report","::[ Laporan Evaluasi Awal Manajer Pelayanan Pasien ]::",sql(
-                        "select reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,if(pasien.jk='L','Laki-Laki','Perempuan') as jk,pasien.tgl_lahir, " +
-                        "concat(pasien.alamat,', ',kelurahan.nm_kel,', ',kecamatan.nm_kec,', ',kabupaten.nm_kab,', ',propinsi.nm_prop) as alamat,mpp_evaluasi.tanggal, " +
-                        "ifnull(bangsal.nm_bangsal,'Ranap Gabung') as ruang,ifnull(kamar_inap.kd_kamar,'RG') as kamar,date_format(kamar_inap.tgl_masuk,'%d-%m-%Y') as tgl_masuk,kamar_inap.jam_masuk,"+
-                        "mpp_evaluasi.kd_dokter,dokterpj.nm_dokter as dpjp,mpp_evaluasi.kd_konsulan,dokterkonsulen.nm_dokter as konsulan, " +
-                        "mpp_evaluasi.diagnosis,mpp_evaluasi.kelompok,mpp_evaluasi.assesmen,mpp_evaluasi.identifikasi,mpp_evaluasi.rencana,mpp_evaluasi.nip,petugas.nama "+
-                        "from reg_periksa inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
-                        "inner join mpp_evaluasi on mpp_evaluasi.no_rawat=reg_periksa.no_rawat " +
-                        "left join kamar_inap on reg_periksa.no_rawat=kamar_inap.no_rawat "+
-                        "left join kamar on kamar_inap.kd_kamar=kamar.kd_kamar "+
-                        "left join bangsal on kamar.kd_bangsal=bangsal.kd_bangsal "+
-                        "inner join dokter as dokterpj on mpp_evaluasi.kd_dokter=dokterpj.kd_dokter " +
-                        "inner join dokter as dokterkonsulen on mpp_evaluasi.kd_konsulan=dokterkonsulen.kd_dokter " +
-                        "inner join petugas on mpp_evaluasi.nip=petugas.nip " +
-                        "inner join kelurahan on pasien.kd_kel=kelurahan.kd_kel " +
-                        "inner join kecamatan on pasien.kd_kec=kecamatan.kd_kec " +
-                        "inner join kabupaten on pasien.kd_kab=kabupaten.kd_kab " +
-                        "inner join propinsi on pasien.kd_prop=propinsi.kd_prop where "+
+            Valid.MyReportqry(laporanEvaluasi(),"report","::[ Laporan Evaluasi Awal Manajer Pelayanan Pasien ]::",sql(
+                        sqlCetakEvaluasi()+"where "+
                         "mpp_evaluasi.no_rawat='"+tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()+"' and "+
                         "mpp_evaluasi.tanggal='"+tbObat.getValueAt(tbObat.getSelectedRow(),6).toString()+"'"),param);
         }else{
