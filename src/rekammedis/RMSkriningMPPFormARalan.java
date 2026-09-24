@@ -35,6 +35,27 @@ public class RMSkriningMPPFormARalan extends RMSkriningMPPFormA {
     }
 
     @Override
+    protected String labelLokasi() {
+        return "Poliklinik";
+    }
+
+    @Override
+    protected String labelTglMasuk() {
+        return "Tgl.Registrasi";
+    }
+
+    @Override
+    protected String kolomLokasi() {
+        return "poliklinik.nm_poli as ruang,"+
+               "concat(reg_periksa.tgl_registrasi,' ',reg_periksa.jam_reg) as tgl_masuk";
+    }
+
+    @Override
+    protected String joinLokasi() {
+        return "inner join poliklinik on reg_periksa.kd_poli=poliklinik.kd_poli ";
+    }
+
+    @Override
     protected String laporanEvaluasi() {
         return "rptCetakEvaluasiAwalMPPRalan.jasper";
     }

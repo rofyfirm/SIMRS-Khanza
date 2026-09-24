@@ -91,6 +91,34 @@ public class RMSkriningMPPFormA extends javax.swing.JDialog {
     protected String judul() {
         return "Form A \u2013 Evaluasi Awal Manajer Pelayanan Pasien";
     }
+    
+    /** Label lokasi pasien. Turunan rawat jalan menimpa metode ini dengan
+     * poliklinik.
+     * @return  */
+    protected String labelLokasi() {
+        return "Kamar";
+    }
+    
+    /** Label tanggal masuk pasien.
+     * @return  */
+    protected String labelTglMasuk() {
+        return "Tgl.Masuk";
+    }
+    
+    /** Kolom lokasi dan tanggal masuk pasien untuk tabel dan isian form.
+     * @return  */
+    protected String kolomLokasi() {
+        return "concat(ifnull(kamar_inap.kd_kamar,'RG'),' ',ifnull(bangsal.nm_bangsal,'Ranap Gabung')) as ruang,"+
+               "concat(kamar_inap.tgl_masuk,' ',kamar_inap.jam_masuk) as tgl_masuk";
+    }
+    
+    /** Join tabel yang dipakai kolomLokasi().
+     * @return  */
+    protected String joinLokasi() {
+        return "left join kamar_inap on reg_periksa.no_rawat=kamar_inap.no_rawat "+
+               "left join kamar on kamar_inap.kd_kamar=kamar.kd_kamar "+
+               "left join bangsal on kamar.kd_bangsal=bangsal.kd_bangsal ";
+    }
 
     /** Nama file laporan cetak Form A.
      * @return  */
@@ -139,7 +167,7 @@ public class RMSkriningMPPFormA extends javax.swing.JDialog {
         initComponents();
         
         tabMode=new DefaultTableModel(null,new Object[]{
-            "No.Rawat","No.RM","Nama Pasien","J.K.","Tgl.Lahir","Alamat","Tgl.Evaluasi","Ruang","Tgl.Masuk",
+            "No.Rawat","No.RM","Nama Pasien","J.K.","Tgl.Lahir","Alamat","Tgl.Evaluasi",labelLokasi(),labelTglMasuk(),
             "Kode DPJP","DPJP","Kode Konsulan","Dokter Konsulan","Diagnosis","Kelompok","Assesmen","Identifikasi",
             "Rencana","NIP","Nama Petugas"
         }){
@@ -281,6 +309,8 @@ public class RMSkriningMPPFormA extends javax.swing.JDialog {
         
         
         ((javax.swing.border.TitledBorder)internalFrame1.getBorder()).setTitle("::[ "+judul()+" ]::");
+        jLabel12.setText(labelLokasi()+" :");
+        jLabel16.setText(labelTglMasuk()+" :");
         
         ChkAccor.setSelected(false);
         isMenu();
@@ -1992,14 +2022,12 @@ public class RMSkriningMPPFormA extends javax.swing.JDialog {
                 ps=koneksi.prepareStatement(sql(
                     "select reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,if(pasien.jk='L','Laki-Laki','Perempuan') as jk,pasien.tgl_lahir, " +
                     "concat(pasien.alamat,', ',kelurahan.nm_kel,', ',kecamatan.nm_kec,', ',kabupaten.nm_kab,', ',propinsi.nm_prop) as alamat,mpp_evaluasi.tanggal, " +
-                    "ifnull(bangsal.nm_bangsal,'Ranap Gabung') as ruang,ifnull(kamar_inap.kd_kamar,'RG') as kamar,kamar_inap.tgl_masuk,kamar_inap.jam_masuk,"+
+                    kolomLokasi()+","+
                     "mpp_evaluasi.kd_dokter,dokterpj.nm_dokter as dpjp,mpp_evaluasi.kd_konsulan,dokterkonsulen.nm_dokter as konsulan, " +
                     "mpp_evaluasi.diagnosis,mpp_evaluasi.kelompok,mpp_evaluasi.assesmen,mpp_evaluasi.identifikasi,mpp_evaluasi.rencana,mpp_evaluasi.nip,petugas.nama "+
                     "from reg_periksa inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
                     "inner join mpp_evaluasi on mpp_evaluasi.no_rawat=reg_periksa.no_rawat " +
-                    "left join kamar_inap on reg_periksa.no_rawat=kamar_inap.no_rawat "+
-                    "left join kamar on kamar_inap.kd_kamar=kamar.kd_kamar "+
-                    "left join bangsal on kamar.kd_bangsal=bangsal.kd_bangsal "+
+                    joinLokasi()+
                     "inner join dokter as dokterpj on mpp_evaluasi.kd_dokter=dokterpj.kd_dokter " +
                     "inner join dokter as dokterkonsulen on mpp_evaluasi.kd_konsulan=dokterkonsulen.kd_dokter " +
                     "inner join petugas on mpp_evaluasi.nip=petugas.nip " +
@@ -2012,14 +2040,12 @@ public class RMSkriningMPPFormA extends javax.swing.JDialog {
                 ps=koneksi.prepareStatement(sql(
                     "select reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,if(pasien.jk='L','Laki-Laki','Perempuan') as jk,pasien.tgl_lahir, " +
                     "concat(pasien.alamat,', ',kelurahan.nm_kel,', ',kecamatan.nm_kec,', ',kabupaten.nm_kab,', ',propinsi.nm_prop) as alamat,mpp_evaluasi.tanggal, " +
-                    "ifnull(bangsal.nm_bangsal,'Ranap Gabung') as ruang,ifnull(kamar_inap.kd_kamar,'RG') as kamar,kamar_inap.tgl_masuk,kamar_inap.jam_masuk,"+
+                    kolomLokasi()+","+
                     "mpp_evaluasi.kd_dokter,dokterpj.nm_dokter as dpjp,mpp_evaluasi.kd_konsulan,dokterkonsulen.nm_dokter as konsulan, " +
                     "mpp_evaluasi.diagnosis,mpp_evaluasi.kelompok,mpp_evaluasi.assesmen,mpp_evaluasi.identifikasi,mpp_evaluasi.rencana,mpp_evaluasi.nip,petugas.nama "+
                     "from reg_periksa inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
                     "inner join mpp_evaluasi on mpp_evaluasi.no_rawat=reg_periksa.no_rawat " +
-                    "left join kamar_inap on reg_periksa.no_rawat=kamar_inap.no_rawat "+
-                    "left join kamar on kamar_inap.kd_kamar=kamar.kd_kamar "+
-                    "left join bangsal on kamar.kd_bangsal=bangsal.kd_bangsal "+
+                    joinLokasi()+
                     "inner join dokter as dokterpj on mpp_evaluasi.kd_dokter=dokterpj.kd_dokter " +
                     "inner join dokter as dokterkonsulen on mpp_evaluasi.kd_konsulan=dokterkonsulen.kd_dokter " +
                     "inner join petugas on mpp_evaluasi.nip=petugas.nip " +
@@ -2049,7 +2075,7 @@ public class RMSkriningMPPFormA extends javax.swing.JDialog {
                 while(rs.next()){
                     tabMode.addRow(new Object[]{
                         rs.getString("no_rawat"),rs.getString("no_rkm_medis"),rs.getString("nm_pasien"),rs.getString("jk"),rs.getDate("tgl_lahir"),rs.getString("alamat"),rs.getString("tanggal"),
-                        rs.getString("kamar")+" "+rs.getString("ruang"),rs.getString("tgl_masuk")+" "+rs.getString("jam_masuk"),rs.getString("kd_dokter"),rs.getString("dpjp"),rs.getString("kd_konsulan"),
+                        rs.getString("ruang"),rs.getString("tgl_masuk"),rs.getString("kd_dokter"),rs.getString("dpjp"),rs.getString("kd_konsulan"),
                         rs.getString("konsulan"),rs.getString("diagnosis"),rs.getString("kelompok"),rs.getString("assesmen"),rs.getString("identifikasi"),rs.getString("rencana"),rs.getString("nip"),
                         rs.getString("nama")
                     });
@@ -2142,16 +2168,14 @@ public class RMSkriningMPPFormA extends javax.swing.JDialog {
         try {
             ps=koneksi.prepareStatement(
                     "select reg_periksa.no_rkm_medis,pasien.nm_pasien, if(pasien.jk='L','Laki-Laki','Perempuan') as jk,pasien.tgl_lahir,reg_periksa.tgl_registrasi,"+
-                    "concat(pasien.alamat,', ',kelurahan.nm_kel,', ',kecamatan.nm_kec,', ',kabupaten.nm_kab,', ',propinsi.nm_prop)as alamat,ifnull(bangsal.nm_bangsal,'Ranap Gabung') as nm_bangsal, "+
-                    "ifnull(kamar_inap.kd_kamar,'RG') as kamar,kamar_inap.tgl_masuk,kamar_inap.jam_masuk "+
+                    "concat(pasien.alamat,', ',kelurahan.nm_kel,', ',kecamatan.nm_kec,', ',kabupaten.nm_kab,', ',propinsi.nm_prop)as alamat,"+
+                    kolomLokasi()+" "+
                     "from reg_periksa inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
                     "inner join kelurahan on pasien.kd_kel=kelurahan.kd_kel "+
                     "inner join kecamatan on pasien.kd_kec=kecamatan.kd_kec "+
                     "inner join kabupaten on pasien.kd_kab=kabupaten.kd_kab " +
                     "inner join propinsi on pasien.kd_prop=propinsi.kd_prop "+
-                    "left join kamar_inap on reg_periksa.no_rawat=kamar_inap.no_rawat "+
-                    "left join kamar on kamar_inap.kd_kamar=kamar.kd_kamar "+
-                    "left join bangsal on kamar.kd_bangsal=bangsal.kd_bangsal "+
+                    joinLokasi()+
                     "where reg_periksa.no_rawat=? group by reg_periksa.no_rawat");
             try {
                 ps.setString(1,TNoRw.getText());
@@ -2163,8 +2187,8 @@ public class RMSkriningMPPFormA extends javax.swing.JDialog {
                     Jk.setText(rs.getString("jk"));
                     TglLahir.setText(rs.getString("tgl_lahir"));
                     Alamat.setText(rs.getString("alamat"));
-                    TglMasuk.setText(rs.getString("tgl_masuk")+" "+rs.getString("jam_masuk"));
-                    Kamar.setText(rs.getString("kamar")+" "+rs.getString("nm_bangsal"));
+                    TglMasuk.setText(rs.getString("tgl_masuk"));
+                    Kamar.setText(rs.getString("ruang"));
                 }
             } catch (Exception e) {
                 System.out.println("Notif : "+e);
