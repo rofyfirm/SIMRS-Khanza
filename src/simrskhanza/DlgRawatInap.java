@@ -115,6 +115,7 @@ import rekammedis.RMHasilPemeriksaanUSGUrologi;
 import rekammedis.RMHasilTindakanESWL;
 import rekammedis.RMKonselingFarmasi;
 import rekammedis.RMLaporanTindakan;
+import rekammedis.RMMonitorPANSSEC;
 import rekammedis.RMMonitoringAldrettePascaAnestesi;
 import rekammedis.RMMonitoringBromagePascaAnestesi;
 import rekammedis.RMMonitoringStewardPascaAnestesi;
@@ -8433,6 +8434,23 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
         }
     }
     
+    private void BtnMonitorPANSSECActionPerformed(java.awt.event.ActionEvent evt) {
+        if(TPasien.getText().trim().equals("")||TNoRw.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
+            TCari.requestFocus();
+        }else{
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            RMMonitorPANSSEC form=new RMMonitorPANSSEC(null,false);
+            form.isCek();
+            form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            form.setLocationRelativeTo(internalFrame1);
+            form.setVisible(true);
+            form.emptTeks();
+            form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
+            this.setCursor(Cursor.getDefaultCursor());
+        }
+    }
+
     private void BtnCatatanObservasiVentilatorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCatatanObservasiRanapActionPerformed
         if(TPasien.getText().trim().equals("")||TNoRw.getText().trim().equals("")){
             JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
@@ -9346,7 +9364,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                           BtnCatatanObservasiVentilator,BtnCatatanAnastesiSedasi,BtnChecklistPemberianFibrinolitik,BtnPenilaianPsikologKlinis,BtnAwalMedisNeonatus,BtnPenilaianDerajatDehidrasi,BtnHasilPemeriksaanECHO,BtnPenilaianBayiBaruLahir,BtnLaporanTindakan,
                           BtnPelaksanaanInformasiEdukasi,BtnCatatanObservasiHemodialisa,BtnCatatanCairanHemodialisa,BtnCatatanPengkajianPaskaOperasi,BtnCatatanObservasiBayi,BtnChecklistKesiapanAnestesi,BtnHasilPemeriksaanSlitLamp,BtnHasilPemeriksaanOCT,
                           BtnChecklistKriteriaMasukNICU,BtnChecklistKriteriaKeluarNICU,BtnAwalMedisPsikiatri,BtnChecklistKriteriaMasukPICU,BtnChecklistKriteriaKeluarPICU,BtnHasilPemeriksaanTreadmill,BtnHasilPemeriksaanECHOPediatrik,BtnAwalMedisJantung,
-                          BtnSkriningGiziKehamilan,BtnPermintaanKonsultasiPerawat,BtnCatatanObservasiRuangOperasi,BtnHasilPemeriksaanUSGAbdomen,BtnIntervensiNyeriFarmakologi,BtnIntervensiNyeriNonFarmakologi,BtnChecklistKriteriaMasukIsolasi,BtnChecklistKriteriaKeluarIsolasi;
+                          BtnSkriningGiziKehamilan,BtnPermintaanKonsultasiPerawat,BtnCatatanObservasiRuangOperasi,BtnHasilPemeriksaanUSGAbdomen,BtnIntervensiNyeriFarmakologi,BtnIntervensiNyeriNonFarmakologi,BtnChecklistKriteriaMasukIsolasi,BtnChecklistKriteriaKeluarIsolasi,BtnMonitorPANSSEC;
     private javax.swing.JPopupMenu PopupSOAP,PopupPemeriksaan;
     private javax.swing.JMenuItem MnCopySOAP,MnPasteSOAP;
     
@@ -9847,6 +9865,10 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
         }
         BtnCatatanObservasiRestrainNonfarmakologi.setVisible(akses.getcatatan_observasi_restrain_nonfarma());   
         if(akses.getcatatan_observasi_restrain_nonfarma()==true){
+            tinggi=tinggi+24;
+        }
+        BtnMonitorPANSSEC.setVisible(akses.getpenilaian_awal_medis_ranap());
+        if(akses.getpenilaian_awal_medis_ranap()==true){
             tinggi=tinggi+24;
         }
         BtnCatatanObservasiVentilator.setVisible(akses.getcatatan_observasi_ventilator());   
@@ -10976,6 +10998,19 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
         BtnCatatanObservasiRestrainNonfarmakologi.setRoundRect(false);
         BtnCatatanObservasiRestrainNonfarmakologi.addActionListener(this::BtnCatatanObservasiRestrainNonfarmakologiActionPerformed);
         
+        BtnMonitorPANSSEC = new widget.Button();
+        BtnMonitorPANSSEC.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png")));
+        BtnMonitorPANSSEC.setText("Monitor PANSS EC");
+        BtnMonitorPANSSEC.setFocusPainted(false);
+        BtnMonitorPANSSEC.setFont(new java.awt.Font("Tahoma", 0, 11));
+        BtnMonitorPANSSEC.setGlassColor(new java.awt.Color(255, 255, 255));
+        BtnMonitorPANSSEC.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        BtnMonitorPANSSEC.setMargin(new java.awt.Insets(1, 1, 1, 1));
+        BtnMonitorPANSSEC.setName("BtnMonitorPANSSEC");
+        BtnMonitorPANSSEC.setPreferredSize(new java.awt.Dimension(190, 23));
+        BtnMonitorPANSSEC.setRoundRect(false);
+        BtnMonitorPANSSEC.addActionListener(this::BtnMonitorPANSSECActionPerformed);
+
         BtnCatatanObservasiVentilator = new widget.Button();
         BtnCatatanObservasiVentilator.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); 
         BtnCatatanObservasiVentilator.setText("Observasi Ventilator");
@@ -11424,6 +11459,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
         FormMenu.add(BtnCatatanObservasiInduksiPersalinan);
         FormMenu.add(BtnCatatanObservasiBayi);
         FormMenu.add(BtnCatatanObservasiRestrainNonfarmakologi);
+        FormMenu.add(BtnMonitorPANSSEC);
         FormMenu.add(BtnCatatanObservasiVentilator);
         FormMenu.add(BtnCatatanObservasiHemodialisa);
         FormMenu.add(BtnCatatanObservasiRuangOperasi);
