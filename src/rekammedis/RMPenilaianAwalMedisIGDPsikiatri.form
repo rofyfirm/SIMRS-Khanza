@@ -1118,7 +1118,7 @@
                             </Property>
                             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                               <StringArray count="1">
-                                <StringItem index="0" value="06-02-2026 19:04:48"/>
+                                <StringItem index="0" value="13-10-2026 21:27:11"/>
                               </StringArray>
                             </Property>
                             <Property name="displayFormat" type="java.lang.String" value="dd-MM-yyyy HH:mm:ss"/>
@@ -1720,15 +1720,16 @@
                           <Properties>
                             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                               <StringArray count="4">
-                                <StringItem index="0" value="Tidak Perlu Kontrol"/>
-                                <StringItem index="1" value="Kontrol/Berobat Jalan"/>
-                                <StringItem index="2" value="Rawat Inap"/>
-                                <StringItem index="3" value="-"/>
+                                <StringItem index="0" value="-"/>
+                                <StringItem index="1" value="Tidak Perlu Kontrol"/>
+                                <StringItem index="2" value="Kontrol/Berobat Jalan"/>
+                                <StringItem index="3" value="Rawat Inap"/>
                               </StringArray>
                             </Property>
                             <Property name="name" type="java.lang.String" value="Dipulangkan" noResource="true"/>
                           </Properties>
                           <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="DipulangkanActionPerformed"/>
                             <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="DipulangkanKeyPressed"/>
                           </Events>
                           <Constraints>
@@ -3352,7 +3353,7 @@
                         </Property>
                         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                           <StringArray count="1">
-                            <StringItem index="0" value="06-02-2026"/>
+                            <StringItem index="0" value="13-10-2026"/>
                           </StringArray>
                         </Property>
                         <Property name="displayFormat" type="java.lang.String" value="dd-MM-yyyy"/>
@@ -3380,7 +3381,7 @@
                         </Property>
                         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                           <StringArray count="1">
-                            <StringItem index="0" value="06-02-2026"/>
+                            <StringItem index="0" value="13-10-2026"/>
                           </StringArray>
                         </Property>
                         <Property name="displayFormat" type="java.lang.String" value="dd-MM-yyyy"/>
