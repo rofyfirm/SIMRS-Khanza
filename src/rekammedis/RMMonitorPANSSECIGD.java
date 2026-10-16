@@ -45,7 +45,7 @@ import kepegawaian.DlgCariDokter;
  *
  * @author perpustakaan
  */
-public final class RMMonitorPANSSEC extends javax.swing.JDialog {
+public final class RMMonitorPANSSECIGD extends javax.swing.JDialog {
     private final DefaultTableModel tabMode;
     private Connection koneksi=koneksiDB.condb();
     private sekuel Sequel=new sekuel();
@@ -60,7 +60,7 @@ public final class RMMonitorPANSSEC extends javax.swing.JDialog {
     /** Creates new form DlgRujuk
      * @param parent
      * @param modal */
-    public RMMonitorPANSSEC(java.awt.Frame parent, boolean modal) {
+    public RMMonitorPANSSECIGD(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         this.setLocation(8,1);
@@ -222,7 +222,7 @@ public final class RMMonitorPANSSEC extends javax.swing.JDialog {
             }
         });
 
-        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Monitor PANSS EC ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
+        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Monitor PANSS EC IGD ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
         internalFrame1.setFont(new java.awt.Font("Tahoma", 2, 12)); // NOI18N
         internalFrame1.setName("internalFrame1"); // NOI18N
         internalFrame1.setLayout(new java.awt.BorderLayout(1, 1));
@@ -921,16 +921,16 @@ public final class RMMonitorPANSSEC extends javax.swing.JDialog {
             param.put("namadokter",tbObat.getValueAt(tbObat.getSelectedRow(),16).toString());
             param.put("diagnosamasuk",Sequel.cariIsi("select kamar_inap.diagnosa_awal from kamar_inap where kamar_inap.diagnosa_awal<>'' and kamar_inap.no_rawat=? ",tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()));
             param.put("diagnosakeluar",Sequel.cariIsi("select kamar_inap.diagnosa_akhir from kamar_inap where kamar_inap.diagnosa_akhir<>'' and kamar_inap.no_rawat=? ",tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()));
-            Valid.MyReportqry("rptFormulirMonitorPANSSEC.jasper","report","::[ Monitor PANSS EC ]::",
+            Valid.MyReportqry("rptFormulirMonitorPANSSECIGD.jasper","report","::[ Monitor PANSS EC IGD ]::",
                     "select reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,reg_periksa.umurdaftar,reg_periksa.sttsumur,pasien.jk,pasien.tgl_lahir,"+
-                    "monitor_panss_ec.tgl_perawatan,monitor_panss_ec.jam_rawat,"+kolomWaktuEvaluasi()+
-                    "group_concat(distinct dokter.nm_dokter order by dokter.nm_dokter separator ', ') as pemeriksa from monitor_panss_ec "+
-                    "inner join reg_periksa on monitor_panss_ec.no_rawat=reg_periksa.no_rawat "+
+                    "monitor_panss_ec_igd.tgl_perawatan,monitor_panss_ec_igd.jam_rawat,"+kolomWaktuEvaluasi()+
+                    "group_concat(distinct dokter.nm_dokter order by dokter.nm_dokter separator ', ') as pemeriksa from monitor_panss_ec_igd "+
+                    "inner join reg_periksa on monitor_panss_ec_igd.no_rawat=reg_periksa.no_rawat "+
                     "inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
-                    "inner join dokter on monitor_panss_ec.kd_dokter=dokter.kd_dokter where reg_periksa.no_rawat='"+tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()+"' and "+
-                    "monitor_panss_ec.tgl_perawatan='"+tbObat.getValueAt(tbObat.getSelectedRow(),6).toString()+"' and monitor_panss_ec.jam_rawat='"+tbObat.getValueAt(tbObat.getSelectedRow(),7).toString()+"' "+
+                    "inner join dokter on monitor_panss_ec_igd.kd_dokter=dokter.kd_dokter where reg_periksa.no_rawat='"+tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()+"' and "+
+                    "monitor_panss_ec_igd.tgl_perawatan='"+tbObat.getValueAt(tbObat.getSelectedRow(),6).toString()+"' and monitor_panss_ec_igd.jam_rawat='"+tbObat.getValueAt(tbObat.getSelectedRow(),7).toString()+"' "+
                     "group by reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,reg_periksa.umurdaftar,reg_periksa.sttsumur,pasien.jk,pasien.tgl_lahir,"+
-                    "monitor_panss_ec.tgl_perawatan,monitor_panss_ec.jam_rawat order by monitor_panss_ec.tgl_perawatan,monitor_panss_ec.jam_rawat",param);
+                    "monitor_panss_ec_igd.tgl_perawatan,monitor_panss_ec_igd.jam_rawat order by monitor_panss_ec_igd.tgl_perawatan,monitor_panss_ec_igd.jam_rawat",param);
             this.setCursor(Cursor.getDefaultCursor());
         }else{
             JOptionPane.showMessageDialog(rootPane,"Silahkan anda pilih data terlebih dahulu..!!");
@@ -1128,7 +1128,7 @@ public final class RMMonitorPANSSEC extends javax.swing.JDialog {
     */
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(() -> {
-            RMMonitorPANSSEC dialog = new RMMonitorPANSSEC(new javax.swing.JFrame(), true);
+            RMMonitorPANSSECIGD dialog = new RMMonitorPANSSECIGD(new javax.swing.JFrame(), true);
             dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                 @Override
                 public void windowClosing(java.awt.event.WindowEvent e) {
@@ -1207,16 +1207,16 @@ public final class RMMonitorPANSSEC extends javax.swing.JDialog {
         try{
             ps=koneksi.prepareStatement(
                 "select reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,reg_periksa.umurdaftar,reg_periksa.sttsumur,pasien.jk,pasien.tgl_lahir,"+
-                "monitor_panss_ec.tgl_perawatan,monitor_panss_ec.jam_rawat,monitor_panss_ec.waktu_evaluasi,monitor_panss_ec.p4,monitor_panss_ec.p7,"+
-                "monitor_panss_ec.g4,monitor_panss_ec.g8,monitor_panss_ec.g14,"+
-                "round((monitor_panss_ec.p4+monitor_panss_ec.p7+monitor_panss_ec.g4+monitor_panss_ec.g8+monitor_panss_ec.g14)/5,1) as total_skor,"+
-                "monitor_panss_ec.kd_dokter,dokter.nm_dokter from monitor_panss_ec "+
-                "inner join reg_periksa on monitor_panss_ec.no_rawat=reg_periksa.no_rawat "+
+                "monitor_panss_ec_igd.tgl_perawatan,monitor_panss_ec_igd.jam_rawat,monitor_panss_ec_igd.waktu_evaluasi,monitor_panss_ec_igd.p4,monitor_panss_ec_igd.p7,"+
+                "monitor_panss_ec_igd.g4,monitor_panss_ec_igd.g8,monitor_panss_ec_igd.g14,"+
+                "round((monitor_panss_ec_igd.p4+monitor_panss_ec_igd.p7+monitor_panss_ec_igd.g4+monitor_panss_ec_igd.g8+monitor_panss_ec_igd.g14)/5,1) as total_skor,"+
+                "monitor_panss_ec_igd.kd_dokter,dokter.nm_dokter from monitor_panss_ec_igd "+
+                "inner join reg_periksa on monitor_panss_ec_igd.no_rawat=reg_periksa.no_rawat "+
                 "inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
-                "inner join dokter on monitor_panss_ec.kd_dokter=dokter.kd_dokter where "+
-                "monitor_panss_ec.tgl_perawatan between ? and ? "+
-                (TCari.getText().trim().equals("")?"":"and (reg_periksa.no_rawat like ? or pasien.no_rkm_medis like ? or pasien.nm_pasien like ? or monitor_panss_ec.kd_dokter like ? or dokter.nm_dokter like ?) ")+
-                "order by monitor_panss_ec.tgl_perawatan,monitor_panss_ec.jam_rawat,monitor_panss_ec.waktu_evaluasi");
+                "inner join dokter on monitor_panss_ec_igd.kd_dokter=dokter.kd_dokter where "+
+                "monitor_panss_ec_igd.tgl_perawatan between ? and ? "+
+                (TCari.getText().trim().equals("")?"":"and (reg_periksa.no_rawat like ? or pasien.no_rkm_medis like ? or pasien.nm_pasien like ? or monitor_panss_ec_igd.kd_dokter like ? or dokter.nm_dokter like ?) ")+
+                "order by monitor_panss_ec_igd.tgl_perawatan,monitor_panss_ec_igd.jam_rawat,monitor_panss_ec_igd.waktu_evaluasi");
 
             try {
                 ps.setString(1,Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00");
@@ -1287,10 +1287,10 @@ public final class RMMonitorPANSSEC extends javax.swing.JDialog {
         String kolom="";
         for(String waktu:new String[]{"0","15","30","45","60","90","120"}){
             for(String butir:new String[]{"p4","p7","g4","g8","g14"}){
-                kolom=kolom+"max(if(monitor_panss_ec.waktu_evaluasi='"+waktu+"',monitor_panss_ec."+butir+",null)) as "+butir+"_"+waktu+",";
+                kolom=kolom+"max(if(monitor_panss_ec_igd.waktu_evaluasi='"+waktu+"',monitor_panss_ec_igd."+butir+",null)) as "+butir+"_"+waktu+",";
             }
-            kolom=kolom+"max(if(monitor_panss_ec.waktu_evaluasi='"+waktu+"',round((monitor_panss_ec.p4+monitor_panss_ec.p7+monitor_panss_ec.g4+"+
-                    "monitor_panss_ec.g8+monitor_panss_ec.g14)/5,1),null)) as total_"+waktu+",";
+            kolom=kolom+"max(if(monitor_panss_ec_igd.waktu_evaluasi='"+waktu+"',round((monitor_panss_ec_igd.p4+monitor_panss_ec_igd.p7+monitor_panss_ec_igd.g4+"+
+                    "monitor_panss_ec_igd.g8+monitor_panss_ec_igd.g14)/5,1),null)) as total_"+waktu+",";
         }
         return kolom;
     }
@@ -1455,7 +1455,7 @@ public final class RMMonitorPANSSEC extends javax.swing.JDialog {
     }
 
     private void ganti() {
-        if(Sequel.mengedittf("monitor_panss_ec","tgl_perawatan=? and jam_rawat=? and waktu_evaluasi=? and no_rawat=?","no_rawat=?,tgl_perawatan=?,jam_rawat=?,waktu_evaluasi=?,"+
+        if(Sequel.mengedittf("monitor_panss_ec_igd","tgl_perawatan=? and jam_rawat=? and waktu_evaluasi=? and no_rawat=?","no_rawat=?,tgl_perawatan=?,jam_rawat=?,waktu_evaluasi=?,"+
             "p4=?,p7=?,g4=?,g8=?,g14=?,kd_dokter=?",14,new String[]{
             TNoRw.getText(),Valid.SetTgl(Tanggal.getSelectedItem()+""),Jam.getSelectedItem()+":"+Menit.getSelectedItem()+":"+Detik.getSelectedItem(),
             WaktuEvaluasi.getSelectedItem().toString(),P4.getSelectedItem().toString(),P7.getSelectedItem().toString(),G4.getSelectedItem().toString(),
@@ -1484,7 +1484,7 @@ public final class RMMonitorPANSSEC extends javax.swing.JDialog {
     }
 
     private void hapus() {
-        if(Sequel.queryu2tf("delete from monitor_panss_ec where tgl_perawatan=? and jam_rawat=? and waktu_evaluasi=? and no_rawat=?",4,new String[]{
+        if(Sequel.queryu2tf("delete from monitor_panss_ec_igd where tgl_perawatan=? and jam_rawat=? and waktu_evaluasi=? and no_rawat=?",4,new String[]{
             tbObat.getValueAt(tbObat.getSelectedRow(),6).toString(),tbObat.getValueAt(tbObat.getSelectedRow(),7).toString(),
             tbObat.getValueAt(tbObat.getSelectedRow(),8).toString(),tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()
         })==true){
@@ -1497,7 +1497,7 @@ public final class RMMonitorPANSSEC extends javax.swing.JDialog {
     }
 
     private void simpan() {
-        if(Sequel.menyimpantf("monitor_panss_ec","?,?,?,?,?,?,?,?,?,?","Data",10,new String[]{
+        if(Sequel.menyimpantf("monitor_panss_ec_igd","?,?,?,?,?,?,?,?,?,?","Data",10,new String[]{
                 TNoRw.getText(),Valid.SetTgl(Tanggal.getSelectedItem()+""),Jam.getSelectedItem()+":"+Menit.getSelectedItem()+":"+Detik.getSelectedItem(),
                 WaktuEvaluasi.getSelectedItem().toString(),P4.getSelectedItem().toString(),P7.getSelectedItem().toString(),G4.getSelectedItem().toString(),
                 G8.getSelectedItem().toString(),G14.getSelectedItem().toString(),KdDokter.getText()

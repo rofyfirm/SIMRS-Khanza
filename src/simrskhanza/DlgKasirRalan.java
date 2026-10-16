@@ -7581,16 +7581,13 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
                     + "No RM [" + TNoRMCari.getText() + "]<br><br>"
                     + "<b>Memiliki Riwayat Alergi:</b><br>"
                     + htmlList.toString() + "</html>";
-            int pilihan = JOptionPane.showConfirmDialog(
+            JOptionPane.showMessageDialog(
                     null,
                     pesan,
                     "Peringatan Alergi Pasien",
-                    JOptionPane.YES_NO_OPTION,
                     JOptionPane.WARNING_MESSAGE // Menambahkan ikon peringatan
             );
-            if (pilihan == JOptionPane.YES_OPTION) {
-                MnDataRalanActionPerformed(null);
-            }
+            MnDataRalanActionPerformed(null);
         } else {
             MnDataRalanActionPerformed(null);
         }

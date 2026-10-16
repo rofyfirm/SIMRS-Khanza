@@ -131,7 +131,7 @@ import rekammedis.RMHasilPemeriksaanSlitLamp;
 import rekammedis.RMHasilPemeriksaanTreadmill;
 import rekammedis.RMKonselingFarmasi;
 import rekammedis.RMLaporanTindakan;
-import rekammedis.RMMonitorPANSSEC;
+import rekammedis.RMMonitorPANSSECIGD;
 import rekammedis.RMMonitoringAldrettePascaAnestesi;
 import rekammedis.RMMonitoringBromagePascaAnestesi;
 import rekammedis.RMMonitoringStewardPascaAnestesi;
@@ -11403,7 +11403,7 @@ private void MnLaporanRekapKunjunganBulananPoliActionPerformed(java.awt.event.Ac
         }else{
             if(tbPetugas.getSelectedRow()!= -1){
                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-                RMMonitorPANSSEC form=new RMMonitorPANSSEC(null,false);
+                RMMonitorPANSSECIGD form=new RMMonitorPANSSECIGD(null,false);
                 form.isCek();
                 form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                 form.setLocationRelativeTo(internalFrame1);

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rptFormulirMonitorPANSSEC" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="2474872e-27dd-4981-9055-139fddfae851">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rptFormulirMonitorPANSSECRanap" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="2474872e-27dd-4981-9055-139fddfae851">
 	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
@@ -17,55 +17,55 @@
 	<parameter name="namadokter" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[select reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,reg_periksa.umurdaftar,reg_periksa.sttsumur,pasien.jk,pasien.tgl_lahir,
-monitor_panss_ec.tgl_perawatan,monitor_panss_ec.jam_rawat,
-max(if(monitor_panss_ec.waktu_evaluasi='0',monitor_panss_ec.p4,null)) as p4_0,
-max(if(monitor_panss_ec.waktu_evaluasi='0',monitor_panss_ec.p7,null)) as p7_0,
-max(if(monitor_panss_ec.waktu_evaluasi='0',monitor_panss_ec.g4,null)) as g4_0,
-max(if(monitor_panss_ec.waktu_evaluasi='0',monitor_panss_ec.g8,null)) as g8_0,
-max(if(monitor_panss_ec.waktu_evaluasi='0',monitor_panss_ec.g14,null)) as g14_0,
-max(if(monitor_panss_ec.waktu_evaluasi='0',round((monitor_panss_ec.p4+monitor_panss_ec.p7+monitor_panss_ec.g4+monitor_panss_ec.g8+monitor_panss_ec.g14)/5,1),null)) as total_0,
-max(if(monitor_panss_ec.waktu_evaluasi='15',monitor_panss_ec.p4,null)) as p4_15,
-max(if(monitor_panss_ec.waktu_evaluasi='15',monitor_panss_ec.p7,null)) as p7_15,
-max(if(monitor_panss_ec.waktu_evaluasi='15',monitor_panss_ec.g4,null)) as g4_15,
-max(if(monitor_panss_ec.waktu_evaluasi='15',monitor_panss_ec.g8,null)) as g8_15,
-max(if(monitor_panss_ec.waktu_evaluasi='15',monitor_panss_ec.g14,null)) as g14_15,
-max(if(monitor_panss_ec.waktu_evaluasi='15',round((monitor_panss_ec.p4+monitor_panss_ec.p7+monitor_panss_ec.g4+monitor_panss_ec.g8+monitor_panss_ec.g14)/5,1),null)) as total_15,
-max(if(monitor_panss_ec.waktu_evaluasi='30',monitor_panss_ec.p4,null)) as p4_30,
-max(if(monitor_panss_ec.waktu_evaluasi='30',monitor_panss_ec.p7,null)) as p7_30,
-max(if(monitor_panss_ec.waktu_evaluasi='30',monitor_panss_ec.g4,null)) as g4_30,
-max(if(monitor_panss_ec.waktu_evaluasi='30',monitor_panss_ec.g8,null)) as g8_30,
-max(if(monitor_panss_ec.waktu_evaluasi='30',monitor_panss_ec.g14,null)) as g14_30,
-max(if(monitor_panss_ec.waktu_evaluasi='30',round((monitor_panss_ec.p4+monitor_panss_ec.p7+monitor_panss_ec.g4+monitor_panss_ec.g8+monitor_panss_ec.g14)/5,1),null)) as total_30,
-max(if(monitor_panss_ec.waktu_evaluasi='45',monitor_panss_ec.p4,null)) as p4_45,
-max(if(monitor_panss_ec.waktu_evaluasi='45',monitor_panss_ec.p7,null)) as p7_45,
-max(if(monitor_panss_ec.waktu_evaluasi='45',monitor_panss_ec.g4,null)) as g4_45,
-max(if(monitor_panss_ec.waktu_evaluasi='45',monitor_panss_ec.g8,null)) as g8_45,
-max(if(monitor_panss_ec.waktu_evaluasi='45',monitor_panss_ec.g14,null)) as g14_45,
-max(if(monitor_panss_ec.waktu_evaluasi='45',round((monitor_panss_ec.p4+monitor_panss_ec.p7+monitor_panss_ec.g4+monitor_panss_ec.g8+monitor_panss_ec.g14)/5,1),null)) as total_45,
-max(if(monitor_panss_ec.waktu_evaluasi='60',monitor_panss_ec.p4,null)) as p4_60,
-max(if(monitor_panss_ec.waktu_evaluasi='60',monitor_panss_ec.p7,null)) as p7_60,
-max(if(monitor_panss_ec.waktu_evaluasi='60',monitor_panss_ec.g4,null)) as g4_60,
-max(if(monitor_panss_ec.waktu_evaluasi='60',monitor_panss_ec.g8,null)) as g8_60,
-max(if(monitor_panss_ec.waktu_evaluasi='60',monitor_panss_ec.g14,null)) as g14_60,
-max(if(monitor_panss_ec.waktu_evaluasi='60',round((monitor_panss_ec.p4+monitor_panss_ec.p7+monitor_panss_ec.g4+monitor_panss_ec.g8+monitor_panss_ec.g14)/5,1),null)) as total_60,
-max(if(monitor_panss_ec.waktu_evaluasi='90',monitor_panss_ec.p4,null)) as p4_90,
-max(if(monitor_panss_ec.waktu_evaluasi='90',monitor_panss_ec.p7,null)) as p7_90,
-max(if(monitor_panss_ec.waktu_evaluasi='90',monitor_panss_ec.g4,null)) as g4_90,
-max(if(monitor_panss_ec.waktu_evaluasi='90',monitor_panss_ec.g8,null)) as g8_90,
-max(if(monitor_panss_ec.waktu_evaluasi='90',monitor_panss_ec.g14,null)) as g14_90,
-max(if(monitor_panss_ec.waktu_evaluasi='90',round((monitor_panss_ec.p4+monitor_panss_ec.p7+monitor_panss_ec.g4+monitor_panss_ec.g8+monitor_panss_ec.g14)/5,1),null)) as total_90,
-max(if(monitor_panss_ec.waktu_evaluasi='120',monitor_panss_ec.p4,null)) as p4_120,
-max(if(monitor_panss_ec.waktu_evaluasi='120',monitor_panss_ec.p7,null)) as p7_120,
-max(if(monitor_panss_ec.waktu_evaluasi='120',monitor_panss_ec.g4,null)) as g4_120,
-max(if(monitor_panss_ec.waktu_evaluasi='120',monitor_panss_ec.g8,null)) as g8_120,
-max(if(monitor_panss_ec.waktu_evaluasi='120',monitor_panss_ec.g14,null)) as g14_120,
-max(if(monitor_panss_ec.waktu_evaluasi='120',round((monitor_panss_ec.p4+monitor_panss_ec.p7+monitor_panss_ec.g4+monitor_panss_ec.g8+monitor_panss_ec.g14)/5,1),null)) as total_120,
-group_concat(distinct dokter.nm_dokter order by dokter.nm_dokter separator ', ') as pemeriksa from monitor_panss_ec 
-inner join reg_periksa on monitor_panss_ec.no_rawat=reg_periksa.no_rawat 
+monitor_panss_ec_ranap.tgl_perawatan,monitor_panss_ec_ranap.jam_rawat,
+max(if(monitor_panss_ec_ranap.waktu_evaluasi='0',monitor_panss_ec_ranap.p4,null)) as p4_0,
+max(if(monitor_panss_ec_ranap.waktu_evaluasi='0',monitor_panss_ec_ranap.p7,null)) as p7_0,
+max(if(monitor_panss_ec_ranap.waktu_evaluasi='0',monitor_panss_ec_ranap.g4,null)) as g4_0,
+max(if(monitor_panss_ec_ranap.waktu_evaluasi='0',monitor_panss_ec_ranap.g8,null)) as g8_0,
+max(if(monitor_panss_ec_ranap.waktu_evaluasi='0',monitor_panss_ec_ranap.g14,null)) as g14_0,
+max(if(monitor_panss_ec_ranap.waktu_evaluasi='0',round((monitor_panss_ec_ranap.p4+monitor_panss_ec_ranap.p7+monitor_panss_ec_ranap.g4+monitor_panss_ec_ranap.g8+monitor_panss_ec_ranap.g14)/5,1),null)) as total_0,
+max(if(monitor_panss_ec_ranap.waktu_evaluasi='15',monitor_panss_ec_ranap.p4,null)) as p4_15,
+max(if(monitor_panss_ec_ranap.waktu_evaluasi='15',monitor_panss_ec_ranap.p7,null)) as p7_15,
+max(if(monitor_panss_ec_ranap.waktu_evaluasi='15',monitor_panss_ec_ranap.g4,null)) as g4_15,
+max(if(monitor_panss_ec_ranap.waktu_evaluasi='15',monitor_panss_ec_ranap.g8,null)) as g8_15,
+max(if(monitor_panss_ec_ranap.waktu_evaluasi='15',monitor_panss_ec_ranap.g14,null)) as g14_15,
+max(if(monitor_panss_ec_ranap.waktu_evaluasi='15',round((monitor_panss_ec_ranap.p4+monitor_panss_ec_ranap.p7+monitor_panss_ec_ranap.g4+monitor_panss_ec_ranap.g8+monitor_panss_ec_ranap.g14)/5,1),null)) as total_15,
+max(if(monitor_panss_ec_ranap.waktu_evaluasi='30',monitor_panss_ec_ranap.p4,null)) as p4_30,
+max(if(monitor_panss_ec_ranap.waktu_evaluasi='30',monitor_panss_ec_ranap.p7,null)) as p7_30,
+max(if(monitor_panss_ec_ranap.waktu_evaluasi='30',monitor_panss_ec_ranap.g4,null)) as g4_30,
+max(if(monitor_panss_ec_ranap.waktu_evaluasi='30',monitor_panss_ec_ranap.g8,null)) as g8_30,
+max(if(monitor_panss_ec_ranap.waktu_evaluasi='30',monitor_panss_ec_ranap.g14,null)) as g14_30,
+max(if(monitor_panss_ec_ranap.waktu_evaluasi='30',round((monitor_panss_ec_ranap.p4+monitor_panss_ec_ranap.p7+monitor_panss_ec_ranap.g4+monitor_panss_ec_ranap.g8+monitor_panss_ec_ranap.g14)/5,1),null)) as total_30,
+max(if(monitor_panss_ec_ranap.waktu_evaluasi='45',monitor_panss_ec_ranap.p4,null)) as p4_45,
+max(if(monitor_panss_ec_ranap.waktu_evaluasi='45',monitor_panss_ec_ranap.p7,null)) as p7_45,
+max(if(monitor_panss_ec_ranap.waktu_evaluasi='45',monitor_panss_ec_ranap.g4,null)) as g4_45,
+max(if(monitor_panss_ec_ranap.waktu_evaluasi='45',monitor_panss_ec_ranap.g8,null)) as g8_45,
+max(if(monitor_panss_ec_ranap.waktu_evaluasi='45',monitor_panss_ec_ranap.g14,null)) as g14_45,
+max(if(monitor_panss_ec_ranap.waktu_evaluasi='45',round((monitor_panss_ec_ranap.p4+monitor_panss_ec_ranap.p7+monitor_panss_ec_ranap.g4+monitor_panss_ec_ranap.g8+monitor_panss_ec_ranap.g14)/5,1),null)) as total_45,
+max(if(monitor_panss_ec_ranap.waktu_evaluasi='60',monitor_panss_ec_ranap.p4,null)) as p4_60,
+max(if(monitor_panss_ec_ranap.waktu_evaluasi='60',monitor_panss_ec_ranap.p7,null)) as p7_60,
+max(if(monitor_panss_ec_ranap.waktu_evaluasi='60',monitor_panss_ec_ranap.g4,null)) as g4_60,
+max(if(monitor_panss_ec_ranap.waktu_evaluasi='60',monitor_panss_ec_ranap.g8,null)) as g8_60,
+max(if(monitor_panss_ec_ranap.waktu_evaluasi='60',monitor_panss_ec_ranap.g14,null)) as g14_60,
+max(if(monitor_panss_ec_ranap.waktu_evaluasi='60',round((monitor_panss_ec_ranap.p4+monitor_panss_ec_ranap.p7+monitor_panss_ec_ranap.g4+monitor_panss_ec_ranap.g8+monitor_panss_ec_ranap.g14)/5,1),null)) as total_60,
+max(if(monitor_panss_ec_ranap.waktu_evaluasi='90',monitor_panss_ec_ranap.p4,null)) as p4_90,
+max(if(monitor_panss_ec_ranap.waktu_evaluasi='90',monitor_panss_ec_ranap.p7,null)) as p7_90,
+max(if(monitor_panss_ec_ranap.waktu_evaluasi='90',monitor_panss_ec_ranap.g4,null)) as g4_90,
+max(if(monitor_panss_ec_ranap.waktu_evaluasi='90',monitor_panss_ec_ranap.g8,null)) as g8_90,
+max(if(monitor_panss_ec_ranap.waktu_evaluasi='90',monitor_panss_ec_ranap.g14,null)) as g14_90,
+max(if(monitor_panss_ec_ranap.waktu_evaluasi='90',round((monitor_panss_ec_ranap.p4+monitor_panss_ec_ranap.p7+monitor_panss_ec_ranap.g4+monitor_panss_ec_ranap.g8+monitor_panss_ec_ranap.g14)/5,1),null)) as total_90,
+max(if(monitor_panss_ec_ranap.waktu_evaluasi='120',monitor_panss_ec_ranap.p4,null)) as p4_120,
+max(if(monitor_panss_ec_ranap.waktu_evaluasi='120',monitor_panss_ec_ranap.p7,null)) as p7_120,
+max(if(monitor_panss_ec_ranap.waktu_evaluasi='120',monitor_panss_ec_ranap.g4,null)) as g4_120,
+max(if(monitor_panss_ec_ranap.waktu_evaluasi='120',monitor_panss_ec_ranap.g8,null)) as g8_120,
+max(if(monitor_panss_ec_ranap.waktu_evaluasi='120',monitor_panss_ec_ranap.g14,null)) as g14_120,
+max(if(monitor_panss_ec_ranap.waktu_evaluasi='120',round((monitor_panss_ec_ranap.p4+monitor_panss_ec_ranap.p7+monitor_panss_ec_ranap.g4+monitor_panss_ec_ranap.g8+monitor_panss_ec_ranap.g14)/5,1),null)) as total_120,
+group_concat(distinct dokter.nm_dokter order by dokter.nm_dokter separator ', ') as pemeriksa from monitor_panss_ec_ranap 
+inner join reg_periksa on monitor_panss_ec_ranap.no_rawat=reg_periksa.no_rawat 
 inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis 
-inner join dokter on monitor_panss_ec.kd_dokter=dokter.kd_dokter 
+inner join dokter on monitor_panss_ec_ranap.kd_dokter=dokter.kd_dokter 
 group by reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,reg_periksa.umurdaftar,reg_periksa.sttsumur,pasien.jk,pasien.tgl_lahir,
-monitor_panss_ec.tgl_perawatan,monitor_panss_ec.jam_rawat]]>
+monitor_panss_ec_ranap.tgl_perawatan,monitor_panss_ec_ranap.jam_rawat]]>
 	</queryString>
 	<field name="no_rawat" class="java.lang.String"/>
 	<field name="no_rkm_medis" class="java.lang.String"/>
@@ -176,7 +176,7 @@ monitor_panss_ec.tgl_perawatan,monitor_panss_ec.jam_rawat]]>
 					<font fontName="Tahoma" size="11" isBold="false"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
-				<text><![CDATA[MONITOR PANSS EC]]></text>
+				<text><![CDATA[MONITOR PANSS EC RAWAT INAP]]></text>
 			</staticText>
 			<rectangle>
 				<reportElement mode="Transparent" x="0" y="24" width="555" height="90" uuid="0f17c056-2b19-4628-8375-e924984d4f73"/>

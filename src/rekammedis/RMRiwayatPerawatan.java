@@ -356,6 +356,8 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
         chkCatatanObservasiRanap = new widget.CekBox();
         chkCatatanObservasiRanapKebidanan = new widget.CekBox();
         chkCatatanObservasiRanapPostPartum = new widget.CekBox();
+        chkMonitorPANSSECIGD = new widget.CekBox();
+        chkMonitorPANSSECRanap = new widget.CekBox();
         chkCatatanObservasiBayi = new widget.CekBox();
         chkCatatanObservasiRestrainNonFarmakologi = new widget.CekBox();
         chkCatatanObservasiVentilator = new widget.CekBox();
@@ -1498,6 +1500,22 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
         chkCatatanObservasiRanapPostPartum.setOpaque(false);
         chkCatatanObservasiRanapPostPartum.setPreferredSize(new java.awt.Dimension(245, 22));
         FormMenu.add(chkCatatanObservasiRanapPostPartum);
+
+        chkMonitorPANSSECIGD.setSelected(true);
+        chkMonitorPANSSECIGD.setText("Monitor PANSS EC IGD");
+        chkMonitorPANSSECIGD.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        chkMonitorPANSSECIGD.setName("chkMonitorPANSSECIGD"); // NOI18N
+        chkMonitorPANSSECIGD.setOpaque(false);
+        chkMonitorPANSSECIGD.setPreferredSize(new java.awt.Dimension(245, 22));
+        FormMenu.add(chkMonitorPANSSECIGD);
+
+        chkMonitorPANSSECRanap.setSelected(true);
+        chkMonitorPANSSECRanap.setText("Monitor PANSS EC Ranap");
+        chkMonitorPANSSECRanap.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        chkMonitorPANSSECRanap.setName("chkMonitorPANSSECRanap"); // NOI18N
+        chkMonitorPANSSECRanap.setOpaque(false);
+        chkMonitorPANSSECRanap.setPreferredSize(new java.awt.Dimension(245, 22));
+        FormMenu.add(chkMonitorPANSSECRanap);
 
         chkCatatanObservasiBayi.setSelected(true);
         chkCatatanObservasiBayi.setText("Catatan Observasi Bayi");
@@ -3842,6 +3860,8 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
     private widget.CekBox chkLaporanTindakan;
     private widget.CekBox chkLayananKedokteranFisikRehabilitasi;
     private widget.CekBox chkLayananProgramKFR;
+    private widget.CekBox chkMonitorPANSSECIGD;
+    private widget.CekBox chkMonitorPANSSECRanap;
     private widget.CekBox chkMonitoringGizi;
     private widget.CekBox chkMonitoringReaksiTranfusi;
     private widget.CekBox chkOperasiVK;
@@ -4406,6 +4426,8 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                     menampilkanEdukasiPasienTerintegrasiRawatJalan(rs.getString("no_rawat"));
                     menampilkanPerencanaanPemulangan(rs.getString("no_rawat"));
                     menampilkanCatatanObservasi(rs.getString("no_rawat"));
+                    menampilkanMonitorPANSSECIGD(rs.getString("no_rawat"));
+                    menampilkanMonitorPANSSECRanap(rs.getString("no_rawat"));
                     menampilkanPemeriksaanRanap(rs.getString("no_rawat"));
                     menampilkanEdukasiPasienTerintegrasiRawatInap(rs.getString("no_rawat"));
                     menampilkanKonsultasiMedik(rs.getString("no_rawat"));
@@ -11116,6 +11138,115 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
             }
         } catch (Exception e) {
             System.out.println("Notif Lembar Program Terapi : "+e);
+        }
+    }
+    
+    private void menampilkanMonitorPANSSECIGD(String norawat) {
+        if(chkMonitorPANSSECIGD.isSelected()==true){
+            menampilkanMonitorPANSSEC(norawat,"monitor_panss_ec_igd","Monitor PANSS EC IGD");
+        }
+    }
+    
+    private void menampilkanMonitorPANSSECRanap(String norawat) {
+        if(chkMonitorPANSSECRanap.isSelected()==true){
+            menampilkanMonitorPANSSEC(norawat,"monitor_panss_ec_ranap","Monitor PANSS EC Ranap");
+        }
+    }
+    
+    private void menampilkanMonitorPANSSEC(String norawat,String tabel,String judul) {
+        try {
+            String[] waktu={"0","15","30","45","60","90","120"};
+            String[] butir={"P4 - Gaduh Gelisah","P7 - Permusuhan","G4 - Ketegangan","G8 - Ketidak Kooperatifan","G14 - Pengendalian Impuls Yang Buruk"};
+            java.util.Map<String,String[][]> lembar=new java.util.LinkedHashMap<>();
+            java.util.Map<String,java.util.Set<String>> dokter=new java.util.HashMap<>();
+            try {
+                rs2=koneksi.prepareStatement(
+                    "select "+tabel+".tgl_perawatan,"+tabel+".jam_rawat,"+tabel+".waktu_evaluasi,"+tabel+".p4,"+tabel+".p7,"+
+                    tabel+".g4,"+tabel+".g8,"+tabel+".g14,dokter.nm_dokter from "+tabel+" "+
+                    "inner join dokter on "+tabel+".kd_dokter=dokter.kd_dokter where "+tabel+".no_rawat='"+norawat+"' "+
+                    "order by "+tabel+".tgl_perawatan,"+tabel+".jam_rawat,"+tabel+".waktu_evaluasi").executeQuery();
+                while(rs2.next()){
+                    String mulai=rs2.getString("tgl_perawatan")+" "+rs2.getString("jam_rawat");
+                    if(!lembar.containsKey(mulai)){
+                        lembar.put(mulai,new String[5][7]);
+                        dokter.put(mulai,new java.util.LinkedHashSet<>());
+                    }
+                    String[][] nilai=lembar.get(mulai);
+                    int kolom=java.util.Arrays.asList(waktu).indexOf(rs2.getString("waktu_evaluasi"));
+                    nilai[0][kolom]=rs2.getString("p4");
+                    nilai[1][kolom]=rs2.getString("p7");
+                    nilai[2][kolom]=rs2.getString("g4");
+                    nilai[3][kolom]=rs2.getString("g8");
+                    nilai[4][kolom]=rs2.getString("g14");
+                    dokter.get(mulai).add(rs2.getString("nm_dokter"));
+                }
+            } catch (Exception e) {
+                System.out.println("Notifikasi : "+e);
+            } finally{
+                if(rs2!=null){
+                    rs2.close();
+                }
+            }
+            if(lembar.size()>0){
+                htmlContent.append(
+                  "<tr class='isi'>").append(
+                    "<td valign='top' width='2%'></td>").append(
+                    "<td valign='top' width='18%'>").append(judul).append("</td>").append(
+                    "<td valign='top' width='1%' align='center'>:</td>").append(
+                    "<td valign='top' width='79%'>").append(
+                      "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"
+                );
+                for(String mulai:lembar.keySet()){
+                    String[][] nilai=lembar.get(mulai);
+                    htmlContent.append(
+                         "<tr>").append(
+                            "<td valign='top'>").append(
+                               "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0px' class='tbl_form'>").append(
+                                  "<tr>").append(
+                                      "<td width='33%' border='0'>Mulai : ").append(mulai).append("</td>").append(
+                                      "<td width='67%' border='0'>Dokter : ").append(String.join(", ",dokter.get(mulai))).append("</td>").append(
+                                  "</tr>").append(
+                               "</table>").append(
+                               "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0px' class='tbl_form'>").append(
+                                  "<tr>").append(
+                                      "<td width='34%' border='0'>Butir Penilaian / Waktu Evaluasi (menit)</td>");
+                    for(int k=0;k<waktu.length;k++){
+                        htmlContent.append("<td width='9%' border='0' align='center'>").append(waktu[k]).append("</td>");
+                    }
+                    htmlContent.append("</tr>");
+                    for(int i=0;i<butir.length;i++){
+                        htmlContent.append("<tr><td border='0' valign='top'>").append(butir[i]).append("</td>");
+                        for(int k=0;k<waktu.length;k++){
+                            htmlContent.append("<td border='0' align='center'>").append(nilai[i][k]==null?"":nilai[i][k]).append("</td>");
+                        }
+                        htmlContent.append("</tr>");
+                    }
+                    htmlContent.append("<tr><td border='0' valign='top'>Total Skor / 5</td>");
+                    for(int k=0;k<waktu.length;k++){
+                        int jumlah=0;
+                        boolean lengkap=true;
+                        for(int i=0;i<butir.length;i++){
+                            if(nilai[i][k]==null){
+                                lengkap=false;
+                            }else{
+                                jumlah=jumlah+Integer.parseInt(nilai[i][k]);
+                            }
+                        }
+                        htmlContent.append("<td border='0' align='center'>").append(lengkap?String.format(java.util.Locale.US,"%.1f",jumlah/5.0):"").append("</td>");
+                    }
+                    htmlContent.append(
+                                  "</tr>").append(
+                               "</table>").append(
+                            "</td>").append(
+                         "</tr>");
+                }
+                htmlContent.append(
+                      "</table>").append(
+                    "</td>").append(
+                  "</tr>");
+            }
+        } catch (Exception e) {
+            System.out.println("Notif Monitor PANSS EC : "+e);
         }
     }
     
