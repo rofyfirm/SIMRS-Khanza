@@ -1,0 +1,3725 @@
+package simrskhanza;
+
+import bridging.AkunRekeningBankJabar;
+import bridging.AkunRekeningBankJateng;
+import bridging.AkunRekeningBankMandiri;
+import bridging.AkunRekeningBankPapua;
+import bridging.AplicareCekReferensiKamar;
+import bridging.AplicareKetersediaanKamar;
+import bridging.ApotekBPJSCekReferensiDPHO;
+import bridging.ApotekBPJSCekReferensiFaskes;
+import bridging.ApotekBPJSCekReferensiObat;
+import bridging.ApotekBPJSCekReferensiPoli;
+import bridging.ApotekBPJSCekReferensiSettingPPK;
+import bridging.ApotekBPJSCekReferensiSpesialistik;
+import bridging.ApotekBPJSDaftarPelayananObat;
+import bridging.ApotekBPJSDaftarPermintaanResepIterasi;
+import bridging.ApotekBPJSDaftarResepObat;
+import bridging.ApotekBPJSKunjunganSEP;
+import bridging.ApotekBPJSMapingObat;
+import bridging.ApotekBPJSMonitoringKlaim;
+import bridging.ApotekBPJSRekapPesertaPRB;
+import bridging.ApotekBPJSResepObat;
+import bridging.ApotekBPJSRiwayatPelayananObat;
+import bridging.BPJSAntreanPerTanggal;
+import bridging.BPJSCekDataIndukKecelakaan;
+import bridging.BPJSCekDataSEPInternal;
+import bridging.BPJSCekDetailSEP2;
+import bridging.BPJSCekKartu;
+import bridging.BPJSCekKlaimJasaRaharja;
+import bridging.BPJSCekNIK2;
+import bridging.BPJSCekNoRujukanPCare;
+import bridging.BPJSCekNoRujukanRS;
+import bridging.BPJSCekReferensiCaraKeluar;
+import bridging.BPJSCekReferensiDiagnosaPRB;
+import bridging.BPJSCekReferensiDokter;
+import bridging.BPJSCekReferensiDokterDPJP;
+import bridging.BPJSCekReferensiDokterHFIS;
+import bridging.BPJSCekReferensiFaskes;
+import bridging.BPJSCekReferensiJadwalHFIS;
+import bridging.BPJSCekReferensiKabupaten;
+import bridging.BPJSCekReferensiKecamatan;
+import bridging.BPJSCekReferensiKelasRawat;
+import bridging.BPJSCekReferensiObatPRB;
+import bridging.BPJSCekReferensiPascaPulang;
+import bridging.BPJSCekReferensiPenyakit;
+import bridging.BPJSCekReferensiPoli;
+import bridging.BPJSCekReferensiPoliHFIS;
+import bridging.BPJSCekReferensiPropinsi;
+import bridging.BPJSCekReferensiProsedur;
+import bridging.BPJSCekReferensiRuangRawat;
+import bridging.BPJSCekReferensiSpesialistik;
+import bridging.BPJSCekRiwayatRujukanPCare;
+import bridging.BPJSCekRiwayatRujukanRS;
+import bridging.BPJSCekRujukanKartuPCare;
+import bridging.BPJSCekRujukanKartuRS;
+import bridging.BPJSCekSKDP;
+import bridging.BPJSCekSuplesiJasaRaharja;
+import bridging.BPJSCekTanggalRujukan;
+import bridging.BPJSDataFingerPrintPasien;
+import bridging.BPJSDataSEP;
+import bridging.BPJSHistoriPelayanan;
+import bridging.BPJSMapingDokterDPJP;
+import bridging.BPJSMapingPoli;
+import bridging.BPJSMonitoringKlaim;
+import bridging.BPJSPotensiPRB;
+import bridging.BPJSProgramPRB;
+import bridging.BPJSRujukanKeluar;
+import bridging.BPJSRujukanKhusus;
+import bridging.BPJSSPRI;
+import bridging.BPJSSuratKontrol;
+import bridging.BPJSTaskIDMobileJKN;
+import bridging.BRIApiIntegrasi;
+import bridging.CoronaDiagnosa;
+import bridging.CoronaPasien;
+import bridging.DlgDataTB;
+import bridging.DutaParkingRekapKeluar;
+import bridging.ICareRiwayatPerawatan;
+import bridging.INACBGCoderNIK;
+import bridging.INACBGPerawatanCorona;
+import bridging.InhealthCekEligibilitas;
+import bridging.InhealthCekReferensiFaskes;
+import bridging.InhealthCekReferensiPoli;
+import bridging.InhealthDataSJP;
+import bridging.InhealthMapingDokter;
+import bridging.InhealthMapingPoli;
+import bridging.InhealthReferensiJenpelRuang;
+import bridging.InhealthTagihan;
+import bridging.InhealthTindakanLaborat;
+import bridging.InhealthTindakanOperasi;
+import bridging.InhealthTindakanRadiologi;
+import bridging.InhealthTindakanRalan;
+import bridging.InhealthTindakanRanap;
+import bridging.MandiriBankTujuanTransfer;
+import bridging.MandiriKodeTransaksiTujuanTransfer;
+import bridging.MandiriMetodePembayaran;
+import bridging.MobileJKNFKTPReferensiDokter;
+import bridging.MobileJKNFKTPReferensiPoli;
+import bridging.MobileJKNPembatalanPendaftaran;
+import bridging.MobileJKNReferensiPendaftaran;
+import bridging.PCareCekFaskesAlihRawat;
+import bridging.PCareCekFaskesSubspesialis;
+import bridging.PCareCekFaskesThalasemia;
+import bridging.PCareCekKartu;
+import bridging.PCareCekReferensiAlergi;
+import bridging.PCareCekReferensiDokter;
+import bridging.PCareCekReferensiKesadaran;
+import bridging.PCareCekReferensiKhusus;
+import bridging.PCareCekReferensiObat;
+import bridging.PCareCekReferensiPenyakit;
+import bridging.PCareCekReferensiPoli;
+import bridging.PCareCekReferensiPrognosa;
+import bridging.PCareCekReferensiProvider;
+import bridging.PCareCekReferensiSarana;
+import bridging.PCareCekReferensiSpesialis;
+import bridging.PCareCekReferensiStatusPulang;
+import bridging.PCareCekReferensiSubspesialis;
+import bridging.PCareCekReferensiTACC;
+import bridging.PCareCekReferensiTindakan;
+import bridging.PCareCekRujukan;
+import bridging.PCareClubProlanis;
+import bridging.PCareDataPemberianObat;
+import bridging.PCareDataPemberianTindakan;
+import bridging.PCareDataPendaftaran;
+import bridging.PCareKegiatanKelompok;
+import bridging.PCareMapingDokter;
+import bridging.PCareMapingObat;
+import bridging.PCareMapingPoli;
+import bridging.PCareMapingTindakanRalan;
+import bridging.PCareMapingTindakanRanap;
+import bridging.PCarePesertaKegiatanKelompok;
+import bridging.ReklasifikasiRalan;
+import bridging.ReklasifikasiRanap;
+import bridging.SatuSehatBridgingTTE;
+import bridging.SatuSehatKirimAllergyIntolerance;
+import bridging.SatuSehatKirimCarePlan;
+import bridging.SatuSehatKirimClinicalImpression;
+import bridging.SatuSehatKirimCompositionRME;
+import bridging.SatuSehatKirimCondition;
+import bridging.SatuSehatKirimDiagnosticReportLabMB;
+import bridging.SatuSehatKirimDiagnosticReportLabPK;
+import bridging.SatuSehatKirimDiagnosticReportRadiologi;
+import bridging.SatuSehatKirimDiet;
+import bridging.SatuSehatKirimEncounter;
+import bridging.SatuSehatKirimMedication;
+import bridging.SatuSehatKirimMedicationDispense;
+import bridging.SatuSehatKirimMedicationRequest;
+import bridging.SatuSehatKirimMedicationStatement;
+import bridging.SatuSehatKirimObservationLabMB;
+import bridging.SatuSehatKirimObservationLabPK;
+import bridging.SatuSehatKirimObservationRadiologi;
+import bridging.SatuSehatKirimObservationTTV;
+import bridging.SatuSehatKirimProcedure;
+import bridging.SatuSehatKirimQRTelaahFarmasi;
+import bridging.SatuSehatKirimServiceRequestLabMB;
+import bridging.SatuSehatKirimServiceRequestLabPK;
+import bridging.SatuSehatKirimServiceRequestRadiologi;
+import bridging.SatuSehatKirimSpecimenLabMB;
+import bridging.SatuSehatKirimSpecimenLabPK;
+import bridging.SatuSehatKirimSpecimenRadiologi;
+import bridging.SatuSehatKirimVaksin;
+import bridging.SatuSehatMapingLaborat;
+import bridging.SatuSehatMapingLokasi;
+import bridging.SatuSehatMapingObatAlkes;
+import bridging.SatuSehatMapingOrganisasi;
+import bridging.SatuSehatMapingRadiologi;
+import bridging.SatuSehatMapingTarifKamarKPTL;
+import bridging.SatuSehatMapingTindakanLaboratKPTL;
+import bridging.SatuSehatMapingTindakanOperasiKPTL;
+import bridging.SatuSehatMapingTindakanRadiologiKPTL;
+import bridging.SatuSehatMapingTindakanRalanKPTL;
+import bridging.SatuSehatMapingTindakanRanapKPTL;
+import bridging.SatuSehatMapingVaksin;
+import bridging.SatuSehatReferensiPasien;
+import bridging.SatuSehatReferensiPraktisi;
+import bridging.SiranapKetersediaanKamar;
+import bridging.SisruteCekReferensiAlasanRujuk;
+import bridging.SisruteCekReferensiDiagnosa;
+import bridging.SisruteCekReferensiFaskes;
+import bridging.SisruteRujukanKeluar;
+import bridging.SisruteRujukanMasukan;
+import bridging.SmartKlaimBPJSKirimFHIR;
+import bridging.SmartKlaimBPJSMappingPenyakit;
+import bridging.SmartKlaimBPJSMappingProsedur;
+import dapur.DapurBarang;
+import dapur.DapurHibah;
+import dapur.DapurInputStok;
+import dapur.DapurNilaiPenerimaanVendorPerBulan;
+import dapur.DapurPembelian;
+import dapur.DapurPemesanan;
+import dapur.DapurPengajuan;
+import dapur.DapurPengeluaran;
+import dapur.DapurPermintaan;
+import dapur.DapurRBiayaHarian;
+import dapur.DapurRHPembelian;
+import dapur.DapurReturBeli;
+import dapur.DapurRingkasanPemesananBarang;
+import dapur.DapurRingkasanPenerimaanBarang;
+import dapur.DapurRingkasanPengadaanBarang;
+import dapur.DapurRingkasanPengajuanBarang;
+import dapur.DapurRingkasanReturBeliBarang;
+import dapur.DapurRingkasanStokKeluarBarang;
+import dapur.DapurRiwayatBarang;
+import dapur.DapurSirkulasiBarang2;
+import dapur.DapurSirkulasiBarang;
+import dapur.DapurStokKeluarBarangPerTanggal;
+import dapur.DapurSuplier;
+import dapur.DapurSuratPemesanan;
+import dapur.DapurVerifikasiPenerimaan;
+import fungsi.akses;
+import grafikanalisa.GrafikDemografiRegistrasi;
+import grafikanalisa.GrafikHemodialisaPerBulan;
+import grafikanalisa.GrafikHemodialisaPerTanggal;
+import grafikanalisa.GrafikInventarisPerJenis;
+import grafikanalisa.GrafikInventarisPerKategori;
+import grafikanalisa.GrafikInventarisPerMerk;
+import grafikanalisa.GrafikInventarisPerProdusen;
+import grafikanalisa.GrafikInventarisPerRuang;
+import grafikanalisa.GrafikItemApotekPerGolongan;
+import grafikanalisa.GrafikItemApotekPerIndustriFarmasi;
+import grafikanalisa.GrafikItemApotekPerJenis;
+import grafikanalisa.GrafikItemApotekPerKategori;
+import grafikanalisa.GrafikKejadianIKPPerBulan;
+import grafikanalisa.GrafikKejadianIKPPerDampak;
+import grafikanalisa.GrafikKejadianIKPPerJenis;
+import grafikanalisa.GrafikKejadianIKPPerTahun;
+import grafikanalisa.GrafikKejadianIKPPerTanggal;
+import grafikanalisa.GrafikKeslingLimbahB3Bulan;
+import grafikanalisa.GrafikKeslingLimbahB3CairBulan;
+import grafikanalisa.GrafikKeslingLimbahB3CairPertanggal;
+import grafikanalisa.GrafikKeslingLimbahB3Pertanggal;
+import grafikanalisa.GrafikKeslingLimbahDomestikBulan;
+import grafikanalisa.GrafikKeslingLimbahDomestikPertanggal;
+import grafikanalisa.GrafikKeslingPDAMPerBulan;
+import grafikanalisa.GrafikKeslingPDAMPertanggal;
+import grafikanalisa.GrafikKeslingTanahPerBulan;
+import grafikanalisa.GrafikKeslingTanahPertanggal;
+import grafikanalisa.GrafikKunjunganRanapPerBulan;
+import grafikanalisa.GrafikKunjunganRanapPerRuang;
+import grafikanalisa.GrafikKunjunganRanapPerTahun;
+import grafikanalisa.GrafikKunjunganRanapPerTanggal;
+import grafikanalisa.GrafikLabRalanPerBulan;
+import grafikanalisa.GrafikLabRalanPerHari;
+import grafikanalisa.GrafikLabRalanPerTahun;
+import grafikanalisa.GrafikLajuHAIsHAPPerRuang;
+import grafikanalisa.GrafikLajuHAIsIADPerRuang;
+import grafikanalisa.GrafikLajuHAIsILOPerRuang;
+import grafikanalisa.GrafikLajuHAIsISKPerRuang;
+import grafikanalisa.GrafikLajuHAIsPlebPerRuang;
+import grafikanalisa.GrafikLajuHAIsVAPPerRuang;
+import grafikanalisa.GrafikMeninggalPerBulan;
+import grafikanalisa.GrafikPasienHAIsBulan;
+import grafikanalisa.GrafikPasienHAIsRuang;
+import grafikanalisa.GrafikPegawaiPerBidang;
+import grafikanalisa.GrafikPegawaiPerDepartemen;
+import grafikanalisa.GrafikPegawaiPerEmergencyIndex;
+import grafikanalisa.GrafikPegawaiPerJenjangJabatan;
+import grafikanalisa.GrafikPegawaiPerKelompokJabatan;
+import grafikanalisa.GrafikPegawaiPerPendidikan;
+import grafikanalisa.GrafikPegawaiPerResikoKerja;
+import grafikanalisa.GrafikPegawaiPerStatusKerja;
+import grafikanalisa.GrafikPegawaiPerStatusWP;
+import grafikanalisa.GrafikPenerimaanObatPerbulan;
+import grafikanalisa.GrafikPengajuanAsetDepartemen;
+import grafikanalisa.GrafikPengajuanAsetStatus;
+import grafikanalisa.GrafikPengajuanAsetUrgensi;
+import grafikanalisa.GrafikPerbaikanInventarisPerBulan;
+import grafikanalisa.GrafikPerbaikanInventarisPerPelaksanaStatus;
+import grafikanalisa.GrafikPerbaikanInventarisPerTahun;
+import grafikanalisa.GrafikPerbaikanInventarisPerTanggal;
+import grafikanalisa.GrafikPeristiwaK3PerBagianTubuh;
+import grafikanalisa.GrafikPeristiwaK3PerBulan;
+import grafikanalisa.GrafikPeristiwaK3PerDampakCidera;
+import grafikanalisa.GrafikPeristiwaK3PerJenisCidera;
+import grafikanalisa.GrafikPeristiwaK3PerJenisLuka;
+import grafikanalisa.GrafikPeristiwaK3PerJenisPekerjaan;
+import grafikanalisa.GrafikPeristiwaK3PerLokasiKejadian;
+import grafikanalisa.GrafikPeristiwaK3PerPenyebab;
+import grafikanalisa.GrafikPeristiwaK3PerTahun;
+import grafikanalisa.GrafikPeristiwaK3PerTanggal;
+import grafikanalisa.GrafikPorsiDietPerBulan;
+import grafikanalisa.GrafikPorsiDietPerRuang;
+import grafikanalisa.GrafikPorsiDietPerTahun;
+import grafikanalisa.GrafikPorsiDietPerTanggal;
+import grafikanalisa.GrafikRadRalanPerBulan;
+import grafikanalisa.GrafikRadRalanPerHari;
+import grafikanalisa.GrafikRadRalanPerTahun;
+import grafikanalisa.GrafikRegistrasiPerAgama;
+import grafikanalisa.GrafikRegistrasiPerBahasa;
+import grafikanalisa.GrafikRegistrasiPerBulan;
+import grafikanalisa.GrafikRegistrasiPerCacat;
+import grafikanalisa.GrafikRegistrasiPerCaraBayar;
+import grafikanalisa.GrafikRegistrasiPerDokter;
+import grafikanalisa.GrafikRegistrasiPerPekerjaan;
+import grafikanalisa.GrafikRegistrasiPerPendidikan;
+import grafikanalisa.GrafikRegistrasiPerPerujuk;
+import grafikanalisa.GrafikRegistrasiPerSuku;
+import grafikanalisa.GrafikRegistrasiPerTahun;
+import grafikanalisa.GrafikRegistrasiPerTanggal;
+import grafikanalisa.GrafikRegistrasiPerUmur;
+import grafikanalisa.GrafikRegistrasiPoli;
+import grafikanalisa.GrafikStatusBatalRegPerBulan;
+import grafikanalisa.GrafikStatusBatalRegPerTahun;
+import grafikanalisa.GrafikStatusBatalRegPerTanggal;
+import grafikanalisa.GrafikStatusPulangRanap;
+import grafikanalisa.GrafikStatusRegPerBulan2;
+import grafikanalisa.GrafikStatusRegPerBulan;
+import grafikanalisa.GrafikStatusRegPerTahun2;
+import grafikanalisa.GrafikStatusRegPerTahun;
+import grafikanalisa.GrafikStatusRegPerTanggal2;
+import grafikanalisa.GrafikStatusRegPerTanggal;
+import grafikanalisa.GrafikTBHasilAkhirPengobatan;
+import grafikanalisa.GrafikTBHasilTesHIV;
+import grafikanalisa.GrafikTBKonfirmasiSkoring5;
+import grafikanalisa.GrafikTBKonfirmasiSkoring6;
+import grafikanalisa.GrafikTBPeriodeLaporan;
+import grafikanalisa.GrafikTBRiwayat;
+import grafikanalisa.GrafikTBRujukan;
+import grafikanalisa.GrafikTBSkoringAnak;
+import grafikanalisa.GrafikTBStatusHIV;
+import grafikanalisa.GrafikTBSumberObat;
+import grafikanalisa.GrafikTBTipeDiagnosis;
+import informasi.InformasiAnalisaKamin;
+import inventaris.InventarisAsalHibah;
+import inventaris.InventarisBarang;
+import inventaris.InventarisBarangCSSD;
+import inventaris.InventarisHibah;
+import inventaris.InventarisJenis;
+import inventaris.InventarisKategori;
+import inventaris.InventarisKoleksi;
+import inventaris.InventarisMerk;
+import inventaris.InventarisPembelian;
+import inventaris.InventarisPemeliharaan;
+import inventaris.InventarisPemeliharaanGedung;
+import inventaris.InventarisPemesanan;
+import inventaris.InventarisPerbaikan;
+import inventaris.InventarisPermintaanPerbaikan;
+import inventaris.InventarisProdusen;
+import inventaris.InventarisRuang;
+import inventaris.InventarisSirkulasi;
+import inventaris.InventarisSirkulasiCSSD;
+import inventaris.InventarisSuplier;
+import inventaris.KeslingLimbahB3Medis;
+import inventaris.KeslingLimbahB3MedisCair;
+import inventaris.KeslingLimbahDomestik;
+import inventaris.KeslingMutuAirLimbah;
+import inventaris.KeslingPemakaiaanAirPDAM;
+import inventaris.KeslingPemakaiaanAirTanah;
+import inventaris.KeslingPestControl;
+import inventaris.PengajuanInventaris;
+import inventaris.RekapPengajuanInventarisDepartemen;
+import inventory.Dlg10ObatTerbanyakPoli;
+import inventory.DlgBarang;
+import inventory.DlgCariPPNObat;
+import inventory.DlgCariPengambilanUTD;
+import inventory.DlgDaftarPermintaanResepPulang;
+import inventory.DlgDaftarPermintaanStokPasien;
+import inventory.DlgDaruratStok;
+import inventory.DlgDataBatch;
+import inventory.DlgGolongan;
+import inventory.DlgIndustriFarmasi;
+import inventory.DlgInputStok;
+import inventory.DlgJenis;
+import inventory.DlgKadaluarsaBatch;
+import inventory.DlgKategori;
+import inventory.DlgKegiatanFarmasi;
+import inventory.DlgKonversi;
+import inventory.DlgMetodeRacik;
+import inventory.DlgMutasiBarang;
+import inventory.DlgObatPenyakit;
+import inventory.DlgObatPerTanggal;
+import inventory.DlgObatPeresep;
+import inventory.DlgPembelian;
+import inventory.DlgPemberianObat;
+import inventory.DlgPemesanan;
+import inventory.DlgPengambilanUTD;
+import inventory.DlgPenggunaObat;
+import inventory.DlgPenjualan;
+import inventory.DlgPenjualanPerTanggal;
+import inventory.DlgPermintaan;
+import inventory.DlgPiutang;
+import inventory.DlgProyeksiBeriObat2;
+import inventory.DlgProyeksiBeriObat;
+import inventory.DlgProyeksiJual;
+import inventory.DlgRekapObatPasien;
+import inventory.DlgRekapObatPoli;
+import inventory.DlgRekapPenerimaan;
+import inventory.DlgRekapPermintaan;
+import inventory.DlgResepPulang;
+import inventory.DlgReturBeli;
+import inventory.DlgReturObatPasien;
+import inventory.DlgReturPiutang;
+import inventory.DlgRiwayatBarangMedis;
+import inventory.DlgRiwayatBatch;
+import inventory.DlgSatuan;
+import inventory.DlgSirkulasiBarang2;
+import inventory.DlgSirkulasiBarang3;
+import inventory.DlgSirkulasiBarang4;
+import inventory.DlgSirkulasiBarang5;
+import inventory.DlgSirkulasiBarang6;
+import inventory.DlgSirkulasiBarang;
+import inventory.DlgSisaStok;
+import inventory.DlgStokPasien;
+import inventory.InventoryCariResepLuar;
+import inventory.InventoryHibahObatBHP;
+import inventory.InventoryNilaiPenerimaanVendorFarmasiPerBulan;
+import inventory.InventoryObatBHPTidakBergerak;
+import inventory.InventoryPengajuanBarangMedis;
+import inventory.InventoryPenggunaanBHPOK;
+import inventory.InventoryRingkasanBeriObat;
+import inventory.InventoryRingkasanBiayaObatPasienPerTanggal;
+import inventory.InventoryRingkasanHibahBarangMedis;
+import inventory.InventoryRingkasanPembelianBarangMedis;
+import inventory.InventoryRingkasanPemesananBarangMedis;
+import inventory.InventoryRingkasanPenerimaanBarangMedis;
+import inventory.InventoryRingkasanPengajuanBarangMedis;
+import inventory.InventoryRingkasanPenjualanBarangMedis;
+import inventory.InventoryRingkasanPiutangBarangMedis;
+import inventory.InventoryRingkasanReturJualBarangMedis;
+import inventory.InventoryRingkasanReturSuplierBarangMedis;
+import inventory.InventoryRingkasanStokKeluarBarangMedis;
+import inventory.InventoryStokAkhirFarmasiPerTanggal;
+import inventory.InventorySuplier;
+import inventory.InventorySuratPemesanan;
+import inventory.InventoryTelaahResep;
+import inventory.InventoryVerifikasiPenerimaan;
+import ipsrs.DlgPengadaanIPSRSPerTanggal;
+import ipsrs.DlgRBiayaHarianIPSRS;
+import ipsrs.DlgRHPembelianIPSRS;
+import ipsrs.DlgRHPengeluaranIPSRS;
+import ipsrs.DlgRekapPenerimaanNonMedis;
+import ipsrs.DlgRekapPermintaanNonMedis;
+import ipsrs.DlgSirkulasiNonMedis2;
+import ipsrs.DlgSirkulasiNonMedis;
+import ipsrs.DlgStokKeluarIPSRSPerTanggal;
+import ipsrs.IPSRSBarang;
+import ipsrs.IPSRSCariPengambilanPenunjangUTD;
+import ipsrs.IPSRSHibah;
+import ipsrs.IPSRSInputStok;
+import ipsrs.IPSRSJenis;
+import ipsrs.IPSRSNilaiPenerimaanVendorNonMedisPerBulan;
+import ipsrs.IPSRSPembelian;
+import ipsrs.IPSRSPemesanan;
+import ipsrs.IPSRSPengajuanBarangNonMedis;
+import ipsrs.IPSRSPengambilanPenunjangUTD;
+import ipsrs.IPSRSPengeluaran;
+import ipsrs.IPSRSPermintaan;
+import ipsrs.IPSRSReturBeli;
+import ipsrs.IPSRSRingkasanPemesananBarangNonMedis;
+import ipsrs.IPSRSRingkasanPenerimaanBarangNonMedis;
+import ipsrs.IPSRSRingkasanPengadaanBarangNonMedis;
+import ipsrs.IPSRSRingkasanPengajuanBarangNonMedis;
+import ipsrs.IPSRSRingkasanPengeluaranBarangNonMedis;
+import ipsrs.IPSRSRingkasanReturBeliBarangNonMedis;
+import ipsrs.IPSRSRiwayatBarang;
+import ipsrs.IPSRSSuplier;
+import ipsrs.IPSRSSuratPemesanan;
+import ipsrs.IPSRSVerifikasiPenerimaan;
+import kepegawaian.DlgAuditBundleIADP;
+import kepegawaian.DlgAuditBundleIDO;
+import kepegawaian.DlgAuditBundleISK;
+import kepegawaian.DlgAuditBundlePLABSI;
+import kepegawaian.DlgAuditBundleVAP;
+import kepegawaian.DlgAuditCuciTanganMedis;
+import kepegawaian.DlgAuditFasilitasAPD;
+import kepegawaian.DlgAuditFasilitasKebersihanTangan;
+import kepegawaian.DlgAuditKamarJenazah;
+import kepegawaian.DlgAuditKepatuhanAPD;
+import kepegawaian.DlgAuditPembuanganBendaTajam;
+import kepegawaian.DlgAuditPembuanganLimbah;
+import kepegawaian.DlgAuditPembuanganLimbahCairInfeksius;
+import kepegawaian.DlgAuditPenangananDarah;
+import kepegawaian.DlgAuditPenempatanPasien;
+import kepegawaian.DlgAuditPengelolaanLinenKotor;
+import kepegawaian.DlgAuditSterilisasiAlat;
+import kepegawaian.DlgBarcode;
+import kepegawaian.DlgBerkasKepegawaian;
+import kepegawaian.DlgBulanan;
+import kepegawaian.DlgDokter;
+import kepegawaian.DlgHarian;
+import kepegawaian.DlgJadwal;
+import kepegawaian.DlgJadwalPegawai;
+import kepegawaian.DlgJadwalTambahan;
+import kepegawaian.DlgJamMasuk;
+import kepegawaian.DlgKehadiran2;
+import kepegawaian.DlgMasterBerkasPegawai;
+import kepegawaian.DlgPetugas;
+import kepegawaian.DlgRuangAuditKepatuhan;
+import kepegawaian.DlgSidikJari;
+import kepegawaian.DlgTemporaryPresensi;
+import kepegawaian.K3RSBagianTubuh;
+import kepegawaian.K3RSBagianTubuhPerTahun;
+import kepegawaian.K3RSDampakCidera;
+import kepegawaian.K3RSDampakCideraPerTahun;
+import kepegawaian.K3RSJenisCidera;
+import kepegawaian.K3RSJenisCideraPerTahun;
+import kepegawaian.K3RSJenisLuka;
+import kepegawaian.K3RSJenisLukaPerTahun;
+import kepegawaian.K3RSJenisPekerjaan;
+import kepegawaian.K3RSJenisPekerjaanPerTahun;
+import kepegawaian.K3RSLokasiKejadian;
+import kepegawaian.K3RSLokasiKejadianPerTahun;
+import kepegawaian.K3RSPenyebab;
+import kepegawaian.K3RSPenyebabPerTahun;
+import kepegawaian.K3RSPeristiwa;
+import kepegawaian.PengajuanCutiAdmin;
+import kepegawaian.SKPKategoriPenilaian;
+import kepegawaian.SKPKriteriaPenilaian;
+import kepegawaian.SKPPenilaianPegawai;
+import kepegawaian.SKPRekapitulasiPenilaianPegawai;
+import keuangan.DlgAkunAsetInventaris;
+import keuangan.DlgAkunBayar;
+import keuangan.DlgAkunBayarHutang;
+import keuangan.DlgAkunPenagihanPiutang;
+import keuangan.DlgAkunPiutang;
+import keuangan.DlgBayarPiutang;
+import keuangan.DlgCashflow;
+import keuangan.DlgDeposit;
+import keuangan.DlgDetailJMDokter2;
+import keuangan.DlgDetailJMDokter;
+import keuangan.DlgDetailPotongan;
+import keuangan.DlgDetailTambahan;
+import keuangan.DlgDetailTindakan;
+import keuangan.DlgDetailVKOK;
+import keuangan.DlgFeeBacaanEKG;
+import keuangan.DlgFeePeriksaRalan;
+import keuangan.DlgFeeRujukanRontgen;
+import keuangan.DlgFeeVisitDokter;
+import keuangan.DlgJnsPerawatanLab;
+import keuangan.DlgJnsPerawatanOperasi;
+import keuangan.DlgJnsPerawatanRadiologi;
+import keuangan.DlgJnsPerawatanRalan;
+import keuangan.DlgJnsPerawatanRanap;
+import keuangan.DlgJnsPerawatanUTD;
+import keuangan.DlgJurnal;
+import keuangan.DlgJurnalHarian;
+import keuangan.DlgKamar;
+import keuangan.DlgKategoriPemasukan;
+import keuangan.DlgKategoriPengeluaran;
+import keuangan.DlgKategoriPiutangJasaPerusahaan;
+import keuangan.DlgLabaRugi;
+import keuangan.DlgLhtBRIVA;
+import keuangan.DlgLhtBankJabar;
+import keuangan.DlgLhtBankJateng;
+import keuangan.DlgLhtBankMandiri;
+import keuangan.DlgLhtBankPapua;
+import keuangan.DlgLhtBiaya;
+import keuangan.DlgLhtPembayaranPihakKe3BankMandiri;
+import keuangan.DlgLhtPiutang;
+import keuangan.DlgOmsetPenerimaan;
+import keuangan.DlgPaymentPoint2;
+import keuangan.DlgPaymentPoint;
+import keuangan.DlgPemasukanLain;
+import keuangan.DlgPembayaranPerAKunBayar2;
+import keuangan.DlgPembayaranPerAKunBayar3;
+import keuangan.DlgPembayaranPerAKunBayar4;
+import keuangan.DlgPembayaranPerAKunBayar5;
+import keuangan.DlgPembayaranPerAKunBayar;
+import keuangan.DlgPembayaranPerPoli;
+import keuangan.DlgPembayaranRalan;
+import keuangan.DlgPembayaranRalanPerHari;
+import keuangan.DlgPembayaranRanap;
+import keuangan.DlgPembayaranRanapPerhari;
+import keuangan.DlgPendapatanPerAKun;
+import keuangan.DlgPendapatanPerAKunClosing;
+import keuangan.DlgPendapatanPerCaraBayar;
+import keuangan.DlgPengaturanRekening;
+import keuangan.DlgPengeluaranHarian;
+import keuangan.DlgPengeluaranPengeluaran;
+import keuangan.DlgPengembalianDepositPasien;
+import keuangan.DlgPerkiraanBiayaRanap;
+import keuangan.DlgPiutangPerAKunPiutang;
+import keuangan.DlgPiutangPercaraBayar;
+import keuangan.DlgPiutangRalan;
+import keuangan.DlgPiutangRanap;
+import keuangan.DlgRBJS;
+import keuangan.DlgRBJmDokter;
+import keuangan.DlgRBJmParamedis;
+import keuangan.DlgRBKSO;
+import keuangan.DlgRBMenejemen;
+import keuangan.DlgRBObatBangsal;
+import keuangan.DlgRBObatDokterPeresep;
+import keuangan.DlgRBObatDokterRalan;
+import keuangan.DlgRBObatDokterRanap;
+import keuangan.DlgRBObatPercaraBayar;
+import keuangan.DlgRBObatPoli;
+import keuangan.DlgRBPaketBHP;
+import keuangan.DlgRBTindakanDokter;
+import keuangan.DlgRBTindakanKamar;
+import keuangan.DlgRBTindakanPoli;
+import keuangan.DlgRHJS;
+import keuangan.DlgRHJmDokter;
+import keuangan.DlgRHJmParamedis;
+import keuangan.DlgRHKSO;
+import keuangan.DlgRHMenejemen;
+import keuangan.DlgRHPaketBHP;
+import keuangan.DlgRekapBiayaRegistrasi;
+import keuangan.DlgRekapPembayaranPerPoli;
+import keuangan.DlgRekapPerShift;
+import keuangan.DlgRekening;
+import keuangan.DlgRekeningTahun;
+import keuangan.KeuanganBayarBebanHutangLain;
+import keuangan.KeuanganBayarJMDokter;
+import keuangan.KeuanganBayarPemesananAset;
+import keuangan.KeuanganBayarPemesananDapur;
+import keuangan.KeuanganBayarPemesananFarmasi;
+import keuangan.KeuanganBayarPemesananNonMedis;
+import keuangan.KeuanganBayarPesanToko;
+import keuangan.KeuanganBayarPiutangJasaPerusahaan;
+import keuangan.KeuanganBayarPiutangPeminjamanUang;
+import keuangan.KeuanganBebanHutangLain;
+import keuangan.KeuanganBubes;
+import keuangan.KeuanganHutangAsetIventarisBelumLunas;
+import keuangan.KeuanganHutangDapurBelumLunas;
+import keuangan.KeuanganHutangNonMedisBelumLunas;
+import keuangan.KeuanganHutangObatBelumLunas;
+import keuangan.KeuanganHutangToko;
+import keuangan.KeuanganJasaTindakan;
+import keuangan.KeuanganKlaimRalan;
+import keuangan.KeuanganNilaiPiutangPerJenisBayarPerBulan;
+import keuangan.KeuanganPemberiHutangLain;
+import keuangan.KeuanganPeminjamPiutang;
+import keuangan.KeuanganPenagihanPiutangPasien;
+import keuangan.KeuanganPengajuanBiaya;
+import keuangan.KeuanganPersetujuanPengajuanBiaya;
+import keuangan.KeuanganPiutangBelumLunas;
+import keuangan.KeuanganPiutangJasaPerusahaan;
+import keuangan.KeuanganPiutangJasaPerusahaanBelumLunas;
+import keuangan.KeuanganPiutangObatBelumLunas;
+import keuangan.KeuanganPiutangPeminjamanUang;
+import keuangan.KeuanganPiutangPeminjamanUangBelumLunas;
+import keuangan.KeuanganRVPBPJS;
+import keuangan.KeuanganRekapJmDokter;
+import keuangan.KeuanganRekapPengajuanBiaya;
+import keuangan.KeuanganRekapPoliAnak;
+import keuangan.KeuanganRincianPiutangPasien;
+import keuangan.KeuanganRingkasanHutangVendorDapur;
+import keuangan.KeuanganRingkasanHutangVendorFarmasi;
+import keuangan.KeuanganRingkasanHutangVendorNonMedis;
+import keuangan.KeuanganRingkasanJasaTindakan;
+import keuangan.KeuanganRingkasanPiutangPerJensBayar;
+import keuangan.KeuanganRingkasanTindakan;
+import keuangan.KeuanganSaldoAkunPerBulan;
+import keuangan.KeuanganSetTarifOnline;
+import keuangan.KeuanganTagihanAset;
+import keuangan.KeuanganTagihanDapur;
+import keuangan.KeuanganTagihanNonMedis;
+import keuangan.KeuanganTagihanObatBHP;
+import keuangan.KeuanganValidasiPenagihanPiutang;
+import keuangan.KeuanganValidasiPersetujuanPengajuanBiaya;
+import keuangan.KeuanganValidasiTagihanAset;
+import keuangan.KeuanganValidasiTagihanDapur;
+import keuangan.KeuanganValidasiTagihanNonMedis;
+import keuangan.KeuanganValidasiTagihanObatBHP;
+import laporan.DlgAnggotaMiliterDirawat;
+import laporan.DlgAnggotaPolriDirawat;
+import laporan.DlgBulananHAIs;
+import laporan.DlgBulananKlasifikasiPasienRanap;
+import laporan.DlgCekEntryRalan;
+import laporan.DlgDaftarPasienRanap;
+import laporan.DlgDaftarPasienRanapPolri;
+import laporan.DlgDaftarPasienRanapTNI;
+import laporan.DlgDataHAIs;
+import laporan.DlgDataInsidenKeselamatan;
+import laporan.DlgDataKlasifikasiPasienRanap;
+import laporan.DlgDataSasaranUsiaLansia;
+import laporan.DlgDataSasaranUsiaProduktif;
+import laporan.DlgDemografiUmurKunjungan;
+import laporan.DlgDiagnosaPenyakit;
+import laporan.DlgDkkPenyakitMenularRalan;
+import laporan.DlgDkkPenyakitMenularRanap;
+import laporan.DlgDkkPenyakitTidakMenularRalan;
+import laporan.DlgDkkPenyakitTidakMenularRanap;
+import laporan.DlgDkkSurveilansPD3I;
+import laporan.DlgDkkSurveilansRalan;
+import laporan.DlgDkkSurveilansRanap;
+import laporan.DlgDokterAsalPasienRanap;
+import laporan.DlgDosisRadiologi;
+import laporan.DlgFrekuensiPenyakitRalan;
+import laporan.DlgFrekuensiPenyakitRanap;
+import laporan.DlgHAIsPerBangsal;
+import laporan.DlgHarianHAIs2;
+import laporan.DlgHarianHAIs;
+import laporan.DlgHarianKlasifikasiPasienRanap;
+import laporan.DlgHitungALOS;
+import laporan.DlgHitungBOR;
+import laporan.DlgICD9;
+import laporan.DlgInsidenKeselamatan;
+import laporan.DlgJumlahMacamDiet;
+import laporan.DlgJumlahPengunjungRalanPolri;
+import laporan.DlgJumlahPengunjungRalanTNI;
+import laporan.DlgJumlahPorsiDiet;
+import laporan.DlgKIPPasienRalan;
+import laporan.DlgKIPPasienRanap;
+import laporan.DlgKepatuhanKelengkapanKeselamatanBedah;
+import laporan.DlgKlasifikasiPasienPerBangsal;
+import laporan.DlgKunjunganLabRalan;
+import laporan.DlgKunjunganLabRanap;
+import laporan.DlgKunjunganRadRalan;
+import laporan.DlgKunjunganRadRanap;
+import laporan.DlgKunjunganRalan;
+import laporan.DlgKunjunganRanap;
+import laporan.DlgLamaPelayananPasien;
+import laporan.DlgLaporanPenyakitPolri;
+import laporan.DlgLaporanPenyakitTNI;
+import laporan.DlgOperasiPerBulan;
+import laporan.DlgPelayananApotek;
+import laporan.DlgPelayananCSSD;
+import laporan.DlgPelayananLab;
+import laporan.DlgPelayananLabMB;
+import laporan.DlgPelayananLabPA;
+import laporan.DlgPelayananOperasi;
+import laporan.DlgPelayananPoli;
+import laporan.DlgPelayananRadiologi;
+import laporan.DlgPelayananRalan;
+import laporan.DlgPembatalanPeriksaPerDokter;
+import laporan.DlgPemeriksaanFisikRalanPerPenyakit;
+import laporan.DlgPenyakit;
+import laporan.DlgPenyakitPd3i;
+import laporan.DlgPenyakitRanapPerCaraBayar;
+import laporan.DlgPenyiapanRM;
+import laporan.DlgPerujukLabPerTahun;
+import laporan.DlgPerujukRadiologiPerTahun;
+import laporan.DlgPoliAsalPasienRanap;
+import laporan.DlgRL13KetersediaanTempatTidur;
+import laporan.DlgRL4A;
+import laporan.DlgRL4ASebab;
+import laporan.DlgRL4B;
+import laporan.DlgRL4BSebab;
+import laporan.DlgRanapPerRuang;
+import laporan.DlgRekapKunjungan;
+import laporan.DlgRekapLabPerTahun;
+import laporan.DlgRekapMutasiBerkas;
+import laporan.DlgRekapPermintaanDiet;
+import laporan.DlgRekapRadiologiPerTahun;
+import laporan.DlgRl32;
+import laporan.DlgRl33;
+import laporan.DlgRl34;
+import laporan.DlgRl36;
+import laporan.DlgRl37;
+import laporan.DlgRl38;
+import laporan.DlgSensusHarianPoli;
+import laporan.DlgSensusHarianRalan;
+import laporan.DlgSirkulasiBerkas;
+import laporan.DlgStatusDataRM;
+import laporan.LaporanBulananIRJ;
+import laporan.LaporanKedatanganPasienPerJam;
+import laporan.LaporanRegistrasiPoliPerTanggal;
+import laporan.LaporanRekapKunjunganRuangPerTahun;
+import laporan.LaporanRekapSkriningPernapasanRalanPerTahun;
+import laporan.LaporanSisaDietPasien;
+import laporan.LaporanTahunanIGD;
+import laporan.LaporanTahunanIRJ;
+import laporan.LaporanTahunanPAM;
+import parkir.DlgParkirBarcode;
+import parkir.DlgParkirJenis;
+import parkir.DlgParkirMasuk;
+import pcraicra.PCRAICRAIdentifikasiRisikoInfeksi;
+import pcraicra.PCRAICRAIdentifikasiRisikoKebakaran;
+import pcraicra.PCRAICRAIdentifikasiRisikoKeselamatan;
+import pcraicra.PCRAICRAIdentifikasiRisikoUtilitas;
+import pcraicra.PCRAICRAJenisAktivitasProyek;
+import pcraicra.PCRAICRAKelasRisikoPencegahan;
+import pcraicra.PCRAICRALokasiKelompokRisikoArea;
+import pcraicra.PCRAICRAPengkajianRisikoPraKonstruksi;
+import pcraicra.PCRAICRAPersyaratanHarusDipenuhi;
+import pcraicra.PCRAICRATindakanPengendalian;
+import permintaan.DlgBookingMCUPerusahaan;
+import permintaan.DlgBookingOperasi;
+import permintaan.DlgBookingRegistrasi;
+import permintaan.DlgCariPermintaanLab;
+import permintaan.DlgCariPermintaanLabMB;
+import permintaan.DlgCariPermintaanLabPA;
+import permintaan.DlgCariPermintaanLayananProgramKFR;
+import permintaan.DlgCariPermintaanRadiologi;
+import permintaan.DlgPermintaanKonsultasiMedik;
+import permintaan.DlgPermintaanKonsultasiPerawat;
+import permintaan.DlgPermintaanPelayananInformasiObat;
+import permintaan.DlgPermintaanRanap;
+import perpustakaan.PerpustakaanAnggota;
+import perpustakaan.PerpustakaanBayarDenda;
+import perpustakaan.PerpustakaanDenda;
+import perpustakaan.PerpustakaanInventaris;
+import perpustakaan.PerpustakaanJenis;
+import perpustakaan.PerpustakaanKategori;
+import perpustakaan.PerpustakaanKoleksi;
+import perpustakaan.PerpustakaanPenerbit;
+import perpustakaan.PerpustakaanPengarang;
+import perpustakaan.PerpustakaanPengaturanPeminjaman;
+import perpustakaan.PerpustakaanRuang;
+import perpustakaan.PerpustakaanSirkulasi;
+import rekammedis.DlgSOAPPerawatan;
+import rekammedis.DlgSOAPRalanAggotaPolri;
+import rekammedis.DlgSOAPRalanAggotaTNI;
+import rekammedis.DlgSOAPRanapAggotaPolri;
+import rekammedis.DlgSOAPRanapAggotaTNI;
+import rekammedis.MasterImunisasi;
+import rekammedis.MasterMasalahKeperawatan;
+import rekammedis.MasterMasalahKeperawatanAnak;
+import rekammedis.MasterMasalahKeperawatanGeriatri;
+import rekammedis.MasterMasalahKeperawatanGigi;
+import rekammedis.MasterMasalahKeperawatanIGD;
+import rekammedis.MasterMasalahKeperawatanMata;
+import rekammedis.MasterMasalahKeperawatanNeonatus;
+import rekammedis.MasterMasalahKeperawatanPsikiatri;
+import rekammedis.MasterRencanaKeperawatan;
+import rekammedis.MasterRencanaKeperawatanAnak;
+import rekammedis.MasterRencanaKeperawatanGeriatri;
+import rekammedis.MasterRencanaKeperawatanGigi;
+import rekammedis.MasterRencanaKeperawatanIGD;
+import rekammedis.MasterRencanaKeperawatanMata;
+import rekammedis.MasterRencanaKeperawatanNeonatus;
+import rekammedis.MasterRencanaKeperawatanPsikiatri;
+import rekammedis.MasterTemplateHasilRadiologi;
+import rekammedis.MasterTemplateInformasiEdukasi;
+import rekammedis.MasterTemplateLaporanOperasi;
+import rekammedis.MasterTemplatePemeriksaanDokter;
+import rekammedis.MasterTriaseMacamKasus;
+import rekammedis.MasterTriasePemeriksaan;
+import rekammedis.MasterTriaseSkala1;
+import rekammedis.MasterTriaseSkala2;
+import rekammedis.MasterTriaseSkala3;
+import rekammedis.MasterTriaseSkala4;
+import rekammedis.MasterTriaseSkala5;
+import rekammedis.RMCariRekonsiliasiObat;
+import rekammedis.RMCatatanADIMEGizi;
+import rekammedis.RMCatatanAnastesiSedasi;
+import rekammedis.RMCatatanPengkajianPaskaOperasi;
+import rekammedis.RMCatatanPersalinan;
+import rekammedis.RMChecklistKesiapanAnestesi;
+import rekammedis.RMChecklistKriteriaKeluarHCU;
+import rekammedis.RMChecklistKriteriaKeluarICU;
+import rekammedis.RMChecklistKriteriaKeluarIsolasi;
+import rekammedis.RMChecklistKriteriaKeluarNICU;
+import rekammedis.RMChecklistKriteriaKeluarPICU;
+import rekammedis.RMChecklistKriteriaMasukHCU;
+import rekammedis.RMChecklistKriteriaMasukICU;
+import rekammedis.RMChecklistKriteriaMasukIsolasi;
+import rekammedis.RMChecklistKriteriaMasukNICU;
+import rekammedis.RMChecklistKriteriaMasukPICU;
+import rekammedis.RMChecklistPemberianFibrinolitik;
+import rekammedis.RMChecklistPostOperasi;
+import rekammedis.RMChecklistPreOperasi;
+import rekammedis.RMDataAsuhanGizi;
+import rekammedis.RMDataCatatanCairanHemodialisa;
+import rekammedis.RMDataCatatanCekGDS;
+import rekammedis.RMDataCatatanKeperawatanRalan;
+import rekammedis.RMDataCatatanKeperawatanRanap;
+import rekammedis.RMDataCatatanKeseimbanganCairan;
+import rekammedis.RMDataCatatanObservasiBayi;
+import rekammedis.RMDataCatatanObservasiCHBP;
+import rekammedis.RMDataCatatanObservasiHemodialisa;
+import rekammedis.RMDataCatatanObservasiIGD;
+import rekammedis.RMDataCatatanObservasiInduksiPersalinan;
+import rekammedis.RMDataCatatanObservasiRanap;
+import rekammedis.RMDataCatatanObservasiRanapKebidanan;
+import rekammedis.RMDataCatatanObservasiRanapPostPartum;
+import rekammedis.RMDataCatatanObservasiRestrainNonFarmakologi;
+import rekammedis.RMDataCatatanObservasiRuangOperasi;
+import rekammedis.RMDataCatatanObservasiVentilator;
+import rekammedis.RMDataFollowUpDBD;
+import rekammedis.RMDataIntervensiNyeriFarmakologi;
+import rekammedis.RMDataIntervensiNyeriNonFarmakologi;
+import rekammedis.RMDataMonitoringAsuhanGizi;
+import rekammedis.RMDataMonitoringReaksiTranfusi;
+import rekammedis.RMDataResumePasien;
+import rekammedis.RMDataResumePasienRanap;
+import rekammedis.RMDataSkriningGiziKehamilan;
+import rekammedis.RMDataSkriningGiziLanjut;
+import rekammedis.RMDeteksiDiniCorona;
+import rekammedis.RMEdukasiPasienKeluargaRawatJalan;
+import rekammedis.RMHasilEndoskopiFaringLaring;
+import rekammedis.RMHasilEndoskopiHidung;
+import rekammedis.RMHasilEndoskopiTelinga;
+import rekammedis.RMHasilPemeriksaanEKG;
+import rekammedis.RMHasilPemeriksaanEcho;
+import rekammedis.RMHasilPemeriksaanEchoPediatrik;
+import rekammedis.RMHasilPemeriksaanOCT;
+import rekammedis.RMHasilPemeriksaanSlitLamp;
+import rekammedis.RMHasilPemeriksaanTreadmill;
+import rekammedis.RMHasilPemeriksaanUSG;
+import rekammedis.RMHasilPemeriksaanUSGAbdomen;
+import rekammedis.RMHasilPemeriksaanUSGGynecologi;
+import rekammedis.RMHasilPemeriksaanUSGNeonatus;
+import rekammedis.RMHasilPemeriksaanUSGUrologi;
+import rekammedis.RMHasilTindakanESWL;
+import rekammedis.RMHemodialisa;
+import rekammedis.RMKonselingFarmasi;
+import rekammedis.RMLaporanTindakan;
+import rekammedis.RMLayananKedokteranFisikRehabilitasi;
+import rekammedis.RMLayananProgramKFR;
+import rekammedis.RMMCU;
+import rekammedis.RMMasterKesimpulanAnjuranMCU;
+import rekammedis.RMMonitorPANSSECIGD;
+import rekammedis.RMMonitorPANSSECRanap;
+import rekammedis.RMMonitoringAldrettePascaAnestesi;
+import rekammedis.RMMonitoringBromagePascaAnestesi;
+import rekammedis.RMMonitoringStewardPascaAnestesi;
+import rekammedis.RMPelaksanaanInformasiEdukasi;
+import rekammedis.RMPemantauanEWSD;
+import rekammedis.RMPemantauanEWSNeonatus;
+import rekammedis.RMPemantauanMEOWS;
+import rekammedis.RMPemantauanPEWS;
+import rekammedis.RMPenatalaksanaanTerapiOkupasi;
+import rekammedis.RMPengkajianRestrain;
+import rekammedis.RMPenilaianAwalKeperawatanBayiAnak;
+import rekammedis.RMPenilaianAwalKeperawatanGigi;
+import rekammedis.RMPenilaianAwalKeperawatanIGD;
+import rekammedis.RMPenilaianAwalKeperawatanKebidanan;
+import rekammedis.RMPenilaianAwalKeperawatanKebidananRanap;
+import rekammedis.RMPenilaianAwalKeperawatanRalan;
+import rekammedis.RMPenilaianAwalKeperawatanRalanGeriatri;
+import rekammedis.RMPenilaianAwalKeperawatanRalanPsikiatri;
+import rekammedis.RMPenilaianAwalKeperawatanRanap;
+import rekammedis.RMPenilaianAwalKeperawatanRanapBayiAnak;
+import rekammedis.RMPenilaianAwalKeperawatanRanapNeonatus;
+import rekammedis.RMPenilaianAwalMedisHemodialisa;
+import rekammedis.RMPenilaianAwalMedisIGD;
+import rekammedis.RMPenilaianAwalMedisIGDPsikiatri;
+import rekammedis.RMPenilaianAwalMedisRalanAnak;
+import rekammedis.RMPenilaianAwalMedisRalanBedah;
+import rekammedis.RMPenilaianAwalMedisRalanBedahMulut;
+import rekammedis.RMPenilaianAwalMedisRalanDewasa;
+import rekammedis.RMPenilaianAwalMedisRalanGeriatri;
+import rekammedis.RMPenilaianAwalMedisRalanJantung;
+import rekammedis.RMPenilaianAwalMedisRalanKandungan;
+import rekammedis.RMPenilaianAwalMedisRalanKulitDanKelamin;
+import rekammedis.RMPenilaianAwalMedisRalanMata;
+import rekammedis.RMPenilaianAwalMedisRalanNeurologi;
+import rekammedis.RMPenilaianAwalMedisRalanOrthopedi;
+import rekammedis.RMPenilaianAwalMedisRalanParu;
+import rekammedis.RMPenilaianAwalMedisRalanPenyakitDalam;
+import rekammedis.RMPenilaianAwalMedisRalanPsikiatrik;
+import rekammedis.RMPenilaianAwalMedisRalanRehabMedik;
+import rekammedis.RMPenilaianAwalMedisRalanTHT;
+import rekammedis.RMPenilaianAwalMedisRalanUrologi;
+import rekammedis.RMPenilaianAwalMedisRanapDewasa;
+import rekammedis.RMPenilaianAwalMedisRanapJantung;
+import rekammedis.RMPenilaianAwalMedisRanapKandungan;
+import rekammedis.RMPenilaianAwalMedisRanapNeonatus;
+import rekammedis.RMPenilaianAwalMedisRanapPsikiatrik;
+import rekammedis.RMPenilaianBayiBaruLahir;
+import rekammedis.RMPenilaianDerajatDehidrasi;
+import rekammedis.RMPenilaianFisioterapi;
+import rekammedis.RMPenilaianKorbanKekerasan;
+import rekammedis.RMPenilaianLanjutanRisikoJatuhAnak;
+import rekammedis.RMPenilaianLanjutanRisikoJatuhDewasa;
+import rekammedis.RMPenilaianLanjutanRisikoJatuhGeriatri;
+import rekammedis.RMPenilaianLanjutanRisikoJatuhLansia;
+import rekammedis.RMPenilaianLanjutanRisikoJatuhPsikiatri;
+import rekammedis.RMPenilaianLanjutanSkriningFungsional;
+import rekammedis.RMPenilaianLevelKecemasanRanapAnak;
+import rekammedis.RMPenilaianPasienImunitasRendah;
+import rekammedis.RMPenilaianPasienKeracunan;
+import rekammedis.RMPenilaianPasienPenyakitMenular;
+import rekammedis.RMPenilaianPasienTerminal;
+import rekammedis.RMPenilaianPreAnastesi;
+import rekammedis.RMPenilaianPreInduksi;
+import rekammedis.RMPenilaianPreOperasi;
+import rekammedis.RMPenilaianPsikologi;
+import rekammedis.RMPenilaianPsikologiKlinis;
+import rekammedis.RMPenilaianRisikoDekubitus;
+import rekammedis.RMPenilaianRisikoJatuhNeonatus;
+import rekammedis.RMPenilaianTambahanBunuhDiri;
+import rekammedis.RMPenilaianTambahanGeriatri;
+import rekammedis.RMPenilaianTambahanMelarikanDiri;
+import rekammedis.RMPenilaianTambahanPerilakuKekerasan;
+import rekammedis.RMPenilaianTerapiWicara;
+import rekammedis.RMPenilaianUlangNyeri;
+import rekammedis.RMPerencanaanPemulangan;
+import rekammedis.RMRiwayatKamarPasien;
+import rekammedis.RMRiwayatPerawatan;
+import rekammedis.RMSKriningRawatJalan;
+import rekammedis.RMSignInSebelumAnastesi;
+import rekammedis.RMSignOutSebelumMenutupLuka;
+import rekammedis.RMSkriningAdiksiNikotin;
+import rekammedis.RMSkriningAnemia;
+import rekammedis.RMSkriningCURB65;
+import rekammedis.RMSkriningDiabetesMelitus;
+import rekammedis.RMSkriningFrailtySyndrome;
+import rekammedis.RMSkriningHipertensi;
+import rekammedis.RMSkriningIndraPendengaran;
+import rekammedis.RMSkriningInstrumenACRS;
+import rekammedis.RMSkriningInstrumenAMT;
+import rekammedis.RMSkriningInstrumenESAT;
+import rekammedis.RMSkriningInstrumenMentalEmosional;
+import rekammedis.RMSkriningInstrumenSDQ;
+import rekammedis.RMSkriningKankerKolorektal;
+import rekammedis.RMSkriningKekerasanPadaPerempuan;
+import rekammedis.RMSkriningKesehatanGigiMulutBalita;
+import rekammedis.RMSkriningKesehatanGigiMulutDewasa;
+import rekammedis.RMSkriningKesehatanGigiMulutLansia;
+import rekammedis.RMSkriningKesehatanGigiMulutRemaja;
+import rekammedis.RMSkriningKesehatanPenglihatan;
+import rekammedis.RMSkriningMPP;
+import rekammedis.RMSkriningMPPFormA;
+import rekammedis.RMSkriningMPPFormARalan;
+import rekammedis.RMSkriningMPPFormB;
+import rekammedis.RMSkriningMPPFormBRalan;
+import rekammedis.RMSkriningMPPRalan;
+import rekammedis.RMSkriningMerokokUsiaSekolahRemaja;
+import rekammedis.RMSkriningNutrisiAnak;
+import rekammedis.RMSkriningNutrisiDewasa;
+import rekammedis.RMSkriningNutrisiLansia;
+import rekammedis.RMSkriningObesitas;
+import rekammedis.RMSkriningPUMA;
+import rekammedis.RMSkriningPneumoniaSeverityIndex;
+import rekammedis.RMSkriningRisikoKankerParu;
+import rekammedis.RMSkriningRisikoKankerPayudara;
+import rekammedis.RMSkriningRisikoKankerServiks;
+import rekammedis.RMSkriningSRQ;
+import rekammedis.RMSkriningTBC;
+import rekammedis.RMSkriningTalasemia;
+import rekammedis.RMTimeOutSebelumInsisi;
+import rekammedis.RMTransferPasienAntarRuang;
+import rekammedis.RMTriaseIGD;
+import rekammedis.RMUjiFungsiKFR;
+import setting.DlgAdmin;
+import setting.DlgBiayaHarian;
+import setting.DlgBiayaSekaliMasuk;
+import setting.DlgClosingKasir;
+import setting.DlgEEksekutif;
+import setting.DlgJamDietPasien;
+import setting.DlgPasswordBPJS;
+import setting.DlgPenelusuranLogin;
+import setting.DlgRuangOperasi;
+import setting.DlgRunTeks;
+import setting.DlgRunTeksApotek;
+import setting.DlgSetAplikasi;
+import setting.DlgSetEmbalase;
+import setting.DlgSetHarga;
+import setting.DlgSetHargaKamar;
+import setting.DlgSetHargaObatRalan;
+import setting.DlgSetHargaObatRanap;
+import setting.DlgSetHargaToko;
+import setting.DlgSetInputParsial;
+import setting.DlgSetKamarInap;
+import setting.DlgSetKeterlambatan;
+import setting.DlgSetNota;
+import setting.DlgSetOtoLokasi;
+import setting.DlgSetOtoRalan;
+import setting.DlgSetPenjabLab;
+import setting.DlgSetRM;
+import setting.DlgSetTarif;
+import setting.DlgUser;
+import setting.DlgVakum;
+import surat.MasterMenolakAnjuranMedis;
+import surat.MasterTemplatePersetujuanPenolakanTindakan;
+import surat.PengumumanEPasien;
+import surat.SuratAlmari;
+import surat.SuratBalas;
+import surat.SuratBebasNarkoba;
+import surat.SuratBebasTato;
+import surat.SuratButaWarna;
+import surat.SuratCutiHamil;
+import surat.SuratIndeks;
+import surat.SuratKeluar;
+import surat.SuratKeteranganBebasTBC;
+import surat.SuratKeteranganBerobat;
+import surat.SuratKeteranganCovid;
+import surat.SuratKeteranganLayakTerbang;
+import surat.SuratKeteranganRawatInap;
+import surat.SuratKeteranganSehat;
+import surat.SuratKewaspadaanKesehatan;
+import surat.SuratKlasifikasi;
+import surat.SuratKontrol;
+import surat.SuratMap;
+import surat.SuratMasuk;
+import surat.SuratPengajuanCutiPerawatan;
+import surat.SuratPenolakanAnjuranMedis;
+import surat.SuratPenolakanResusitasi;
+import surat.SuratPermintaanBinrohtal;
+import surat.SuratPermintaanPerlindunganDariKekerasan;
+import surat.SuratPermintaanSecondOpinion;
+import surat.SuratPermohonanPrivasi;
+import surat.SuratPernyataanMemilihDPJP;
+import surat.SuratPernyataanPasienUmum;
+import surat.SuratPersetujuanPemeriksaanHIV;
+import surat.SuratPersetujuanPenolakanTindakan;
+import surat.SuratPersetujuanPenundaanPelayanan;
+import surat.SuratPersetujuanRawatInap;
+import surat.SuratPersetujuanUmum;
+import surat.SuratPulangAtasPermintaanSendiri;
+import surat.SuratRak;
+import surat.SuratRuang;
+import surat.SuratSakit;
+import surat.SuratSakitPihak2;
+import surat.SuratSerahTerimaBarangAnggotaTubuh;
+import surat.SuratSifat;
+import surat.SuratStatus;
+import surat.SuratTidakHamil;
+import toko.TokoBarang;
+import toko.TokoBayarPiutang;
+import toko.TokoInputStok;
+import toko.TokoJenis;
+import toko.TokoKeuntunganBarang;
+import toko.TokoMember;
+import toko.TokoPembelian;
+import toko.TokoPemesanan;
+import toko.TokoPendapatanHarian;
+import toko.TokoPengajuanBarang;
+import toko.TokoPenjualan;
+import toko.TokoPenjualanHarian;
+import toko.TokoPiutang;
+import toko.TokoPiutangHarian;
+import toko.TokoReturBeli;
+import toko.TokoReturJual;
+import toko.TokoReturPiutang;
+import toko.TokoRiwayatBarang;
+import toko.TokoSirkulasi2;
+import toko.TokoSirkulasi;
+import toko.TokoSuplier;
+import toko.TokoSuratPemesanan;
+import tranfusidarah.UTDCekalDarah;
+import tranfusidarah.UTDDonor;
+import tranfusidarah.UTDKomponenDarah;
+import tranfusidarah.UTDMedisRusak;
+import tranfusidarah.UTDPemisahanDarah;
+import tranfusidarah.UTDPendonor;
+import tranfusidarah.UTDPenunjangRusak;
+import tranfusidarah.UTDPenyerahanDarah;
+import tranfusidarah.UTDStokDarah;
+import viabarcode.DlgBarcodeRalan;
+import viabarcode.DlgBarcodeRanap;
+import viabarcode.LabKeslingCariHasilPengujianSampel;
+import viabarcode.LabKeslingCariPenugasanPengujianSampel;
+import viabarcode.LabKeslingCariPermintaanPengujianSampelDapatDilayani;
+import viabarcode.LabKeslingCariPermintaanPengujianSampelTidakDapatDilayani;
+import viabarcode.LabKeslingCariValidasiPengujianSampel;
+import viabarcode.LabKeslingCariVerifikasiPengujianSampel;
+import viabarcode.LabKeslingMasterSampelBakuMutu;
+import viabarcode.LabKeslingNilaiNormalBakuMutu;
+import viabarcode.LabKeslingParameterPengujian;
+import viabarcode.LabKeslingPelanggan;
+import viabarcode.LabKeslingPembayaranPengujianSampel;
+import viabarcode.LabKeslingPermintaanPengujianSampel;
+import viabarcode.LabKeslingRekapPelayanan;
+import viabarcode.LabKeslingRekapPembayaran;
+import ziscsr.ZISAtapRumahPenerimaDankes;
+import ziscsr.ZISDapurRumahPenerimaDankes;
+import ziscsr.ZISDindingRumahPenerimaDankes;
+import ziscsr.ZISElektronikPenerimaDankes;
+import ziscsr.ZISJenisSimpananPenerimaDankes;
+import ziscsr.ZISKamarMandiPenerimaDankes;
+import ziscsr.ZISKategoriAsnafPenerimaDankes;
+import ziscsr.ZISKategoriPHBSPenerimaDankes;
+import ziscsr.ZISKursiRumahPenerimaDankes;
+import ziscsr.ZISLantaiRumahPenerimaDankes;
+import ziscsr.ZISPatologisPenerimaDankes;
+import ziscsr.ZISPengeluaranPenerimaDankes;
+import ziscsr.ZISPenghasilanPenerimaDankes;
+import ziscsr.ZISTernakPenerimaDankes;
+import ziscsr.ZISUkuranRumahPenerimaDankes;
+
+/**
+ * Isi menu utama per kategori cmbMenu ([A] sampai [U]). Urutan entri = urutan
+ * tombol di layar. Tombol yang tampil di lebih dari satu kategori didaftarkan
+ * sekali dengan tambah(), di kategori lain cukup juga().
+ */
+final class DaftarMenuUtama {
+    private final MenuUtama m;
+    private final frmUtama u;
+
+    DaftarMenuUtama(MenuUtama m,frmUtama u){
+        this.m=m;
+        this.u=u;
+    }
+
+    void isi(){
+        kategoriA();
+        kategoriB();
+        kategoriC();
+        kategoriD();
+        kategoriE();
+        kategoriF();
+        kategoriG();
+        kategoriH();
+        kategoriI();
+        kategoriJ();
+        kategoriK();
+        kategoriL();
+        kategoriM();
+        kategoriN();
+        kategoriO();
+        kategoriP();
+        kategoriQ();
+        kategoriR();
+        kategoriS();
+        kategoriT();
+        kategoriU();
+    }
+
+    /** [A] Registrasi, Tagihan Ranap & Ralan, Pelayanan & Billing Pasien */
+    private void kategoriA(){
+        m.kategori(0);
+        m.tambah("btnAnalisaKamar", "Informasi Kamar", "iconfinder_cleaning-door-knob-object-hygiene_5728178.png", akses::getinformasi_kamar)
+            .buka(() -> new InformasiAnalisaKamin(u,false));
+        m.tambah("BtnJadwal", "Jadwal Praktek", "informasidokter.png", akses::getjadwal_praktek)
+            .buka(() -> new DlgJadwal(u,false)).sebelum(f -> f.emptTeks());
+        m.tambah("btnRegistrasi", "Registrasi", "checklist.png", akses::getregistrasi)
+            .buka(() -> new DlgReg(u,false)).sebelum(f -> { f.emptTeks(); f.isCek(); });
+        m.tambah("btnBookingPeriksa", "Booking Periksa", "if_addressbook_32380.png", akses::getbooking_periksa)
+            .aksi(u::btnBookingPeriksaActionPerformed);
+        m.tambah("btnBookingRegistrasi", "Booking Registrasi", "Icon-Booking.png", akses::getbooking_registrasi)
+            .buka(() -> new DlgBookingRegistrasi(u,false));
+        m.tambah("btnBookingMCUPerusahaan", "Booking MCU Perusahaan", "6002396_building_coronavirus_covid19_health_hospital_icon.png", akses::getbooking_mcu_perusahaan)
+            .buka(() -> new DlgBookingMCUPerusahaan(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnIGD", "IGD/UGD", "Iconigd.png", akses::getigd)
+            .aksi(u::btnIGDActionPerformed);
+        m.tambah("btnRalan", "Tindakan Ralan", "Icon-Tindakan-Rajal.png", akses::gettindakan_ralan)
+            .buka(() -> new DlgRawatJalan(null,false)).sebelum(f -> { f.SetPj("-"); f.SetPoli("-"); }).sesudah(f -> f.isCek());
+        m.tambah("btnPermintaanRanap", "Permintaan Rawat Inap", "iconfinder_Register_6083883.png", akses::getpermintaan_ranap)
+            .buka(() -> new DlgPermintaanRanap(u,false));
+        m.tambah("btnKamarInap", "Rawat Inap", "Home.png", () -> akses.getkamar_inap()||akses.getbilling_ranap()||akses.gettindakan_ranap())
+            .buka(() -> new DlgKamarInap(null,false)).sebelum(f -> { f.isCek(); f.emptTeks(); });
+        m.tambah("btnJadwalOperasi", "Jadwal Operasi", "JadwalOperasi.png", akses::getbooking_operasi)
+            .buka(() -> new DlgBookingOperasi(u,false));
+        m.tambah("btnPermintaanLab", "Permintaan Lab PK", "if_laboratory_44676.png", () -> akses.getpermintaan_lab()||akses.getperiksa_lab()||akses.getpemeriksaan_lab_pa()||akses.getpemeriksaan_lab_mb())
+            .buka(() -> new DlgCariPermintaanLab(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnPermintaanLabPA", "Permintaan Lab PA", "if_laboratory_44676.png", () -> akses.getpermintaan_lab()||akses.getperiksa_lab()||akses.getpemeriksaan_lab_pa()||akses.getpemeriksaan_lab_mb())
+            .buka(() -> new DlgCariPermintaanLabPA(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnPermintaanLabMB", "Permintaan Lab MB", "if_laboratory_44676.png", () -> akses.getpermintaan_lab()||akses.getperiksa_lab()||akses.getpemeriksaan_lab_pa()||akses.getpemeriksaan_lab_mb())
+            .buka(() -> new DlgCariPermintaanLabMB(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnPermintaanRadiologi", "Permintaan Radiologi", "if_Thorax_X-Ray_Black_63791.png", () -> akses.getpermintaan_radiologi()||akses.getperiksa_radiologi())
+            .buka(() -> new DlgCariPermintaanRadiologi(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnPermintaanLayananProgramKFR", "Permintaan Layanan Program KFR", "12178185_physiotherapy_physiotherapist_rehabilitation_patient_exercise_icon.png", () -> akses.getlayanan_kedokteran_fisik_rehabilitasi()||akses.getlayanan_program_kfr())
+            .buka(() -> new DlgCariPermintaanLayananProgramKFR(u,false)).sebelum(f -> f.isCek());
+        m.tambah("BtnDpjp", "DPJP Ranap", "doctor2.png", akses::getdpjp_ranap)
+            .buka(() -> new DlgDpjp(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnRanap", "Tindakan Ranap", "tindakanranap.png", akses::gettindakan_ranap)
+            .buka(() -> new DlgRawatInap(null,false)).sebelum(f -> f.isCek());
+        m.tambah("btnTagihanOperasi", "Operasi/VK", "surgeon.png", akses::getoperasi)
+            .buka(() -> new DlgCariTagihanOperasi(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnRujukPasien", "Rujukan Keluar", "1485357758_Doctor.png", akses::getrujukan_keluar)
+            .buka(() -> new DlgRujuk(u,false)).sebelum(f -> { f.emptTeks(); f.isCek(); });
+        m.tambah("btnRujukMasuk", "Rujukan Masuk", "if_vector_65_13_473800.png", akses::getrujukan_masuk)
+            .buka(() -> new DlgRujukMasuk(null,false)).sebelum(f -> { f.emptTeks(); f.isCek(); });
+        m.tambah("btnBeriObat", "Beri Obat/BHP", "first_aid_kit.png", akses::getberi_obat)
+            .buka(() -> new DlgPemberianObat(null,false)).sebelum(f -> { f.tampilPO3(); f.isCek(); });
+        m.tambah("btnResepPulang", "Resep Pulang", "IconResepPulang.png", akses::getresep_pulang)
+            .buka(() -> new DlgResepPulang(u,false)).sebelum(f -> { f.tampil2(); f.isCek(); });
+        m.tambah("btnResepObat", "No. Resep", "iconnomorresep.png", akses::getresep_obat)
+            .aksi(u::btnResepObatActionPerformed);
+        m.tambah("btnDiet", "Diet Pasien", "dietpasien.png", akses::getdiet_pasien)
+            .buka(() -> new DlgPemberianDiet(u,false)).sebelum(f -> f.tampil());
+        m.tambah("btnSkriningRawatJalan", "Skrining Rawat Jalan", "IconSkriningRalan.png", akses::getsekrining_rawat_jalan)
+            .buka(() -> new RMSKriningRawatJalan(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); });
+        m.tambah("btnDeteksiDiniCorona", "Deteksi Dini Corona", "iconfinder_Medical_Result-Health-Document-Virus-Medical_5958965.png", akses::getdeteksi_corona)
+            .buka(() -> new RMDeteksiDiniCorona(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnLaboratorium", "Periksa Lab PK", "laboratory.png", akses::getperiksa_lab)
+            .buka(() -> new DlgCariPeriksaLab(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnLaboratoriumPA", "Periksa Lab PA", "6008661_bacteria_coronavirus_covid_laboratory_microscope_icon.png", akses::getpemeriksaan_lab_pa)
+            .buka(() -> new DlgCariPeriksaLabPA(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnLaboratoriumMB", "Periksa Lab MB", "5728202_coronavirus_medical_microbiology_research_science_icon.png", akses::getpemeriksaan_lab_mb)
+            .buka(() -> new DlgCariPeriksaLabMB(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnPeriksaRadiologi", "Periksa Radiologi", "Icon-Radiologi.png", akses::getperiksa_radiologi)
+            .buka(() -> new DlgCariPeriksaRadiologi(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnKasir", "Rawat Jalan", "cashbox.png", () -> akses.getkasir_ralan()||akses.getbilling_ralan())
+            .aksi(u::btnKasirActionPerformed);
+        m.tambah("btnDeposit", "Deposit Pasien", "Money.png", akses::getdeposit_pasien)
+            .buka(() -> new DlgDeposit(u,false)).sebelum(f -> { f.tampil2(); f.isCek(); });
+        m.tambah("btnPerkiraanBiayaRanap", "Perkiraan Biaya Ranap", "if_Rank-History_49609.png", akses::getperkiraan_biaya_ranap)
+            .buka(() -> new DlgPerkiraanBiayaRanap(u,false)).sebelum(f -> f.isCek());
+    }
+
+    /** [B] Tindakan & Obat & BHP Via Barcode, Lab Kesehatan Lingkungan */
+    private void kategoriB(){
+        m.kategori(1);
+        m.tambah("btnBarcodeRalan", "Rawat Jalan", "Barcode-Rawat-Jalan.png", akses::getbarcoderalan)
+            .buka(() -> new DlgBarcodeRalan(u,false));
+        m.tambah("btnBarcodeRanap", "Rawat Inap", "Barcode-Rawat-Inap.png", akses::getbarcoderanap)
+            .buka(() -> new DlgBarcodeRanap(u,false));
+        m.tambah("btnLabKeslingPelanggan", "Pelanggan Lab Kesling", "9554587_school_education_learning_book_science_icon.png", akses::getpelanggan_lab_kesehatan_lingkungan)
+            .buka(() -> new LabKeslingPelanggan(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); });
+        m.tambah("btnLabKeslingSampelBakuMutu", "Master Sampel Lab Kesling", "5856695_laboratory_medical_research_science_test_icon.png", akses::getmaster_sampel_bakumutu)
+            .buka(() -> new LabKeslingMasterSampelBakuMutu(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); });
+        m.tambah("btnLabKeslingParameterPengujian", "Parameter Pengujian Lab Kesling", "5856688_laboratory_medical_mixer_roll_rotating_icon.png", akses::getparameter_pengujian_lab_kesehatan_lingkungan)
+            .buka(() -> new LabKeslingParameterPengujian(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); });
+        m.tambah("btnLabKeslingNilaiNormalBakuMutu", "Nilai Normal Baku Mutu Lab Kesling", "8960644_test_test tube_blood_laboratory_lab_icon.png", akses::getnilai_normal_baku_mutu_lab_kesehatan_lingkungan)
+            .buka(() -> new LabKeslingNilaiNormalBakuMutu(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); });
+        m.tambah("btnLabKeslingPermintaanPengujianSampel", "Permintaan Pengujian Sampel Lab Kesling", "5269078_book_calendar_education_library_loan_icon.png", akses::getpermintaan_pengujian_sampel_lab_kesehatan_lingkungan)
+            .buka(() -> new LabKeslingPermintaanPengujianSampel(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); });
+        m.tambah("btnLabKeslingPengujianSampelTidakDapatDilayani", "Sampel Pengujian Lab Kesling Tidak Dapat Dilayani", "6088713_banned_closed_shop_sign_icon.png", akses::getpermintaan_pengujian_sampel_lab_kesehatan_lingkungan)
+            .buka(() -> new LabKeslingCariPermintaanPengujianSampelTidakDapatDilayani(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnLabKeslingPengujianSampelDapatDilayani", "Sampel Pengujian Lab Kesling Dapat Dilayani", "4059950_and_architecture_book_buildings_business_icon.png", () -> akses.getpermintaan_pengujian_sampel_lab_kesehatan_lingkungan()||akses.getpenugasan_pengujian_sampel_lab_kesehatan_lingkungan())
+            .buka(() -> new LabKeslingCariPermintaanPengujianSampelDapatDilayani(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnLabKeslingPenugasanPengujianSampel", "Data Penugasan Pengujian Sampel Lab Kesling", "7038097_marketing_file_business_clipboard_data_icon.png", () -> akses.getpenugasan_pengujian_sampel_lab_kesehatan_lingkungan()||akses.gethasil_pengujian_sampel_lab_kesehatan_lingkungan())
+            .buka(() -> new LabKeslingCariPenugasanPengujianSampel(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnLabKeslingHasilPengujianSampel", "Data Hasil Pengujian Sampel Lab Kesling", "6725462_archive_data_document_file_page_icon.png", () -> akses.gethasil_pengujian_sampel_lab_kesehatan_lingkungan()||akses.getverifikasi_pengujian_sampel_lab_kesehatan_lingkungan())
+            .buka(() -> new LabKeslingCariHasilPengujianSampel(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnLabKeslingVerifikasiPengujianSampel", "Data Verifikasi Pengujian Sampel Lab Kesling", "4698583_document_file_paper_pen_text_icon.png", () -> akses.getverifikasi_pengujian_sampel_lab_kesehatan_lingkungan()||akses.getvalidasi_pengujian_sampel_lab_kesehatan_lingkungan())
+            .buka(() -> new LabKeslingCariVerifikasiPengujianSampel(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnLabKeslingValidasiPengujianSampel", "Data Validasi Pengujian Sampel Lab Kesling", "paper_9683410.png", akses::getvalidasi_pengujian_sampel_lab_kesehatan_lingkungan)
+            .buka(() -> new LabKeslingCariValidasiPengujianSampel(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnLabKeslingRekapPelayanan", "Rekap Pelayanan Lab Kesling", "85334_file_open_icon.png", akses::getrekap_pelayanan_lab_kesehatan_lingkungan)
+            .buka(() -> new LabKeslingRekapPelayanan(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnLabKeslingPembyaranPengujianSampel", "Pembayaran Pengujian Sampel Lab Kesling", "money-bag_2953536-2.png", akses::getpembayaran_pengujian_sampel_lab_kesehatan_lingkungan)
+            .buka(() -> new LabKeslingPembayaranPengujianSampel(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnLabKeslingRekapPembayaran", "Rekap Pembayaran Lab Kesling", "money_536054-2.png", akses::getpembayaran_pengujian_sampel_lab_kesehatan_lingkungan)
+            .buka(() -> new LabKeslingRekapPembayaran(u,false)).sebelum(f -> f.isCek());
+    }
+
+    /** [C] Presensi, Manajemen & Penggajian Pegawai Rumah Sakit */
+    private void kategoriC(){
+        m.kategori(2);
+        m.tambah("btnPegawai", "Petugas", "receptionist.png", akses::getpetugas)
+            .buka(() -> new DlgPetugas(null,false)).sebelum(f -> { f.emptTeks(); f.isCek(); });
+        m.tambah("btnDokter", "Dokter", "doctor2.png", akses::getdokter)
+            .buka(() -> new DlgDokter(null,false)).sebelum(f -> { f.emptTeks(); f.isCek(); f.setAlwaysOnTop(false); });
+        m.tambah("btnBarcode", "Barcode Presensi", "1360484263_barcode.png", akses::getbarcode)
+            .buka(() -> new DlgBarcode(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnSidikJari", "Sidik Jari", "finger.png", akses::getsidikjari)
+            .buka(() -> new DlgSidikJari(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnJamPresensi", "Jam Presensi", "Time.png", akses::getjam_masuk)
+            .buka(() -> new DlgJamMasuk(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnJadwalPegawai", "Jadwal Pegawai", "1360485865_schedule.png", akses::getjadwal_pegawai)
+            .buka(() -> new DlgJadwalPegawai(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnJadwalTambahan", "Jadwal Tambahan", "1360485865_schedule.png", akses::getjadwal_pegawai)
+            .buka(() -> new DlgJadwalTambahan(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnRekapHarian", "Presensi Harian", "rekap.png", akses::getpresensi_harian)
+            .buka(() -> new DlgHarian(u,false)).sebelum(f -> { f.tampil(); f.isCek(); });
+        m.tambah("btnRekapBulanan", "Presensi Bulanan", "1360486898_project-plan.png", akses::getpresensi_bulanan)
+            .buka(() -> new DlgBulanan(u,false)).sebelum(f -> { f.isCek(); f.tampil(); });
+        m.tambah("btnTemporaryPresensi", "Temporary Presensi", "1404047834_application-vnd.ms-excel.png", akses::gettemporary_presensi)
+            .buka(() -> new DlgTemporaryPresensi(u,false));
+        m.tambah("btnPengajuanCuti", "Pengajuan Cuti", "iconfinder_reminders_3572.png", akses::getpengajuan_cuti)
+            .buka(() -> new PengajuanCutiAdmin(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnRekapPresensi", "Rekap Kehadiran", "sign-up.png", null)
+            .aksi(u::btnRekapPresensiActionPerformed);
+        m.tambah("btnRekapPresensi2", "Rekap Kehadiran 2", "sign-up.png", null)
+            .buka(() -> new DlgKehadiran2(u,false));
+        m.tambah("btnPenggajian", "Kepegawaian & Gaji", "1404046603_wallet.png", () -> akses.getpegawai_admin()||akses.getpegawai_user())
+            .aksi(u::btnPenggajianActionPerformed);
+        m.tambah("btnMasterBerkasPegawai", "Master Berkas Pegawai", "folder.png", akses::getmaster_berkas_pegawai)
+            .buka(() -> new DlgMasterBerkasPegawai(null,false)).sebelum(f -> f.emptTeks());
+        m.tambah("btnBerkasPegawai", "Berkas Kepegawaian", "1481002437_partners.png", akses::getberkas_kepegawaian)
+            .buka(() -> new DlgBerkasKepegawaian(null,false));
+        m.tambah("btnRiwayatJabatan", "Riwayat Jabatan", "if_TextEdit_37595.png", akses::getriwayat_jabatan)
+            .aksi(u::btnRiwayatJabatanActionPerformed);
+        m.tambah("btnRiwayatPendidikan", "Riwayat Pendidikan", "1481038237_Adobe_Bridge_CS.png", akses::getriwayat_pendidikan)
+            .aksi(u::btnRiwayatPendidikanActionPerformed);
+        m.tambah("btnRiwayatNaikGaji", "Riwayat Naik Gaji", "coins.png", akses::getriwayat_naik_gaji)
+            .aksi(u::btnRiwayatNaikGajiActionPerformed);
+        m.tambah("btnKegiatanIlmiah", "Kegiatan Ilmiah & Pelatihan", "if_gtk-find-and-replace_39047.png", akses::getkegiatan_ilmiah)
+            .aksi(u::btnKegiatanIlmiahActionPerformed);
+        m.tambah("btnRiwayatPenghargaan", "Riwayat Penghargaan", "if_folder_images_61610.png", akses::getriwayat_penghargaan)
+            .aksi(u::btnRiwayatPenghargaanActionPerformed);
+        m.tambah("btnRiwayatSuratPeringatan", "Riwayat Surat Peringatan", "3069185_book_education_learn_school_icon.png", akses::getriwayat_surat_peringatan)
+            .aksi(u::btnRiwayatSuratPeringatanActionPerformed);
+        m.tambah("btnRiwayatPenelitian", "Riwayat Penelitian", "if_research_87460.png", akses::getriwayat_penelitian)
+            .aksi(u::btnRiwayatPenelitianActionPerformed);
+        m.tambah("btnSMS", "SMS Gateway", "1360485538_recieve-mail.png", akses::getsms)
+            .aksi(u::btnSMSActionPerformed);
+        m.tambah("btnJenisCideraK3", "Jenis Cidera K3", "ruber.png", akses::getjenis_cidera_k3rs)
+            .buka(() -> new K3RSJenisCidera(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnPenyebabKecelakaanK3", "Penyebab Kecelakaan K3", "iconfinder_sponge_2___331505.png", akses::getpenyebab_k3rs)
+            .buka(() -> new K3RSPenyebab(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnJenisLukaK3", "Jenis Luka K3", "iconfinder_h3_19725.png", akses::getjenis_luka_k3rs)
+            .buka(() -> new K3RSJenisLuka(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnLokasiKejadianK3", "Lokasi Kejadian K3", "iconfinder_arrows_blue_61552.png", akses::getlokasi_kejadian_k3rs)
+            .buka(() -> new K3RSLokasiKejadian(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnDampakCideraK3", "Dampak Cidera K3", "iconfinder_ambulance_45490.png", akses::getdampak_cidera_k3rs)
+            .buka(() -> new K3RSDampakCidera(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnJenisPekerjaanK3", "Jenis Pekerjaan K3", "iconfinder_applications-engineering_8830.png", akses::getjenis_pekerjaan_k3rs)
+            .buka(() -> new K3RSJenisPekerjaan(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnBagianTubuhK3", "Bagian Tubuh K3", "plaster.png", akses::getbagian_tubuh_k3rs)
+            .buka(() -> new K3RSBagianTubuh(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnPeristiwaK3", "Peristiwa K3", "iconfinder_Artboard_18_3874677.png", akses::getperistiwa_k3rs)
+            .buka(() -> new K3RSPeristiwa(u,false)).sebelum(f -> { f.emptTeks(); f.isCek(); });
+        m.tambah("btnJenisCideraK3PerTahun", "Jenis Cidera K3 Per Tahun", "ruber.png", akses::getjenis_cidera_k3rstahun)
+            .buka(() -> new K3RSJenisCideraPerTahun(u,false));
+        m.tambah("btnPenyebabKecelakaanK3PerTahun", "Penyebab Kecelakaan K3 Per Tahun", "iconfinder_sponge_2___331505.png", akses::getpenyebab_k3rstahun)
+            .buka(() -> new K3RSPenyebabPerTahun(u,false));
+        m.tambah("btnJenisLukaK3PerTahun", "Jenis Luka K3 Per Tahun", "iconfinder_h3_19725.png", akses::getjenis_luka_k3rstahun)
+            .buka(() -> new K3RSJenisLukaPerTahun(u,false));
+        m.tambah("btnLokasiKejadianK3PerTahun", "Lokasi Kejadian K3 Per Tahun", "iconfinder_arrows_blue_61552.png", akses::getlokasi_kejadian_k3rstahun)
+            .buka(() -> new K3RSLokasiKejadianPerTahun(u,false));
+        m.tambah("btnDampakCideraK3PerTahun", "Dampak Cidera K3 Per Tahun", "iconfinder_ambulance_45490.png", akses::getdampak_cidera_k3rstahun)
+            .buka(() -> new K3RSDampakCideraPerTahun(u,false));
+        m.tambah("btnJenisPekerjaanK3PerTahun", "Jenis Pekerjaan K3 Per Tahun", "iconfinder_applications-engineering_8830.png", akses::getjenis_pekerjaan_k3rstahun)
+            .buka(() -> new K3RSJenisPekerjaanPerTahun(u,false));
+        m.tambah("btnBagianTubuhK3PerTahun", "Bagian Tubuh K3 Per Tahun", "plaster.png", akses::getbagian_tubuh_k3rstahun)
+            .buka(() -> new K3RSBagianTubuhPerTahun(u,false));
+        m.tambah("btnAuditKepatuhanAPD", "Audit Kepatuhan APD", "5986179_admit_hospital_insurance_medical_medicine_icon.png", akses::getaudit_kepatuhan_apd)
+            .buka(() -> new DlgAuditKepatuhanAPD(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnAuditCuciTanganMedis", "Audit Cuci Tangan Medis", "5929226_clean_cleaning_hands_wash_washing_icon.png", akses::getaudit_cuci_tangan_medis)
+            .buka(() -> new DlgAuditCuciTanganMedis(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnRuangAuditKepatuhan", "Ruang/Unit Audit Kepatuhan", "8961095_home_monitoring_electricity_thermal_humidity_icon.png", akses::getruang_audit_kepatuhan)
+            .buka(() -> new DlgRuangAuditKepatuhan(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); });
+        m.tambah("btnAuditPembuanganLimbah", "Audit Pembuangan Limbah", "8956796_trash_can_bin_delete_rubbish_icon.png", akses::getaudit_pembuangan_limbah)
+            .buka(() -> new DlgAuditPembuanganLimbah(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnAuditPembuanganBendaTajam", "Audit Pembuangan Benda Tajam & Jarum", "8960649_syringes_syringe_vaccine_vaccination_vaccines_icon.png", akses::getaudit_pembuangan_benda_tajam)
+            .buka(() -> new DlgAuditPembuanganBendaTajam(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnAuditPenangananDarah", "Audit Penanganan Darah", "8960610_blood_drop_blood test_hand_transfusion_icon.png", akses::getaudit_penanganan_darah)
+            .buka(() -> new DlgAuditPenangananDarah(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnAuditPengelolaanLinenKotor", "Audit Pengelolaan Linen Kotor", "7150138_washing_machine_clean_wash_technology_icon.png", akses::getaudit_pengelolaan_linen_kotor)
+            .buka(() -> new DlgAuditPengelolaanLinenKotor(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnAuditPenempatanPasien", "Audit Penempatan Pasien", "6088155_head_headache_infection_pain_sick_icon.png", akses::getaudit_penempatan_pasien)
+            .buka(() -> new DlgAuditPenempatanPasien(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnAuditKamarJenazah", "Audit Kamar Jenazah", "kerandajenazah.png", akses::getaudit_kamar_jenazah)
+            .buka(() -> new DlgAuditKamarJenazah(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnAuditBundleIADP", "Audit Bundle IADP", "5856663_blood_laboratory_medical_research_science_icon.png", akses::getaudit_bundle_iadp)
+            .buka(() -> new DlgAuditBundleIADP(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnAuditBundleIDO", "Audit Bundle IDO", "6123156_avatar_doctor_frontliner_medical staff_surgeon_icon.png", akses::getaudit_bundle_ido)
+            .buka(() -> new DlgAuditBundleIDO(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnAuditFasilitasKebersihanTangan", "Audit Fasilitas Kebersihan Tangan", "5932586_hands_soap_wash_coronavirus_covid19_icon.png", akses::getaudit_fasilitas_kebersihan_tangan)
+            .buka(() -> new DlgAuditFasilitasKebersihanTangan(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnAuditFasilitasAPD", "Audit Fasilitas APD", "1626354_apron_home_kitchen_restaurant_room_icon.png", akses::getaudit_fasilitas_apd)
+            .buka(() -> new DlgAuditFasilitasAPD(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnAuditPembuanganLimbahCairInfeksius", "Audit Pembuangan Limbah Cair Infeksius", "5972292_blood_disease_fluid_infection_transmission_icon.png", akses::getaudit_pembuangan_limbah_cair_infeksius)
+            .buka(() -> new DlgAuditPembuanganLimbahCairInfeksius(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnAuditSterilisasiAlat", "Audit Sterilisasi Alat", "8960613_iv_iv pole_blood_transfusion_infusion_icon.png", akses::getaudit_sterilisasi_alat)
+            .buka(() -> new DlgAuditSterilisasiAlat(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnAuditBundleISK", "Audit Bundle ISK", "5958327_clipboard virus_disease_epidemic_file data_infection_icon.png", akses::getaudit_bundle_isk)
+            .buka(() -> new DlgAuditBundleISK(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnAuditBundlePLABSI", "Audit Bundle PLABSI", "5875848_blood_cell_disease_infect_lab_icon.png", akses::getaudit_bundle_plabsi)
+            .buka(() -> new DlgAuditBundlePLABSI(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnAuditBundleVAP", "Audit Bundle VAP", "5856684_disease_lung_outbreak_pneumonia_virus_icon.png", akses::getaudit_bundle_vap)
+            .buka(() -> new DlgAuditBundleVAP(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnSKPKategoriPenilaian", "Kategori Pengkajian SKP", "5986210_clothing_equipment_protection_protective_safety_icon.png", akses::getskp_kategori_penilaian)
+            .buka(() -> new SKPKategoriPenilaian(u,false));
+        m.tambah("btnSKPKriteriaPenilaian", "Kriteria Pengkajian SKP", "9016856_safety_suit_virus_glove_covid-19_icon.png", akses::getskp_kriteria_penilaian)
+            .buka(() -> new SKPKriteriaPenilaian(u,false));
+        m.tambah("btnSKPPenilaianPegawai", "Pengkajian SKP Petugas/Dokter", "6088187_gloves_hand_safety_secure_icon.png", akses::getskp_penilaian)
+            .buka(() -> new SKPPenilaianPegawai(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnSKPRekapitulasiPenilaian", "Rekapitulasi Pengkajian SKP", "5958329_crowd patient_disease_epidemic_hospital_infection_icon.png", akses::getskp_rekapitulasi_penilaian)
+            .buka(() -> new SKPRekapitulasiPenilaianPegawai(u,false));
+    }
+
+    /** [D] Transaksi Inventory Obat, BHP Medis, Alat Kesehatan Pasien */
+    private void kategoriD(){
+        m.kategori(3);
+        m.tambah("btnAsalHibah", "Asal Hibah", "if_filing_cabinet_search-g_86207.png", akses::getasal_hibah)
+            .buka(() -> new InventarisAsalHibah(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnIndustriFarmasi", "Industri Farmasi", "1360486910_company.png", akses::getindustrifarmasi)
+            .buka(() -> new DlgIndustriFarmasi(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); });
+        m.tambah("btnSuplier", "Suplier Obat/Alkes/BHP", "1485357959_truck.png", akses::getsuplier)
+            .buka(() -> new InventorySuplier(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); });
+        m.tambah("btnSatuan", "Satuan Barang", "bag1.png", akses::getsatuan_barang)
+            .buka(() -> new DlgSatuan(null,false)).sebelum(f -> { f.isCek(); f.emptTeks(); });
+        m.tambah("btnMetodeRacik", "Metode Racik", "if_document-new_23212.png", akses::getmetode_racik)
+            .buka(() -> new DlgMetodeRacik(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); });
+        m.tambah("btnKonversi", "Konversi Satuan", "ark2.png", akses::getkonversi_satuan)
+            .buka(() -> new DlgKonversi(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); });
+        m.tambah("btnJnsBarang", "Jenis Obat, Alkes & BHP", "Card_file.png", akses::getjenis_barang)
+            .buka(() -> new DlgJenis(null,false)).sebelum(f -> { f.isCek(); f.emptTeks(); });
+        m.tambah("btnKategoriBarang", "Kategori Obat, Alkes & BHP", "address-book.png", akses::getkategori_barang)
+            .buka(() -> new DlgKategori(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); });
+        m.tambah("btnGolonganBarang", "Golongan Obat, Alkes & BHP", "1360485894_add-notes.png", akses::getgolongan_barang)
+            .buka(() -> new DlgGolongan(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); });
+        m.tambah("btnObat", "Obat, Alkes & BHP", "1360815855_laboratory.png", akses::getobat)
+            .buka(() -> new DlgBarang(null,false)).sebelum(f -> { f.emptTeks(); f.isCek(); });
+        m.tambah("btnOpname", "Stok Opname Obat & BHP", "1360487078_shipping.png", akses::getstok_opname_obat)
+            .buka(() -> new DlgInputStok(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnMutasiBarang", "Mutasi Obat & BHP", "1360485642_edit-notes.png", akses::getmutasi_barang)
+            .buka(() -> new DlgMutasiBarang(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnPermintaanStokObatPasien", "Permintaan Stok Obat Pasien", "IconPermintaanStokObatPasien.png", akses::getpermintaan_stok_obat_pasien)
+            .buka(() -> new DlgDaftarPermintaanStokPasien(u,false)).sebelum(f -> { f.isCek(); f.tampil(); });
+        m.tambah("btnPermintaanResepPulang", "Permintaan Resep Pulang", "iconfinder_paper_pencil-lb_86334.png", akses::getpermintaan_resep_pulang)
+            .buka(() -> new DlgDaftarPermintaanResepPulang(u,false)).sebelum(f -> { f.isCek(); f.tampil(); });
+        m.tambah("btnStokObatPasien", "Stok Obat Pasien", "1360487078_shipping.png", akses::getstok_obat_pasien)
+            .buka(() -> new DlgStokPasien(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnPermintaanMedis", "Permintaan Obat & BHP", "if_packing_49602.png", () -> akses.getpermintaan_medis()||akses.getmutasi_barang()||akses.getpengeluaran_stok_apotek())
+            .buka(() -> new DlgPermintaan(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnRingkasanPermintaanMedis", "Ringkasan Permintaan Obat & BHP", "if_binary-tree_49580.png", akses::getrekap_permintaan_medis)
+            .buka(() -> new DlgRekapPermintaan(u,false));
+        m.tambah("btnPengajuanBarangMedis", "Pengajuan Obat & BHP", "iconfinder_ordering_49597.png", akses::getpengajuan_barang_medis)
+            .buka(() -> new InventoryPengajuanBarangMedis(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnRingkasanPengajuanMedis", "Ringkasan Pengajuan Obat & BHP", "if_binary-tree_49580.png", akses::getringkasan_pengajuan_obat)
+            .buka(() -> new InventoryRingkasanPengajuanBarangMedis(u,false));
+        m.tambah("btnSuratPemesananMedis", "Surat Pemesanan Obat & BHP", "if_Select-Language_49621.png", () -> akses.getsurat_pemesanan_medis()||akses.getpemesanan_obat())
+            .buka(() -> new InventorySuratPemesanan(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnRingkasanPemesananMedis", "Ringkasan Pemesanan Obat & BHP", "if_binary-tree_49580.png", akses::getringkasan_pemesanan_obat)
+            .buka(() -> new InventoryRingkasanPemesananBarangMedis(u,false));
+        m.tambah("btnPembelian", "Pengadaan Obat & BHP", "1360487067_calculator.png", akses::getpengadaan_obat)
+            .buka(() -> new DlgPembelian(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnRingkasanPembelianMedis", "Ringkasan Pengadaan Obat & BHP", "if_binary-tree_49580.png", akses::getringkasan_pengadaan_obat)
+            .buka(() -> new InventoryRingkasanPembelianBarangMedis(u,false));
+        m.tambah("btnPemesanan", "Penerimaan Obat & BHP", "kwrite.png", () -> akses.getpemesanan_obat()||akses.getbayar_pemesanan_obat())
+            .buka(() -> new DlgPemesanan(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnRingkasanPenerimaanMedis", "Ringkasan Penerimaan Obat & BHP", "if_binary-tree_49580.png", akses::getringkasan_penerimaan_obat)
+            .buka(() -> new InventoryRingkasanPenerimaanBarangMedis(u,false));
+        m.tambah("btnHibahObatBHP", "Hibah Obat & BHP", "if_Address_Book_Alt_blue_86952.png", akses::gethibah_obat_bhp)
+            .buka(() -> new InventoryHibahObatBHP(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnRingkasanHibahMedis", "Ringkasan Hibah Obat & BHP", "if_binary-tree_49580.png", akses::getringkasan_hibah_obat)
+            .buka(() -> new InventoryRingkasanHibahBarangMedis(u,false));
+        m.tambah("btnPenjualan", "Penjualan Obat & BHP", "cashbox.png", akses::getpenjualan_obat)
+            .buka(() -> new DlgPenjualan(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnRingkasanPenjualanMedis", "Ringkasan Penjualan Obat & BHP", "if_binary-tree_49580.png", akses::getringkasan_penjualan_obat)
+            .buka(() -> new InventoryRingkasanPenjualanBarangMedis(u,false));
+        m.tambah("btnRingkasanBeriObat", "Ringkasan Beri Obat & BHP", "if_binary-tree_49580.png", akses::getringkasan_beri_obat)
+            .buka(() -> new InventoryRingkasanBeriObat(u,false));
+        m.tambah("btnDaftarPermintaanResep", "Daftar Resep Dokter", "1360485894_add-notes.png", akses::getresep_dokter)
+            .aksi(u::btnDaftarPermintaanResepActionPerformed);
+        m.tambah("btnPiutang", "Piutang Obat & BHP", "checklist.png", akses::getpiutang_obat)
+            .buka(() -> new DlgPiutang(u,false)).sebelum(f -> { f.emptTeks(); f.isCek(); });
+        m.tambah("btnRingkasanPiutangObat", "Ringkasan Piutang Obat & BHP", "if_binary-tree_49580.png", akses::getringkasan_piutang_obat)
+            .buka(() -> new InventoryRingkasanPiutangBarangMedis(u,false));
+        m.tambah("btnStokKeluarMedis", "Stok Keluar Medis", "shopping-basket-full.png", akses::getpengeluaran_stok_apotek)
+            .aksi(u::btnStokKeluarMedisActionPerformed);
+        m.tambah("btnRingkasanStokKeluarObat", "Ringkasan Stok Keluar Obat & BHP", "if_binary-tree_49580.png", akses::getringkasan_stok_keluar_obat)
+            .buka(() -> new InventoryRingkasanStokKeluarBarangMedis(u,false));
+        m.tambah("btnReturBeli", "Retur Ke Suplier", "1360816189_arrow_down.png", akses::getretur_ke_suplier)
+            .buka(() -> new DlgReturBeli(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); });
+        m.tambah("btnRingkasanReturSuplierObat", "Ringkasan Retur Suplier Obat & BHP", "if_binary-tree_49580.png", akses::getringkasan_retur_suplier_obat)
+            .buka(() -> new InventoryRingkasanReturSuplierBarangMedis(u,false));
+        m.tambah("btnReturJual", "Retur Dari Pembeli", "1360486142_shopping_cart.png", akses::getretur_dari_pembeli)
+            .aksi(u::btnReturJualActionPerformed);
+        m.tambah("btnRingkasanReturJualObat", "Ringkasan Retur Pembeli Obat & BHP", "if_binary-tree_49580.png", akses::getringkasan_retur_pembeli_obat)
+            .buka(() -> new InventoryRingkasanReturJualBarangMedis(u,false));
+        m.tambah("btnReturPasien", "Retur Obat Ranap", "1360815295_medical_case.png", akses::getretur_obat_ranap)
+            .buka(() -> new DlgReturObatPasien(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnReturPiutang", "Retur Piutang Pembeli", "custom-reports.png", akses::getretur_piutang_pasien)
+            .buka(() -> new DlgReturPiutang(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); });
+        m.tambah("btnPengambilanUTD", "Pengambilan BHP UTD", "1360487078_shipping.png", akses::getpengambilan_utd)
+            .buka(() -> new DlgPengambilanUTD(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnKeuntungan", "Keuntungan Penjualan", "coins.png", akses::getkeuntungan_penjualan)
+            .buka(() -> new DlgProyeksiJual(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnKeuntunganObatRanap", "Keuntungan Beri Obat ", "coins.png", akses::getkeuntungan_beri_obat)
+            .buka(() -> new DlgProyeksiBeriObat(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnKeuntunganObat2", "Keuntungan Beri Obat 2", "coins.png", akses::getkeuntungan_beri_obat_nonpiutang)
+            .buka(() -> new DlgProyeksiBeriObat2(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnSirkulasi", "Sirkulasi Obat, Alkes & BHP", "1360487125_system-restart-panel.png", akses::getsirkulasi_obat)
+            .buka(() -> new DlgSirkulasiBarang(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnSirkulasi2", "Sirkulasi Obat, Alkes & BHP 2", "1360487125_system-restart-panel.png", akses::getsirkulasi_obat2)
+            .buka(() -> new DlgSirkulasiBarang2(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnSirkulasi3", "Sirkulasi Obat, Alkes & BHP 3", "1360487125_system-restart-panel.png", akses::getsirkulasi_obat3)
+            .buka(() -> new DlgSirkulasiBarang3(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnSirkulasiObat4", "Sirkulasi Obat, Alkes & BHP 4", "1360487125_system-restart-panel.png", akses::getsirkulasi_obat4)
+            .buka(() -> new DlgSirkulasiBarang4(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnSirkulasiObat5", "Sirkulasi Obat, Alkes & BHP 5", "1360487125_system-restart-panel.png", akses::getsirkulasi_obat5)
+            .buka(() -> new DlgSirkulasiBarang5(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnSirkulasiObat6", "Sirkulasi Obat, Alkes & BHP 6", "1360487125_system-restart-panel.png", akses::getsirkulasi_obat6)
+            .buka(() -> new DlgSirkulasiBarang6(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnObatPerTanggal", "Obat/Alkes/BHP Per Tanggal", "1360485865_schedule.png", akses::getpemberian_obat_pertanggal)
+            .buka(() -> new DlgObatPerTanggal(u,false));
+        m.tambah("btnPenjualanPerTanggal", "Penjualan Bebas Per Tanggal", "1360485865_schedule.png", akses::getpenjualan_obat_pertanggal)
+            .buka(() -> new DlgPenjualanPerTanggal(u,false));
+        m.tambah("btnRiwayatBarangMedis", "Riwayat Obat, Alkes & BHP", "gnome-searchtool.png", akses::getriwayat_obat_alkes_bhp)
+            .buka(() -> new DlgRiwayatBarangMedis(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnDaruratStok", "Darurat Stok", "1360487078_shipping.png", akses::getdarurat_stok)
+            .buka(() -> new DlgDaruratStok(u,false));
+        m.tambah("btnPenggunaObatResep", "Pengguna Obat/Alkes/BHP Resep", "family.png", akses::getpengguna_obat_resep)
+            .buka(() -> new DlgPenggunaObat(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnRekapPenerimaanObat", "Rekap Penerimaan Obat & BHP", "if_TextEdit_37595.png", akses::getrekap_pemesanan)
+            .buka(() -> new DlgRekapPenerimaan(null,false)).sebelum(f -> { f.emptTeks(); f.isCek(); });
+        m.tambah("btnDataBatch", "Data Batch", "1360484263_barcode.png", akses::getdata_batch)
+            .buka(() -> new DlgDataBatch(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); });
+        m.tambah("btnRiwayatBatch", "Riwayat Batch", "1481038237_Adobe_Bridge_CS.png", akses::getriwayat_data_batch)
+            .buka(() -> new DlgRiwayatBatch(u,false));
+        m.tambah("btnKegiatanFarmasi", "Kegiatan Farmasi", "if_website_-_address_book_3440827.png", akses::getkegiatan_farmasi)
+            .buka(() -> new DlgKegiatanFarmasi(u,false)).sebelum(f -> f.tampil());
+        m.tambah("btnPPNObat", "PPN Obat", "if_money_299107.png", akses::getppn_obat)
+            .buka(() -> new DlgCariPPNObat(u,false));
+        m.tambah("btnKadaluarsaBatch", "Kadaluarsa Batch", "iconfinder_diagram-11_35581.png", akses::getkadaluarsa_batch)
+            .buka(() -> new DlgKadaluarsaBatch(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnSisaStok", "Sisa Stok", "iconfinder_icon-62-document-table_314903.png", akses::getsisa_stok)
+            .buka(() -> new DlgSisaStok(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnObatPerResep", "Obat Per Resep", "iconfinder_eccomerce_-_receipt_3440909.png", akses::getobat_per_resep)
+            .buka(() -> new DlgObatPeresep(u,false));
+        m.tambah("btn10BesarObatPoli", "10 Obat Terbanyak Poli", "if_07_Note_Book_2064482.png", akses::getobat10_terbanyak_poli)
+            .buka(() -> new Dlg10ObatTerbanyakPoli(u,false));
+        m.tambah("btnRekapObatPoli", "Rekap Obat Per Poli", "1360815855_laboratory.png", akses::getrekap_obat_poli)
+            .buka(() -> new DlgRekapObatPoli(u,false));
+        m.tambah("btnRekapObatPasien", "Rekap Obat Per Pasien", "1360815855_laboratory.png", akses::getrekap_obat_pasien)
+            .buka(() -> new DlgRekapObatPasien(u,false));
+        m.tambah("btnVerifikasiPenerimaanFarmasi", "Verifikasi Penerimaan Obat/Alkes/BHP", "iconfinder_ToDoList-planing-list-planlist-todo_6071846.png", akses::getverifikasi_penerimaan_farmasi)
+            .buka(() -> new InventoryVerifikasiPenerimaan(u,false));
+        m.tambah("btnPenggunaanBHPOK", "Penggunaan BHP OK/VK", "iconfinder_ecommerce-14_4707170.png", akses::getpenggunaan_bhp_ok)
+            .buka(() -> new InventoryPenggunaanBHPOK(u,false));
+        m.tambah("btnResepLuar", "Resep Luar", "5994864_capsule_drug_medicine_pill_tablet_icon.png", akses::getresep_luar)
+            .buka(() -> new InventoryCariResepLuar(u,false));
+        m.tambah("btnStokAkhirFarmasiPerTanggal", "Stok Akhir Farmasi Per Tanggal", "iconfinder_bag_icons-15_1075431.png", akses::getstok_akhir_farmasi_pertanggal)
+            .buka(() -> new InventoryStokAkhirFarmasiPerTanggal(u,false));
+        m.tambah("btnTelaahResep", "Pengkajian Resep & Obat", "5868989_coronavirus_drug_medic_medical_medicine_icon.png", akses::gettelaah_resep)
+            .buka(() -> new InventoryTelaahResep(u,false)).sebelum(f -> { f.emptTeks(); f.isCek(); });
+        m.tambah("btnRingkasanBiayaObatPasienPerTanggal", "Ringkasan Biaya Obat Pasien Per Tanggal", "if_binary-tree_49580.png", akses::getringkasan_biaya_obat_pasien_pertanggal)
+            .buka(() -> new InventoryRingkasanBiayaObatPasienPerTanggal(u,false));
+        m.tambah("btnNilaiPenerimaanVendorFarmasiPerBulan", "Nilai Penerimaan Vendor Farmasi Per Bulan", "iconfinder_File_Files_Folder_Clipboard_Data_Confirm_3909329.png", akses::getnilai_penerimaan_vendor_farmasi_perbulan)
+            .buka(() -> new InventoryNilaiPenerimaanVendorFarmasiPerBulan(u,false));
+        m.tambah("btnObatBHPTidakBergerak", "Obat/Alkes/BHP Tidak Bergerak", "iconfinder_preferences-system-time_8810.png", akses::getobat_bhp_tidakbergerak)
+            .buka(() -> new InventoryObatBHPTidakBergerak(u,true)).sebelum(f -> f.isCek());
+    }
+
+    /** [E] Transaksi Inventory Barang Non Medis, Penunjang ( Lab & RO ) */
+    private void kategoriE(){
+        m.kategori(4);
+        m.juga("btnAsalHibah");
+        m.juga("btnSatuan");
+        m.tambah("btnJenisIpsrs", "Jenis Barang Non Medis", "cabinet.png", akses::getipsrs_jenis_barang)
+            .buka(() -> new IPSRSJenis(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); });
+        m.tambah("btnBarangIpsrs", "Barang Non Medis", "1360487078_shipping.png", akses::getipsrs_barang)
+            .buka(() -> new IPSRSBarang(u,false)).sebelum(f -> { f.emptTeks(); f.onCari(); });
+        m.tambah("btnSuplierIPSRS", "Suplier Non Medis", "1481002123_wheelchair.png", akses::getsuplier_penunjang)
+            .buka(() -> new IPSRSSuplier(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); });
+        m.tambah("btnPermintaanNonMedis", "Permintaan Barang Non Medis", "if_packing_49602.png", akses::getpermintaan_non_medis)
+            .buka(() -> new IPSRSPermintaan(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnRekapPermintaanNonMedis", "Ringkasan Permintaan Barang Non Medis", "if_binary-tree_49580.png", akses::getrekap_permintaan_non_medis)
+            .buka(() -> new DlgRekapPermintaanNonMedis(u,false));
+        m.tambah("btnPengajuanBarangNonMedis", "Pengajuan Barang Non Medis", "iconfinder_distributor-report_49583.png", akses::getpengajuan_barang_nonmedis)
+            .buka(() -> new IPSRSPengajuanBarangNonMedis(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnRingkasanPengajuanNonMedis", "Ringkasan Pengajuan Non Medis", "if_binary-tree_49580.png", akses::getringkasan_pengajuan_nonmedis)
+            .buka(() -> new IPSRSRingkasanPengajuanBarangNonMedis(u,false));
+        m.tambah("btnSuratPemesananNonMedis", "Surat Pemesanan Barang Non Medis", "if_Select-Language_49621.png", akses::getsurat_pemesanan_non_medis)
+            .buka(() -> new IPSRSSuratPemesanan(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnRingkasanPemesananNonMedis", "Ringkasan Pemesanan Non Medis", "if_binary-tree_49580.png", akses::getringkasan_pemesanan_nonmedis)
+            .buka(() -> new IPSRSRingkasanPemesananBarangNonMedis(u,false));
+        m.tambah("btnPembelianIpsrs", "Pengadaan Barang Non Medis", "inventory-maintenance.png", akses::getipsrs_pengadaan_barang)
+            .buka(() -> new IPSRSPembelian(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnRingkasanPengadaanNonMedis", "Ringkasan Pengadaan Non Medis", "if_binary-tree_49580.png", akses::getringkasan_pengadaan_nonmedis)
+            .buka(() -> new IPSRSRingkasanPengadaanBarangNonMedis(u,false));
+        m.tambah("btnPenerimaanNonMedis", "Penerimaan Barang Non Medis", "1481038192_market.png", akses::getpenerimaan_non_medis)
+            .buka(() -> new IPSRSPemesanan(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnRingkasanPenerimaanNonMedis", "Ringkasan Penerimaan Non Medis", "if_binary-tree_49580.png", akses::getringkasan_penerimaan_nonmedis)
+            .buka(() -> new IPSRSRingkasanPenerimaanBarangNonMedis(u,false));
+        m.tambah("btnHibahNonMedis", "Hibah Non Medis", "307356_box_brown_cardboard_package_icon.png", akses::gethibah_non_medis)
+            .buka(() -> new IPSRSHibah(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnPengeluaranIpsrs", "Stok Keluar Non Medis", "shopping-basket-full.png", akses::getipsrs_stok_keluar)
+            .buka(() -> new IPSRSPengeluaran(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnRingkasanStokKeluarNonMedis", "Ringkasan Stok Keluar Non Medis", "if_binary-tree_49580.png", akses::getringkasan_stokkeluar_nonmedis)
+            .buka(() -> new IPSRSRingkasanPengeluaranBarangNonMedis(u,false));
+        m.tambah("btnReturBarangNonMedis", "Retur Ke Suplier Non Medis", "iconfinder_eccomerce_-_carton_box_return_3440901.png", akses::getipsrs_returbeli)
+            .buka(() -> new IPSRSReturBeli(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnRingkasanReturSuplierNonMedis", "Ringkasan Retur Suplier Non Medis", "if_binary-tree_49580.png", akses::getringkasan_returbeli_nonmedis)
+            .buka(() -> new IPSRSRingkasanReturBeliBarangNonMedis(u,false));
+        m.tambah("btnRiwayatBarangNonMedis", "Riwayat Barang Non Medis", "iconfinder_accessories-text-editor_23663.png", akses::getipsrs_riwayat_barang)
+            .buka(() -> new IPSRSRiwayatBarang(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnRBiayaIpsrs", "Biaya Pengadaan Non Medis", "1360486845_23.png", akses::getipsrs_pengeluaran_harian)
+            .buka(() -> new DlgRBiayaHarianIPSRS(u,false));
+        m.tambah("btnRHMasukIpsrs", "Rekap Pengadaan Non Medis", "shopping_cart.png", akses::getipsrs_rekap_pengadaan)
+            .buka(() -> new DlgRHPembelianIPSRS(u,false));
+        m.tambah("btnRHKeluarIpsrs", "Rekap Stok Keluar Non Medis", "1360816018_tests.png", akses::getipsrs_rekap_stok_keluar)
+            .buka(() -> new DlgRHPengeluaranIPSRS(u,false));
+        m.tambah("btnPengambilanPenunjangUTD", "Pengambilan UTD", "1481002155_skills.png", akses::getpengambilan_penunjang_utd)
+            .buka(() -> new IPSRSPengambilanPenunjangUTD(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnPengadaanIPSRSPerTanggal", "Pengadaan Non Medis Per Tanggal", "if_document-new_23212.png", akses::getipsrs_pengadaan_pertanggal)
+            .buka(() -> new DlgPengadaanIPSRSPerTanggal(u,false));
+        m.tambah("btnStokKeluarIPSRSPerTanggal", "Stok Keluar Non Medis Per Tanggal", "if_document-open_23214.png", akses::getipsrs_stokkeluar_pertanggal)
+            .buka(() -> new DlgStokKeluarIPSRSPerTanggal(u,false));
+        m.tambah("btnRekapPenerimaanNonMedis", "Rekap Penerimaan Non Medis", "if_TextEdit_37595.png", akses::getrekap_pemesanan_non_medis)
+            .buka(() -> new DlgRekapPenerimaanNonMedis(null,false)).sebelum(f -> { f.emptTeks(); f.isCek(); });
+        m.tambah("btnOpnameIPSRS", "Stok Opname Non Medis", "ark2.png", akses::getstok_opname_logistik)
+            .buka(() -> new IPSRSInputStok(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnSirkulasiNonMedis", "Sirkulasi Non Medis", "1360487125_system-restart-panel.png", akses::getsirkulasi_non_medis)
+            .buka(() -> new DlgSirkulasiNonMedis(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnSirkulasiNonMedis2", "Sirkulasi Non Medis 2", "1360487125_system-restart-panel.png", akses::getsirkulasi_non_medis2)
+            .buka(() -> new DlgSirkulasiNonMedis2(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnVerifikasiPenerimaanLogistik", "Verifikasi Penerimaan Non Medis", "iconfinder_File_Files_Folder_Document_Doc_Confirm-39_3909343.png", akses::getverifikasi_penerimaan_logistik)
+            .buka(() -> new IPSRSVerifikasiPenerimaan(u,false));
+        m.tambah("btnNilaiPenerimaanVendorNonMedisPerBulan", "Nilai Penerimaan Vendor Non Medis Per Bulan", "iconfinder_File_Files_Folder_Clipboard_Data_Confirm_3909329.png", akses::getnilai_penerimaan_vendor_nonmedis_perbulan)
+            .buka(() -> new IPSRSNilaiPenerimaanVendorNonMedisPerBulan(u,false));
+    }
+
+    /** [F] Transaksi Inventory Barang Dapur Kering & Basah */
+    private void kategoriF(){
+        m.kategori(5);
+        m.juga("btnAsalHibah");
+        m.juga("btnSatuan");
+        m.tambah("btnBarangDapur", "Barang Dapur", "Barang_Dapur.png", akses::getdapur_barang)
+            .buka(() -> new DapurBarang(u,false)).sebelum(f -> { f.emptTeks(); f.onCari(); });
+        m.tambah("btnOpnameDapur", "Stok Opname Barang Dapur", "Stok_Opname_Barang_Dapur.png", akses::getdapur_opname)
+            .buka(() -> new DapurInputStok(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnSuplierDapur", "Suplier Dapur", "Suplier_Dapur.png", akses::getdapur_suplier)
+            .buka(() -> new DapurSuplier(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnPengajuanBarangDapur", "Pengajuan Barang Dapur", "2570321_business_checklist_company_economic_finance_icon.png", akses::getpengajuan_barang_dapur)
+            .buka(() -> new DapurPengajuan(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnRingkasanPengajuanDapur", "Ringkasan Pengajuan Dapur", "if_binary-tree_49580.png", akses::getringkasan_pengajuan_dapur)
+            .buka(() -> new DapurRingkasanPengajuanBarang(u,false));
+        m.tambah("btnSuratPemesananDapur", "Surat Pemesanan Barang Dapur", "2570304_business_company_economic_finance_interprise_icon.png", akses::getsurat_pemesanan_dapur)
+            .buka(() -> new DapurSuratPemesanan(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnRingkasanPemesananDapur", "Ringkasan Pemesanan Dapur", "if_binary-tree_49580.png", akses::getringkasan_pemesanan_dapur)
+            .buka(() -> new DapurRingkasanPemesananBarang(u,false));
+        m.tambah("btnPembelianDapur", "Pengadaan Barang Dapur", "Pengadaan_Barang_Dapur.png", akses::getdapur_pembelian)
+            .buka(() -> new DapurPembelian(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnRingkasanPengadaanDapur", "Ringkasan Pengadaan Dapur", "if_binary-tree_49580.png", akses::getdapur_ringkasan_pembelian)
+            .buka(() -> new DapurRingkasanPengadaanBarang(u,false));
+        m.tambah("btnPenerimaanBarangDapur", "Penerimaan Barang Dapur", "3377055_bowl_food_noodle_ramen_icon.png", akses::getdapur_pemesanan)
+            .buka(() -> new DapurPemesanan(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnRingkasanPenerimaanDapur", "Ringkasan Penerimaan Dapur", "if_binary-tree_49580.png", akses::getringkasan_penerimaan_dapur)
+            .buka(() -> new DapurRingkasanPenerimaanBarang(u,false));
+        m.tambah("btnHibahDapur", "Hibah Barang Dapur", "3377054_chow_food_mein_noodle_icon.png", akses::gethibah_dapur)
+            .buka(() -> new DapurHibah(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnPengeluaranDapur", "Stok Keluar Dapur", "Stok_Keluar_Dapur.png", akses::getdapur_stok_keluar)
+            .buka(() -> new DapurPengeluaran(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnRingkasanStokKeluarDapur", "Ringkasan Stok Keluar Dapur", "if_binary-tree_49580.png", akses::getringkasan_stokkeluar_dapur)
+            .buka(() -> new DapurRingkasanStokKeluarBarang(u,false));
+        m.tambah("btnReturBarangDapur", "Retur Ke Suplier Dapur", "2570312_business_company_economic_finance_interprise_icon.png", akses::getdapur_returbeli)
+            .buka(() -> new DapurReturBeli(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnRingkasanReturBeliDapur", "Ringkasan Retur Suplier Dapur", "if_binary-tree_49580.png", akses::getringkasan_returbeli_dapur)
+            .buka(() -> new DapurRingkasanReturBeliBarang(u,false));
+        m.tambah("btnRiwayatBarangDapur", "Riwayat Barang Dapur", "Riwayat_Barang_Dapur.png", akses::getdapur_riwayat_barang)
+            .buka(() -> new DapurRiwayatBarang(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnPermintaanDapur", "Permintaan Barang Dapur", "Permintaan_Barang_Dapur.png", akses::getpermintaan_dapur)
+            .buka(() -> new DapurPermintaan(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnRBiayaDapur", "Biaya Pengadaan Dapur", "Biaya_Pengadaan_Dapur.png", akses::getbiaya_pengadaan_dapur)
+            .buka(() -> new DapurRBiayaHarian(u,false));
+        m.tambah("btnRekapPengadaanDapur", "Rekap Pengadaan Dapur", "Rekap_Pengadaan_Dapur.png", akses::getrekap_pengadaan_dapur)
+            .buka(() -> new DapurRHPembelian(u,false));
+        m.tambah("btnStokKeluarDapurPerTanggal", "Stok Keluar Dapur Per Tanggal", "2151696_barbecue_cooking_food_garden_grill_icon.png", akses::getdapur_stokkeluar_pertanggal)
+            .buka(() -> new DapurStokKeluarBarangPerTanggal(u,false));
+        m.tambah("btnSirkulasiDapur", "Sirkulasi Barang Dapur", "1360487125_system-restart-panel.png", akses::getsirkulasi_dapur)
+            .buka(() -> new DapurSirkulasiBarang(u,false));
+        m.tambah("btnSirkulasiDapur2", "Sirkulasi Barang Dapur 2", "1360487125_system-restart-panel.png", akses::getsirkulasi_dapur2)
+            .buka(() -> new DapurSirkulasiBarang2(u,false));
+        m.tambah("btnVerifikasiPenerimaanDapur", "Verifikasi Penerimaan Dapur", "2570299_business_company_economic_finance_interprise_icon.png", akses::getverifikasi_penerimaan_dapur)
+            .buka(() -> new DapurVerifikasiPenerimaan(u,false));
+        m.tambah("btnNilaiPenerimaanVendorDapurPerBulan", "Nilai Penerimaan Vendor Dapur Per Bulan", "iconfinder_File_Files_Folder_Clipboard_Data_Confirm_3909329.png", akses::getnilai_penerimaan_vendor_dapur_perbulan)
+            .buka(() -> new DapurNilaiPenerimaanVendorPerBulan(u,false));
+    }
+
+    /** [G] Aset, Inventaris Barang & Instalasi Kesehatan Lingkungan */
+    private void kategoriG(){
+        m.kategori(6);
+        m.juga("btnAsalHibah");
+        m.tambah("btnJenisInventaris", "Jenis Inventaris", "cabinet.png", akses::getinventaris_jenis)
+            .buka(() -> new InventarisJenis(u,false)).sebelum(f -> { f.emptTeks(); f.isCek(); });
+        m.tambah("btnKategoriInventaris", "Kategori Inventaris", "1360487078_shipping.png", akses::getinventaris_kategori)
+            .buka(() -> new InventarisKategori(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); });
+        m.tambah("btnMerkInventaris", "Merk Inventaris", "bag1.png", akses::getinventaris_merk)
+            .buka(() -> new InventarisMerk(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); });
+        m.tambah("btnRuangInventaris", "Ruang Inventaris", "bedroom.png", akses::getinventaris_ruang)
+            .buka(() -> new InventarisRuang(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); });
+        m.tambah("btnProdusenInventaris", "Produsen Inventaris", "industry.png", akses::getinventaris_produsen)
+            .buka(() -> new InventarisProdusen(u,false)).sebelum(f -> { f.emptTeks(); f.isCek(); });
+        m.tambah("btnBarangInventaris", "Koleksi Inventaris", "fax.png", akses::getinventaris_koleksi)
+            .buka(() -> new InventarisBarang(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); });
+        m.tambah("btnInventaris", "Data Inventaris", "1360486921_bar-code.png", akses::getinventaris_inventaris)
+            .buka(() -> new InventarisKoleksi(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); });
+        m.tambah("btnSirkulasiInventaris", "Sirkulasi Inventaris", "1360487125_system-restart-panel.png", akses::getinventaris_sirkulasi)
+            .buka(() -> new InventarisSirkulasi(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); });
+        m.tambah("btnPermintaanPerbaikanInventaris", "Permintaan Perbaikan Inventaris", "iconfinder_ordering_49597.png", akses::getpermintaan_perbaikan_inventaris)
+            .buka(() -> new InventarisPermintaanPerbaikan(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); });
+        m.tambah("btnPerbaikanInventaris", "Perbaikan Inventaris", "if_package_utilities_3557.png", akses::getperbaikan_inventaris)
+            .buka(() -> new InventarisPerbaikan(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnPemeliharaanInventaris", "Pemeliharaan Inventaris", "iconfinder_preferences_6586102.png", akses::getpemeliharaan_inventaris)
+            .buka(() -> new InventarisPemeliharaan(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnPengajuanAsetInventaris", "Pengajuan Aset/Inventaris", "iconfinder_reports_49615.png", akses::getpengajuan_asetinventaris)
+            .buka(() -> new PengajuanInventaris(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnRekapPengajuanAsetDepartemen", "Rekap Pengajuan Aset Departemen", "if_x-office-document-template_25011.png", akses::getrekap_pengajuan_aset_departemen)
+            .buka(() -> new RekapPengajuanInventarisDepartemen(u,false));
+        m.tambah("btnSuplierInventaris", "Suplier Aset/Inventaris", "1988878_front_lorry_truck_vehicle_icon.png", akses::getsuplier_inventaris)
+            .buka(() -> new InventarisSuplier(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); });
+        m.tambah("btnPengadaanAset", "Pengadaan Aset/Inventaris", "10999_bag_cash_coin_money_icon.png", akses::getpengadaan_aset_inventaris)
+            .buka(() -> new InventarisPembelian(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnPenerimaanAset", "Penerimaan Aset/Inventaris", "49599_add_package_icon.png", akses::getpenerimaan_aset_inventaris)
+            .buka(() -> new InventarisPemesanan(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnHibahAsetInventaris", "Hibah Aset/Inventaris", "if_Workstation_by_Artdesigner_60887.png", akses::gethibah_aset_inventaris)
+            .buka(() -> new InventarisHibah(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnPemeliharaanGedung", "Pemeliharaan Gedung", "if_back_house_window-home_2222745.png", akses::getpemeliharaan_gedung)
+            .buka(() -> new InventarisPemeliharaanGedung(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnBarangCSSD", "Barang CSSD", "if_order-history_49596.png", akses::getbarang_cssd)
+            .buka(() -> new InventarisBarangCSSD(u,false)).sebelum(f -> { f.emptTeks(); f.tampil(); f.isCek(); });
+        m.tambah("btnSirkulasiInventarisCSSD", "Sirkulasi CSSD", "1360487125_system-restart-panel.png", akses::getsirkulasi_cssd)
+            .buka(() -> new InventarisSirkulasiCSSD(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); });
+        m.tambah("btnPemakaianAirPDAM", "Pemakaian Air PDAM", "iconfinder_Energy_Energy_Oil_Water_Drop_Fuel_3911250.png", akses::getpemakaian_air_pdam)
+            .buka(() -> new KeslingPemakaiaanAirPDAM(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); });
+        m.tambah("btnPemakaianAirTanah", "Pemakaian Air Tanah", "iconfinder_Ecology_tap_water_2992443.png", akses::getpemakaian_air_tanah)
+            .buka(() -> new KeslingPemakaiaanAirTanah(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); });
+        m.tambah("btnLimbahB3Medis", "Limbah Padat B3 Medis", "iconfinder_Bin_ecology_recyclewaste_2992453.png", akses::getlimbah_b3_medis)
+            .buka(() -> new KeslingLimbahB3Medis(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); });
+        m.tambah("btnLimbahB3MedisCair", "Limbah Cair B3 Medis", "5958332_disease_drink water_epidemic_hydrate_infection_icon.png", akses::getkesling_limbah_b3medis_cair)
+            .buka(() -> new KeslingLimbahB3MedisCair(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); });
+        m.tambah("btnLimbahDomestik", "Limbah Padat Domestik", "iconfinder_trash red_10554.png", akses::getlimbah_domestik)
+            .buka(() -> new KeslingLimbahDomestik(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); });
+        m.tambah("btnMutuAirLimbah", "Mutu Air Limbah", "iconfinder_Care_ecology_water_hand_2992434.png", akses::getmutu_air_limbah)
+            .buka(() -> new KeslingMutuAirLimbah(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); });
+        m.tambah("btnPestControl", "Pest Control", "iconfinder_world_eco_leaves_2992451.png", akses::getpest_control)
+            .buka(() -> new KeslingPestControl(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); });
+    }
+
+    /** [H] Menejemen Parkir Kendaraan Pasien & Karyawan */
+    private void kategoriH(){
+        m.kategori(7);
+        m.tambah("btnJenisParkir", "Jenis Parkir", "parkirjenis.png", akses::getparkir_jenis)
+            .buka(() -> new DlgParkirJenis(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnBarcodeParkir", "Barcode Parkir", "1360484263_barcode.png", akses::getparkir_barcode)
+            .buka(() -> new DlgParkirBarcode(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnParkirMasuk", "Parkir Masuk", "parkirmasuk.png", akses::getparkir_in)
+            .buka(() -> new DlgParkirMasuk(u,false)).sebelum(f -> f.isCek());
+    }
+
+    /** [I] Olah Data Tagihan Rawat Inap & Rawat Jalan */
+    private void kategoriI(){
+        m.kategori(8);
+        m.tambah("btnTagihanPoli", "Harian Dokter Poli", "1404047106_emblem-money.png", akses::getharian_tindakan_poli)
+            .buka(() -> new DlgRBTindakanPoli(u,false));
+        m.tambah("btnHarianKamar", "Harian Kamar", "1404047106_emblem-money.png", akses::getharian_kamar)
+            .buka(() -> new DlgRBTindakanKamar(u,false));
+        m.tambah("btnTagihanDokter", "Harian Dokter Ralan", "1404047106_emblem-money.png", akses::getharian_tindakan_dokter)
+            .buka(() -> new DlgRBTindakanDokter(u,false));
+        m.tambah("btnTagihanObatPoli", "Obat Per Poli", "1360815855_laboratory.png", akses::getobat_per_poli)
+            .buka(() -> new DlgRBObatPoli(u,false));
+        m.tambah("btnTagihanObatBangsal", "Obat Per Kamar", "1360815855_laboratory.png", akses::getobat_per_kamar)
+            .buka(() -> new DlgRBObatBangsal(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnObatPasienRalan", "Obat Per Dokter Ralan", "1360815855_laboratory.png", akses::getobat_per_dokter_ralan)
+            .buka(() -> new DlgRBObatDokterRalan(u,false));
+        m.tambah("btnObatPasienRanap", "Obat Per Dokter Ranap", "1360815855_laboratory.png", akses::getobat_per_dokter_ranap)
+            .buka(() -> new DlgRBObatDokterRanap(u,false));
+        m.tambah("btnObatPasienPeresep", "Obat Per Dokter Peresep", "1360815855_laboratory.png", akses::getobat_per_dokter_peresep)
+            .buka(() -> new DlgRBObatDokterPeresep(u,false));
+        m.tambah("btnObatPerCaraBayar", "Obat Per Cara Bayar", "1360815855_laboratory.png", akses::getobat_per_cara_bayar)
+            .buka(() -> new DlgRBObatPercaraBayar(u,false));
+        m.tambah("btnDetailTindakan", "Detail Tindakan", "address-book.png", akses::getdetail_tindakan)
+            .buka(() -> new DlgDetailTindakan(u,false));
+        m.tambah("btnJMDetailDokter", "Detail JM Dokter", "address-book.png", akses::getjm_ranap_dokter)
+            .buka(() -> new DlgDetailJMDokter(u,false));
+        m.tambah("btnJMDetailDokter2", "Detail JM Dokter 2", "address-book.png", akses::getdetailjmdokter2)
+            .buka(() -> new DlgDetailJMDokter2(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnRHDOkter", "Harian Dokter", "address-book.png", akses::getharian_dokter)
+            .buka(() -> new DlgRHJmDokter(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnRBDokter", "Bulanan Dokter", "address-book.png", akses::getbulanan_dokter)
+            .buka(() -> new DlgRBJmDokter(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnRekapJasaDokter", "Rekap JM Dokter", "address-book.png", akses::getrekap_jm_dokter)
+            .buka(() -> new KeuanganRekapJmDokter(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnRekapBiayaRegistrasi", "Rekap Biaya Registrasi", "473796_analytics_chart_computer_graph_laptop_icon.png", akses::getrekap_biaya_registrasi)
+            .buka(() -> new DlgRekapBiayaRegistrasi(u,false));
+        m.tambah("btnRHParamedis", "Harian Paramedis", "1360485894_add-notes.png", akses::getharian_paramedis)
+            .buka(() -> new DlgRHJmParamedis(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnRBParamedis", "Bulanan Paramedis", "1360485894_add-notes.png", akses::getbulanan_paramedis)
+            .buka(() -> new DlgRBJmParamedis(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnRHJasaSarana", "Harian Jasa Sarana", "address-book.png", akses::getharian_js)
+            .buka(() -> new DlgRHJS(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnRBJasaSarana", "Bulanan Jasa Sarana", "address-book.png", akses::getbulanan_js)
+            .buka(() -> new DlgRBJS(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnRHKSO", "Harian KSO", "address-book.png", akses::getharian_kso)
+            .buka(() -> new DlgRHKSO(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnRBKSO", "Bulanan KSO", "address-book.png", akses::getbulanan_kso)
+            .buka(() -> new DlgRBKSO(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnRHMenejemen", "Harian Menejemen", "address-book.png", akses::getharian_menejemen)
+            .buka(() -> new DlgRHMenejemen(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnRBMenejemen", "Bulanan Menejemen", "address-book.png", akses::getbulanan_menejemen)
+            .buka(() -> new DlgRBMenejemen(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnRHPaketBHP", "Harian BHP Medis/Paket Obat", "1360815855_laboratory.png", akses::getharian_paket_bhp)
+            .buka(() -> new DlgRHPaketBHP(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnRBPaketBHP", "Bulanan BHP Medis/Paket Obat", "1360815855_laboratory.png", akses::getbulanan_paket_bhp)
+            .buka(() -> new DlgRBPaketBHP(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnRingkasanTindakanRalan", "Ringkasan Tindakan", "if_binary-tree_49580.png", akses::getringkasan_tindakan)
+            .buka(() -> new KeuanganRingkasanTindakan(u,false));
+        m.tambah("btnfee_visit_dokter", "Fee Visit Dokter", "1360485865_schedule.png", akses::getfee_visit_dokter)
+            .buka(() -> new DlgFeeVisitDokter(u,false));
+        m.tambah("btnfee_bacaan_ekg", "Fee Bacaan EKG", "1360485865_schedule.png", akses::getfee_bacaan_ekg)
+            .buka(() -> new DlgFeeBacaanEKG(u,false));
+        m.tambah("btnfee_rujukan_rontgen", "Fee Rujukan Rontgen", "1360485865_schedule.png", akses::getfee_rujukan_rontgen)
+            .buka(() -> new DlgFeeRujukanRontgen(u,false));
+        m.tambah("btnfee_rujukan_ranap", "Fee Rujukan Ranap", "1360485865_schedule.png", akses::getfee_rujukan_ranap)
+            .aksi(u::btnfee_rujukan_ranapActionPerformed);
+        m.tambah("btnfee_ralan", "Fee Periksa Ralan", "1360485865_schedule.png", akses::getfee_ralan)
+            .buka(() -> new DlgFeePeriksaRalan(u,false));
+        m.tambah("btnDetailVKOK", "Detail VK & OK", "address-book.png", akses::getdetail_tindakan_okvk)
+            .buka(() -> new DlgDetailVKOK(u,false));
+        m.tambah("btnJasaTindakanPasien", "Jasa Tindakan Pasien", "5859106_avatar_doctor_job_surgeon_user_icon.png", akses::getjasa_tindakan_pasien)
+            .buka(() -> new KeuanganJasaTindakan(u,false));
+        m.tambah("btnRingkasanJasaTindakanPasien", "Ringkasan Jasa Tindakan Pasien", "if_binary-tree_49580.png", akses::getringkasan_jasa_tindakan_medis)
+            .buka(() -> new KeuanganRingkasanJasaTindakan(u,false));
+        m.tambah("btnRalanMasuk", "Pembayaran Ralan", "1404047007_02.png", akses::getpembayaran_ralan)
+            .buka(() -> new DlgPembayaranRalan(u,false));
+        m.tambah("btnRanapMasuk", "Pembayaran Ranap", "1404047007_02.png", akses::getpembayaran_ranap)
+            .buka(() -> new DlgPembayaranRanap(u,false)).sebelum(f -> f.tampil());
+        m.tambah("btnLihatPiutang", "Piutang Pasien", "checklist_pencil-o.png", akses::getpiutang_pasien)
+            .buka(() -> new DlgLhtPiutang(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnPiutangRalan", "Piutang Ralan", "1404047007_02.png", akses::getpiutang_ralan)
+            .buka(() -> new DlgPiutangRalan(u,false));
+        m.tambah("btnPiutangRanap", "Piutang Ranap", "1404047007_02.png", akses::getpiutang_ranap)
+            .buka(() -> new DlgPiutangRanap(u,false));
+        m.tambah("btnTagihanRalanPerhari", "Rekap Pembayaran Ralan", "1360485865_schedule.png", akses::getrekap_pembayaran_ralan)
+            .buka(() -> new DlgPembayaranRalanPerHari(u,false));
+        m.tambah("btnTagihanRanapPerhari", "Rekap Pembayaran Ranap", "1360485865_schedule.png", akses::getrekap_pembayaran_ranap)
+            .buka(() -> new DlgPembayaranRanapPerhari(u,false));
+        m.tambah("btnPembayaranPerUnit", "Pembayaran Per Unit", "if_TextEdit_37595.png", akses::getpembayaran_per_unit)
+            .buka(() -> new DlgPembayaranPerPoli(u,false));
+        m.tambah("btnRekapPembayaranPerUnit", "Rekap Pembayaran Per Unit", "if_kde-document-open_23426.png", akses::getrekap_pembayaran_per_unit)
+            .buka(() -> new DlgRekapPembayaranPerPoli(u,false));
+        m.tambah("btnTagihanMasuk", "Tagihan Masuk", "1404046800_Cash_register.png", akses::gettagihan_masuk)
+            .buka(() -> new DlgLhtBiaya(u,false));
+        m.tambah("btnTambahanBiaya", "Tambahan Biaya Pasien", "1404046786_Money.png", akses::gettambahan_biaya)
+            .buka(() -> new DlgDetailTambahan(u,false));
+        m.tambah("btnPotonganBiaya", "Potongan Biaya Pasien", "1404046786_Money.png", akses::getpotongan_biaya)
+            .buka(() -> new DlgDetailPotongan(u,false));
+        m.tambah("btnRekapPoliAnak", "Rekap Poli Anak", "address-book.png", akses::getrekap_poli_anak)
+            .buka(() -> new KeuanganRekapPoliAnak(u,false));
+        m.juga("btnDeposit");
+        m.tambah("btnRekapPershift", "Rekap Uang Pershift", "checklist.png", akses::getrekap_per_shift)
+            .buka(() -> new DlgRekapPerShift(u,false));
+        m.tambah("btnPaymentPoint", "Payment Point", "coins.png", akses::getpayment_point)
+            .buka(() -> new DlgPaymentPoint(u,false));
+        m.tambah("btnPaymentPoint2", "Payment Point 2", "coins.png", akses::getpayment_point2)
+            .buka(() -> new DlgPaymentPoint2(u,false));
+        m.tambah("btnPembayaranAkunBayar", "Pembayaran Per Akun Bayar", "1404046811_money.png", akses::getpembayaran_akun_bayar)
+            .buka(() -> new DlgPembayaranPerAKunBayar(u,false));
+        m.tambah("btnPembayaranAkunBayar2", "Pembayaran Per Akun Bayar 2", "1404046811_money.png", akses::getpembayaran_akun_bayar2)
+            .buka(() -> new DlgPembayaranPerAKunBayar2(u,false));
+        m.tambah("btnPembayaranAkunBayar3", "Pembayaran Per Akun Bayar 3", "1404046811_money.png", akses::getpembayaran_akun_bayar3)
+            .buka(() -> new DlgPembayaranPerAKunBayar3(u,false));
+        m.tambah("btnPembayaranAkunBayar4", "Pembayaran Per Akun Bayar 4", "1404046811_money.png", akses::getpembayaran_akun_bayar4)
+            .buka(() -> new DlgPembayaranPerAKunBayar4(u,false));
+        m.tambah("btnPembayaranAkunBayar5", "Pembayaran Per Akun Bayar 5", "1404046811_money.png", akses::getpembayaran_akun_bayar5)
+            .buka(() -> new DlgPembayaranPerAKunBayar5(u,false));
+        m.tambah("btnPiutangPerAkunPiutang", "Piutang Per Akun Piutang", "stock_task.png", akses::getpiutang_akun_piutang)
+            .buka(() -> new DlgPiutangPerAKunPiutang(u,false));
+        m.tambah("btnPendapatanPerAkun", "Pendapatan Per Akun Rekening", "1404046811_money.png", akses::getpendapatan_per_akun)
+            .buka(() -> new DlgPendapatanPerAKun(u,false));
+        m.tambah("btnPendapatanPerAkunClosing", "Pendapatan Per Akun Closing", "1404046811_money.png", akses::getpendapatan_per_akun_closing)
+            .buka(() -> new DlgPendapatanPerAKunClosing(u,false));
+    }
+
+    /** [J] Olah Data Penyakit, Laporan DKK, Laporal RL & Laporan Internal */
+    private void kategoriJ(){
+        m.kategori(9);
+        m.tambah("btnICD9", "ICD 9", "Gnome-X-Office-Address-Book-48.png", akses::geticd9)
+            .buka(() -> new DlgICD9(u,false)).sebelum(f -> f.emptTeks());
+        m.tambah("btnICD", "ICD 10", "Gnome-X-Office-Address-Book-48.png", akses::getpenyakit)
+            .buka(() -> new DlgPenyakit(null,false)).sebelum(f -> { f.isCek(); f.emptTeks(); });
+        m.tambah("btnPenyakitPD3I", "Penyakit AFP & PD3I", "Gnome-X-Office-Address-Book-48.png", akses::getpenyakit_pd3i)
+            .buka(() -> new DlgPenyakitPd3i(u,false));
+        m.tambah("btnSurveilansPD3I", "Surveilans AFP & PD3I", "Gnome-X-Office-Address-Book-48.png", akses::getsurveilans_pd3i)
+            .buka(() -> new DlgDkkSurveilansPD3I(u,false));
+        m.tambah("btnSurveilansRalan", "Surveilans Ralan", "Gnome-X-Office-Address-Book-48.png", akses::getsurveilans_ralan)
+            .buka(() -> new DlgDkkSurveilansRalan(u,false));
+        m.tambah("btnSurveilansRanap", "Surveilans Ranap", "Gnome-X-Office-Address-Book-48.png", akses::getsurveilans_ranap)
+            .buka(() -> new DlgDkkSurveilansRanap(u,false));
+        m.tambah("btnPnyTakMenularRalan", "Pny Tdk Menular Ralan", "Gnome-X-Office-Address-Book-48.png", akses::getpny_takmenular_ralan)
+            .buka(() -> new DlgDkkPenyakitTidakMenularRalan(u,false));
+        m.tambah("btnPnyTakMenularRanap", "Pny Tdk Menular Ranap", "Gnome-X-Office-Address-Book-48.png", akses::getpny_takmenular_ranap)
+            .buka(() -> new DlgDkkPenyakitTidakMenularRanap(u,false));
+        m.tambah("btnPnyMenularRalan", "Pny Menular Ralan", "Gnome-X-Office-Address-Book-48.png", akses::getpenyakit_menular_ralan)
+            .buka(() -> new DlgDkkPenyakitMenularRalan(u,false));
+        m.tambah("btnPnyMenularRanap", "Pny Menular Ranap", "Gnome-X-Office-Address-Book-48.png", akses::getpenyakit_menular_ranap)
+            .buka(() -> new DlgDkkPenyakitMenularRanap(u,false));
+        m.tambah("btnObatPenyakit", "Obat Penyakit", "1360484848_applications-science.png", akses::getobat_penyakit)
+            .buka(() -> new DlgObatPenyakit(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); });
+        m.tambah("btnFrekuensiRalan", "Frekuensi Penyakit Ralan", "Gnome-X-Office-Address-Book-48.png", akses::getpenyakit_ralan)
+            .buka(() -> new DlgFrekuensiPenyakitRalan(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnFrekuensiRanap", "Frekuensi Penyakit Ranap", "applications-office.png", akses::getpenyakit_ranap)
+            .buka(() -> new DlgFrekuensiPenyakitRanap(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnKunjunganRalan", "Kunjungan Ralan", "Gnome-X-Office-Address-Book-48.png", akses::getkunjungan_ralan)
+            .buka(() -> new DlgKunjunganRalan(u,false));
+        m.tambah("btnKunjunganRanap", "Kunjungan Ranap", "Gnome-X-Office-Address-Book-48.png", akses::getkunjungan_ranap)
+            .buka(() -> new DlgKunjunganRanap(u,false)).sebelum(f -> f.tampil());
+        m.tambah("btnKedatanganPasienPerJam", "Kedatangan Pasien Per Jam", "iconfinder_cmyk-04_906567.png", akses::getkedatangan_pasien)
+            .buka(() -> new LaporanKedatanganPasienPerJam(u,false));
+        m.tambah("btnRekapKunjungan", "Rekap Kunjungan", "iconfinder_Calendar_27835.png", akses::getrekap_kunjungan)
+            .buka(() -> new DlgRekapKunjungan(u,false));
+        m.tambah("btnKunjunganLabRalan", "Kunjungan Lab Ralan", "Gnome-X-Office-Address-Book-48.png", akses::getkunjungan_permintaan_lab)
+            .buka(() -> new DlgKunjunganLabRalan(u,false));
+        m.tambah("btnKunjunganLabRanap", "Kunjungan Lab Ranap", "Gnome-X-Office-Address-Book-48.png", akses::getkunjungan_permintaan_lab2)
+            .buka(() -> new DlgKunjunganLabRanap(u,false));
+        m.tambah("btnKunjunganRadRalan", "Kunjungan Radiologi Ralan", "Gnome-X-Office-Address-Book-48.png", akses::getkunjungan_permintaan_radiologi)
+            .buka(() -> new DlgKunjunganRadRalan(u,false));
+        m.tambah("btnKunjunganRadRanap", "Kunjungan Radiologi Ranap", "Gnome-X-Office-Address-Book-48.png", akses::getkunjungan_permintaan_radiologi2)
+            .buka(() -> new DlgKunjunganRadRanap(u,false));
+        m.tambah("btnSensusHarianPoli", "Sensus Harian Poli", "custom-reports.png", akses::getsensus_harian_poli)
+            .buka(() -> new DlgSensusHarianPoli(u,false));
+        m.tambah("btnSensusHarianRalan", "Sensus Harian Ralan", "custom-reports.png", akses::getsensus_harian_ralan)
+            .buka(() -> new DlgSensusHarianRalan(u,false));
+        m.tambah("btnRl13KetersediaanKamar", "RL 1.3 Ketersediaan Tempat Tidur", "Gnome-X-Office-Address-Book-48.png", akses::getrl1_3_ketersediaan_kamar)
+            .buka(() -> new DlgRL13KetersediaanTempatTidur(u,false));
+        m.tambah("btnRl32", "RL 3.2 Rawat Darurat", "Gnome-X-Office-Address-Book-48.png", akses::getrl32)
+            .buka(() -> new DlgRl32(u,false)).sebelum(f -> f.tampil());
+        m.tambah("btnRl33", "RL 3.3 Gigi dan Mulut", "Gnome-X-Office-Address-Book-48.png", akses::getrl33)
+            .buka(() -> new DlgRl33(u,false));
+        m.tambah("btnRl34", "RL 3.4 Kebidanan", "Gnome-X-Office-Address-Book-48.png", akses::getrl34)
+            .buka(() -> new DlgRl34(u,false));
+        m.tambah("btnRl36", "RL 3.6 Pembedahan", "Gnome-X-Office-Address-Book-48.png", akses::getrl36)
+            .buka(() -> new DlgRl36(u,false));
+        m.tambah("btnRl37", "RL 3.7 Radiologi", "Gnome-X-Office-Address-Book-48.png", akses::getrl37)
+            .buka(() -> new DlgRl37(u,false));
+        m.tambah("btnRl38", "RL 3.8 Laboratorium", "Gnome-X-Office-Address-Book-48.png", akses::getrl38)
+            .buka(() -> new DlgRl38(u,false));
+        m.tambah("btnRl4a", "RL 4A Morbiditas Ranap", "1491582089_Finance_financial_report.png", akses::getrl4a)
+            .buka(() -> new DlgRL4A(u,false));
+        m.tambah("btnRl4b", "RL 4B Morbiditas Ralan", "1491582089_Finance_financial_report.png", akses::getrl4b)
+            .buka(() -> new DlgRL4B(u,false));
+        m.tambah("btnRl4asebab", "RL 4A Sebab Morbiditas Ranap", "1491582089_Finance_financial_report.png", akses::getrl4asebab)
+            .buka(() -> new DlgRL4ASebab(u,false));
+        m.tambah("btnRl4bsebab", "RL 4B Sebab Morbiditas Ralan", "1491582089_Finance_financial_report.png", akses::getrl4bsebab)
+            .buka(() -> new DlgRL4BSebab(u,false));
+        m.tambah("btnLamaPelayananRalan", "Lama Pelayanan Ralan", "Gnome-X-Office-Address-Book-48.png", akses::getlama_pelayanan_ralan)
+            .buka(() -> new DlgPelayananRalan(u,false));
+        m.tambah("btnLamaPelayananApotek", "Lama Pelayanan Apotek", "Gnome-X-Office-Address-Book-48.png", akses::getlama_pelayanan_apotek)
+            .buka(() -> new DlgPelayananApotek(u,false));
+        m.tambah("btnLamaPelayananRadiologi", "Lama Pelayanan Radiologi", "Gnome-X-Office-Address-Book-48.png", akses::getlama_pelayanan_radiologi)
+            .buka(() -> new DlgPelayananRadiologi(u,false));
+        m.tambah("btnLamaPelayananLab", "Lama Pelayanan Lab PK", "Gnome-X-Office-Address-Book-48.png", akses::getlama_pelayanan_lab)
+            .buka(() -> new DlgPelayananLab(u,false));
+        m.tambah("btnLamaPelayananLabPA", "Lama Pelayanan Lab PA", "Gnome-X-Office-Address-Book-48.png", akses::getlama_pelayanan_lab)
+            .buka(() -> new DlgPelayananLabPA(u,false));
+        m.tambah("btnLamaPelayananLabMB", "Lama Pelayanan Lab MB", "Gnome-X-Office-Address-Book-48.png", akses::getlama_pelayanan_lab)
+            .buka(() -> new DlgPelayananLabMB(u,false));
+        m.tambah("btnLamaPelayananPoli", "Lama Pelayanan Poli", "Gnome-X-Office-Address-Book-48.png", akses::getlama_pelayanan_poli)
+            .buka(() -> new DlgPelayananPoli(u,false));
+        m.tambah("btnLamaPenyiapanRM", "Lama Penyiapan RM", "Gnome-X-Office-Address-Book-48.png", akses::getlama_penyiapan_rm)
+            .buka(() -> new DlgPenyiapanRM(u,false));
+        m.tambah("btnLamaPelayananPasien", "Lama Pelayanan Pasien", "Gnome-X-Office-Address-Book-48.png", akses::getlama_pelayanan_pasien)
+            .buka(() -> new DlgLamaPelayananPasien(u,false));
+        m.tambah("btnLamaOperasi", "Lama Operasi", "Gnome-X-Office-Address-Book-48.png", akses::getlama_operasi)
+            .buka(() -> new DlgPelayananOperasi(u,false));
+        m.tambah("btnLamaPelayananCSSD", "Lama Pelayanan CSSD", "Gnome-X-Office-Address-Book-48.png", akses::getlama_pelayanan_cssd)
+            .buka(() -> new DlgPelayananCSSD(u,false));
+        m.tambah("btnDosisRadiologi", "Dosis Radiologi", "iconfinder_DocumentManagement-documentation-folder-projectmanagement-filemanagement_6071870.png", akses::getdosis_radiologi)
+            .buka(() -> new DlgDosisRadiologi(u,false));
+        m.tambah("btnHarianHAIs", "Harian HAIs", "if_house_shelf_1378832.png", akses::getharian_HAIs)
+            .buka(() -> new DlgHarianHAIs(u,false));
+        m.tambah("btnHarianHAIs2", "Harian HAIs 2", "if_house_shelf_1378832.png", akses::getharian_HAIs2)
+            .buka(() -> new DlgHarianHAIs2(u,false));
+        m.tambah("btnBulananHAIs", "Bulanan HAIs", "if_house_shelf_1378832.png", akses::getbulanan_HAIs)
+            .buka(() -> new DlgBulananHAIs(u,false));
+        m.tambah("btnHAIsBangsal", "HAIs Per Kamar/Bangsal", "if_house_shelf_1378832.png", akses::gethais_perbangsal)
+            .buka(() -> new DlgHAIsPerBangsal(u,false));
+        m.tambah("btnHitungBor", "Hitung BOR", "bedroom.png", akses::gethitung_bor)
+            .buka(() -> new DlgHitungBOR(u,false));
+        m.tambah("btnHitungAlos", "Hitung ALOS", "bedroom.png", akses::gethitung_alos)
+            .buka(() -> new DlgHitungALOS(u,false));
+        m.tambah("btnPembatalanPeriksaDokter", "Pembatalan Periksa Per Dokter", "address-book.png", akses::getpembatalan_periksa_dokter)
+            .buka(() -> new DlgPembatalanPeriksaPerDokter(u,false));
+        m.tambah("btnCekEntryRalan", "Cek Entry Ralan", "if_TextEdit_37595.png", akses::getcek_entry_ralan)
+            .buka(() -> new DlgCekEntryRalan(u,false));
+        m.tambah("btnRanapPerRuang", "Ranap Per Ruang", "if_House_132045.png", akses::getranap_per_ruang)
+            .buka(() -> new DlgRanapPerRuang(u,false));
+        m.tambah("btnPoliAsalPasienRanap", "Poli Asal Pasien Ranap", "4698575_building_business_finance_office_icon.png", akses::getpoli_asal_pasien_ranap)
+            .buka(() -> new DlgPoliAsalPasienRanap(u,false));
+        m.tambah("btnDokterAsalPasienRanap", "Dokter Asal Pasien Ranap", "4698580_chat_conversation_laptop_message_text_icon.png", akses::getdokter_asal_pasien_ranap)
+            .buka(() -> new DlgDokterAsalPasienRanap(u,false));
+        m.tambah("btnPenyakitRanapCaraBayar", "Penyakit Ranap Per Cara Bayar", "if_24_DNA_2064499.png", akses::getpenyakit_ranap_cara_bayar)
+            .buka(() -> new DlgPenyakitRanapPerCaraBayar(u,false));
+        m.tambah("btnRekapLabPerTahun", "Rekap Lab Per Tahun", "if_projects_63140.png", akses::getrekap_lab_pertahun)
+            .buka(() -> new DlgRekapLabPerTahun(u,false));
+        m.tambah("btnPerujukLabPerTahun", "Perujuk Lab Per Tahun", "doctor2.png", akses::getperujuk_lab_pertahun)
+            .buka(() -> new DlgPerujukLabPerTahun(u,false));
+        m.tambah("btnRekapRadiologiPerTahun", "Rekap Radiologi Per Tahun", "if_Thorax_X-Ray_Black_63791.png", akses::getrekap_radiologi_pertahun)
+            .buka(() -> new DlgRekapRadiologiPerTahun(u,false));
+        m.tambah("btnPerujukRadiologiPerTahun", "Perujuk Radiologi Per Tahun", "doctor_assistant.png", akses::getperujuk_radiologi_pertahun)
+            .buka(() -> new DlgPerujukRadiologiPerTahun(u,false));
+        m.tambah("btnJumlahPorsiDiet", "Rekap Bulanan Porsi Diet", "iconfinder_bibimbub_3377053.png", akses::getjumlah_porsi_diet)
+            .buka(() -> new DlgJumlahPorsiDiet(u,false));
+        m.tambah("btnJumlahMacamDiet", "Rekap Bulanan Macam Diet", "iconfinder_ramen_3377055.png", akses::getjumlah_macam_diet)
+            .buka(() -> new DlgJumlahMacamDiet(u,false));
+        m.tambah("btnRekapPermintaanDiet", "Rekap Permintaan Diet", "iconfinder_fried_rice_3377056.png", akses::getrekap_permintaan_diet)
+            .buka(() -> new DlgRekapPermintaanDiet(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnSisaDietPasien", "Sisa Diet Pasien", "5296685_fish_food_meal_rice_salmon_icon.png", akses::getsisa_diet_pasien)
+            .buka(() -> new LaporanSisaDietPasien(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); });
+        m.tambah("btnDataSITT", "Data TB", "Gnome-X-Office-Address-Book-48.png", akses::getkemenkes_sitt)
+            .buka(() -> new DlgDataTB(u,false)).sebelum(f -> { f.emptTeks(); f.isCek(); });
+        m.tambah("btnRekapMutasiBerkas", "Rekap Mutasi Berkas", "iconfinder_group_data_45163.png", akses::getrekap_mutasi_berkas)
+            .buka(() -> new DlgRekapMutasiBerkas(u,false));
+        m.tambah("btnSkriningRalanPernapasanPerTahun", "Skrining Pernapasan Ralan Per Tahun", "skrining.png", akses::getskrining_ralan_pernapasan_pertahun)
+            .buka(() -> new LaporanRekapSkriningPernapasanRalanPerTahun(u,false));
+        m.tambah("btnKunjunganBangsalTahun", "Masuk Ruang Per Tahun", "if_Company_132030.png", akses::getkunjungan_bangsal_pertahun)
+            .buka(() -> new LaporanRekapKunjunganRuangPerTahun(u,true));
+        m.tambah("btnKIPPasienRanap", "KIP Pasien Ranap", "iconfinder_reports_49615.png", akses::getkip_pasien_ranap)
+            .buka(() -> new DlgKIPPasienRanap(u,false));
+        m.tambah("btnKIPPasienRalan", "KIP Pasien Ralan", "iconfinder_reports_49615.png", akses::getkip_pasien_ralan)
+            .buka(() -> new DlgKIPPasienRalan(u,false));
+        m.tambah("btnDaftarPasienRanap", "Daftar Pasien Ranap", "if_009_95869.png", akses::getdaftar_pasien_ranap)
+            .buka(() -> new DlgDaftarPasienRanap(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnAnggotaMiliterDirawat", "Anggota TNI Dirawat", "if_Soldier-3_379419.png", () -> u.isTNI()&&akses.getanggota_militer_dirawat())
+            .buka(() -> new DlgAnggotaMiliterDirawat(u,false));
+        m.tambah("btnDaftarPasienRanapTNI", "Daftar Pasien Ranap TNI", "if_009_95869.png", () -> u.isTNI()&&akses.getdaftar_pasien_ranaptni())
+            .buka(() -> new DlgDaftarPasienRanapTNI(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnAnggotaPolriDirawat", "Anggota POLRI Dirawat", "131492_policeman_police_police officer_police-officer_guard_icon.png", () -> u.isTNI()&&akses.getanggota_polri_dirawat())
+            .buka(() -> new DlgAnggotaPolriDirawat(u,false));
+        m.tambah("btnDaftarPasienRanapPolri", "Daftar Pasien Ranap POLRI", "if_009_95869.png", () -> u.isTNI()&&akses.getdaftar_pasien_ranap_polri())
+            .buka(() -> new DlgDaftarPasienRanapPolri(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnLaporanPenyakitPolri", "Laporan Penyakit POLRI", "6008661_bacteria_coronavirus_covid_laboratory_microscope_icon.png", () -> u.isTNI()&&akses.getlaporan_penyakit_polri())
+            .buka(() -> new DlgLaporanPenyakitPolri(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnLaporanPenyakitTNI", "Laporan Penyakit TNI", "6008661_bacteria_coronavirus_covid_laboratory_microscope_icon.png", () -> u.isTNI()&&akses.getlaporan_penyakit_tni())
+            .buka(() -> new DlgLaporanPenyakitTNI(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnJumlahPengunjungRalanPolri", "Jumlah Pengunjung Ralan POLRI", "5868974_paper_research_corona virus_coronavirus_file_icon.png", () -> u.isTNI()&&akses.getjumlah_pengunjung_ralan_polri())
+            .buka(() -> new DlgJumlahPengunjungRalanPolri(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnJumlahPengunjungRalanTNI", "Jumlah Pengunjung Ralan TNI", "5868974_paper_research_corona virus_coronavirus_file_icon.png", () -> u.isTNI()&&akses.getjumlah_pengunjung_ralan_tni())
+            .buka(() -> new DlgJumlahPengunjungRalanTNI(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnRegistrasiPoliPerTanggal", "Registrasi Poli Per Tanggal", "iconfinder_News_728959.png", akses::getregistrasi_poli_per_tanggal)
+            .buka(() -> new LaporanRegistrasiPoliPerTanggal(null,false));
+        m.tambah("btnLaporanTahunanIRJ", "Laporan Tahunan IRJ", "laporantahunanIRJ.png", akses::getlaporan_tahunan_irj)
+            .buka(() -> new LaporanTahunanIRJ(u,true)).sebelum(f -> f.isCek());
+        m.tambah("btnLaporanBulananIRJ", "Laporan Bulanan IRJ", "laporantahunanIRJ.png", akses::getlaporan_bulanan_irj)
+            .buka(() -> new LaporanBulananIRJ(u,true)).sebelum(f -> f.isCek());
+        m.tambah("btnLaporanTahunanIGD", "Laporan Tahunan IGD", "laporantahunanIRJ.png", akses::getlaporan_tahunan_igd)
+            .buka(() -> new LaporanTahunanIGD(u,true)).sebelum(f -> f.isCek());
+        m.tambah("btnBulananKlasifikasiPasienRanap", "Bulanan Klasifikasi Pasien Ranap", "iconfinder_Letter_Printing_Paper_Sizes_1977178.png", akses::getbulanan_klasifikasi_pasien_ranap)
+            .buka(() -> new DlgBulananKlasifikasiPasienRanap(u,false));
+        m.tambah("btnHarianKlasifikasiPasienRanap", "Harian Klasifikasi Pasien Ranap", "iconfinder_Letter_Printing_Paper_Sizes_1977178.png", akses::getharian_klasifikasi_pasien_ranap)
+            .buka(() -> new DlgHarianKlasifikasiPasienRanap(u,false));
+        m.tambah("btnKlasifikasiPasienPerRuang", "Klasifikasi Pasien Per Ruang", "iconfinder_Letter_Printing_Paper_Sizes_1977178.png", akses::getklasifikasi_pasien_perbangsal)
+            .buka(() -> new DlgKlasifikasiPasienPerBangsal(u,false));
+        m.tambah("btnDemografiUmurKunjungan", "Demografi Umur Kunjungan", "custom-reports.png", akses::getdemografi_umur_kunjungan)
+            .buka(() -> new DlgDemografiUmurKunjungan(u,false));
+        m.tambah("btnStatusDataRM", "Status Data RM", "4852569_chat_chatting_conversation_files_message_icon.png", akses::getstatus_data_rm)
+            .buka(() -> new DlgStatusDataRM(u,false));
+        m.tambah("btnKepatuhanKelengkapanKeselamatanBedah", "Kepatuhan Kelengkapan Keselamatan Bedah", "6008657_avatar_job_medical_occupation_people_icon.png", akses::getkepatuhan_kelengkapan_keselamatan_bedah)
+            .buka(() -> new DlgKepatuhanKelengkapanKeselamatanBedah(u,false));
+        m.tambah("btnOperasiPerBulan", "Operasi Per Bulan", "9554573_calendar_note_date_schedule_event_icon.png", akses::getoperasi_per_bulan)
+            .buka(() -> new DlgOperasiPerBulan(u,false));
+        m.tambah("btnLaporanTahunanPenolakanAnjuranMedis", "Laporan Tahunan Penolakan Anjuran Medis", "9929050_analysis_graph_growth_report_statistics_icon.png", akses::getlaporan_tahunan_penolakan_anjuran_medis)
+            .buka(() -> new LaporanTahunanPAM(u,true)).sebelum(f -> f.isCek());
+        m.tambah("btnPemeriksaanFisikRalanPerPenyakit", "Pemeriksaan Fisik Ralan Per Penyakit", "9161307_graph_user_chart_statistics_business_icon.png", akses::getpemeriksaan_fisik_ralan_per_penyakit)
+            .buka(() -> new DlgPemeriksaanFisikRalanPerPenyakit(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnDataSasaranUsiaProduktif", "Data Sasaran Usia Produktif", "49607_product_report_sales_icon.png", akses::getdata_sasaran_usiaproduktif)
+            .buka(() -> new DlgDataSasaranUsiaProduktif(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnDataSasaranUsiaLansia", "Data Sasaran Usia Lansia", "49607_product_report_sales_icon.png", akses::getdata_sasaran_usialansia)
+            .buka(() -> new DlgDataSasaranUsiaLansia(u,false)).sebelum(f -> f.isCek());
+    }
+
+    /** [K] Tarif Pelayanan, Menejemen Keuangan & Akuntansi */
+    private void kategoriK(){
+        m.kategori(10);
+        m.tambah("btnKamar", "Kamar", "industry.png", akses::getkamar)
+            .buka(() -> new DlgKamar(null,false)).sebelum(f -> { f.emptTeks(); f.isCek(); });
+        m.tambah("btnTindakanRalan", "Tarif Ralan", "plaster.png", akses::gettarif_ralan)
+            .buka(() -> new DlgJnsPerawatanRalan(null,false)).sebelum(f -> { f.emptTeks(); f.isCek(); });
+        m.tambah("btnTindakanRanap", "Tarif Ranap", "doctor (2).png", akses::gettarif_ranap)
+            .buka(() -> new DlgJnsPerawatanRanap(null,false)).sebelum(f -> { f.emptTeks(); f.isCek(); });
+        m.tambah("btnTarifLab", "Tarif Lab", "address-book.png", akses::gettarif_lab)
+            .buka(() -> new DlgJnsPerawatanLab(u,false)).sebelum(f -> { f.emptTeks(); f.isCek(); });
+        m.tambah("btnTarifRadiologi", "Tarif Radiologi", "1410153940_radiology.png", akses::gettarif_radiologi)
+            .buka(() -> new DlgJnsPerawatanRadiologi(u,false)).sebelum(f -> { f.emptTeks(); f.isCek(); });
+        m.tambah("btnPaketOperasi", "Tarif Operasi/VK", "1360487111_stock_paste.png", akses::gettarif_operasi)
+            .buka(() -> new DlgJnsPerawatanOperasi(u,false)).sebelum(f -> { f.emptTeks(); f.isCek(); });
+        m.tambah("btnTarifUtd", "Tarif UTD", "1481001686_injection_blood.png", akses::gettarif_utd)
+            .buka(() -> new DlgJnsPerawatanUTD(u,false)).sebelum(f -> { f.emptTeks(); f.isCek(); });
+        m.tambah("btnSetTarifOnline", "Set Tarif Online", "iconfinder_Non-Service_Specific_copy_Client_259291.png", akses::getset_tarif_online)
+            .buka(() -> new KeuanganSetTarifOnline(u,false));
+        m.tambah("btnCaraBayar", "Asuransi/Askes/Jenis Bayar", "4171274_day_heart_love_time_valentine_icon.png", akses::getcara_bayar)
+            .buka(() -> new DlgPenanggungJawab(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); });
+        m.tambah("btnRekening", "Akun Rekening", "kwrite.png", akses::getakun_rekening)
+            .buka(() -> new DlgRekening(u,false)).sebelum(f -> { f.tampil3(); f.isCek(); f.emptTeks(); });
+        m.tambah("btnRekeningTahun", "Rekening Tahun", "money_bag.png", akses::getrekening_tahun)
+            .buka(() -> new DlgRekeningTahun(u,false)).sebelum(f -> { f.tampil2(); f.isCek(); f.emptTeks(); });
+        m.tambah("btnSaldoAkunPerBulan", "Saldo Akun Per Bulan", "iconfinder_icons-05_799761.png", akses::getsaldo_akun_perbulan)
+            .buka(() -> new KeuanganSaldoAkunPerBulan(u,false));
+        m.tambah("btnakun_bayar", "Akun Bayar", "checklist.png", akses::getakun_bayar)
+            .buka(() -> new DlgAkunBayar(u,false));
+        m.tambah("btnAkunBayarHutang", "Akun Bayar Hutang", "87482_wallet_icon.png", akses::getakun_bayar_hutang)
+            .buka(() -> new DlgAkunBayarHutang(u,false));
+        m.tambah("btnAkunPiutang", "Akun Piutang", "1404046603_wallet.png", akses::getakun_piutang)
+            .buka(() -> new DlgAkunPiutang(u,false));
+        m.tambah("btnAkunPenagihanPiutang", "Akun Penagihan Piutang", "1485357487_Business.png", akses::getakun_penagihan_piutang)
+            .buka(() -> new DlgAkunPenagihanPiutang(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnAkunAsetInventaris", "Akun Jenis Aset/Inventaris", "iconfinder_50842_money_safe_vault_keep_icon_48px.png", akses::getakun_aset_inventaris)
+            .buka(() -> new DlgAkunAsetInventaris(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); });
+        m.tambah("btnPengaturanRekening", "Pengaturan Rekening", "gtk-stock-book.png", akses::getpengaturan_rekening)
+            .buka(() -> new DlgPengaturanRekening(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnKategoriPengeluaranHarian", "Kategori Pengeluaran Harian", "299058_tag_icon.png", akses::getkategori_pengeluaran_harian)
+            .buka(() -> new DlgKategoriPengeluaran(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnPengeluaran", "Pengeluaran Harian", "1404047106_emblem-money.png", akses::getpengeluaran)
+            .buka(() -> new DlgPengeluaranHarian(u,false)).sebelum(f -> { f.emptTeks(); f.isCek(); });
+        m.tambah("btnKategoriPemasukanLian", "Kategori Pemasukan Lain-lain", "3440908_ecommerce_label_price_shop_shopping_icon.png", akses::getkategori_pemasukan_lain)
+            .buka(() -> new DlgKategoriPemasukan(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnPemasukanLain", "Pemasukan Lain-Lain", "1360486845_23.png", akses::getpemasukan_lain)
+            .buka(() -> new DlgPemasukanLain(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); });
+        m.tambah("btnKategoriPiutangJasaPerusahaan", "Kategori Piutang Jasa Perusahaan", "7013421_marketing_finance_business_money_payment_icon.png", akses::getkategori_piutang_jasa_perusahaan)
+            .buka(() -> new DlgKategoriPiutangJasaPerusahaan(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnPiutangJasaPerusahaan", "Piutang Jasa Perusahaan", "5027880_bag_business_currency_dollar_finance_icon.png", akses::getpiutang_jasa_perusahaan)
+            .buka(() -> new KeuanganPiutangJasaPerusahaan(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnPiutangJasaPerusahaanBelumLunas", "Piutang Jasa Perusahaan Belum Lunas", "9517544_cheque_banking_check_finance_payment_icon.png", akses::getpiutang_jasa_perusahaan_belum_lunas)
+            .buka(() -> new KeuanganPiutangJasaPerusahaanBelumLunas(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnBayarPiutangJasaPerusahaan", "Bayar Piutang Jasa Perusahaan", "2570316_business_company_economic_finance_get_icon.png", akses::getbayar_piutang_jasa_perusahaan)
+            .buka(() -> new KeuanganBayarPiutangJasaPerusahaan(u,false)).sebelum(f -> f.isCek());
+        m.juga("btnDeposit");
+        m.juga("btnLihatPiutang");
+        m.tambah("btnRincianPiutangPasien", "Rincian Piutang Pasien", "checklist_pencil-o.png", akses::getrincian_piutang_pasien)
+            .buka(() -> new KeuanganRincianPiutangPasien(u,false));
+        m.tambah("btnPiutangBelumLunas", "Piutang Belum Lunas", "checklist_pencil-o.png", akses::getpiutang_pasien2)
+            .buka(() -> new KeuanganPiutangBelumLunas(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnPiutangObatBelumLunas", "Piutang Obat & BHP Belum Lunas", "17219_cash_cashbox_machine_payment_register_icon.png", akses::getpiutang_obat_belum_lunas)
+            .buka(() -> new KeuanganPiutangObatBelumLunas(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnPiutangPerCaraBayar", "Piutang Per Cara Bayar", "checklist_pencil-o.png", akses::getdetail_piutang_penjab)
+            .buka(() -> new DlgPiutangPercaraBayar(u,false));
+        m.tambah("btnNilaiPiutangPerJenisBayarPerBulan", "Nilai Piutang Per Cara Bayar Per Bulan", "checklist_pencil-o.png", akses::getnilai_piutang_perjenis_bayar_per_bulan)
+            .buka(() -> new KeuanganNilaiPiutangPerJenisBayarPerBulan(u,false));
+        m.tambah("btnRingkasanPiutangPerJenisBayar", "Ringkasan Piutang Per Cara Bayar", "checklist_pencil-o.png", akses::getringkasan_piutang_jenis_bayar)
+            .buka(() -> new KeuanganRingkasanPiutangPerJensBayar(u,false));
+        m.tambah("btnPenagihanPiutangPasien", "Penagihan Piutang Pasien", "checklist_pencil-o.png", akses::getpenagihan_piutang_pasien)
+            .buka(() -> new KeuanganPenagihanPiutangPasien(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnValidasiPenagihanPiutang", "Validasi Penagihan Piutang", "iconfinder_50_3319638.png", akses::getvalidasi_penagihan_piutang)
+            .buka(() -> new KeuanganValidasiPenagihanPiutang(u,false));
+        m.tambah("btnRVPPiutangBPJS", "RVP Piutang BPJS", "iconfinder_wallet_pay_sale_shop_4177573.png", akses::getrvu_bpjs)
+            .buka(() -> new KeuanganRVPBPJS(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnKlaimRawatJalan", "Klaim Rawat Jalan", "iconfinder_PriorityTasks-task-document-paper-descending_6071856.png", akses::getklaim_rawat_jalan)
+            .buka(() -> new KeuanganKlaimRalan(u,false));
+        m.tambah("btnBayarPiutang", "Bayar Piutang", "1404046811_money.png", akses::getbayar_piutang)
+            .buka(() -> new DlgBayarPiutang(u,false)).sebelum(f -> { f.emptTeks(); f.isCek(); });
+        m.tambah("btnOmsetPenerimaan", "Penerimaan/Omset/Kas Masuk", "iconfinder_Finance_saving_1889200.png", akses::getomset_penerimaan)
+            .buka(() -> new DlgOmsetPenerimaan(u,false));
+        m.tambah("btnPengembalianDepositPasien", "Pengembalian Deposit Pasien", "iconfinder_11006_coin_money_purse_icon_48px.png", akses::getpengembalian_deposit_pasien)
+            .buka(() -> new DlgPengembalianDepositPasien(u,false)).sebelum(f -> f.tampil());
+        m.tambah("btnPendapatanPerCaraBayar", "Pendapatan Per Cara Bayar", "iconfinder_eccomerce_-_money_3440907.png", akses::getpendapatan_per_carabayar)
+            .buka(() -> new DlgPendapatanPerCaraBayar(u,false));
+        m.tambah("btnPembayaranBankJateng", "Pembayaran Bank Jateng", "iconfinder_eccomerce_-_wallet_3440917.png", akses::getpembayaran_bank_jateng)
+            .buka(() -> new DlgLhtBankJateng(u,false));
+        m.tambah("btnPembayaranBRIVA", "Pembayaran BRIVA", "iconfinder_eccomerce_-_wallet_3440917.png", akses::getpembayaran_briva)
+            .buka(() -> new DlgLhtBRIVA(u,false));
+        m.tambah("btnPembayaranBankPapua", "Pembayaran Bank Papua", "iconfinder_eccomerce_-_wallet_3440917.png", akses::getpembayaran_bank_papua)
+            .buka(() -> new DlgLhtBankPapua(u,false));
+        m.tambah("btnPembayaranBankJabar", "Pembayaran Bank Jabar", "iconfinder_eccomerce_-_wallet_3440917.png", akses::getpembayaran_bank_jabar)
+            .buka(() -> new DlgLhtBankJabar(u,false));
+        m.tambah("btnPembayaranBankMandiri", "Pembayaran Bank Mandiri", "mandiri.png", akses::getpembayaran_bank_mandiri)
+            .buka(() -> new DlgLhtBankMandiri(u,false));
+        m.tambah("btnPembayaranPihakKe3BankMandiri", "Pembayaran Pihak Ke 3 Bank Mandiri", "mandiri.png", akses::getpembayaran_pihak_ke3_bankmandiri)
+            .buka(() -> new DlgLhtPembayaranPihakKe3BankMandiri(u,false));
+        m.tambah("btnRingkasanHutangVendorFarmasi", "Ringkasan Hutang Vendor Farmasi", "if_mail-message-new_23443.png", akses::getringkasan_hutang_vendor_farmasi)
+            .buka(() -> new KeuanganRingkasanHutangVendorFarmasi(u,true));
+        m.tambah("btnHutangObat", "Hutang Obat & BHP", "cashbox.png", akses::gethutang_obat)
+            .buka(() -> new KeuanganHutangObatBelumLunas(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnTagihanHutangObat", "Titip Faktur/Tagihan Obat & BHP", "iconfinder_3387311_document_money_report_sheet_shopping_icon_48px.png", akses::gettagihan_hutang_obat)
+            .buka(() -> new KeuanganTagihanObatBHP(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnValidasiTagihanObatBHP", "Validasi Titip Faktur/Tagihan Obat & BHP", "iconfinder_3387295_credit_finance_machine_payment_shopping_icon_48px.png", akses::getvalidasi_tagihan_hutang_obat)
+            .buka(() -> new KeuanganValidasiTagihanObatBHP(u,false));
+        m.tambah("btnbayar_pemesanan", "Bayar Pesan Obat/BHP", "cashbox.png", akses::getbayar_pemesanan_obat)
+            .buka(() -> new KeuanganBayarPemesananFarmasi(u,false)).sebelum(f -> f.tampil2());
+        m.tambah("btnRingkasanHutangVendorBarangNonMedis", "Ringkasan Hutang Vendor Non Medis", "iconfinder_filetype_-_download_3440881.png", akses::getringkasan_hutang_vendor_nonmedis)
+            .buka(() -> new KeuanganRingkasanHutangVendorNonMedis(u,true));
+        m.tambah("btnHutangNonMedis", "Hutang Non Medis", "1360487067_calculator.png", akses::gethutang_barang_non_medis)
+            .buka(() -> new KeuanganHutangNonMedisBelumLunas(u,false));
+        m.tambah("btnTagihanHutangNonMedis", "Titip Faktur/Tagihan Non Medis", "iconfinder_3387311_document_money_report_sheet_shopping_icon_48px.png", akses::gettitip_faktur_non_medis)
+            .buka(() -> new KeuanganTagihanNonMedis(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnValidasiTagihanNonMedis", "Validasi Titip Faktur/Tagihan Non Medis", "iconfinder_3387295_credit_finance_machine_payment_shopping_icon_48px.png", akses::getvalidasi_tagihan_non_medis)
+            .buka(() -> new KeuanganValidasiTagihanNonMedis(u,false));
+        m.tambah("btnBayarPesanNonMedis", "Bayar Pesan Non Medis", "1360487067_calculator.png", akses::getbayar_pesan_non_medis)
+            .buka(() -> new KeuanganBayarPemesananNonMedis(u,false)).sebelum(f -> f.tampil2());
+        m.tambah("btnHutangAsetInventaris", "Hutang Aset/Inventaris", "49607_product_report_sales_icon.png", akses::gethutang_aset_inventaris)
+            .buka(() -> new KeuanganHutangAsetIventarisBelumLunas(u,false));
+        m.tambah("btnTagihanHutangAset", "Titip Faktur/Tagihan Aset/Inventaris", "iconfinder_3387311_document_money_report_sheet_shopping_icon_48px.png", akses::gettitip_faktur_aset)
+            .buka(() -> new KeuanganTagihanAset(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnValidasiTagihanAset", "Validasi Titip Faktur/Tagihan Aset/Inventaris", "iconfinder_3387295_credit_finance_machine_payment_shopping_icon_48px.png", akses::getvalidasi_tagihan_aset)
+            .buka(() -> new KeuanganValidasiTagihanAset(u,false));
+        m.tambah("btnBayarPemesananInventaris", "Bayar Pesan Aset/Inventaris", "iconfinder_10998_cash_money_icon_48px.png", akses::getbayar_pemesanan_iventaris)
+            .buka(() -> new KeuanganBayarPemesananAset(u,false));
+        m.tambah("btnRingkasanHutangVendorBarangDapur", "Ringkasan Hutang Vendor Dapur", "2151697_bread_cutting_food_knife_rye_icon.png", akses::getringkasan_hutang_vendor_dapur)
+            .buka(() -> new KeuanganRingkasanHutangVendorDapur(u,true));
+        m.tambah("btnHutangDapur", "Hutang Barang Dapur", "2620509_employee_job_note_seeker_unemployee_icon.png", akses::gethutang_dapur)
+            .buka(() -> new KeuanganHutangDapurBelumLunas(u,false));
+        m.tambah("btnTagihanHutangDapur", "Titip Faktur/Tagihan Dapur", "iconfinder_3387311_document_money_report_sheet_shopping_icon_48px.png", akses::gettitip_faktur_dapur)
+            .buka(() -> new KeuanganTagihanDapur(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnValidasiTagihanDapur", "Validasi Titip Faktur/Tagihan Dapur", "iconfinder_3387295_credit_finance_machine_payment_shopping_icon_48px.png", akses::getvalidasi_tagihan_dapur)
+            .buka(() -> new KeuanganValidasiTagihanDapur(u,false));
+        m.tambah("btnBayarPesanDapur", "Bayar Pesan Dapur", "2620509_employee_job_note_seeker_unemployee_icon.png", akses::getbayar_pesan_dapur)
+            .buka(() -> new KeuanganBayarPemesananDapur(u,false)).sebelum(f -> f.tampil2());
+        m.tambah("btnPeminjamPiutang", "Peminjam Piutang", "if_Teachers-24_103847.png", akses::getpeminjam_piutang)
+            .buka(() -> new KeuanganPeminjamPiutang(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); });
+        m.tambah("btnPiutangLainLain", "Piutang Peminjaman Uang", "iconfinder_11001_cash_coins_money_pig_piggy bank_icon_48px.png", () -> akses.getpiutang_lainlain()||akses.getbayar_piutang_lain())
+            .buka(() -> new KeuanganPiutangPeminjamanUang(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnPiutangPeminjamanUangBelumLunas", "Piutang Peminjaman Uang Belum Lunas", "9554856_money_finance_business_office_marketing_icon.png", akses::getpiutang_peminjaman_uang_belum_lunas)
+            .buka(() -> new KeuanganPiutangPeminjamanUangBelumLunas(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnBayarPiutangLainLain", "Bayar Piutang Peminjaman Uang", "47679_card_credit_payment_icon.png", akses::getbayar_piutang_lain)
+            .buka(() -> new KeuanganBayarPiutangPeminjamanUang(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); });
+        m.tambah("btnPemberiHutangLain", "Pemberi Hutang Lain", "6427817_building_business_corporate_office_icon.png", akses::getpemberi_hutang_lain)
+            .buka(() -> new KeuanganPemberiHutangLain(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); });
+        m.tambah("btnBebanHutangLain", "Beban Hutang Lain", "9554836_finance_business_marketing_chart_office_icon.png", akses::getbeban_hutang_lain)
+            .buka(() -> new KeuanganBebanHutangLain(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnBayarBebanHutangLain", "Bayar Beban Hutang Lain", "9554841_finance_business_office_marketing_chart_icon.png", akses::getbayar_beban_hutang_lain)
+            .buka(() -> new KeuanganBayarBebanHutangLain(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); });
+        m.tambah("btnBayarJMDokter", "Bayar JM Dokter", "4852541_doc_docx_files_odt_rtf_icon.png", akses::getbayar_jm_dokter)
+            .buka(() -> new KeuanganBayarJMDokter(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnPengajuanBiayaKuangan", "Pengajuan Biaya", "7013431_file_document_finance_business_laptop_icon.png", akses::getpengajuan_biaya)
+            .buka(() -> new KeuanganPengajuanBiaya(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnPersetujuanPengajuanBiaya", "Persetujuan Pengajuan Biaya", "7013438_office_briefcase_business_bag_finance_icon.png", akses::getpersetujuan_pengajuan_biaya)
+            .buka(() -> new KeuanganPersetujuanPengajuanBiaya(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnValidasiPersetujuanPengajuanBiaya", "Validasi Persetujuan Pengajuan Biaya", "7013442_finance_business_money_payment_inflation_icon.png", akses::getvalidasi_persetujuan_pengajuan_biaya)
+            .buka(() -> new KeuanganValidasiPersetujuanPengajuanBiaya(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnRekapPengajuanBiaya", "Rekap Pengajuan Biaya", "1901528_business_chart_infographic_icon.png", akses::getrekap_pengajuan_biaya)
+            .buka(() -> new KeuanganRekapPengajuanBiaya(u,false));
+        m.tambah("btnPengeluaranPengeluaran", "Pengeluaran-pengeluaran/Kas Keluar", "8822938_money_bag_gold_bars_icon.png", akses::getpengeluaran_pengeluaran)
+            .buka(() -> new DlgPengeluaranPengeluaran(u,false));
+        m.tambah("btnPostingJurnal", "Posting Jurnal", "1360485642_edit-notes.png", akses::getposting_jurnal)
+            .buka(() -> new DlgJurnal(u,false)).sebelum(f -> { f.tampil(); f.isCek(); f.emptTeks(); });
+        m.tambah("btnJurnalHarian", "Jurnal Harian", "1360485865_schedule.png", akses::getjurnal_harian)
+            .buka(() -> new DlgJurnalHarian(u,false));
+        m.tambah("btnBubes", "Buku Besar", "applications-office.png", akses::getbuku_besar)
+            .buka(() -> new KeuanganBubes(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnCashFlow", "Cash Flow", "1360486845_23.png", akses::getcashflow)
+            .buka(() -> new DlgCashflow(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnLabaRugi", "Keuangan", "1360486822_20.png", akses::getkeuangan)
+            .buka(() -> new DlgLabaRugi(u,false)).sebelum(f -> f.isCek());
+    }
+
+    /** [L] Bridging VClaim, Aplicare, PCare, INACBG, Kemenkes & Pihak Ke 3 */
+    private void kategoriL(){
+        m.kategori(11);
+        m.tambah("btnCekBPJSKartu", "Cek No.Kartu VClaim", "vclaim.png", akses::getbpjs_cek_kartu)
+            .buka(() -> new BPJSCekKartu(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnCekBPJSNik", "Cek NIK VClaim", "vclaim.png", akses::getbpjs_cek_nik)
+            .buka(() -> new BPJSCekNIK2(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnCekBPJSSKDP", "Cek SKDP VClaim", "vclaim.png", akses::getbpjs_cek_skdp)
+            .buka(() -> new BPJSCekSKDP(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnCekBPJSRiwayatRujukanPCare", "Riwayat Rujukan PCare di VClaim", "vclaim.png", akses::getbpjs_cek_riwayat)
+            .buka(() -> new BPJSCekRiwayatRujukanPCare(u,false));
+        m.tambah("btnCekBPJSRiwayatRujukanRS", "Riwayat Rujukan RS di VClaim", "vclaim.png", akses::getbpjs_cek_riwayat_rujukanrs)
+            .buka(() -> new BPJSCekRiwayatRujukanRS(u,false));
+        m.tambah("btnCekBPJSTanggalRujukan", "Tanggal Rujukan di VClaim", "vclaim.png", akses::getbpjs_cek_tanggal_rujukan)
+            .buka(() -> new BPJSCekTanggalRujukan(u,false));
+        m.tambah("btnCekBPJSNomorRujukanPCare", "Cek No.Rujukan PCare di VClaim", "vclaim.png", akses::getbpjs_cek_nomor_rujukan)
+            .buka(() -> new BPJSCekNoRujukanPCare(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnCekBPJSNomorRujukanRS", "Cek No.Rujukan RS di VClaim", "vclaim.png", akses::getbpjs_cek_nomor_rujukan_rs)
+            .buka(() -> new BPJSCekNoRujukanRS(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnCekBPJSRujukanKartuPCare", "Cek Rujukan Kartu PCare di VClaim", "vclaim.png", akses::getbpjs_cek_rujukan_kartu_pcare)
+            .buka(() -> new BPJSCekRujukanKartuPCare(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnCekBPJSRujukanKartuRS", "Cek Rujukan Kartu RS di VClaim", "vclaim.png", akses::getbpjs_cek_rujukan_kartu_rs)
+            .buka(() -> new BPJSCekRujukanKartuRS(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnBPJSHistoriPelayanan", "Histori Pelayanan BPJS", "vclaim.png", akses::getbpjs_histori_pelayanan)
+            .buka(() -> new BPJSHistoriPelayanan(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnCekBPJSDiagnosa", "Referensi Diagnosa VClaim", "vclaim.png", akses::getbpjs_referensi_diagnosa)
+            .buka(() -> new BPJSCekReferensiPenyakit(u,false));
+        m.tambah("btnCekBPJSPoli", "Referensi Poli VClaim", "vclaim.png", akses::getbpjs_referensi_poli)
+            .buka(() -> new BPJSCekReferensiPoli(u,false));
+        m.tambah("btnMapingPoliBPJS", "Mapping Poli VClaim", "vclaim.png", akses::getmapping_poli_bpjs)
+            .buka(() -> new BPJSMapingPoli(u,false));
+        m.tambah("btnCekBPJSFaskes", "Referensi Faskes VClaim", "vclaim.png", akses::getbpjs_referensi_faskes)
+            .buka(() -> new BPJSCekReferensiFaskes(u,false));
+        m.tambah("btnCekReferensiProsedurBPJS", "Referensi Prosedur VClaim", "vclaim.png", akses::getbpjs_cek_prosedur)
+            .buka(() -> new BPJSCekReferensiProsedur(u,false));
+        m.tambah("btnCekReferensiKelasRawatBPJS", "Referensi Kelas Rawat VClaim", "vclaim.png", akses::getbpjs_cek_kelas_rawat)
+            .buka(() -> new BPJSCekReferensiKelasRawat(u,false));
+        m.tambah("btnCekReferensiDokterBPJS", "Referensi Dokter VClaim", "vclaim.png", akses::getbpjs_cek_dokter)
+            .buka(() -> new BPJSCekReferensiDokter(u,false));
+        m.tambah("btnCekReferensiSpesialistikBPJS", "Referensi Spesialistik VClaim", "vclaim.png", akses::getbpjs_cek_spesialistik)
+            .buka(() -> new BPJSCekReferensiSpesialistik(u,false));
+        m.tambah("btnCekReferensiRuangRawatBPJS", "Referensi Ruang Rawat VClaim", "vclaim.png", akses::getbpjs_cek_ruangrawat)
+            .buka(() -> new BPJSCekReferensiRuangRawat(u,false));
+        m.tambah("btnCekReferensiCaraKeluarBPJS", "Referensi Cara Keluar VClaim", "vclaim.png", akses::getbpjs_cek_carakeluar)
+            .buka(() -> new BPJSCekReferensiCaraKeluar(u,false));
+        m.tambah("btnCekReferensiPascaPulangBPJS", "Referensi Pasca Pulang VClaim", "vclaim.png", akses::getbpjs_cek_pasca_pulang)
+            .buka(() -> new BPJSCekReferensiPascaPulang(u,false));
+        m.tambah("btnCekReferensiPropinsiBPJS", "Referensi Propinsi VClaim", "vclaim.png", akses::getbpjs_cek_propinsi)
+            .buka(() -> new BPJSCekReferensiPropinsi(u,false));
+        m.tambah("btnCekReferensiKabupatenBPJS", "Referensi Kabupaten VClaim", "vclaim.png", akses::getbpjs_cek_kabupaten)
+            .buka(() -> new BPJSCekReferensiKabupaten(u,false));
+        m.tambah("btnCekReferensiKecamatanBPJS", "Referensi Kecamatan VClaim", "vclaim.png", akses::getbpjs_cek_kecamatan)
+            .buka(() -> new BPJSCekReferensiKecamatan(u,false));
+        m.tambah("btnCekReferensiDokterDPJPBPJS", "Referensi Dokter DPJP VClaim", "vclaim.png", akses::getbpjs_cek_dokterdpjp)
+            .buka(() -> new BPJSCekReferensiDokterDPJP(u,false));
+        m.tambah("btnBPJSReferensiDiagnosaPRB", "Referensi Diagnosa PRB VClaim", "vclaim.png", akses::getbpjs_diagnosa_prb)
+            .buka(() -> new BPJSCekReferensiDiagnosaPRB(u,false));
+        m.tambah("btnBPJSReferensiObatPRB", "Referensi Obat PRB VClaim", "vclaim.png", akses::getbpjs_obat_prb)
+            .buka(() -> new BPJSCekReferensiObatPRB(u,false));
+        m.tambah("btnBPJSProgramPRB", "Program PRB di VClaim", "vclaim.png", akses::getbpjs_program_prb)
+            .buka(() -> new BPJSProgramPRB(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnBPJSPotensiPRB", "Potensi PRB di VClaim", "vclaim.png", akses::getbpjs_potensi_prb)
+            .buka(() -> new BPJSPotensiPRB(u,false));
+        m.tambah("btnMappingDokterDPJPVClaim", "Mapping Dokter DPJP VClaim", "vclaim.png", akses::getbpjs_mapping_dokterdpjp)
+            .buka(() -> new BPJSMapingDokterDPJP(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnBPJSSEP", "Data Bridging SEP VClaim", "vclaim.png", akses::getbpjs_sep)
+            .buka(() -> new BPJSDataSEP(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnCekSEP", "Cek Nomor SEP", "vclaim.png", akses::getbpjs_cek_sep)
+            .buka(() -> new BPJSCekDetailSEP2(null,true));
+        m.tambah("btnRujukanKeluarBPJS", "Data Rujukan Keluar VClaim", "vclaim.png", akses::getbpjs_rujukan_keluar)
+            .buka(() -> new BPJSRujukanKeluar(u,false)).sebelum(f -> { f.tampil(); f.emptTeks(); f.isCek(); });
+        m.tambah("btnMonitoringKlaim", "Monitoring Verifikasi Klaim BPJS", "vclaim.png", akses::getbpjs_monitoring_klaim)
+            .buka(() -> new BPJSMonitoringKlaim(u,false));
+        m.tambah("btnBPJSSuratKontrol", "Surat Kontrol VClaim", "vclaim.png", akses::getbpjs_surat_kontrol)
+            .buka(() -> new BPJSSuratKontrol(u,false));
+        m.tambah("btnBPJSSuratPRI", "Surat PRI VClaim", "vclaim.png", akses::getbpjs_surat_pri)
+            .buka(() -> new BPJSSPRI(u,false));
+        m.tambah("btnBPJSSuplesiJasaRaharja", "Suplesi Jasa Raharja di VClaim", "vclaim.png", akses::getbpjs_suplesi_jasaraharja)
+            .buka(() -> new BPJSCekSuplesiJasaRaharja(u,false));
+        m.tambah("btnBPJSDataIndukKecelakaan", "Data Induk Kecelakaan VClaim", "vclaim.png", akses::getbpjs_data_induk_kecelakaan)
+            .buka(() -> new BPJSCekDataIndukKecelakaan(u,false));
+        m.tambah("btnBPJSDataSEPInternal", "Data SEP Internal VClaim", "vclaim.png", akses::getbpjs_sep_internal)
+            .buka(() -> new BPJSCekDataSEPInternal(u,false));
+        m.tambah("btnBPJSKlaimJasaRaharja", "Klaim Jaminan Jasa Raharja VClaim", "vclaim.png", akses::getbpjs_klaim_jasa_raharja)
+            .buka(() -> new BPJSCekKlaimJasaRaharja(u,false));
+        m.tambah("btnBPJSPasienFinger", "Pasien Finger Print VClaim", "vclaim.png", akses::getbpjs_daftar_finger_print)
+            .buka(() -> new BPJSDataFingerPrintPasien(u,false));
+        m.tambah("btnBPJSRujukanKhusus", "Rujukan Khusus VClaim", "vclaim.png", akses::getbpjs_rujukan_khusus)
+            .buka(() -> new BPJSRujukanKhusus(u,false));
+        m.tambah("btnBPJSReferensiPoliHFIS", "Referensi Poli HFIS", "vclaim.png", akses::getbpjs_referensi_poli_hfis)
+            .buka(() -> new BPJSCekReferensiPoliHFIS(u,false));
+        m.tambah("btnBPJSReferensiDokterHFIS", "Referensi Dokter HFIS", "vclaim.png", akses::getbpjs_referensi_dokter_hfis)
+            .buka(() -> new BPJSCekReferensiDokterHFIS(u,false));
+        m.tambah("btnBPJSReferensiJadwalHFIS", "Referensi Jadwal HFIS", "vclaim.png", akses::getbpjs_referensi_jadwal_hfis)
+            .buka(() -> new BPJSCekReferensiJadwalHFIS(u,false));
+        m.tambah("btnBPJSTaskIDMobileJKN", "Task ID Mobile JKN", "vclaim.png", akses::getbpjs_task_id)
+            .buka(() -> new BPJSTaskIDMobileJKN(u,false));
+        m.tambah("btnBPJSAntreanPerTanggalMobileJKN", "Antrean Per Tanggal Mobile JKN", "vclaim.png", akses::getbpjs_antrean_pertanggal)
+            .buka(() -> new BPJSAntreanPerTanggal(u,false));
+        m.tambah("btnBPJSReferensiDPHOApotek", "Referensi DPHO Apotek BPJS", "bpjs_apotek.png", akses::getbpjs_referensi_dpho_apotek)
+            .buka(() -> new ApotekBPJSCekReferensiDPHO(u,false));
+        m.tambah("btnBPJSReferensiPoliApotek", "Referensi Poli Apotek BPJS", "bpjs_apotek.png", akses::getbpjs_referensi_poli_apotek)
+            .buka(() -> new ApotekBPJSCekReferensiPoli(u,false));
+        m.tambah("btnBPJSReferensiFaskesApotek", "Referensi Faskes Apotek BPJS", "bpjs_apotek.png", akses::getbpjs_referensi_faskes_apotek)
+            .buka(() -> new ApotekBPJSCekReferensiFaskes(u,false));
+        m.tambah("btnBPJSReferensiSpesialistikApotek", "Referensi Spesialistik Apotek BPJS", "bpjs_apotek.png", akses::getbpjs_referensi_spesialistik_apotek)
+            .buka(() -> new ApotekBPJSCekReferensiSpesialistik(u,false));
+        m.tambah("btnBPJSReferensiSettingPPKApotek", "Referensi Setting PPK Apotek BPJS", "bpjs_apotek.png", akses::getbpjs_referensi_setting_apotek)
+            .buka(() -> new ApotekBPJSCekReferensiSettingPPK(u,false));
+        m.tambah("btnBPJSReferensiObatApotek", "Referensi Obat Apotek BPJS", "bpjs_apotek.png", akses::getbpjs_referensi_obat_apotek)
+            .buka(() -> new ApotekBPJSCekReferensiObat(u,false));
+        m.tambah("btnBPJSMapingObatApotek", "Mapping Obat Apotek BPJS", "bpjs_apotek.png", akses::getbpjs_mapping_obat_apotek)
+            .buka(() -> new ApotekBPJSMapingObat(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnBPJSKunjunganSEPApotek", "Pencarian SEP Apotek BPJS", "bpjs_apotek.png", akses::getbpjs_kunjungan_sep_apotek)
+            .buka(() -> new ApotekBPJSKunjunganSEP(u,false));
+        m.tambah("btnBPJSMonitoringKlaimApotek", "Monitoring Klaim Apotek BPJS", "bpjs_apotek.png", akses::getbpjs_monitoring_klaim_apotek)
+            .buka(() -> new ApotekBPJSMonitoringKlaim(u,false));
+        m.tambah("btnBPJSDaftarPelayananObatApotek", "Daftar Pelayanan Obat Apotek BPJS", "bpjs_apotek.png", akses::getbpjs_daftar_pelayanan_obat_apotek)
+            .buka(() -> new ApotekBPJSDaftarPelayananObat(u,false));
+        m.tambah("btnBPJSRiwayatPelayananObatApotek", "Riwayat Pelayanan Obat Apotek BPJS", "bpjs_apotek.png", akses::getbpjs_riwayat_pelayanan_obat)
+            .buka(() -> new ApotekBPJSRiwayatPelayananObat(u,false));
+        m.tambah("btnBPJSRekapPesertaPRBObatApotek", "Rekap Peserta PRB Apotek BPJS", "bpjs_apotek.png", akses::getbpjs_rekap_peserta_prb_apotek)
+            .buka(() -> new ApotekBPJSRekapPesertaPRB(u,false));
+        m.tambah("btnBPJSResepObatApotek", "Resep Obat Apotek BPJS", "bpjs_apotek.png", akses::getbpjs_daftar_resep_apotek)
+            .buka(() -> new ApotekBPJSResepObat(u,false));
+        m.tambah("btnObatApolApotekBPJS", "Obat ApOL Apotek BPJS", "bpjs_apotek.png", akses::getbpjs_obat_23hari_apotek)
+            .buka(() -> new ApotekBPJSDaftarResepObat(u,false));
+        m.tambah("btnPermintaanResepIterasiApotekBPJS", "Permintaan Resep Iterasi Apotek BPJS", "bpjs_apotek.png", akses::getdaftar_permintaan_resep_iterasi_bpjs)
+            .buka(() -> new ApotekBPJSDaftarPermintaanResepIterasi(u,false));
+        m.tambah("btnMappingProsedurSmartKlaimBPJS", "Mapping Prosedur Smart Klaim BPJS", "bpjs.png", akses::getmapping_prosedur_smart_klaim_bpjs)
+            .buka(() -> new SmartKlaimBPJSMappingProsedur(u,false));
+        m.tambah("btnMappingPenyakitSmartKlaimBPJS", "Mapping Penyakit Smart Klaim BPJS", "bpjs.png", akses::getmapping_penyakit_smart_klaim_bpjs)
+            .buka(() -> new SmartKlaimBPJSMappingPenyakit(u,false));
+        m.tambah("btnKirimFHIRSmartKlaimBPJS", "Kirim FHIR Smart Klaim BPJS", "bpjs.png", akses::getbridging_smart_klaim_bpjs)
+            .buka(() -> new SmartKlaimBPJSKirimFHIR(u,false));
+        m.tambah("btnRiwayatPerawatanICare", "Riwayat Perawatan ICare BPJS", "bpjs.png", akses::getriwayat_perawatan_icare_bpjs)
+            .buka(() -> new ICareRiwayatPerawatan(u,false));
+        m.tambah("btnReklasifikasiRalan", "Reklasifikasi Ralan", "1404047007_02.png", akses::getreklasifikasi_ralan)
+            .buka(() -> new ReklasifikasiRalan(u,false));
+        m.tambah("btnReklasifikasiRanap", "Reklasifikasi Ranap", "1404047007_02.png", akses::getreklasifikasi_ranap)
+            .buka(() -> new ReklasifikasiRanap(u,false));
+        m.tambah("btnAplicareReferensiKamar", "Referensi Kamar Aplicare", "bedroom.png", akses::getaplicare_referensi_kamar)
+            .buka(() -> new AplicareCekReferensiKamar(u,false));
+        m.tambah("btnAplicareKetersediaanKamar", "Ketersediaan Kamar Aplicare", "1485357524_Company.png", akses::getaplicare_ketersediaan_kamar)
+            .buka(() -> new AplicareKetersediaanKamar(u,false));
+        m.tambah("btnInaCBGCoderNIK", "Coder NIK INACBG", "1481002113_guard.png", akses::getinacbg_coder_nik)
+            .buka(() -> new INACBGCoderNIK(u,false)).sebelum(f -> { f.emptTeks(); f.isCek(); });
+        m.tambah("btnInaCBGKlaimBaruOtomatis", "Klaim Baru Otomatis INACBG", "1485358050_receptionist.png", akses::getinacbg_klaim_baru_otomatis)
+            .aksi(u::btnInaCBGKlaimBaruOtomatisActionPerformed);
+        m.tambah("btnInaCBGKlaimBaruManual", "Klaim Baru Manual INACBG", "1485358050_receptionist.png", akses::getinacbg_klaim_baru_manual)
+            .aksi(u::btnInaCBGKlaimBaruManualActionPerformed);
+        m.tambah("btnInaCBGKlaimBaruManual2", "Klaim Baru Manual INACBG 2", "1485358050_receptionist.png", akses::getinacbg_klaim_baru_manual2)
+            .aksi(u::btnInaCBGKlaimBaruManual2ActionPerformed);
+        m.tambah("btnReferensiKamarInhealth", "Referensi Ruang Rawat Inhealth", "inhealth.png", akses::getinhealth_referensi_jenpel_ruang_rawat)
+            .buka(() -> new InhealthReferensiJenpelRuang(u,false)).sebelum(f -> f.emptTeks());
+        m.tambah("btnCekInhealthPoli", "Referensi Poli Inhealth", "inhealth.png", akses::getinhealth_referensi_poli)
+            .buka(() -> new InhealthCekReferensiPoli(u,false));
+        m.tambah("btnMappingPoliInhealth", "Mapping Poli Inhealth", "inhealth.png", akses::getinhealth_mapping_poli)
+            .buka(() -> new InhealthMapingPoli(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnMappingDokterInhealth", "Mapping Dokter Inhealth", "inhealth.png", akses::getinhealth_mapping_dokter)
+            .buka(() -> new InhealthMapingDokter(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnMappingTindakanRalanInhealth", "Tarif Ralan Inhealth", "inhealth.png", akses::getinhealth_mapping_tindakan_ralan)
+            .buka(() -> new InhealthTindakanRalan(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnMappingTindakanRanapInhealth", "Tarif Ranap Inhealth", "inhealth.png", akses::getinhealth_mapping_tindakan_ranap)
+            .buka(() -> new InhealthTindakanRanap(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnMappingTindakanRadiologiInhealth", "Tarif Radiologi Inhealth", "inhealth.png", akses::getinhealth_mapping_tindakan_radiologi)
+            .buka(() -> new InhealthTindakanRadiologi(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnMappingTindakanLaboratInhealth", "Tarif Laborat Inhealth", "inhealth.png", akses::getinhealth_mapping_tindakan_laborat)
+            .buka(() -> new InhealthTindakanLaborat(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnMappingTindakanOperasiInhealth", "Tarif Operasi Inhealth", "inhealth.png", akses::getinhealth_mapping_tindakan_operasi)
+            .buka(() -> new InhealthTindakanOperasi(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnCekInhealthFaskes", "Referensi Faskes Inhealth", "inhealth.png", akses::getinhealth_referensi_faskes)
+            .buka(() -> new InhealthCekReferensiFaskes(u,false));
+        m.tambah("btnCekEligibilitasInhealth", "Cek Eligibilitas Inhealth", "inhealth.png", akses::getinhealth_cek_eligibilitas)
+            .buka(() -> new InhealthCekEligibilitas(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnInhealthSJP", "Data Bridging SJP Inhealth", "inhealth.png", akses::getinhealth_sjp)
+            .buka(() -> new InhealthDataSJP(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnKirimTagihanInheath", "Tagihan Inhealth", "inhealth.png", akses::getinhealth_kirim_tagihan)
+            .buka(() -> new InhealthTagihan(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnCekPCareDiagnosa", "Referensi Diagnosa PCare", "pcare.png", akses::getpcare_cek_penyakit)
+            .buka(() -> new PCareCekReferensiPenyakit(u,false));
+        m.tambah("btnCekPCareKesadaran", "Referensi Kesadaran PCare", "pcare.png", akses::getpcare_cek_kesadaran)
+            .buka(() -> new PCareCekReferensiKesadaran(u,false));
+        m.tambah("btnPCareReferensiDokter", "Referensi Dokter PCare", "pcare.png", akses::getpcare_cek_dokter)
+            .buka(() -> new PCareCekReferensiDokter(u,false));
+        m.tambah("btnPCareReferensiPoli", "Referensi Poli PCare", "pcare.png", akses::getpcare_cek_poli)
+            .buka(() -> new PCareCekReferensiPoli(u,false));
+        m.tambah("btnPCareReferensiProvider", "Referensi Provider PCare", "pcare.png", akses::getpcare_cek_provider)
+            .buka(() -> new PCareCekReferensiProvider(u,false));
+        m.tambah("btnPCareReferensiStatusPulang", "Referensi Stts Pulang PCare", "pcare.png", akses::getpcare_cek_statuspulang)
+            .buka(() -> new PCareCekReferensiStatusPulang(u,false));
+        m.tambah("btnPCareReferensiSpesialis", "Referensi Spesialis PCare", "pcare.png", akses::getpcare_cek_spesialis)
+            .buka(() -> new PCareCekReferensiSpesialis(u,false));
+        m.tambah("btnPCareReferensiSubspesialis", "Referensi Subspesialis PCare", "pcare.png", akses::getpcare_cek_subspesialis)
+            .buka(() -> new PCareCekReferensiSubspesialis(u,false));
+        m.tambah("btnPCareReferensiSarana", "Referensi Sarana PCare", "pcare.png", akses::getpcare_cek_sarana)
+            .buka(() -> new PCareCekReferensiSarana(u,false));
+        m.tambah("btnPCareReferensiAlergi", "Referensi Alergi PCare", "pcare.png", akses::getpcare_cek_alergi)
+            .buka(() -> new PCareCekReferensiAlergi(u,false));
+        m.tambah("btnPCareReferensiPrognosa", "Referensi Prognosa PCare", "pcare.png", akses::getpcare_cek_prognosa)
+            .buka(() -> new PCareCekReferensiPrognosa(u,false));
+        m.tambah("btnPCareReferensiKhusus", "Referensi Khusus PCare", "pcare.png", akses::getpcare_cek_khusus)
+            .buka(() -> new PCareCekReferensiKhusus(u,false));
+        m.tambah("btnPCareReferensiObat", "Referensi Obat PCare", "pcare.png", akses::getpcare_cek_obat)
+            .buka(() -> new PCareCekReferensiObat(u,false));
+        m.tambah("btnPCareReferensiTindakan", "Referensi Tindakan PCare", "pcare.png", akses::getpcare_cek_tindakan)
+            .buka(() -> new PCareCekReferensiTindakan(u,false));
+        m.tambah("btnCekPCareTACC", "Referensi TACC PCare", "pcare.png", akses::getpcare_alasan_tacc)
+            .buka(() -> new PCareCekReferensiTACC(u,false));
+        m.tambah("btnPCareFaskesSubspesialis", "Faskes Subspesialis PCare", "pcare.png", akses::getpcare_cek_faskessubspesialis)
+            .buka(() -> new PCareCekFaskesSubspesialis(u,false));
+        m.tambah("btnPCareFaskesAlihRawat", "Faskes Alih Rawat PCare", "pcare.png", akses::getpcare_cek_faskesalihrawat)
+            .buka(() -> new PCareCekFaskesAlihRawat(u,false));
+        m.tambah("btnPCareFaskesThalasemia", "Faskes Thalasemia & Hemofili PCare", "pcare.png", akses::getpcare_cek_faskesthalasemia)
+            .buka(() -> new PCareCekFaskesThalasemia(u,false));
+        m.tambah("btnPCareMapingObat", "Mapping Obat PCare", "pcare.png", akses::getpcare_mapping_obat)
+            .buka(() -> new PCareMapingObat(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnPCareMapingTindakan", "Tarif Ralan PCare", "pcare.png", akses::getpcare_mapping_tindakan)
+            .buka(() -> new PCareMapingTindakanRalan(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnPCareMapingTindakanRanap", "Tarif Ranap PCare", "pcare.png", akses::getpcare_mapping_tindakan_ranap)
+            .buka(() -> new PCareMapingTindakanRanap(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnPCareMapingDokter", "Mapping Dokter PCare", "pcare.png", akses::getpcare_mapping_dokter)
+            .buka(() -> new PCareMapingDokter(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnPCareMapingPoli", "Mapping Poli PCare", "pcare.png", akses::getpcare_mapping_poli)
+            .buka(() -> new PCareMapingPoli(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnPCareClubProlanis", "Club Prolanis PCare", "pcare.png", akses::getpcare_club_prolanis)
+            .buka(() -> new PCareClubProlanis(u,false));
+        m.tambah("btnPCareKegiatanKelompok", "Kegiatan Kelompok PCare", "pcare.png", () -> akses.getpcare_kegiatan_kelompok()||akses.getpcare_peserta_kegiatan_kelompok())
+            .buka(() -> new PCareKegiatanKelompok(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnPCarePesertaKegiatanKelompok", "Peserta Keg Kelompok PCare", "pcare.png", akses::getpcare_peserta_kegiatan_kelompok)
+            .buka(() -> new PCarePesertaKegiatanKelompok(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnPCareCekKartu", "Cek No.Kartu PCare", "pcare.png", akses::getpcare_cek_kartu)
+            .buka(() -> new PCareCekKartu(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnPCarePendaftaran", "Data Pendaftaran PCare", "pcare.png", akses::getbridging_pcare_daftar)
+            .buka(() -> new PCareDataPendaftaran(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnCekPCareRujukan", "Cek Rujukan PCare", "pcare.png", akses::getpcare_cek_rujukan)
+            .buka(() -> new PCareCekRujukan(u,false));
+        m.tambah("btnPCareBeriObat", "Pemberian Obat PCare", "pcare.png", akses::getpcare_pemberian_obat)
+            .buka(() -> new PCareDataPemberianObat(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnPCareBeriTindakan", "Pemberian Tindakan PCare", "pcare.png", akses::getpcare_pemberian_tindakan)
+            .buka(() -> new PCareDataPemberianTindakan(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnCekSisruteFaskes", "Referensi Faskes Sisrute", "industry.png", akses::getsisrute_referensi_faskes)
+            .buka(() -> new SisruteCekReferensiFaskes(u,false));
+        m.tambah("btnCekSisruteAlasanRujuk", "Referensi Alasan Rujuk Sisrute", "if_todo_list_add_17451.png", akses::getsisrute_referensi_alasanrujuk)
+            .buka(() -> new SisruteCekReferensiAlasanRujuk(u,false));
+        m.tambah("btnCekSisruteDiagnosa", "Referensi Diagnosa Sisrute", "Gnome-X-Office-Address-Book-48.png", akses::getsisrute_referensi_diagnosa)
+            .buka(() -> new SisruteCekReferensiDiagnosa(u,false));
+        m.tambah("btnRujukanMasukSisrute", "Rujukan Masuk Sisrute", "iconfinder_analysis_60159.png", akses::getsisrute_rujukan_masuk)
+            .buka(() -> new SisruteRujukanMasukan(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnRujukanKeluarSisrute", "Rujukan Keluar Sisrute", "1485357758_Doctor.png", akses::getsisrute_rujukan_keluar)
+            .buka(() -> new SisruteRujukanKeluar(u,false)).sebelum(f -> { f.isCek(); f.tutupInput(); });
+        m.tambah("btnSiranapKetersediaanKamar", "Ketersediaan Kamar SIRANAP", "1485357524_Company.png", akses::getsiranap_ketersediaan_kamar)
+            .buka(() -> new SiranapKetersediaanKamar(u,false));
+        m.tambah("btnPasienCorona", "Pasien Corona", "iconfinder_fever-illness-sick-temperature-thermomete_5994873.png", akses::getpasien_corona)
+            .buka(() -> new CoronaPasien(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnDiagnosaPasienCorona", "Diagnosa Pasien Corona", "iconfinder_Dna-genetics-genomic-strand-virus_5994869.png", akses::getdiagnosa_pasien_corona)
+            .buka(() -> new CoronaDiagnosa(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnPerawatanPasienCorona", "Perawatan Pasien Corona", "iconfinder_Night-sleep-sleeping-health_5994844.png", akses::getperawatan_pasien_corona)
+            .buka(() -> new INACBGPerawatanCorona(u,false)).sebelum(f -> { f.isCek(); f.tampil(); });
+        m.tambah("btnReferensiPendaftaranMobileJKN", "Referensi Pendaftaran Mobile JKN", "iconfinder_Hospital_5947112.png", akses::getreferensi_mobilejkn_bpjs)
+            .buka(() -> new MobileJKNReferensiPendaftaran(u,false));
+        m.tambah("btnBatalPendaftaranMobileJKN", "Batal Pendaftaran Mobile JKN", "iconfinder_Analysis-Case-Document-Virus-History_5958953.png", akses::getbatal_pendaftaran_mobilejkn_bpjs)
+            .buka(() -> new MobileJKNPembatalanPendaftaran(u,false));
+        m.tambah("btnAkunRekeningHtHBankJateng", "Host To Host Bank Jateng", "bankjateng.png", akses::getakun_host_to_host_bank_jateng)
+            .buka(() -> new AkunRekeningBankJateng(u,false));
+        m.tambah("btnAkunRekeningHtHBankJabar", "Host To Host Bank Jabar", "bankbjb.png", akses::getakun_host_to_host_bank_jabar)
+            .buka(() -> new AkunRekeningBankJabar(u,false));
+        m.tambah("btnIntegrasiBRIApi", "Integrasi BRI API", "briapi.png", akses::getintegrasi_briapi)
+            .buka(() -> new BRIApiIntegrasi(u,false));
+        m.tambah("btnAkunRekeningHtHBankPapua", "Host To Host Bank Papua", "bankpapua.jpg", akses::getakun_host_to_host_bank_papua)
+            .buka(() -> new AkunRekeningBankPapua(u,false));
+        m.tambah("btnHostToHostBankMandiri", "Host To Host Bank Mandiri", "mandiri.png", akses::getakun_host_to_host_bank_mandiri)
+            .buka(() -> new AkunRekeningBankMandiri(u,false)).sebelum(f -> f.emptTeks());
+        m.tambah("btnMandiriMetodePembayaran", "Metode Pembayaran Bank Mandiri", "mandiri.png", akses::getmetode_pembayaran_bankmandiri)
+            .buka(() -> new MandiriMetodePembayaran(u,false));
+        m.tambah("btnMandiriBankTujuanTRansfer", "Bank Tujuan Transfer Bank Mandiri", "mandiri.png", akses::getbank_tujuan_transfer_bankmandiri)
+            .buka(() -> new MandiriBankTujuanTransfer(u,false));
+        m.tambah("btnMandiriKodeTransaksiTujuanTRansfer", "Kode Transaksi Tujuan Transfer Bank Mandiri", "mandiri.png", akses::getkodetransaksi_tujuan_transfer_bankmandiri)
+            .buka(() -> new MandiriKodeTransaksiTujuanTransfer(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnReferensiDokterSatuSehat", "Referensi Praktisi Satu Sehat", "satusehat.png", akses::getsatu_sehat_referensi_dokter)
+            .buka(() -> new SatuSehatReferensiPraktisi(u,false));
+        m.tambah("btnReferensiPasienSatuSehat", "Referensi Pasien Satu Sehat", "satusehat.png", akses::getsatu_sehat_referensi_pasien)
+            .buka(() -> new SatuSehatReferensiPasien(u,false));
+        m.tambah("btnMappingOrganisasiSatuSehat", "Mapping Organisasi Satu Sehat", "satusehat.png", akses::getsatu_sehat_mapping_departemen)
+            .buka(() -> new SatuSehatMapingOrganisasi(u,false)).sesudah(f -> f.isCek());
+        m.tambah("btnMappingLokasiSatuSehat", "Mapping Lokasi Satu Sehat", "satusehat.png", akses::getsatu_sehat_mapping_lokasi)
+            .buka(() -> new SatuSehatMapingLokasi(u,false)).sesudah(f -> f.isCek());
+        m.tambah("btnMappingVaksinSatuSehat", "Mapping Vaksin Satu Sehat", "satusehat.png", akses::getsatu_sehat_mapping_vaksin)
+            .buka(() -> new SatuSehatMapingVaksin(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnKirimEncounterSatuSehat", "Kirim Encounter Satu Sehat", "satusehat.png", akses::getsatu_sehat_kirim_encounter)
+            .buka(() -> new SatuSehatKirimEncounter(u,false)).sesudah(f -> f.isCek());
+        m.tambah("btnKirimConditionSatuSehat", "Kirim Condition Satu Sehat", "satusehat.png", akses::getsatu_sehat_kirim_condition)
+            .buka(() -> new SatuSehatKirimCondition(u,false)).sesudah(f -> f.isCek());
+        m.tambah("btnKirimObservationTTVSatuSehat", "Kirim Observation-TTV Satu Sehat", "satusehat.png", akses::getsatu_sehat_kirim_observationttv)
+            .buka(() -> new SatuSehatKirimObservationTTV(u,false)).sesudah(f -> f.isCek());
+        m.tambah("btnKirimProcedureSatuSehat", "Kirim Procedure Satu Sehat", "satusehat.png", akses::getsatu_sehat_kirim_procedure)
+            .buka(() -> new SatuSehatKirimProcedure(u,false)).sesudah(f -> f.isCek());
+        m.tambah("btnKirimVaksinSatuSehat", "Kirim Imunisasi Satu Sehat", "satusehat.png", akses::getsatu_sehat_kirim_Immunization)
+            .buka(() -> new SatuSehatKirimVaksin(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnKirimClinicalImpressionSatuSehat", "Kirim Clinical Impression Satu Sehat", "satusehat.png", akses::getsatu_sehat_kirim_clinicalimpression)
+            .buka(() -> new SatuSehatKirimClinicalImpression(u,false));
+        m.tambah("btnKirimDietSatuSehat", "Kirim Diet Satu Sehat", "satusehat.png", akses::getsatu_sehat_kirim_diet)
+            .buka(() -> new SatuSehatKirimDiet(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnMappingObatSatuSehat", "Mapping Obat/Alkes/BHP Satu Sehat", "satusehat.png", akses::getsatu_sehat_mapping_obat)
+            .buka(() -> new SatuSehatMapingObatAlkes(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnKirimMedicationSatuSehat", "Kirim Medication Satu Sehat", "satusehat.png", akses::getsatu_sehat_kirim_medication)
+            .buka(() -> new SatuSehatKirimMedication(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnKirimMedicationRequestSatuSehat", "Kirim Medication Request Satu Sehat", "satusehat.png", akses::getsatu_sehat_kirim_medicationrequest)
+            .buka(() -> new SatuSehatKirimMedicationRequest(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnKirimMedicationDispenseSatuSehat", "Kirim Medication Dispense Satu Sehat", "satusehat.png", akses::getsatu_sehat_kirim_medicationdispense)
+            .buka(() -> new SatuSehatKirimMedicationDispense(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnKirimMedicationStatementSatuSehat", "Kirim Medication Statement Satu Sehat", "satusehat.png", akses::getsatu_sehat_kirim_medicationstatement)
+            .buka(() -> new SatuSehatKirimMedicationStatement(u,false));
+        m.tambah("btnKirimQRTelaahFarmasiSatuSehat", "Kirim Q.R. Telaah Farmasi Satu Sehat", "satusehat.png", akses::getsatu_sehat_kirim_questionresponse_telaah_farmasi)
+            .buka(() -> new SatuSehatKirimQRTelaahFarmasi(u,false)).sesudah(f -> f.isCek());
+        m.tambah("btnKirimAllergiSatuSehat", "Kirim Allergy Intolerance Satu Sehat", "satusehat.png", akses::getsatu_sehat_kirim_allergy_intolerance)
+            .buka(() -> new SatuSehatKirimAllergyIntolerance(u,false)).sesudah(f -> f.isCek());
+        m.tambah("btnMapingTarifTindakanRalanKPTLSatuSehat", "Mapping Tindakan Ralan KPTL Satu Sehat", "satusehat.png", akses::getsatu_sehat_mapping_kptl_tindakan_ralan)
+            .buka(() -> new SatuSehatMapingTindakanRalanKPTL(u,false)).sesudah(f -> f.isCek());
+        m.tambah("btnMapingTarifTindakanRanapKPTLSatuSehat", "Mapping Tindakan Ranap KPTL Satu Sehat", "satusehat.png", akses::getsatu_sehat_mapping_kptl_tindakan_ranap)
+            .buka(() -> new SatuSehatMapingTindakanRanapKPTL(u,false)).sesudah(f -> f.isCek());
+        m.tambah("btnMapingTarifTindakanRadiologiKPTLSatuSehat", "Mapping Tindakan Radiologi KPTL Satu Sehat", "satusehat.png", akses::getsatu_sehat_mapping_kptl_tindakan_radiologi)
+            .buka(() -> new SatuSehatMapingTindakanRadiologiKPTL(u,false)).sesudah(f -> f.isCek());
+        m.tambah("btnMapingTarifTindakanLabKPTLSatuSehat", "Mapping Tindakan Lab KPTL Satu Sehat", "satusehat.png", akses::getsatu_sehat_mapping_kptl_tindakan_laborat)
+            .buka(() -> new SatuSehatMapingTindakanLaboratKPTL(u,false)).sesudah(f -> f.isCek());
+        m.tambah("btnMapingTarifTindakanOperasiKPTLSatuSehat", "Mapping Tindakan Operasi KPTL Satu Sehat", "satusehat.png", akses::getsatu_sehat_mapping_kptl_tindakan_operasi)
+            .buka(() -> new SatuSehatMapingTindakanOperasiKPTL(u,false)).sesudah(f -> f.isCek());
+        m.tambah("btnMapingTarifKamarKPTLSatuSehat", "Mapping Tarif Kamar KPTL Satu Sehat", "satusehat.png", akses::getsatu_sehat_mapping_kptl_tarif_kamar)
+            .buka(() -> new SatuSehatMapingTarifKamarKPTL(u,false)).sesudah(f -> f.isCek());
+        m.tambah("btnBridgingCompositionRMESatuSehat", "Kirim Composition Satu Sehat", "satusehat.png", akses::getsatu_sehat_kirim_composition)
+            .buka(() -> new SatuSehatKirimCompositionRME(u,false)).sesudah(f -> f.isCek());
+        m.tambah("btnBridgingTTESatuSehat", "Bridging TTE Satu Sehat", "satusehat.png", akses::getsatu_sehat_tanda_tangan_elektronik)
+            .buka(() -> new SatuSehatBridgingTTE(u,false)).sesudah(f -> f.isCek());
+        m.tambah("btnMappingRadiologiSatuSehat", "Mapping Tindakan Radiologi Satu Sehat", "satusehat.png", akses::getsatu_sehat_mapping_radiologi)
+            .buka(() -> new SatuSehatMapingRadiologi(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnMappingLaboratSatuSehat", "Mapping Tindakan Lab PK & MB Satu Sehat", "satusehat.png", akses::getsatu_sehat_mapping_lab)
+            .buka(() -> new SatuSehatMapingLaborat(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnKirimServiceRequestRadiologiSatuSehat", "Kirim Service Request Radiologi Satu Sehat", "satusehat.png", akses::getsatu_sehat_kirim_servicerequest_radiologi)
+            .buka(() -> new SatuSehatKirimServiceRequestRadiologi(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnKirimSpecimenRadiologiSatuSehat", "Kirim Specimen Radiologi Satu Sehat", "satusehat.png", akses::getsatu_sehat_kirim_specimen_radiologi)
+            .buka(() -> new SatuSehatKirimSpecimenRadiologi(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnKirimObservationRadiologiSatuSehat", "Kirim Observation Radiologi Satu Sehat", "satusehat.png", akses::getsatu_sehat_kirim_observation_radiologi)
+            .buka(() -> new SatuSehatKirimObservationRadiologi(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnKirimDiagnosticReportSatuSehat", "Kirim Diagnostic Report Radiologi Satu Sehat", "satusehat.png", akses::getsatu_sehat_kirim_diagnosticreport_radiologi)
+            .buka(() -> new SatuSehatKirimDiagnosticReportRadiologi(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnKirimServiceRequestLabPKSatuSehat", "Kirim Service Request Lab PK Satu Sehat", "satusehat.png", akses::getsatu_sehat_kirim_servicerequest_lab)
+            .buka(() -> new SatuSehatKirimServiceRequestLabPK(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnKirimSpecimenLabPKSatuSehat", "Kirim Specimen Lab PK Satu Sehat", "satusehat.png", akses::getsatu_sehat_kirim_specimen_lab)
+            .buka(() -> new SatuSehatKirimSpecimenLabPK(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnKirimObservationLabPKSatuSehat", "Kirim Observation Lab PK Satu Sehat", "satusehat.png", akses::getsatu_sehat_kirim_observation_lab)
+            .buka(() -> new SatuSehatKirimObservationLabPK(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnKirimDiagnosticReportLabPKSatuSehat", "Kirim Diagnostic Report Lab PK Satu Sehat", "satusehat.png", akses::getsatu_sehat_kirim_diagnosticreport_lab)
+            .buka(() -> new SatuSehatKirimDiagnosticReportLabPK(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnKirimServiceRequestLabMBSatuSehat", "Kirim Service Request Lab MB Satu Sehat", "satusehat.png", akses::getsatu_sehat_kirim_servicerequest_labmb)
+            .buka(() -> new SatuSehatKirimServiceRequestLabMB(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnKirimSpecimenLabMBSatuSehat", "Kirim Specimen Lab MB Satu Sehat", "satusehat.png", akses::getsatu_sehat_kirim_specimen_labmb)
+            .buka(() -> new SatuSehatKirimSpecimenLabMB(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnKirimObservationLabMBSatuSehat", "Kirim Observation Lab MB Satu Sehat", "satusehat.png", akses::getsatu_sehat_kirim_observation_labmb)
+            .buka(() -> new SatuSehatKirimObservationLabMB(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnKirimDiagnosticReportLabMBSatuSehat", "Kirim Diagnostic Report Lab MB Satu Sehat", "satusehat.png", akses::getsatu_sehat_kirim_diagnosticreport_labmb)
+            .buka(() -> new SatuSehatKirimDiagnosticReportLabMB(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnKirimCarePlanSatuSehat", "Kirim Care Plan Satu Sehat", "satusehat.png", akses::getsatu_sehat_kirim_careplan)
+            .buka(() -> new SatuSehatKirimCarePlan(u,false));
+        m.tambah("btnReferensiPoliMobileJKNFKTP", "Referensi Poli Mobile JKN FKTP", "5994859_building_clinic_health_hospital_medical_icon.png", akses::getreferensi_poli_mobilejknfktp)
+            .buka(() -> new MobileJKNFKTPReferensiPoli(u,false));
+        m.tambah("btnReferensiDokterMobileJKNFKTP", "Referensi Dokter Mobile JKN FKTP", "5958331_disease_doctor_epidemic_hospital_infection_icon.png", akses::getreferensi_dokter_mobilejknfktp)
+            .buka(() -> new MobileJKNFKTPReferensiDokter(u,false));
+        m.tambah("btnRekapKeluarDutaParking", "Rekap Keluar Duta Parking", "22989_cabriolet_car_mazda_red_transport_icon.png", akses::getduta_parkir_rekap_keluar)
+            .buka(() -> new DutaParkingRekapKeluar(u,false)).sebelum(f -> f.isCek());
+    }
+
+    /** [M] Olah Data Rekam Medis Pasien */
+    private void kategoriM(){
+        m.kategori(12);
+        m.tambah("btnPerusahaan", "Instansi/Perusahaan Pasien", "1485357524_Company.png", akses::getperusahaan_pasien)
+            .buka(() -> new DlgPerusahaan(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnSuku", "Suku/Bangsa Pasien", "if_Login Manager_3503.png", akses::getsuku_bangsa)
+            .buka(() -> new DlgSuku(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnBahasa", "Bahasa Pasien", "if_Orange forum_54521.png", akses::getbahasa_pasien)
+            .buka(() -> new DlgBahasa(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnGolonganTNI", "Golongan TNI", "if_advantage_teamwork_1034367.png", () -> u.isTNI()&&akses.getgolongan_tni())
+            .buka(() -> new DlgGolonganTNI(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnSatuanTNI", "Satuan TNI", "if_17_2959846.png", () -> u.isTNI()&&akses.getsatuan_tni())
+            .buka(() -> new DlgSatuanTNI(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnJabatanTNI", "Jabatan TNI", "if_house_kitchen_table_1378836.png", () -> u.isTNI()&&akses.getjabatan_tni())
+            .buka(() -> new DlgJabatanTNI(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnPangkatTNI", "Pangkat TNI", "if_23_Page_Rank_Badge_1688850.png", () -> u.isTNI()&&akses.getpangkat_tni())
+            .buka(() -> new DlgPangkatTNI(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnGolonganPolri", "Golongan POLRI", "if_advantage_teamwork_1034367.png", () -> u.isTNI()&&akses.getgolongan_polri())
+            .buka(() -> new DlgGolonganPolri(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnSatuanPolri", "Satuan POLRI", "if_17_2959846.png", () -> u.isTNI()&&akses.getsatuan_polri())
+            .buka(() -> new DlgSatuanPolri(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnJabatanPolri", "Jabatan POLRI", "if_house_kitchen_table_1378836.png", () -> u.isTNI()&&akses.getjabatan_polri())
+            .buka(() -> new DlgJabatanPolri(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnPangkatPolri", "Pangkat POLRI", "if_23_Page_Rank_Badge_1688850.png", () -> u.isTNI()&&akses.getpangkat_polri())
+            .buka(() -> new DlgPangkatPolri(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnCacatFisik", "Cacat Fisik", "plaster.png", akses::getcacat_fisik)
+            .buka(() -> new DlgCacatFisik(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnPasien", "Pasien", "patient.png", akses::getpasien)
+            .buka(() -> new DlgPasien(null,false)).sebelum(f -> { f.emptTeks(); f.isCek(); });
+        m.tambah("btnLahir", "Kelahiran Bayi", "baby-girl.png", akses::getkelahiran_bayi)
+            .buka(() -> new DlgIKBBayi(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); });
+        m.tambah("btnCatatanPasien", "Catatan Pasien", "kwrite.png", akses::getcatatan_pasien)
+            .buka(() -> new DlgLhtCatatanPasien(u,false));
+        m.tambah("btnPasienMati", "Pasien Meninggal", "Ambulance.png", akses::getpasien_meninggal)
+            .buka(() -> new DlgPasienMati(u,false)).sebelum(f -> { f.emptTeks(); f.isCek(); });
+        m.tambah("btnDiagnosa", "Diagnosa Pasien", "health.png", akses::getdiagnosa_pasien)
+            .buka(() -> new DlgDiagnosaPenyakit(null,false)).sebelum(f -> f.isCek());
+        m.tambah("btnInsidenKeselamatan", "Insiden Keselamatan", "1481002123_wheelchair.png", akses::getinsiden_keselamatan)
+            .buka(() -> new DlgInsidenKeselamatan(u,false)).sebelum(f -> f.emptTeks());
+        m.tambah("btnDataHAIs", "Data HAIs", "1360816018_tests.png", akses::getdata_HAIs)
+            .buka(() -> new DlgDataHAIs(u,false)).sebelum(f -> { f.isCek(); f.tampil(); });
+        m.tambah("btnKlasifikasiPasienRanap", "Klasifikasi Pasien Ranap", "iconfinder_clipboard_6586111.png", akses::getklasifikasi_pasien_ranap)
+            .buka(() -> new DlgDataKlasifikasiPasienRanap(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnSOAPPerawatan", "SOAP Perawatan", "iconfinder_patient-health_report-graph-coronavirus_6000116.png", akses::getsoap_perawatan)
+            .buka(() -> new DlgSOAPPerawatan(u,false));
+        m.tambah("btnSOAPRalanAnggotaPolri", "SOAP Ralan Anggota POLRI", "iconfinder_patient-health_report-graph-coronavirus_6000116.png", () -> u.isTNI()&&akses.getsoap_ralan_polri())
+            .buka(() -> new DlgSOAPRalanAggotaPolri(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnSOAPRanapAnggotaPolri", "SOAP Ranap Anggota POLRI", "iconfinder_patient-health_report-graph-coronavirus_6000116.png", () -> u.isTNI()&&akses.getsoap_ranap_polri())
+            .buka(() -> new DlgSOAPRanapAggotaPolri(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnSOAPRalanAnggotaTNI", "SOAP Ralan Anggota TNI", "iconfinder_patient-health_report-graph-coronavirus_6000116.png", () -> u.isTNI()&&akses.getsoap_ralan_tni())
+            .buka(() -> new DlgSOAPRalanAggotaTNI(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnSOAPRanapAnggotaTNI", "SOAP Ranap Anggota TNI", "iconfinder_patient-health_report-graph-coronavirus_6000116.png", () -> u.isTNI()&&akses.getsoap_ranap_tni())
+            .buka(() -> new DlgSOAPRanapAggotaTNI(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnRiwayatKamarPasien", "Riwayat Kamar Pasien", "iconfinder_Coronavirus-covid19-case-patient-hospital-treatment_6009596.png", akses::getriwayat_kamar_pasien)
+            .buka(() -> new RMRiwayatKamarPasien(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnInsidenKeselamatanPasien", "Data Insiden Keselamatan", "1485357758_Doctor.png", akses::getinsiden_keselamatan_pasien)
+            .buka(() -> new DlgDataInsidenKeselamatan(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnSirkulasiBerkas", "Peminjaman Berkas RM", "data_management.png", akses::getpeminjaman_berkas)
+            .buka(() -> new DlgSirkulasiBerkas(u,false)).sebelum(f -> { f.tampil(); f.emptTeks(); f.isCek(); });
+        m.tambah("btnResume", "Riwayat Perawatan", "1360816018_tests.png", akses::getresume_pasien)
+            .buka(() -> new RMRiwayatPerawatan(u,false));
+        m.tambah("btnRetensiRM", "Retensi Berkas R.M.", "reportorium.png", akses::getretensi_rm)
+            .aksi(u::btnRetensiRMActionPerformed);
+        m.tambah("btnMutasiBerkas", "Mutasi Berkas RM", "1360485642_edit-notes.png", akses::getmutasi_berkas)
+            .aksi(u::btnMutasiBerkasActionPerformed);
+        m.tambah("btnBerkasDigitalPerawatan", "Berkas Digital Perawatan", "if_folder_images_61610.png", akses::getberkas_digital_perawatan)
+            .aksi(u::btnBerkasDigitalPerawatanActionPerformed);
+        m.tambah("btnPengaduan", "Pengaduan/Chat", "if_message_add_17398.png", akses::getpengaduan_pasien)
+            .aksi(u::btnPengaduanActionPerformed);
+        m.tambah("btnMasterTriasePemeriksaan", "Master Triase Pemeriksaan", "iconfinder_stethoscope_38717.png", akses::getmaster_triase_pemeriksaan)
+            .buka(() -> new MasterTriasePemeriksaan(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnMasterTriaseMacamKasus", "Master Triase Macam Kasus", "iconfinder_briefcase_45523.png", akses::getmaster_triase_macamkasus)
+            .buka(() -> new MasterTriaseMacamKasus(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnMasterTriaseSkala1", "Master Triase Skala 1", "cpr.png", akses::getmaster_triase_skala1)
+            .buka(() -> new MasterTriaseSkala1(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnMasterTriaseSkala2", "Master Triase Skala 2", "iconfinder_emergency_45491.png", akses::getmaster_triase_skala2)
+            .buka(() -> new MasterTriaseSkala2(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnMasterTriaseSkala3", "Master Triase Skala 3", "iconfinder_dialog-warning_118940.png", akses::getmaster_triase_skala3)
+            .buka(() -> new MasterTriaseSkala3(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnMasterTriaseSkala4", "Master Triase Skala 4", "iconfinder_Male-User-Warning_49595.png", akses::getmaster_triase_skala4)
+            .buka(() -> new MasterTriaseSkala4(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnMasterTriaseSkala5", "Master Triase Skala 5", "user-group-new.png", akses::getmaster_triase_skala5)
+            .buka(() -> new MasterTriaseSkala5(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnDataTriaseIGD", "Data Triase IGD", "iconfinder_h2_19724.png", akses::getdata_triase_igd)
+            .buka(() -> new RMTriaseIGD(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnResumePasien", "Resume Pasien Ralan", "iconfinder_icon-56-document-text_314896.png", akses::getdata_resume_pasien)
+            .buka(() -> new RMDataResumePasien(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnResumePasienRanap", "Resume Pasien Ranap", "iconfinder_icon-56-document-text_314896.png", akses::getdata_resume_pasien)
+            .buka(() -> new RMDataResumePasienRanap(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnSkriningGiziLanjut", "Skrining Gizi Lanjut", "iconfinder_green_curry_3377058.png", akses::getskrining_gizi)
+            .buka(() -> new RMDataSkriningGiziLanjut(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnAsuhanGizi", "Asuhan Gizi", "iconfinder_cake_3_61139.png", akses::getasuhan_gizi)
+            .buka(() -> new RMDataAsuhanGizi(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnMonitoringAsuhanGizi", "Monitoring Asuhan Gizi", "iconfinder_constr_account_statements_1267308.png", akses::getmonitoring_asuhan_gizi)
+            .buka(() -> new RMDataMonitoringAsuhanGizi(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnCatatanADIMEGizi", "Catatan ADIME Gizi", "6771580_book_education_learning_school_science_icon.png", akses::getcatatan_adime_gizi)
+            .buka(() -> new RMCatatanADIMEGizi(u,false)).sebelum(f -> { f.isCek(); f.tampil(); });
+        m.tambah("btnSkriningNutrisiDewasa", "Skrining Nutrisi Pasien Dewasa", "5980339_eat_food_fruit_healthy_meal_icon.png", akses::getskrining_nutrisi_dewasa)
+            .buka(() -> new RMSkriningNutrisiDewasa(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); });
+        m.tambah("btnSkriningNutrisiLansia", "Skrining Nutrisi Pasien Lansia", "5994849_food_health_hot_meal_restaurant_icon.png", akses::getskrining_nutrisi_lansia)
+            .buka(() -> new RMSkriningNutrisiLansia(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); });
+        m.tambah("btnSkriningNutrisiAnak", "Skrining Nutrisi Pasien Anak", "6141442_covid19_food_health_eat hot food and use serving spoon_virus transmission_icon.png", akses::getskrining_nutrisi_anak)
+            .buka(() -> new RMSkriningNutrisiAnak(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); });
+        m.tambah("btnSkriningGiziKehamilan", "Skrining Gizi Kehamilan", "meal_4814223.png", akses::getskrining_gizi_kehamilan)
+            .buka(() -> new RMDataSkriningGiziKehamilan(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnMasterTemplateHasilRadiologi", "Master Template Hasil Radiologi", "6771602_book shelf_books_education_learning_school_icon.png", akses::gettemplate_hasil_radiologi)
+            .buka(() -> new MasterTemplateHasilRadiologi(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); f.setTampil(); });
+        m.tambah("btnMasterTemplateLaporanOperasi", "Master Template Laporan Operasi", "5983459_avatar_coronavirus_covid19_doctor_health_icon.png", akses::gettemplate_laporan_operasi)
+            .buka(() -> new MasterTemplateLaporanOperasi(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); f.setTampil(); });
+        m.tambah("btnMasterTemplatePemeriksaanDokter", "Master Template Pemeriksaan", "templatepemeriksaan.png", akses::gettemplate_pemeriksaan)
+            .buka(() -> new MasterTemplatePemeriksaanDokter(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); f.setTampil(); });
+        m.tambah("btnMasterTemplateInformasiEdukasi", "Master Template Informasi & Edukasi", "11211459_whiteboard_canvas_education_school_classroom_icon.png", akses::gettemplate_pelaksanaan_informasi_edukasi)
+            .buka(() -> new MasterTemplateInformasiEdukasi(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnMasterMasalahKeperawatan", "Master Masalah Keperawatan", "iconfinder__bed_rest_sleep_sick_patient_bed_rest_5928511.png", akses::getmaster_masalah_keperawatan)
+            .buka(() -> new MasterMasalahKeperawatan(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnMasterRencanaKeperawatan", "Master Rencana Keperawatan", "iconfinder__bed_rest_sleep_sick_patient_bed_rest_5928511.png", akses::getmaster_rencana_keperawatan)
+            .buka(() -> new MasterRencanaKeperawatan(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnMasterMasalahKeperawatanGigi", "Master Masalah Keperawatan Gigi", "iconfinder_healthcare_and_medical-hygienic-tooth_paste-toothpaste-toothbrush-health_care_4394831.png", akses::getmaster_masalah_keperawatan_gigi)
+            .buka(() -> new MasterMasalahKeperawatanGigi(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnMasterRencanaKeperawatanGigi", "Master Rencana Keperawatan Gigi", "iconfinder_healthcare_and_medical-hygienic-tooth_paste-toothpaste-toothbrush-health_care_4394831.png", akses::getmaster_rencana_keperawatan_gigi)
+            .buka(() -> new MasterRencanaKeperawatanGigi(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnMasterMasalahKeperawatanAnak", "Master Masalah Keperawatan Bayi/Anak", "baby-boy.png", akses::getmaster_masalah_keperawatan_anak)
+            .buka(() -> new MasterMasalahKeperawatanAnak(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnMasterRencanaKeperawatanAnak", "Master Rencana Keperawatan Bayi/Anak", "baby-boy.png", akses::getmaster_rencana_keperawatan_anak)
+            .buka(() -> new MasterRencanaKeperawatanAnak(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnMasterMasalahKeperawatanMata", "Master Masalah Keperawatan Mata", "85364_eye_icon.png", akses::getmaster_masalah_keperawatan_mata)
+            .buka(() -> new MasterMasalahKeperawatanMata(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnMasterRencanaKeperawatanMata", "Master Rencana Keperawatan Mata", "85364_eye_icon.png", akses::getmaster_rencana_keperawatan_mata)
+            .buka(() -> new MasterRencanaKeperawatanMata(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnMasterMasalahKeperawatanIGD", "Master Masalah Keperawatan IGD", "iconfinder_30-Doctor_5929214.png", akses::getmaster_masalah_keperawatan_igd)
+            .buka(() -> new MasterMasalahKeperawatanIGD(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnMasterRencanaKeperawatanIGD", "Master Rencana Keperawatan IGD", "iconfinder_30-Doctor_5929214.png", akses::getmaster_rencana_keperawatan_igd)
+            .buka(() -> new MasterRencanaKeperawatanIGD(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnMasterMasalahKeperawatanPsikiatri", "Master Masalah Keperawatan Psikiatri", "3380376_analytical_brain_creative_intelligence_mindset_icon.png", akses::getmaster_masalah_keperawatan_psikiatri)
+            .buka(() -> new MasterMasalahKeperawatanPsikiatri(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnMasterRencanaKeperawatanPsikiatri", "Master Rencana Keperawatan Psikiatri", "3380376_analytical_brain_creative_intelligence_mindset_icon.png", akses::getmaster_rencana_keperawatan_psikiatri)
+            .buka(() -> new MasterRencanaKeperawatanPsikiatri(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnMasterMasalahKeperawatanGeriatri", "Master Masalah Keperawatan Geriatri", "3099440_old_man_icon.png", akses::getmaster_masalah_keperawatan_geriatri)
+            .buka(() -> new MasterMasalahKeperawatanGeriatri(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnMasterRencanaKeperawatanGeriatri", "Master Rencana Keperawatan Geriatri", "3099440_old_man_icon.png", akses::getmaster_rencana_keperawatan_geriatri)
+            .buka(() -> new MasterRencanaKeperawatanGeriatri(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnMasterMasalahKeperawatanNeonatus", "Master Masalah Keperawatan Neonatus", "3231119_baby_cartoon_child_family_kid_icon.png", akses::getmaster_masalah_keperawatan_neonatus)
+            .buka(() -> new MasterMasalahKeperawatanNeonatus(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnMasterRencanaKeperawatanNeonatus", "Master Rencana Keperawatan Neonatus", "3231119_baby_cartoon_child_family_kid_icon.png", akses::getmaster_rencana_keperawatan_neonatus)
+            .buka(() -> new MasterRencanaKeperawatanNeonatus(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnMasterImunisasi", "Master Imunisasi", "iconfinder_19-tube_5980344.png", akses::getmaster_imunisasi)
+            .buka(() -> new MasterImunisasi(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnPenilaianAwalKeperawatanRalan", "Awal Keperawatan Ralan Umum", "iconfinder_report-clipboard-medical-checklist-healthcare_5859123.png", akses::getpenilaian_awal_keperawatan_ralan)
+            .buka(() -> new RMPenilaianAwalKeperawatanRalan(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); f.setTampil(); });
+        m.tambah("btnPenilaianAwalKeperawatanRanap", "Awal Keperawatan Ranap Umum", "iconfinder_report-clipboard-medical-checklist-healthcare_5859123.png", akses::getpenilaian_awal_keperawatan_ranap)
+            .buka(() -> new RMPenilaianAwalKeperawatanRanap(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); f.setTampil(); });
+        m.tambah("btnPenilaianAwalKeperawatanIGD", "Awal Keperawatan IGD", "iconfinder_AMBULANCE-transport-health_care-transportation-urgency_6007988.png", akses::getpenilaian_awal_keperawatan_igd)
+            .buka(() -> new RMPenilaianAwalKeperawatanIGD(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); f.setTampil(); });
+        m.tambah("btnPenilaianAwalKeperawatanGigi", "Awal Keperawatan Gigi", "iconfinder_09-report_5980350.png", akses::getpenilaian_awal_keperawatan_gigi)
+            .buka(() -> new RMPenilaianAwalKeperawatanGigi(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); f.setTampil(); });
+        m.tambah("btnPenilaianAwalKeperawatanKebidanan", "Awal Keperawatan Ralan Kebidanan", "iconfinder_209-pregnant-woman-2_3099532.png", akses::getpenilaian_awal_keperawatan_kebidanan)
+            .buka(() -> new RMPenilaianAwalKeperawatanKebidanan(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); f.setTampil(); });
+        m.tambah("btnPenilaianAwalKeperawatanKebidananRanap", "Awal Keperawatan Ranap Kebidanan", "iconfinder_209-pregnant-woman-2_3099532.png", akses::getpenilaian_awal_keperawatan_ranapkebidanan)
+            .buka(() -> new RMPenilaianAwalKeperawatanKebidananRanap(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); f.setTampil(); });
+        m.tambah("btnPenilaianAwalRalanBayi", "Awal Keperawatan Ralan Bayi/Anak", "baby-cot.png", akses::getpenilaian_awal_keperawatan_anak)
+            .buka(() -> new RMPenilaianAwalKeperawatanBayiAnak(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); f.setTampil(); });
+        m.tambah("btnPenilaianAwalKeperawatanRanapBayiAnak", "Awal Keperawatan Ranap Bayi/Anak", "baby-cot.png", akses::getpenilaian_awal_keperawatan_ranap_bayi)
+            .buka(() -> new RMPenilaianAwalKeperawatanRanapBayiAnak(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); f.setTampil(); });
+        m.tambah("btnPenilaianAwalKeperawatanRalanPsikiatri", "Awal Keperawatan Ralan Psikiatri", "5898990_blood_clipboard_lab_report_test_icon.png", akses::getpenilaian_awal_keperawatan_psikiatri)
+            .buka(() -> new RMPenilaianAwalKeperawatanRalanPsikiatri(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); f.setTampil(); });
+        m.tambah("btnPenilaianAwalKeperawatanRalanGeriatri", "Awal Keperawatan Ralan Geriatri", "7717242_grandmother_old_woman_female_avatar_icon.png", akses::getpenilaian_awal_keperawatan_ralan_geriatri)
+            .buka(() -> new RMPenilaianAwalKeperawatanRalanGeriatri(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); f.setTampil(); });
+        m.tambah("btnPenilaianAwalKeperawatanRanapNeonatus", "Awal Keperawatan Ranap Neonatus", "2363103_baby_boy_girl_kid_toy_icon.png", akses::getpenilaian_awal_keperawatan_ranap_neonatus)
+            .buka(() -> new RMPenilaianAwalKeperawatanRanapNeonatus(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); f.setTampil(); });
+        m.tambah("btnPenilaianAwalMedisIGD", "Awal Medis IGD", "5929223_avatar_fever_man_measure_sick_icon.png", akses::getpenilaian_awal_medis_igd)
+            .buka(() -> new RMPenilaianAwalMedisIGD(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); f.setTampil(); });
+        m.tambah("btnPenilaianAwalMedisRalanIGDPsikiatri", "Awal Medis IGD Psikiatri", "6141467_covid19_health_problem_tired_hard breathing_icon.png", akses::getpenilaian_medis_ralan_gawat_darurat_psikiatri)
+            .buka(() -> new RMPenilaianAwalMedisIGDPsikiatri(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); f.setTampil(); });
+        m.tambah("btnPenilaianAwalMedisRalan", "Awal Medis Ralan Umum", "5898992_bed_fever_ill_sick_temperature_icon.png", akses::getpenilaian_awal_medis_ralan)
+            .buka(() -> new RMPenilaianAwalMedisRalanDewasa(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); f.setTampil(); });
+        m.tambah("btnPenilaianAwalMedisRanap", "Awal Medis Ranap Umum", "5898992_bed_fever_ill_sick_temperature_icon.png", akses::getpenilaian_awal_medis_ranap)
+            .buka(() -> new RMPenilaianAwalMedisRanapDewasa(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); f.setTampil(); });
+        m.tambah("btnPenilaianAwalMedisRanapNeonatus", "Awal Medis Ranap Neonatus", "4043239_baby_child_kid_toddler_icon.png", akses::getpenilaian_awal_medis_ranap_neonatus)
+            .buka(() -> new RMPenilaianAwalMedisRanapNeonatus(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); f.setTampil(); });
+        m.tambah("btnPenilaianBayiBaruLahir", "Pengkajian Bayi Baru Lahir", "7717231_baby_kid_pushchair_buggy_pram_icon.png", akses::getpenilaian_bayi_baru_lahir)
+            .buka(() -> new RMPenilaianBayiBaruLahir(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); f.setTampil(); });
+        m.tambah("btnPenilaianAwalMedisRalanBayi", "Awal Medis Ralan Bayi/Anak", "7717226_baby_kid_people_maternity_human_icon.png", akses::getpenilaian_awal_medis_ralan_anak)
+            .buka(() -> new RMPenilaianAwalMedisRalanAnak(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); f.setTampil(); });
+        m.tambah("btnPenilaianAwalMedisRalanKandungan", "Awal Medis Ralan Kandungan", "7717224_pregnant_woman_pregnancy_baby_gestation_icon.png", akses::getpenilaian_awal_medis_ralan_kebidanan)
+            .buka(() -> new RMPenilaianAwalMedisRalanKandungan(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); f.setTampil(); });
+        m.tambah("btnPenilaianAwalMedisRanapKandungan", "Awal Medis Ranap Kandungan", "7717224_pregnant_woman_pregnancy_baby_gestation_icon.png", akses::getpenilaian_awal_medis_ranap_kebidanan)
+            .buka(() -> new RMPenilaianAwalMedisRanapKandungan(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); f.setTampil(); });
+        m.tambah("btnPenilaianAwalMedisRalanJantung", "Awal Medis Ralan Jantung", "6217204_anatomy_heart_human_medical_organ_icon.png", akses::getpenilaian_awal_medis_ralan_jantung)
+            .buka(() -> new RMPenilaianAwalMedisRalanJantung(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); f.setTampil(); });
+        m.tambah("btnPenilaianAwalMedisRanapJantung", "Awal Medis Ranap Jantung", "6217204_anatomy_heart_human_medical_organ_icon.png", akses::getpenilaian_awal_medis_ranap_jantung)
+            .buka(() -> new RMPenilaianAwalMedisRanapJantung(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); f.setTampil(); });
+        m.tambah("btnPenilaianAwalMedisRalanUrologi", "Awal Medis Ralan Urologi", "12321086_kidney_medical_health_organ_care_icon.png", akses::getpenilaian_awal_medis_ralan_urologi)
+            .buka(() -> new RMPenilaianAwalMedisRalanUrologi(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); f.setTampil(); });
+        m.tambah("btnHasilPemeriksaanUSG", "Hasil USG Kandungan", "375263_scan_scans_ultra sound_ultrasound_icon.png", akses::gethasil_pemeriksaan_usg)
+            .buka(() -> new RMHasilPemeriksaanUSG(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); f.setTampil(); });
+        m.tambah("btnHasilUSGUrologi", "Hasil USG Urologi", "6088090_disease_infected_infection_kidney_icon.png", akses::gethasil_usg_urologi)
+            .buka(() -> new RMHasilPemeriksaanUSGUrologi(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); f.setTampil(); });
+        m.tambah("btnHasilUSGGynecologi", "Hasil USG Gynecologi", "375257_uterus_icon.png", akses::gethasil_usg_gynecologi)
+            .buka(() -> new RMHasilPemeriksaanUSGGynecologi(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); f.setTampil(); });
+        m.tambah("btnHasilUSGNeonatus", "Hasil USG Neonatus", "7744782_mom_baby_mom and baby_mothers day_mother_icon.png", akses::gethasil_usg_neonatus)
+            .buka(() -> new RMHasilPemeriksaanUSGNeonatus(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); f.setTampil(); });
+        m.tambah("btnHasilUSGAbdomen", "Hasil USG Abdomen", "abs_3500353.png", akses::gethasil_pemeriksaan_usg_abdomen)
+            .buka(() -> new RMHasilPemeriksaanUSGAbdomen(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); f.setTampil(); });
+        m.tambah("btnPenilaianAwalMedisRalanTHT", "Awal Medis Ralan THT", "5868953_coronavirus_covid-19_nose_secretion_snot_icon.png", akses::getpenilaian_awal_medis_ralan_tht)
+            .buka(() -> new RMPenilaianAwalMedisRalanTHT(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); f.setTampil(); });
+        m.tambah("btnPenilaianAwalMedisRalanPsikiatri", "Awal Medis Ralan Psikiatri", "5856674_bacteria_brain_disease_encephalitis_healthy_icon.png", akses::getpenilaian_awal_medis_ralan_psikiatri)
+            .buka(() -> new RMPenilaianAwalMedisRalanPsikiatrik(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); f.setTampil(); });
+        m.tambah("btnPenilaianAwalMedisRanapPsikiatri", "Awal Medis Ranap Psikiatri", "5856674_bacteria_brain_disease_encephalitis_healthy_icon.png", akses::getpenilaian_medis_ranap_psikiatrik)
+            .buka(() -> new RMPenilaianAwalMedisRanapPsikiatrik(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); f.setTampil(); });
+        m.tambah("btnPenilaianAwalMedisRalanPenyakitDalam", "Awal Medis Ralan Penyakit Dalam", "5972291_ailment_disease_germ_illness_pathogen_icon.png", akses::getpenilaian_awal_medis_ralan_penyakit_dalam)
+            .buka(() -> new RMPenilaianAwalMedisRalanPenyakitDalam(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); f.setTampil(); });
+        m.tambah("btnPenilaianAwalMedisRalanMata", "Awal Medis Ralan Mata", "1459441_eye_holidays_anatomy_halloween_icon.png", akses::getpenilaian_awal_medis_ralan_mata)
+            .buka(() -> new RMPenilaianAwalMedisRalanMata(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); f.setTampil(); });
+        m.tambah("btnPenilaianAwalMedisRalanNeurologi", "Awal Medis Ralan Neurologi", "2730389_brain_divide_inkcontober_sains_icon.png", akses::getpenilaian_awal_medis_ralan_neurologi)
+            .buka(() -> new RMPenilaianAwalMedisRalanNeurologi(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); f.setTampil(); });
+        m.tambah("btnPenilaianAwalMedisRalanOrthopedi", "Awal Medis Ralan Orthopedi", "5859952_accident_injury_knee_leg_medical_icon.png", akses::getpenilaian_awal_medis_ralan_orthopedi)
+            .buka(() -> new RMPenilaianAwalMedisRalanOrthopedi(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); f.setTampil(); });
+        m.tambah("btnPenilaianAwalMedisRalanBedah", "Awal Medis Ralan Bedah", "8008238_knife_cut_cutlery_cutting_tools_icon.png", akses::getpenilaian_awal_medis_ralan_bedah)
+            .buka(() -> new RMPenilaianAwalMedisRalanBedah(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); f.setTampil(); });
+        m.tambah("btnPenilaianAwalMedisRalanBedahMulut", "Awal Medis Ralan Bedah Mulut", "5947116_avoid_do not_hand_mouth_touch_icon.png", akses::getpenilaian_awal_medis_ralan_bedah_mulut)
+            .buka(() -> new RMPenilaianAwalMedisRalanBedahMulut(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); f.setTampil(); });
+        m.tambah("btnPenilaianAwalMedisRalanGeriatri", "Awal Medis Ralan Geriatri", "5964799_ill_old man_patient_sick_sore throat_icon.png", akses::getpenilaian_awal_medis_ralan_geriatri)
+            .buka(() -> new RMPenilaianAwalMedisRalanGeriatri(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); f.setTampil(); });
+        m.tambah("btnPenilaianAwalMedisRalanKulitKelamin", "Awal Medis Ralan Kulit & Kelamin", "1343433_sex_penis_dildo_icon.png", akses::getpenilaian_awal_medis_ralan_kulit_kelamin)
+            .buka(() -> new RMPenilaianAwalMedisRalanKulitDanKelamin(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); f.setTampil(); });
+        m.tambah("btnPenilaianAwalMedisRalanParu", "Awal Medis Ralan Paru", "6217209_anatomy_human_lung_medical_organ_icon.png", akses::getpenilaian_awal_medis_ralan_paru)
+            .buka(() -> new RMPenilaianAwalMedisRalanParu(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); f.setTampil(); });
+        m.tambah("btnPenilaianAwalMedisRalanRehabMedik", "Awal Medis Ralan Fisik & Rehabilitasi", "6141446_convalescence_covid19_recovered_recuperate_rehabilitation_icon.png", akses::getpenilaian_medis_ralan_rehab_medik)
+            .buka(() -> new RMPenilaianAwalMedisRalanRehabMedik(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); f.setTampil(); });
+        m.tambah("btnPenilaianAwalMedisHemodialisa", "Awal Medis Pasien Hemodialisa", "6087984_disease_infected_infection_kidney_icon.png", akses::getpenilaian_medis_ralan_hemodialisa)
+            .buka(() -> new RMPenilaianAwalMedisHemodialisa(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); f.setTampil(); });
+        m.tambah("btnHasilPemeriksaanEKG", "Hasil Pemeriksaan EKG", "8960620_cardiogram_tape_cardiology_electrocardiography_electrocardiogram_icon.png", akses::gethasil_pemeriksaan_ekg)
+            .buka(() -> new RMHasilPemeriksaanEKG(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); f.setTampil(); });
+        m.tambah("btnHasilPemeriksaanTreadmill", "Hasil Pemeriksaan Treadmill", "11685378_running_walking_jogging_run_exercise_icon.png", akses::gethasil_pemeriksaan_treadmill)
+            .buka(() -> new RMHasilPemeriksaanTreadmill(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); f.setTampil(); });
+        m.tambah("btnHasilPemeriksaanSlitLamp", "Hasil Pemeriksaan Slit Lamp", "5173015_eye_focus_internet_scan_security_icon.png", akses::gethasil_pemeriksaan_slit_lamp)
+            .buka(() -> new RMHasilPemeriksaanSlitLamp(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); f.setTampil(); });
+        m.tambah("btnHasilPemeriksaanOCT", "Hasil Pemeriksaan OCT", "12689641_eye_tracking_target_behavior_vision_icon.png", akses::gethasil_pemeriksaan_oct)
+            .buka(() -> new RMHasilPemeriksaanOCT(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); f.setTampil(); });
+        m.tambah("btnHasilPemeriksaanECHO", "Hasil Pemeriksaan ECHO", "2104702_beat_health_healthcare_heart_heartbeat_icon.png", akses::gethasil_pemeriksaan_echo)
+            .buka(() -> new RMHasilPemeriksaanEcho(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); f.setTampil(); });
+        m.tambah("btnHasilPemeriksaanECHOPediatrik", "Hasil Pemeriksaan ECHO Pediatrik", "2104702_beat_health_healthcare_heart_heartbeat_icon.png", akses::gethasil_pemeriksaan_echo_pediatrik)
+            .buka(() -> new RMHasilPemeriksaanEchoPediatrik(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); f.setTampil(); });
+        m.tambah("btnHasilEndoskopiFaringLaring", "Hasil Endoskopi Faring/Laring", "8725899_ear_icon.png", akses::gethasil_endoskopi_faring_laring)
+            .buka(() -> new RMHasilEndoskopiFaringLaring(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); f.setTampil(); });
+        m.tambah("btnHasilEndoskopiHidung", "Hasil Endoskopi Hidung", "6088167_cold_disease_infection_nasal_nose_icon.png", akses::gethasil_endoskopi_hidung)
+            .buka(() -> new RMHasilEndoskopiHidung(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); f.setTampil(); });
+        m.tambah("btnHasilEndoskopiTelinga", "Hasil Endoskopi Telinga", "299079_headphone_icon.png", akses::gethasil_endoskopi_telinga)
+            .buka(() -> new RMHasilEndoskopiTelinga(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); f.setTampil(); });
+        m.tambah("btnPenilaianTambahanGeriatri", "Pengkajian Tambahan Pasien Geriatri", "6141440_boy_man_old_people_elderly and kid_icon.png", akses::getpenilaian_tambahan_pasien_geriatri)
+            .buka(() -> new RMPenilaianTambahanGeriatri(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); f.setTampil(); });
+        m.tambah("btnPenilaianTambahanBunuhDiri", "Pengkajian Tambahan Bunuh Diri", "6954610_blood_crime_kill_killer_knife_icon.png", akses::getpenilaian_tambahan_bunuh_diri)
+            .buka(() -> new RMPenilaianTambahanBunuhDiri(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); });
+        m.tambah("btnPenilaianTambahanPerilakuKekerasan", "Pengkajian Tambahan Perilaku Kekerasan", "9191525_nonviolence_violence_weapon_criminal_combat_icon.png", akses::getpenilaian_tambahan_perilaku_kekerasan)
+            .buka(() -> new RMPenilaianTambahanPerilakuKekerasan(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); });
+        m.tambah("btnPenilaianTambahanMelarikanDiri", "Pengkajian Tambahan Melarikan Diri", "6141439_healthcare_marathon_run_running_exercise regularly_icon.png", akses::getpenilaian_tambahan_beresiko_melarikan_diri)
+            .buka(() -> new RMPenilaianTambahanMelarikanDiri(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); });
+        m.tambah("btnPenilaianPasienTerminal", "Pengkajian Pasien Terminal", "6141428_coronavirus_covid19_isolation_patient_coronavirus isolation_icon.png", akses::getpenilaian_pasien_terminal)
+            .buka(() -> new RMPenilaianPasienTerminal(u,false));
+        m.tambah("btnPenilaianKorbanKekerasan", "Pengkajian Korban Kekerasan", "3792054_blood_halloween_knife_murder_icon.png", akses::getpenilaian_korban_kekerasan)
+            .buka(() -> new RMPenilaianKorbanKekerasan(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); f.setTampil(); });
+        m.tambah("btnPenilaianPasienPenyakitMenular", "Pengkajian Pasien Penyakit Menular", "5980337_coronavirus_data_disease_information_research_icon.png", akses::getpenilaian_pasien_penyakit_menular)
+            .buka(() -> new RMPenilaianPasienPenyakitMenular(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); f.setTampil(); });
+        m.tambah("btnPenilaianPasienImunitasRendah", "Pengkajian Pasien Imunitas Rendah", "5964813_chest_coronavirus_healthcare_medical_pain_icon.png", akses::getpenilaian_pasien_imunitas_rendah)
+            .buka(() -> new RMPenilaianPasienImunitasRendah(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); f.setTampil(); });
+        m.tambah("btnPenilaianDerajatDehidrasi", "Pengkajian Derajat Dehidrasi", "897234_aqua_bottle_drink_water_icon.png", akses::getpenilaian_derajat_dehidrasi)
+            .buka(() -> new RMPenilaianDerajatDehidrasi(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); });
+        m.tambah("btnPenilaianPasienKeracunan", "Pengkajian Pasien Keracunan", "2730370_inkcontober_mushroom_poison_icon.png", akses::getpenilaian_pasien_keracunan)
+            .buka(() -> new RMPenilaianPasienKeracunan(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); f.setTampil(); });
+        m.tambah("btnPenilaianLevelKecemasanRanapAnak", "Pengkajian Level Kecemasan Ranap Anak", "8468129_dead_death_fear_grim_horror_icon.png", akses::getpenilaian_level_kecemasan_ranap_anak)
+            .buka(() -> new RMPenilaianLevelKecemasanRanapAnak(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); });
+        m.tambah("btnCatatanObservasiIGD", "Catatan Observasi IGD", "85380_note_icon.png", akses::getcatatan_observasi_igd)
+            .buka(() -> new RMDataCatatanObservasiIGD(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnCatatanObservasiRanap", "Catatan Observasi Ranap", "4852555_business_files_management_icon.png", akses::getcatatan_observasi_ranap)
+            .buka(() -> new RMDataCatatanObservasiRanap(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnCatatanObservasiRanapKebidanan", "Catatan Observasi Ranap Kebidanan", "4852562_education_files_school_icon.png", akses::getcatatan_observasi_ranap_kebidanan)
+            .buka(() -> new RMDataCatatanObservasiRanapKebidanan(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnCatatanObservasiRanapPostPartum", "Catatan Observasi Ranap Post Partum", "4852546_documents_files_folder_icon.png", akses::getcatatan_observasi_ranap_postpartum)
+            .buka(() -> new RMDataCatatanObservasiRanapPostPartum(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnCatatanObservasiRuangOperasi", "Catatan Observasi Ruang Operasi", "surgery-room_17774320.png", akses::getcatatan_observasi_ruang_ok)
+            .buka(() -> new RMDataCatatanObservasiRuangOperasi(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnCatatanObservasiBayi", "Catatan Observasi Bayi", "1312866_signature_analysis_business_finance_office_icon.png", akses::getcatatan_observasi_bayi)
+            .buka(() -> new RMDataCatatanObservasiBayi(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnCatatanObservasiCHBP", "Catatan Observasi CHBP", "4852563_education_files_research_science_icon.png", akses::getcatatan_observasi_chbp)
+            .buka(() -> new RMDataCatatanObservasiCHBP(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnCatatanObservasiInduksiPersalinan", "Catatan Observasi Induksi Persalinan", "3298612_document_paper_sign_signing_icon.png", akses::getcatatan_observasi_induksi_persalinan)
+            .buka(() -> new RMDataCatatanObservasiInduksiPersalinan(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnCatatanObservasiRestrainNonFramakologi", "Catatan Observasi Restrain Nonfarmakologi", "10447_chain_link_web_icon.png", akses::getcatatan_observasi_restrain_nonfarma)
+            .buka(() -> new RMDataCatatanObservasiRestrainNonFarmakologi(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnMonitorPANSSECIGD", "Monitor PANSS EC IGD", "5859961_depression_disorder_health_mental_psychology_icon.png", akses::getpenilaian_awal_medis_ranap)
+            .buka(() -> new RMMonitorPANSSECIGD(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnMonitorPANSSECRanap", "Monitor PANSS EC Ranap", "mental-health_18376031-2.png", akses::getpenilaian_awal_medis_ranap)
+            .buka(() -> new RMMonitorPANSSECRanap(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnCatatanObservasiVentilator", "Catatan Observasi Ventilator", "6088631_bed_hospital_icu_medical_treatment_icon.png", akses::getcatatan_observasi_ventilator)
+            .buka(() -> new RMDataCatatanObservasiVentilator(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnCatatanObservasiHemodialisa", "Catatan Observasi Hemodialisa", "4757453_checklist_document_file_list_paper_icon.png", akses::getcatatan_observasi_hemodialisa)
+            .buka(() -> new RMDataCatatanObservasiHemodialisa(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnCatatanKeseimbanganCairan", "Keseimbangan Cairan", "7150134_water_drink_drop_blue_icon.png", akses::getbalance_cairan)
+            .buka(() -> new RMDataCatatanKeseimbanganCairan(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); });
+        m.tambah("btnCatatanCairanHemodialisa", "Catatan Cairan Hemodialisa", "1059390_document_clip_page_paper_text_icon.png", akses::getcatatan_cairan_hemodialisa)
+            .buka(() -> new RMDataCatatanCairanHemodialisa(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnDataFollowUpDBD", "Follow Up DBD", "5972298_carrier_insect_mosquito_transmission_virus_icon.png", akses::getfollow_up_dbd)
+            .buka(() -> new RMDataFollowUpDBD(u,false)).sesudah(f -> f.isCek());
+        m.tambah("btnCatatanKeperawatanRalan", "Catatan Keperawatan Ralan", "6123164_avatar_frontliner_male_medical staff_nurse_icon.png", akses::getcatatan_keperawatan_ralan)
+            .buka(() -> new RMDataCatatanKeperawatanRalan(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnCatatanKeperawatanRanap", "Catatan Keperawatan Ranap", "6123164_avatar_frontliner_male_medical staff_nurse_icon.png", akses::getcatatan_keperawatan_ranap)
+            .buka(() -> new RMDataCatatanKeperawatanRanap(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnCatatanPersalinan", "Catatan Persalinan", "375264_baby_fetus_pregnancy_icon.png", akses::getcatatan_persalinan)
+            .buka(() -> new RMCatatanPersalinan(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); f.setTampil(); });
+        m.tambah("btnMonitoringReaksiTranfusi", "Monitoring Reaksi Tranfusi", "6088722_blood_bottle_packet_icon.png", akses::getmonitoring_reaksi_tranfusi)
+            .buka(() -> new RMDataMonitoringReaksiTranfusi(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); });
+        m.tambah("btnPemantauanPEWSAnak", "Pemantauan PEWS Pasien Anak", "7744788_mom_children_mothers day_mother_love_icon.png", akses::getpemantauan_pews_anak)
+            .buka(() -> new RMPemantauanPEWS(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); });
+        m.tambah("btnPemantauanPEWSDewasa", "Pemantauan EWS Pasien Dewasa", "5928521_disease_fever_high_symptom_temperature_icon.png", akses::getpemantauan_pews_dewasa)
+            .buka(() -> new RMPemantauanEWSD(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); });
+        m.tambah("btnPemantauanMEOWS", "Pemantauan MEOWS Pasien Obstetri", "7744777_pregnant_mothers day_mother_mom_love_icon.png", akses::getpemantauan_meows_obstetri)
+            .buka(() -> new RMPemantauanMEOWS(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); });
+        m.tambah("btnPemantauanEWSNeonatus", "Pemantauan EWS Pasien Neonatus", "7717229_mom_family_baby_kid_child_icon.png", akses::getpemantauan_ews_neonatus)
+            .buka(() -> new RMPemantauanEWSNeonatus(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnHemodialisa", "Hemodialisa", "iconfinder_32_Disease_infected_infection_kidney_6088186.png", akses::gethemodialisa)
+            .buka(() -> new RMHemodialisa(null,false)).sebelum(f -> f.isCek());
+        m.tambah("btnFisioterapi", "Awal Fisioterapi", "6009609_corona_coronavirus_covid19_crowd_huddle_icon.png", akses::getpenilaian_fisioterapi)
+            .buka(() -> new RMPenilaianFisioterapi(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); f.setTampil(); });
+        m.tambah("btnPenilaianTerapiWicara", "Pengkajian Terapi Wicara", "2185069_dental_dentist_halitosis_human_mouth_icon.png", akses::getpenilaian_terapi_wicara)
+            .buka(() -> new RMPenilaianTerapiWicara(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); f.setTampil(); });
+        m.tambah("btnPenatalaksanaanTerapiOkupasi", "Penatalaksanaan Terapi Okupasi", "6008649_fatigue_healthcare_illness_sickness_tired_icon.png", akses::getpenatalaksanaan_terapi_okupasi)
+            .buka(() -> new RMPenatalaksanaanTerapiOkupasi(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); f.setTampil(); });
+        m.tambah("btnPenilaianPsikologi", "Pengkajian Psikologi", "2890565_ai_artificial intelligence_automaton_brain_electronics_icon.png", akses::getpenilaian_psikologi)
+            .buka(() -> new RMPenilaianPsikologi(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); f.setTampil(); });
+        m.tambah("btnPenilaianPsikologiKlinis", "Pengkajian Psikologi Klinis", "9320236_wifi_mind_interaction_untact_icon.png", akses::getpenilaian_psikologi_klinis)
+            .buka(() -> new RMPenilaianPsikologiKlinis(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); f.setTampil(); });
+        m.tambah("btnPenilaianPreInduksi", "Pengkajian Pre Induksi", "6008650_breath_breathing_difficult_healthcare_illness_icon.png", akses::getpenilaian_pre_induksi)
+            .buka(() -> new RMPenilaianPreInduksi(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); f.setTampil(); });
+        m.tambah("btnChecklistPreOperasi", "Check List Pre Operasi", "7638087_writing_education_learning_pencil_note_icon.png", akses::getchecklist_pre_operasi)
+            .buka(() -> new RMChecklistPreOperasi(u,false)).sesudah(f -> f.isCek());
+        m.tambah("btnSignInSebelumAnestesi", "Sign-In Sebelum Anestesi", "6012901_diagnosis_document_medical_paper_records_icon.png", akses::getsignin_sebelum_anestesi)
+            .buka(() -> new RMSignInSebelumAnastesi(u,false)).sesudah(f -> f.isCek());
+        m.tambah("btnTimeOutSebelumInsisi", "Time-Out Sebelum Insisi", "8168668_notes_paper_document_page_icon.png", akses::gettimeout_sebelum_insisi)
+            .buka(() -> new RMTimeOutSebelumInsisi(u,false)).sesudah(f -> f.isCek());
+        m.tambah("btnSignOutSebelumMenutupLuka", "Sign-Out Sebelum Menutup Luka", "7172890_note_book_office_paper_document_icon.png", akses::getsignout_sebelum_menutup_luka)
+            .buka(() -> new RMSignOutSebelumMenutupLuka(u,false)).sesudah(f -> f.isCek());
+        m.tambah("btnChecklistPostOperasi", "Check List Post Operasi", "5859108_book_education_handbook_medical_medicine_icon.png", akses::getchecklist_post_operasi)
+            .buka(() -> new RMChecklistPostOperasi(u,false)).sesudah(f -> f.isCek());
+        m.tambah("btnPenilaianPreOperasi", "Pengkajian Pre Operasi", "6088726_bed_hospital_icu_medical_treatment_icon.png", akses::getpenilaian_pre_operasi)
+            .buka(() -> new RMPenilaianPreOperasi(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); f.setTampil(); });
+        m.tambah("btnPenilaianPreAnastesi", "Pengkajian Pre Anestesi", "6141465_bed_rest_sleep_sleeping_get enough rest_icon.png", akses::getpenilaian_pre_anestesi)
+            .buka(() -> new RMPenilaianPreAnastesi(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); f.setTampil(); });
+        m.tambah("btnChecklistKesiapanAnestesi", "Check List Kesiapan Anestesi", "7479646_questionnaire_survey_checklist_list_clipboard_icon.png", akses::getchecklist_kesiapan_anestesi)
+            .buka(() -> new RMChecklistKesiapanAnestesi(u,false)).sesudah(f -> f.isCek());
+        m.tambah("btnCatatanAnastesiSedasi", "Catatan Anestesi-Sedasi", "2620508_employee_job_notes_seeker_unemployee_icon.png", akses::getcatatan_anestesi_sedasi)
+            .buka(() -> new RMCatatanAnastesiSedasi(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); f.setTampil(); });
+        m.tambah("btnSkorAldrettePascaAnestesi", "Skor Aldrette Pasca Anestesi", "8168606_stocks_chart_graph_analytics_icon.png", akses::getskor_aldrette_pasca_anestesi)
+            .buka(() -> new RMMonitoringAldrettePascaAnestesi(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); });
+        m.tambah("btnSkorStewardPascaAnestesi", "Skor Steward Pasca Anestesi", "1688863_chart_graph_seo_icon.png", akses::getskor_steward_pasca_anestesi)
+            .buka(() -> new RMMonitoringStewardPascaAnestesi(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); });
+        m.tambah("btnSkorBromagePascaAnestesi", "Skor Bromage Pasca Anestesi", "282476_analytics_chart_icon.png", akses::getskor_bromage_pasca_anestesi)
+            .buka(() -> new RMMonitoringBromagePascaAnestesi(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); });
+        m.tambah("btnCatatanPengkajianPaskaOperasi", "Catatan Pengkajian Paska Operasi", "6141455_covid19_doctor_hospital_medical_medicine_icon.png", akses::getcatatan_pengkajian_paska_operasi)
+            .buka(() -> new RMCatatanPengkajianPaskaOperasi(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); f.setTampil(); });
+        m.tambah("btnChecklistKriteriaMasukHCU", "Check List Kriteria Masuk HCU", "6088703_beat_care_heart_pulse_time_icon.png", akses::getchecklist_kriteria_masuk_hcu)
+            .buka(() -> new RMChecklistKriteriaMasukHCU(u,false)).sesudah(f -> f.isCek());
+        m.tambah("btnChecklistKriteriaKeluarHCU", "Check List Kriteria Keluar HCU", "6088703_beat_care_heart_pulse_time_icon.png", akses::getchecklist_kriteria_keluar_hcu)
+            .buka(() -> new RMChecklistKriteriaKeluarHCU(u,false)).sesudah(f -> f.isCek());
+        m.tambah("btnChecklistKriteriaMasukNICU", "Check List Kriteria Masuk NICU", "6088517_beat_care_heart_pulse_time_icon.png", akses::getkriteria_masuk_nicu)
+            .buka(() -> new RMChecklistKriteriaMasukNICU(u,false)).sesudah(f -> f.isCek());
+        m.tambah("btnChecklistKriteriaKeluarNICU", "Check List Kriteria Keluar NICU", "6088517_beat_care_heart_pulse_time_icon.png", akses::getkriteria_keluar_nicu)
+            .buka(() -> new RMChecklistKriteriaKeluarNICU(u,false)).sesudah(f -> f.isCek());
+        m.tambah("btnChecklistKriteriaMasukPICU", "Check List Kriteria Masuk PICU", "1934246_boy_child_kid_people_playing_icon.png", akses::getkriteria_masuk_picu)
+            .buka(() -> new RMChecklistKriteriaMasukPICU(u,false)).sesudah(f -> f.isCek());
+        m.tambah("btnChecklistKriteriaKeluarPICU", "Check List Kriteria Keluar PICU", "1934246_boy_child_kid_people_playing_icon.png", akses::getkriteria_keluar_picu)
+            .buka(() -> new RMChecklistKriteriaKeluarPICU(u,false)).sesudah(f -> f.isCek());
+        m.tambah("btnChecklistKriteriaMasukICU", "Check List Kriteria Masuk ICU", "6088168_care_drip_health_recovery_treatment_icon.png", akses::getchecklist_kriteria_masuk_icu)
+            .buka(() -> new RMChecklistKriteriaMasukICU(u,false)).sesudah(f -> f.isCek());
+        m.tambah("btnChecklistKriteriaKeluarICU", "Check List Kriteria Keluar ICU", "6088168_care_drip_health_recovery_treatment_icon.png", akses::getchecklist_kriteria_keluar_icu)
+            .buka(() -> new RMChecklistKriteriaKeluarICU(u,false)).sesudah(f -> f.isCek());
+        m.tambah("btnChecklistKriteriaMasukIsolasi", "Check List Kriteria Masuk Isolasi", "isolation-2.png", akses::getchecklist_kriteria_masuk_isolasi)
+            .buka(() -> new RMChecklistKriteriaMasukIsolasi(u,false)).sesudah(f -> f.isCek());
+        m.tambah("btnChecklistKriteriaKeluarIsolasi", "Check List Kriteria Keluar Isolasi", "isolation.png", akses::getchecklist_kriteria_keluar_isolasi)
+            .buka(() -> new RMChecklistKriteriaKeluarIsolasi(u,false)).sesudah(f -> f.isCek());
+        m.tambah("btnPerencanaanPemulangan", "Perencanaan Pemulangan", "6141469_coronavirus_covid_covid19_hospital_infected_icon.png", akses::getperencanaan_pemulangan)
+            .buka(() -> new RMPerencanaanPemulangan(u,false)).sebelum(f -> { f.isCek(); f.setTampil(); });
+        m.tambah("btnPenilaianRisikoJatuhDewasa", "Pengkajian Lanjutan Risiko Jatuh Dewasa", "5859949_accident_foot_injury_leg_pain_icon.png", akses::getpenilaian_lanjutan_resiko_jatuh_dewasa)
+            .buka(() -> new RMPenilaianLanjutanRisikoJatuhDewasa(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnPenilaianRisikoJatuhAnak", "Pengkajian Lanjutan Risiko Jatuh Anak", "5986162_disease_health_injury_medical_numb_icon.png", akses::getpenilaian_lanjutan_resiko_jatuh_anak)
+            .buka(() -> new RMPenilaianLanjutanRisikoJatuhAnak(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnPenilaianRisikoJatuhLansia", "Pengkajian Lanjutan Risiko Jatuh Lansia", "131480_spectacles_retired_retiree_father_grandfather_icon.png", akses::getpenilaian_lanjutan_resiko_jatuh_lansia)
+            .buka(() -> new RMPenilaianLanjutanRisikoJatuhLansia(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnPenilaianRisikoJatuhGeriatri", "Pengkajian Lanjutan Risiko Jatuh Geriatri", "5958966_mask_medical_pollution_security_icon.png", akses::getpenilaian_lanjutan_resiko_jatuh_geriatri)
+            .buka(() -> new RMPenilaianLanjutanRisikoJatuhGeriatri(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnPenilaianRisikoJatuhNeonatus", "Pengkajian Lanjutan Risiko Jatuh Neonatus", "7717236_hand_baby_kid_motherhood_mothers_icon.png", akses::getpenilaian_risiko_jatuh_neonatus)
+            .buka(() -> new RMPenilaianRisikoJatuhNeonatus(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnPenilaianRisikoJatuhPsikiatri", "Pengkajian Lanjutan Risiko Jatuh Psikiatri", "9803221_man_fall_holiday_autumn_tradition_icon.png", akses::getpenilaian_lanjutan_resiko_jatuh_psikiatri)
+            .buka(() -> new RMPenilaianLanjutanRisikoJatuhPsikiatri(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnPenilaianLanjutanSkriningFungsional", "Pengkajian Lanjutan Skrining Fungsional", "6000610_covid19_people_scan_tempurature_virus_icon.png", akses::getpenilaian_lanjutan_skrining_fungsional)
+            .buka(() -> new RMPenilaianLanjutanSkriningFungsional(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnPenilaianUlangNyeri", "Pengkajian Ulang Nyeri", "5725022_head_headache_migraine_pain_severe_icon.png", akses::getpenilaian_ulang_nyeri)
+            .buka(() -> new RMPenilaianUlangNyeri(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); });
+        m.tambah("btnIntervensiNyeriFarmakologi", "Intervensi Nyeri Farmakologi", "vitamin_17348719.png", akses::getintervensi_nyeri_farmakologi)
+            .buka(() -> new RMDataIntervensiNyeriFarmakologi(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); });
+        m.tambah("btnIntervensiNyeriNonFarmakologi", "Intervensi Nyeri Non Farmakologi", "music_9881578.png", akses::getintervensi_nyeri_nonfarmakologi)
+            .buka(() -> new RMDataIntervensiNyeriNonFarmakologi(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); });
+        m.tambah("btnPenilaianRisikoDekubitus", "Pengkajian Risiko Dekubitus", "6090058_bed_rent_room_icon.png", akses::getpenilaian_risiko_dekubitus)
+            .buka(() -> new RMPenilaianRisikoDekubitus(u,false)).sesudah(f -> f.isCek());
+        m.tambah("btnLayananKedokteranFisikRehabilitasi", "Layanan Kedokteran Fisik & Rehabilitasi", "4082071_healthcare_hospital_medical_icon.png", akses::getlayanan_kedokteran_fisik_rehabilitasi)
+            .buka(() -> new RMLayananKedokteranFisikRehabilitasi(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); f.setTampil(); });
+        m.tambah("btnLayananProgramKFR", "Layanan Program KFR", "8960631_crutches_crutch_orthopedic_physiotherapy_rehabilitation_icon.png", akses::getlayanan_program_kfr)
+            .buka(() -> new RMLayananProgramKFR(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); });
+        m.tambah("btnUjiFungsiKFR", "Uji Fungsi/Prosedur KFR", "6159284_bicycle_bike_cycling_isometric_mountain bike_icon.png", akses::getuji_fungsi_kfr)
+            .buka(() -> new RMUjiFungsiKFR(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnDokumentasiTindakanESWL", "Dokumentasi Tindakan ESWL", "6087984_disease_infected_infection_kidney_icon.png", akses::gethasil_tindakan_eswl)
+            .buka(() -> new RMHasilTindakanESWL(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); f.setTampil(); });
+        m.tambah("btnMasterKesimpulanAnjuranMCU", "Master Kesimpulan & Anjuran MCU", "5854057_education_memo_notes_pad_reminder_icon.png", akses::getmaster_kesimpulan_anjuran_mcu)
+            .buka(() -> new RMMasterKesimpulanAnjuranMCU(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnPenilaianMCU", "Pengkajian MCU", "4852556_doctor_files_medical_record_icon.png", akses::getpenilaian_mcu)
+            .buka(() -> new RMMCU(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); f.setTampil(); });
+        m.tambah("btnKonselingFarmasi", "Konseling Farmasi", "6771587_diary_education_learning_pencil_school_icon.png", akses::getkonseling_farmasi)
+            .buka(() -> new RMKonselingFarmasi(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); });
+        m.tambah("btnPelayananInformasiObat", "Pelayanan Informasi Obat", "8960614_medicines_medicine_drug_pill_tablet_icon.png", akses::getpelayanan_informasi_obat)
+            .buka(() -> new DlgPermintaanPelayananInformasiObat(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); });
+        m.tambah("btnKonsultasiMedik", "Konsultasi Medik", "6071860_freelance_freelancer_job_occupation_worker_icon.png", akses::getkonsultasi_medik)
+            .buka(() -> new DlgPermintaanKonsultasiMedik(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnKonsultasiPerawat", "Konsultasi Perawat", "discuss_12922995.png", akses::getkonsultasi_perawat)
+            .buka(() -> new DlgPermintaanKonsultasiPerawat(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnTransferPasienAntarRuang", "Transfer Pasien Antar Ruang", "6009596_case_coronavirus_covid19_hospital_patient_icon.png", akses::gettransfer_pasien_antar_ruang)
+            .buka(() -> new RMTransferPasienAntarRuang(u,false)).sebelum(f -> { f.isCek(); f.setTampil(); });
+        m.tambah("btnPengkajianRestrain", "Pengkajian Restrain", "3841816_chain_hyperlink_interface_link_multimedia_icon.png", akses::getpengkajian_restrain)
+            .buka(() -> new RMPengkajianRestrain(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); });
+        m.tambah("btnCatatanCekGDS", "Catatan Cek GDS", "6427847_information_note_notebook_sheet_icon.png", akses::getcatatan_cek_gds)
+            .buka(() -> new RMDataCatatanCekGDS(u,false)).sesudah(f -> f.isCek());
+        m.tambah("btnRekonsiliasiObat", "Rekonsiliasi Obat", "9016848_doctor_examination_covid-19_virus_pandemic_icon.png", akses::getrekonsiliasi_obat)
+            .buka(() -> new RMCariRekonsiliasiObat(u,false));
+        m.tambah("btnChecklistPemberianFibrinolitik", "Check List Pemberian Fibrinolitik", "2620524_cv_employee_job_seeker_unemployee_icon.png", akses::getchecklist_pemberian_fibrinolitik)
+            .buka(() -> new RMChecklistPemberianFibrinolitik(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); });
+        m.tambah("btnSkriningManagerPelayananPasien", "Skrining Manajer Pelayanan Pasien", "9016855_stay_at_home_covid-19_virus_icon.png", akses::getmpp_skrining)
+            .buka(() -> new RMSkriningMPP(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); });
+        m.tambah("btnSkriningMPPRalan", "Skrining Manajer Pelayanan Pasien Rawat Jalan", "9016855_stay_at_home_covid-19_virus_icon.png", akses::getmpp_skrining)
+            .buka(() -> new RMSkriningMPPRalan(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); });
+        m.tambah("btnSkriningMPPFormA", "Evaluasi Awal Manajer Pelayanan Pasien", "6088113_computer_record_scan_screening_virus_icon.png", akses::getmpp_skrining)
+            .buka(() -> new RMSkriningMPPFormA(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); f.setTampil(); });
+        m.tambah("btnSkriningMPPFormARalan", "Evaluasi Awal Manajer Pelayanan Pasien Rawat Jalan", "6088113_computer_record_scan_screening_virus_icon.png", akses::getmpp_skrining)
+            .buka(() -> new RMSkriningMPPFormARalan(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); f.setTampil(); });
+        m.tambah("btnSkriningMPPFormB", "Catatan Implementasi Manajer Pelayanan Pasien", "6088152_computer_record_scan_screening_virus_icon.png", akses::getmpp_skrining)
+            .buka(() -> new RMSkriningMPPFormB(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); });
+        m.tambah("btnSkriningMPPFormBRalan", "Catatan Implementasi Manajer Pelayanan Pasien Rawat Jalan", "6088152_computer_record_scan_screening_virus_icon.png", akses::getmpp_skrining)
+            .buka(() -> new RMSkriningMPPFormBRalan(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); });
+        m.tambah("btnEdukasiPasienKeluargaRJ", "Edukasi Pasien & Keluarga Rawat Jalan", "6088164_clipboard_healthcare_medical_medicine_report_icon.png", akses::getedukasi_pasien_keluarga_rj)
+            .buka(() -> new RMEdukasiPasienKeluargaRawatJalan(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); });
+        m.tambah("btnPelaksanaanInformasiEdukasi", "Pelaksanaan Informasi & Edukasi", "11211449_book_library_learning_knowledge_education_icon.png", akses::getpelaksanaan_informasi_edukasi)
+            .buka(() -> new RMPelaksanaanInformasiEdukasi(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); });
+        m.tambah("btnSkriningMerokokUsiaSekolah", "Skrining Merokok Usia Sekolah & Remaja", "3017868_day_patrick_pipe_smoke_st_icon.png", akses::getskrining_perilaku_merokok_sekolah_remaja)
+            .buka(() -> new RMSkriningMerokokUsiaSekolahRemaja(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnSkriningKekerasanPadaPerempuan", "Skrining Kekerasan Pada Perempuan", "9191520_nonviolence_violence_hit_thrash_conflict_icon.png", akses::getskrining_kekerasan_pada_perempuan)
+            .buka(() -> new RMSkriningKekerasanPadaPerempuan(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnSkriningObesitas", "Skrining Obesitas", "5859965_body_fat_health_obesity_overweight_icon.png", akses::getskrining_obesitas)
+            .buka(() -> new RMSkriningObesitas(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnSkriningRisikoKankerPayudara", "Skrining Risiko Kanker Payudara", "6715353_breast_danger_emoji_freak_nipple_icon.png", akses::getskrining_risiko_kanker_payudara)
+            .buka(() -> new RMSkriningRisikoKankerPayudara(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnSkriningRisikoKankerParu", "Skrining Risiko Kanker Paru", "5862576_covid-19_infection_inspect_lung_virus_icon.png", akses::getskrining_risiko_kanker_paru)
+            .buka(() -> new RMSkriningRisikoKankerParu(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnSkriningRisikoKankerServiks", "Skrining Risiko Kanker Serviks", "10716890_summer_swimsuit_beach_swimwear_bikini_icon.png", akses::getskrining_risiko_kanker_serviks)
+            .buka(() -> new RMSkriningRisikoKankerServiks(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnSkriningKesehatanGigiMulutRemaja", "Skrining Kesehatan Gigi Mulut Remaja", "2185081_dental_dentist_dentistry_loose tooth_medical_icon.png", akses::getskrining_kesehatan_gigi_mulut_remaja)
+            .buka(() -> new RMSkriningKesehatanGigiMulutRemaja(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnSkriningKesehatanGigiMulutBalita", "Skrining Kesehatan Gigi Mulut Balita", "2185086_bright_clean_dental_dentist_tooth_icon.png", akses::getskrining_kesehatan_gigi_mulut_balita)
+            .buka(() -> new RMSkriningKesehatanGigiMulutBalita(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnSkriningKesehatanGigiMulutLansia", "Skrining Kesehatan Gigi Mulut Lansia", "2185054_dental_dental veneers_dentist_dentistry_medical_icon.png", akses::getskrining_kesehatan_gigi_mulut_lansia)
+            .buka(() -> new RMSkriningKesehatanGigiMulutLansia(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnSkriningKesehatanGigiMulutDewasa", "Skrining Kesehatan Gigi Mulut Dewasa", "2185055_dental_dental checking_dentist_dentistry_oral hygiene_icon.png", akses::getskrining_kesehatan_gigi_mulut_dewasa)
+            .buka(() -> new RMSkriningKesehatanGigiMulutDewasa(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnSkriningAnemia", "Skrining Anemia", "8960655_blood_negative blood_negative_medical_donation_icon.png", akses::getskrining_anemia)
+            .buka(() -> new RMSkriningAnemia(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnSkriningHipertensi", "Skrining Hipertensi", "5859959_blood_health_heart_hypertension_medical_icon.png", akses::getskrining_hipertensi)
+            .buka(() -> new RMSkriningHipertensi(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnSkriningKesehatanPenglihatan", "Skrining Kesehatan Penglihatan", "5947108_avoid_do not_eye_hand_touch_icon.png", akses::getskrining_kesehatan_penglihatan)
+            .buka(() -> new RMSkriningKesehatanPenglihatan(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnSkriningIndraPendengaran", "Skrining Indra Pendengaran", "9534119_ear_plugs_beats_headphones_headphone_icon.png", akses::getskrining_indra_pendengaran)
+            .buka(() -> new RMSkriningIndraPendengaran(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnSkriningTBC", "Skrining TBC", "infected_lungs_virus transmission_virus_bacteria_icon.png", akses::getskrining_tbc)
+            .buka(() -> new RMSkriningTBC(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnSkriningPUMA", "Skrining PUMA", "6067589_coronavirus_covid-19_lungs_pneumonia_icon.png", akses::getskrining_puma)
+            .buka(() -> new RMSkriningPUMA(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); });
+        m.tambah("btnSkriningAdiksiNikotin", "Skrining Adiksi Nikotin", "6230216_cigar_cigaret_cigarette_tobacco_icon.png", akses::getskrining_adiksi_nikotin)
+            .buka(() -> new RMSkriningAdiksiNikotin(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); });
+        m.tambah("btnSkriningThalassemia", "Skrining Thalassemia", "6088744_blood_lab_research_sample_test_icon.png", akses::getskrining_thalassemia)
+            .buka(() -> new RMSkriningTalasemia(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); });
+        m.tambah("btnSkriningInstrumenSDQ", "Skrining Instrumen SDQ", "8322715_smile_emoji_emoticon_feeling_face_icon.png", akses::getskrining_instrumen_sdq)
+            .buka(() -> new RMSkriningInstrumenSDQ(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); });
+        m.tambah("btnSkriningInstrumenSRQ", "Skrining Instrumen SRQ", "8322725_emoji_emoticon_heart_kiss_icon.png", akses::getskrining_instrumen_srq)
+            .buka(() -> new RMSkriningSRQ(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); });
+        m.tambah("btnSkriningInstrumenACRS", "Skrining Instrumen ACRS", "3231124_boy_brother_cartoon_child_family_icon.png", akses::getskrining_instrumen_acrs)
+            .buka(() -> new RMSkriningInstrumenACRS(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); });
+        m.tambah("btnSkriningInstrumenMentalEmosional", "Skrining Instrumen Mental Emosional Anak", "5859961_depression_disorder_health_mental_psychology_icon.png", akses::getskrining_instrumen_mental_emosional)
+            .buka(() -> new RMSkriningInstrumenMentalEmosional(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); });
+        m.tambah("btnSkriningInstrumenAMT", "Skrining Instrumen AMT", "7717225_woman_mothers_day_avatar_mom_icon.png", akses::getskrining_instrumen_amt)
+            .buka(() -> new RMSkriningInstrumenAMT(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); });
+        m.tambah("btnSkriningInstrumenESAT", "Skrining Instrumen ESAT", "6771568_book_education_learning_puzzle_school_icon.png", akses::getskrining_instrumen_esat)
+            .buka(() -> new RMSkriningInstrumenESAT(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); });
+        m.tambah("btnSkriningPneumoniaSeverityIndex", "Skrining Pneumonia Severity Index", "5986203_coronavirus_covid_infection_lung_pneumonia_icon.png", akses::getskrining_pneumonia_severity_index)
+            .buka(() -> new RMSkriningPneumoniaSeverityIndex(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); });
+        m.tambah("btnSkriningCURB65", "Skrining CURB-65", "lungs_2811493.png", akses::getskrining_curb65)
+            .buka(() -> new RMSkriningCURB65(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); });
+        m.tambah("btnSkriningKankerKolorektal", "Skrining Kanker Kolorektal", "5728186_bowel_constipation_diarrhea_irritable_sick_icon.png", akses::getskrining_kanker_kolorektal)
+            .buka(() -> new RMSkriningKankerKolorektal(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); });
+        m.tambah("btnSkriningDiabetesMelitus", "Skrining Diabetes Melitus", "6954606_candy_candy shop_dessert_food and restaurant_sugar_icon.png", akses::getskrining_diabetes_melitus)
+            .buka(() -> new RMSkriningDiabetesMelitus(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnSkriningFrailtySyndrome", "Skrining Frailty Syndrome", "6217215_bacteria_people_virus_woman_icon.png", akses::getskrining_frailty_syndrome)
+            .buka(() -> new RMSkriningFrailtySyndrome(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnLaporanTindakan", "Laporan Tindakan Medis", "5929215_avatar_doctor_health_hospital_man_icon.png", akses::getlaporan_tindakan)
+            .buka(() -> new RMLaporanTindakan(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); f.setTampil(); });
+    }
+
+    /** [N] Unit Pelayanan Tranfusi Darah */
+    private void kategoriN(){
+        m.kategori(13);
+        m.tambah("btnPengambilanUTD2", "Pengambilan BHP Medis", "1360487078_shipping.png", akses::getpengambilan_utd2)
+            .buka(() -> new DlgCariPengambilanUTD(u,false)).sebelum(f -> f.setHapus());
+        m.tambah("btnUTDMedisRusak", "BHP Medis Rusak", "1360486858_stock-market.png", akses::getutd_medis_rusak)
+            .buka(() -> new UTDMedisRusak(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnPengambilanPenunjangUTD2", "Pengambilan BHP Non Medis", "1481002155_skills.png", akses::getpengambilan_penunjang_utd2)
+            .buka(() -> new IPSRSCariPengambilanPenunjangUTD(u,false)).sebelum(f -> f.setHapus());
+        m.tambah("btnUTDPenunjangRusak", "BHP Non Medis Rusak", "inventory-maintenance.png", akses::getutd_penunjang_rusak)
+            .buka(() -> new UTDPenunjangRusak(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnUTDKomponenDarah", "Komponen Darah", "1481001686_injection_blood.png", akses::getutd_komponen_darah)
+            .buka(() -> new UTDKomponenDarah(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnPendonorDarah", "Pendonor Darah", "iconfinder_623_Love_sharing_heart_wedding_valentine_valentines_day_love_4171308.png", akses::getutd_pendonor)
+            .buka(() -> new UTDPendonor(u,false));
+        m.tambah("btnUTDDonorDarah", "Donor Darah", "1481001706_heart_beat.png", akses::getutd_donor)
+            .buka(() -> new UTDDonor(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnUTDCekalDarah", "Pencekalan Darah", "1360487093_price.png", akses::getutd_cekal_darah)
+            .buka(() -> new UTDCekalDarah(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnUTDPemisahanDarah", "Pemisahan Darah", "1360815855_laboratory.png", akses::getutd_pemisahan_darah)
+            .buka(() -> new UTDPemisahanDarah(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnUTDStokDarah", "Stok Darah", "1481001585_blood_drop.png", akses::getutd_stok_darah)
+            .buka(() -> new UTDStokDarah(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnUTDPenyerahanDarah", "Penyerahan Darah", "health.png", akses::getutd_penyerahan_darah)
+            .buka(() -> new UTDPenyerahanDarah(u,false)).sebelum(f -> f.isCek());
+    }
+
+    /** [O] Analisa, Dashboard & Info Grafik */
+    private void kategoriO(){
+        m.kategori(14);
+        m.tambah("btnGrafikKunjunganPoli", "Registrasi Per Poli", "1491582015_11.png", akses::getgrafik_kunjungan_poli)
+            .buka(() -> new GrafikRegistrasiPoli(u,true));
+        m.tambah("btnGrafikKunjunganPerDokter", "Registrasi Per Dokter", "1491582080_6.png", akses::getgrafik_kunjungan_perdokter)
+            .buka(() -> new GrafikRegistrasiPerDokter(u,true));
+        m.tambah("btnGrafikKunjunganPerPekerjaan", "Registrasi Per Pekerjaan", "1491582015_11.png", akses::getgrafik_kunjungan_perpekerjaan)
+            .buka(() -> new GrafikRegistrasiPerPekerjaan(u,true));
+        m.tambah("btnGrafikKunjunganPerPendidikan", "Registrasi Per Pendidikan", "1491582080_6.png", akses::getgrafik_kunjungan_perpendidikan)
+            .buka(() -> new GrafikRegistrasiPerPendidikan(u,true));
+        m.tambah("btnGrafikKunjunganPerTahun", "Registrasi Per Tahun", "1491582015_11.png", akses::getgrafik_kunjungan_pertahun)
+            .buka(() -> new GrafikRegistrasiPerTahun(u,true));
+        m.tambah("btnGrafikKunjunganPerBulan", "Registrasi Per Bulan", "1491582080_6.png", akses::getgrafik_kunjungan_perbulan)
+            .buka(() -> new GrafikRegistrasiPerBulan(u,true));
+        m.tambah("btnGrafikKunjunganPerTanggal", "Registrasi Per Tanggal", "1491582015_11.png", akses::getgrafik_kunjungan_pertanggal)
+            .buka(() -> new GrafikRegistrasiPerTanggal(u,true));
+        m.tambah("btnGrafikDemografiRegistrasi", "Demografi Registrasi", "1491582080_6.png", akses::getgrafik_kunjungan_demografi)
+            .buka(() -> new GrafikDemografiRegistrasi(u,true));
+        m.tambah("btnGrafikStatusRegPerTahun", "Registrasi Lama Per Tahun", "1491582015_11.png", akses::getgrafik_kunjungan_statusdaftartahun)
+            .buka(() -> new GrafikStatusRegPerTahun(u,true));
+        m.tambah("btnGrafikStatusRegPerTahun2", "Registrasi Baru Per Tahun", "1491582080_6.png", akses::getgrafik_kunjungan_statusdaftartahun2)
+            .buka(() -> new GrafikStatusRegPerTahun2(u,true));
+        m.tambah("btnGrafikStatusRegPerBulan", "Registrasi Lama Per Bulan", "1491582015_11.png", akses::getgrafik_kunjungan_statusdaftarbulan)
+            .buka(() -> new GrafikStatusRegPerBulan(u,true));
+        m.tambah("btnGrafikStatusRegPerBulan2", "Registrasi Baru Per Bulan", "1491582080_6.png", akses::getgrafik_kunjungan_statusdaftarbulan2)
+            .buka(() -> new GrafikStatusRegPerBulan2(u,true));
+        m.tambah("btnGrafikStatusRegPerTanggal", "Registrasi Lama Per Tanggal", "1491582015_11.png", akses::getgrafik_kunjungan_statusdaftartanggal)
+            .buka(() -> new GrafikStatusRegPerTanggal(u,true));
+        m.tambah("btnGrafikStatusRegPerTanggal2", "Registrasi Baru Per Tanggal", "1491582080_6.png", akses::getgrafik_kunjungan_statusdaftartanggal2)
+            .buka(() -> new GrafikStatusRegPerTanggal2(u,true));
+        m.tambah("btnGrafikStatusRegBatalPerTahun", "Batal Periksa Per Tahun", "1491582015_11.png", akses::getgrafik_kunjungan_statusbataltahun)
+            .buka(() -> new GrafikStatusBatalRegPerTahun(u,true));
+        m.tambah("btnGrafikStatusRegBatalPerBulan", "Batal Periksa Per Bulan", "1491582080_6.png", akses::getgrafik_kunjungan_statusbatalbulan)
+            .buka(() -> new GrafikStatusBatalRegPerBulan(u,true));
+        m.tambah("btnGrafikStatusRegBatalPerTanggal", "Batal Periksa Per Tanggal", "1491582015_11.png", akses::getgrafik_kunjungan_statusbataltanggal)
+            .buka(() -> new GrafikStatusBatalRegPerTanggal(u,true));
+        m.tambah("btnGrafikKunjunganPerCarabayar", "Registrasi Per Cara Bayar", "1491582080_6.png", akses::getgrafik_kunjungan_percarabayar)
+            .buka(() -> new GrafikRegistrasiPerCaraBayar(u,true));
+        m.tambah("btnGrafikKunjunganRanapPerTahun", "Kunjungan Ranap Per Tahun", "1491582015_11.png", akses::getgrafik_kunjungan_ranaptahun)
+            .buka(() -> new GrafikKunjunganRanapPerTahun(u,true));
+        m.tambah("btnGrafikLabRalanPerTahun", "Kunjungan Lab Ralan Per Tahun", "1491582080_6.png", akses::getgrafik_lab_ralantahun)
+            .buka(() -> new GrafikLabRalanPerTahun(u,true));
+        m.tambah("btnGrafikRadRalanPerTahun", "Kunjungan Rad Ralan Per Tahun", "1491582015_11.png", akses::getgrafik_rad_ralantahun)
+            .buka(() -> new GrafikRadRalanPerTahun(u,true));
+        m.tambah("btnGrafikPerPerujuk", "Registrasi Per Perujuk", "1491582080_6.png", akses::getgrafik_per_perujuk)
+            .buka(() -> new GrafikRegistrasiPerPerujuk(u,true));
+        m.tambah("btnGrafikLabRalanPerBulan", "Kunjungan Lab Ralan Per Bulan", "1491582015_11.png", akses::getgrafik_lab_ralanbulan)
+            .buka(() -> new GrafikLabRalanPerBulan(u,true));
+        m.tambah("btnGrafikRadRalanPerBulan", "Kunjungan Rad Ralan Per Bulan", "1491582080_6.png", akses::getgrafik_rad_ralanbulan)
+            .buka(() -> new GrafikRadRalanPerBulan(u,true));
+        m.tambah("btnGrafikLabRalanPerHari", "Kunjungan Lab Ralan Per Tanggal", "1491582015_11.png", akses::getgrafik_lab_ralanhari)
+            .buka(() -> new GrafikLabRalanPerHari(u,true));
+        m.tambah("btnGrafikRadRalanPerHari", "Kunjungan Rad Ralan Per Tanggal", "1491582080_6.png", akses::getgrafik_rad_ralanhari)
+            .buka(() -> new GrafikRadRalanPerHari(u,true));
+        m.tambah("btnGrafikKejadianIKPPerTahun", "Kejadian IKP Per Tahun", "1491582015_11.png", akses::getgrafik_ikp_pertahun)
+            .buka(() -> new GrafikKejadianIKPPerTahun(u,true));
+        m.tambah("btnGrafikKejadianIKPPerBulan", "Kejadian IKP Per Bulan", "1491582080_6.png", akses::getgrafik_ikp_perbulan)
+            .buka(() -> new GrafikKejadianIKPPerBulan(u,true));
+        m.tambah("btnGrafikKejadianIKPPerTanggal", "Kejadian IKP Per Tanggal", "1491582015_11.png", akses::getgrafik_ikp_pertanggal)
+            .buka(() -> new GrafikKejadianIKPPerTanggal(u,true));
+        m.tambah("btnGrafikKejadianIKPPerJenis", "Kejadian IKP Per Jenis", "1491582080_6.png", akses::getgrafik_ikp_jenis)
+            .buka(() -> new GrafikKejadianIKPPerJenis(u,true));
+        m.tambah("btnGrafikKejadianIKPPerDampak", "Kejadian IKP Per Dampak", "1491582015_11.png", akses::getgrafik_ikp_dampak)
+            .buka(() -> new GrafikKejadianIKPPerDampak(u,true));
+        m.tambah("btnGrafikKunjunganPerAgama", "Registrasi Per Agama", "1491582080_6.png", akses::getgrafik_kunjungan_per_agama)
+            .buka(() -> new GrafikRegistrasiPerAgama(u,true));
+        m.tambah("btnGrafikKunjunganPerUmur", "Registrasi Per Umur", "1491582015_11.png", akses::getgrafik_kunjungan_per_umur)
+            .buka(() -> new GrafikRegistrasiPerUmur(u,true));
+        m.tambah("btnGrafikKunjunganPerSuku", "Registrasi Per Suku/Bangsa", "1491582080_6.png", akses::getgrafik_kunjungan_suku)
+            .buka(() -> new GrafikRegistrasiPerSuku(u,true));
+        m.tambah("btnGrafikKunjunganPerBahasa", "Registrasi Per Bahasa", "1491582015_11.png", akses::getgrafik_kunjungan_bahasa)
+            .buka(() -> new GrafikRegistrasiPerBahasa(u,true));
+        m.tambah("btnGrafikKunjunganPerCacat", "Registrasi Per Cacat Fisik", "1491582080_6.png", akses::getgrafik_kunjungan_per_cacat)
+            .buka(() -> new GrafikRegistrasiPerCacat(u,true));
+        m.tambah("btnGrafikTBLaporanPeriode", "Periode Laporan TB", "1491582015_11.png", akses::getgrafik_tb_periodelaporan)
+            .buka(() -> new GrafikTBPeriodeLaporan(u,true));
+        m.tambah("btnGrafikTBRujukan", "Rujukan TB", "1491582080_6.png", akses::getgrafik_tb_rujukan)
+            .buka(() -> new GrafikTBRujukan(u,true));
+        m.tambah("btnGrafikTBRiwayat", "Riwayat TB", "1491582015_11.png", akses::getgrafik_tb_riwayat)
+            .buka(() -> new GrafikTBRiwayat(u,true));
+        m.tambah("btnGrafikTBTipeDiagnosis", "Tipe Diagnosis TB", "1491582080_6.png", akses::getgrafik_tb_tipediagnosis)
+            .buka(() -> new GrafikTBTipeDiagnosis(u,true));
+        m.tambah("btnGrafikTBSTatusHIV", "Status HIV TB", "1491582015_11.png", akses::getgrafik_tb_statushiv)
+            .buka(() -> new GrafikTBStatusHIV(u,true));
+        m.tambah("btnGrafikTBSkoringAnak", "Skoring Anak TB", "1491582080_6.png", akses::getgrafik_tb_skoringanak)
+            .buka(() -> new GrafikTBSkoringAnak(u,true));
+        m.tambah("btnGrafikTBKonfirmasiSkoring5", "Konfirmasi Skoring 5 TB", "1491582015_11.png", akses::getgrafik_tb_konfirmasiskoring5)
+            .buka(() -> new GrafikTBKonfirmasiSkoring5(u,true));
+        m.tambah("btnGrafikTBKonfirmasiSkoring6", "Konfirmasi Skoring 6 TB", "1491582080_6.png", akses::getgrafik_tb_konfirmasiskoring6)
+            .buka(() -> new GrafikTBKonfirmasiSkoring6(u,true));
+        m.tambah("btnGrafikTBSumberObat", "Sumber Obat TB", "1491582015_11.png", akses::getgrafik_tb_sumberobat)
+            .buka(() -> new GrafikTBSumberObat(u,true));
+        m.tambah("btnGrafikTBHasilAkhirPengobatan", "Hasil Akhir Pengobatan TB", "1491582080_6.png", akses::getgrafik_tb_hasilakhirpengobatan)
+            .buka(() -> new GrafikTBHasilAkhirPengobatan(u,true));
+        m.tambah("btnGrafikTBHasilTesHIV", "Hasil Tes HIV TB", "1491582015_11.png", akses::getgrafik_tb_hasilteshiv)
+            .buka(() -> new GrafikTBHasilTesHIV(u,true));
+        m.tambah("btnGrafikPemakaianAirPDAMPerTanggal", "Pemakaian Air PDAM Per Tanggal", "1491582080_6.png", akses::getgrafik_air_pdam_pertanggal)
+            .buka(() -> new GrafikKeslingPDAMPertanggal(u,true));
+        m.tambah("btnGrafikPemakaianAirPDAMPerBulan", "Pemakaian Air PDAM Per Bulan", "1491582015_11.png", akses::getgrafik_air_pdam_perbulan)
+            .buka(() -> new GrafikKeslingPDAMPerBulan(u,true));
+        m.tambah("btnGrafikPemakaianAirTanahPerTanggal", "Pemakaian Air Tanah Per Tanggal", "1491582080_6.png", akses::getgrafik_air_tanah_pertanggal)
+            .buka(() -> new GrafikKeslingTanahPertanggal(u,true));
+        m.tambah("btnGrafikPemakaianAirTanahPerBulan", "Pemakaian Air Tanah Per Bulan", "1491582015_11.png", akses::getgrafik_air_tanah_perbulan)
+            .buka(() -> new GrafikKeslingTanahPerBulan(u,true));
+        m.tambah("btnGrafikLimbahB3MedisPerTanggal", "Limbah B3 Medis Per Tanggal", "1491582080_6.png", akses::getgrafik_limbahb3_pertanggal)
+            .buka(() -> new GrafikKeslingLimbahB3Pertanggal(u,true));
+        m.tambah("btnGrafikLimbahB3MedisPerBulan", "Limbah B3 Medis Per Bulan", "1491582015_11.png", akses::getgrafik_limbahb3_perbulan)
+            .buka(() -> new GrafikKeslingLimbahB3Bulan(u,true));
+        m.tambah("btnGrafikLimbahDomestikPerTanggal", "Limbah Padat Domestik Per Tanggal", "1491582080_6.png", akses::getgrafik_limbahdomestik_pertanggal)
+            .buka(() -> new GrafikKeslingLimbahDomestikPertanggal(u,true));
+        m.tambah("btnGrafikLimbahDomestikPerBulan", "Limbah Padat Domestik Medis Per Bulan", "1491582015_11.png", akses::getgrafik_limbahdomestik_perbulan)
+            .buka(() -> new GrafikKeslingLimbahDomestikBulan(u,true));
+        m.tambah("btnGrafikK3PerTahun", "K3 Per Tahun", "1491582080_6.png", akses::getgrafik_k3_pertahun)
+            .buka(() -> new GrafikPeristiwaK3PerTahun(u,true));
+        m.tambah("btnGrafikK3PerBulan", "K3 Per Bulan", "1491582015_11.png", akses::getgrafik_k3_perbulan)
+            .buka(() -> new GrafikPeristiwaK3PerBulan(u,true));
+        m.tambah("btnGrafikK3PerTanggal", "K3 Per Tanggal", "1491582080_6.png", akses::getgrafik_k3_pertanggal)
+            .buka(() -> new GrafikPeristiwaK3PerTanggal(u,true));
+        m.tambah("btnGrafikK3PerJenisCidera", "K3 Per Jenis Cidera", "1491582015_11.png", akses::getgrafik_k3_perjeniscidera)
+            .buka(() -> new GrafikPeristiwaK3PerJenisCidera(u,true));
+        m.tambah("btnGrafikK3PerPenyebab", "K3 Per Penyebab Kecelakaan", "1491582080_6.png", akses::getgrafik_k3_perpenyebab)
+            .buka(() -> new GrafikPeristiwaK3PerPenyebab(u,true));
+        m.tambah("btnGrafikK3PerJenisLuka", "K3 Per Jenis Luka", "1491582015_11.png", akses::getgrafik_k3_perjenisluka)
+            .buka(() -> new GrafikPeristiwaK3PerJenisLuka(u,true));
+        m.tambah("btnGrafikK3PerLokasiKejadian", "K3 Per Lokasi Kejadian", "1491582080_6.png", akses::getgrafik_k3_lokasikejadian)
+            .buka(() -> new GrafikPeristiwaK3PerLokasiKejadian(u,true));
+        m.tambah("btnGrafikK3PerDampakCidera", "K3 Per Dampak Cidera", "1491582015_11.png", akses::getgrafik_k3_dampakcidera)
+            .buka(() -> new GrafikPeristiwaK3PerDampakCidera(u,true));
+        m.tambah("btnGrafikK3PerJenisPekerjaan", "K3 Per Jenis Pekerjaan", "1491582080_6.png", akses::getgrafik_k3_perjenispekerjaan)
+            .buka(() -> new GrafikPeristiwaK3PerJenisPekerjaan(u,true));
+        m.tambah("btnGrafikK3PerBagianTubuh", "K3 Per Bagian Tubuh", "1491582015_11.png", akses::getgrafik_k3_perbagiantubuh)
+            .buka(() -> new GrafikPeristiwaK3PerBagianTubuh(u,true));
+        m.tambah("btnGrafikKunjunganRanapBulan", "Kunjungan Ranap Per Bulan", "1491582080_6.png", akses::getgrafik_kunjungan_ranapbulan)
+            .buka(() -> new GrafikKunjunganRanapPerBulan(u,true));
+        m.tambah("btnGrafikKunjunganRanapTanggal", "Kunjungan Ranap Per Tanggal", "1491582015_11.png", akses::getgrafik_kunjungan_ranaptanggal)
+            .buka(() -> new GrafikKunjunganRanapPerTanggal(u,true));
+        m.tambah("btnGrafikKunjunganRanapRuang", "Kunjungan Ranap Per Ruang", "1491582080_6.png", akses::getgrafik_kunjungan_ranap_peruang)
+            .buka(() -> new GrafikKunjunganRanapPerRuang(u,true));
+        m.tambah("btnGrafikJenjangJabatanPegawai", "Pegawai Per Jenjang Jabatan", "1491582015_11.png", akses::getgrafik_jenjang_jabatanpegawai)
+            .buka(() -> new GrafikPegawaiPerJenjangJabatan(u,true));
+        m.tambah("btnGrafikBidangPegawai", "Pegawai Per Bidang/Bagian", "1491582080_6.png", akses::getgrafik_bidangpegawai)
+            .buka(() -> new GrafikPegawaiPerBidang(u,true));
+        m.tambah("btnGrafikDepartemenPegawai", "Pegawai Per Departemen", "1491582015_11.png", akses::getgrafik_departemenpegawai)
+            .buka(() -> new GrafikPegawaiPerDepartemen(u,true));
+        m.tambah("btnGrafikPendidikanPegawai", "Pegawai Per Pendidikan", "1491582080_6.png", akses::getgrafik_pendidikanpegawai)
+            .buka(() -> new GrafikPegawaiPerPendidikan(u,true));
+        m.tambah("btnGrafikStatusWPPegawai", "Pegawai Per Status WP", "1491582015_11.png", akses::getgrafik_sttswppegawai)
+            .buka(() -> new GrafikPegawaiPerStatusWP(u,true));
+        m.tambah("btnGrafikStatusKerjaPegawai", "Pegawai Per Status Kerja", "1491582080_6.png", akses::getgrafik_sttskerjapegawai)
+            .buka(() -> new GrafikPegawaiPerStatusKerja(u,true));
+        m.tambah("btnGrafikStatusPulangRanap", "Status Pulang Ranap", "1491582015_11.png", akses::getgrafik_sttspulangranap)
+            .buka(() -> new GrafikStatusPulangRanap(u,true));
+        m.tambah("btnGrafikItemApotekPerJenis", "Item Apotek Per Jenis", "1491582080_6.png", akses::getitem_apotek_jenis)
+            .buka(() -> new GrafikItemApotekPerJenis(u,true));
+        m.tambah("btnGrafikItemApotekPerKategori", "Item Apotek Per Kategori", "1491582015_11.png", akses::getitem_apotek_kategori)
+            .buka(() -> new GrafikItemApotekPerKategori(u,true));
+        m.tambah("btnGrafikItemApotekPerGolongan", "Item Apotek Per Golongan", "1491582080_6.png", akses::getitem_apotek_golongan)
+            .buka(() -> new GrafikItemApotekPerGolongan(u,true));
+        m.tambah("btnGrafikItemApotekPerIndustriFarmasi", "Item Apotek Per Industri Farmasi", "1491582015_11.png", akses::getitem_apotek_industrifarmasi)
+            .buka(() -> new GrafikItemApotekPerIndustriFarmasi(u,true));
+        m.tambah("btnGrafikPengajuanAsetUrgensi", "Pengajuan Aset Per Urgensi", "1491582080_6.png", akses::getgrafik_pengajuan_aset_urgensi)
+            .buka(() -> new GrafikPengajuanAsetUrgensi(u,true));
+        m.tambah("btnGrafikPengajuanAsetStatus", "Pengajuan Aset Per Status", "1491582015_11.png", akses::getgrafik_pengajuan_aset_status)
+            .buka(() -> new GrafikPengajuanAsetStatus(u,true));
+        m.tambah("btnGrafikPengajuanAsetDepartemen", "Pengajuan Aset Per Departemen", "1491582080_6.png", akses::getgrafik_pengajuan_aset_departemen)
+            .buka(() -> new GrafikPengajuanAsetDepartemen(u,true));
+        m.tambah("btnGrafikKelompokJabatanPegawai", "Pegawai Per Kelompok Jabatan", "1491582015_11.png", akses::getgrafik_kelompok_jabatanpegawai)
+            .buka(() -> new GrafikPegawaiPerKelompokJabatan(u,true));
+        m.tambah("btnGrafikRisikoKerjaPegawai", "Pegawai Per Risiko Kerja", "1491582080_6.png", akses::getgrafik_resiko_kerjapegawai)
+            .buka(() -> new GrafikPegawaiPerResikoKerja(u,true));
+        m.tambah("btnGrafikEmergencyIndexPegawai", "Pegawai Per Emergency Index", "1491582015_11.png", akses::getgrafik_emergency_indexpegawai)
+            .buka(() -> new GrafikPegawaiPerEmergencyIndex(u,true));
+        m.tambah("btnGrafikInventarisRuang", "Jumlah Inventaris Per Ruang", "1491582080_6.png", akses::getgrafik_inventaris_ruang)
+            .buka(() -> new GrafikInventarisPerRuang(u,true));
+        m.tambah("btnGrafikInventarisJenis", "Jumlah Inventaris Per Jenis", "1491582015_11.png", akses::getgrafik_inventaris_jenis)
+            .buka(() -> new GrafikInventarisPerJenis(u,true));
+        m.tambah("btnGrafikHAIsPasienRuang", "Pasien HAIs Per Ruang", "1491582080_6.png", akses::getgrafik_HAIs_pasienbangsal)
+            .buka(() -> new GrafikPasienHAIsRuang(u,true));
+        m.tambah("btnGrafikHAIsPasienBulan", "Pasien HAIs Per Bulan", "1491582015_11.png", akses::getgrafik_HAIs_pasienbulan)
+            .buka(() -> new GrafikPasienHAIsBulan(u,true));
+        m.tambah("btnGrafikHAIsLajuVAP", "Laju HAIs VAP Per Ruang", "1491582080_6.png", akses::getgrafik_HAIs_laju_vap)
+            .buka(() -> new GrafikLajuHAIsVAPPerRuang(u,true));
+        m.tambah("btnGrafikHAIsLajuIAD", "Laju HAIs IAD Per Ruang", "1491582015_11.png", akses::getgrafik_HAIs_laju_iad)
+            .buka(() -> new GrafikLajuHAIsIADPerRuang(u,true));
+        m.tambah("btnGrafikHAIsLajuPleb", "Laju HAIs Plebitis Per Ruang", "1491582080_6.png", akses::getgrafik_HAIs_laju_pleb)
+            .buka(() -> new GrafikLajuHAIsPlebPerRuang(u,true));
+        m.tambah("btnGrafikHAIsLajuISK", "Laju HAIs ISK Per Ruang", "1491582015_11.png", akses::getgrafik_HAIs_laju_isk)
+            .buka(() -> new GrafikLajuHAIsISKPerRuang(u,true));
+        m.tambah("btnGrafikHAIsLajuILO", "Laju HAIs ILO Per Ruang", "1491582080_6.png", akses::getgrafik_HAIs_laju_ilo)
+            .buka(() -> new GrafikLajuHAIsILOPerRuang(u,true));
+        m.tambah("btnGrafikHAIsLajuHAP", "Laju HAIs HAP Per Ruang", "1491582015_11.png", akses::getgrafik_HAIs_laju_hap)
+            .buka(() -> new GrafikLajuHAIsHAPPerRuang(u,true));
+        m.tambah("btnGrafikPenerimaanObatPerBulan", "Penerimaan Obat, Alkes & BHP Per Bulan", "1491582080_6.png", akses::getpenerimaan_obat_perbulan)
+            .buka(() -> new GrafikPenerimaanObatPerbulan(u,true));
+        m.tambah("btnGrafikHemodialisaPerTanggal", "Hemodialisa Per Tanggal", "1491582015_11.png", akses::getgrafik_harian_hemodialisa)
+            .buka(() -> new GrafikHemodialisaPerTanggal(u,true));
+        m.tambah("btnGrafikHemodialisaPerBulan", "Hemodialisa Per Bulan", "1491582080_6.png", akses::getgrafik_bulanan_hemodialisa)
+            .buka(() -> new GrafikHemodialisaPerBulan(u,true));
+        m.tambah("btnGrafikHemodialisaPerTahun", "Hemodialisa Per Tahun", "1491582015_11.png", akses::getgrafik_tahunan_hemodialisa)
+            .buka(() -> new GrafikHemodialisaPerBulan(u,true));
+        m.tambah("btnGrafikMeninggalPerBulan", "Pasien Meninggal Per Bulan", "1491582080_6.png", akses::getgrafik_bulanan_meninggal)
+            .buka(() -> new GrafikMeninggalPerBulan(u,true));
+        m.tambah("btnGrafikInventarisKategori", "Jumlah Inventaris Per Kategori", "1491582015_11.png", akses::getgrafik_inventaris_kategori)
+            .buka(() -> new GrafikInventarisPerKategori(u,true));
+        m.tambah("btnGrafikInventarisMerk", "Jumlah Inventaris Per Merk", "1491582080_6.png", akses::getgrafik_inventaris_merk)
+            .buka(() -> new GrafikInventarisPerMerk(u,true));
+        m.tambah("btnGrafikInventarisProdusen", "Jumlah Inventaris Per Produsen", "1491582015_11.png", akses::getgrafik_inventaris_produsen)
+            .buka(() -> new GrafikInventarisPerProdusen(u,true));
+        m.tambah("btnGrafikPorsiDietPerTanggal", "Porsi Diet Per Tanggal", "1491582080_6.png", akses::getgrafik_porsidiet_pertanggal)
+            .buka(() -> new GrafikPorsiDietPerTanggal(u,true));
+        m.tambah("btnGrafikPorsiDietPerBulan", "Porsi Diet Per Bulan", "1491582015_11.png", akses::getgrafik_porsidiet_perbulan)
+            .buka(() -> new GrafikPorsiDietPerBulan(u,true));
+        m.tambah("btnGrafikPorsiDietPerTahun", "Porsi Diet Per Tahun", "1491582080_6.png", akses::getgrafik_porsidiet_pertahun)
+            .buka(() -> new GrafikPorsiDietPerTahun(u,true));
+        m.tambah("btnGrafikPorsiDietPerRuang", "Porsi Diet Per Ruang", "1491582015_11.png", akses::getgrafik_porsidiet_perbangsal)
+            .buka(() -> new GrafikPorsiDietPerRuang(u,true));
+        m.tambah("btnGrafikPerbaikanInventarisPerTanggal", "Perbaikan Inventaris Per Tanggal", "1491582080_6.png", akses::getgrafik_perbaikan_inventaris_pertanggal)
+            .buka(() -> new GrafikPerbaikanInventarisPerTanggal(u,true));
+        m.tambah("btnGrafikPerbaikanInventarisPerBulan", "Perbaikan Inventaris Per Bulan", "1491582015_11.png", akses::getgrafik_perbaikan_inventaris_perbulan)
+            .buka(() -> new GrafikPerbaikanInventarisPerBulan(u,true));
+        m.tambah("btnGrafikPerbaikanInventarisPerTahun", "Perbaikan Inventaris Per Tahun", "1491582080_6.png", akses::getgrafik_perbaikan_inventaris_pertahun)
+            .buka(() -> new GrafikPerbaikanInventarisPerTahun(u,true));
+        m.tambah("btnGrafikPerbaikanInventarisPerPelaksanaStatus", "Perbaikan Inventaris Per Pelaksana & Status", "1491582015_11.png", akses::getgrafik_perbaikan_inventaris_perpelaksana_status)
+            .buka(() -> new GrafikPerbaikanInventarisPerPelaksanaStatus(u,true));
+        m.tambah("btnGrafikLimbahB3MedisCairPerTanggal", "Limbah B3 Cair Per Tanggal", "1491582080_6.png", akses::getgrafik_limbahb3cair_pertanggal)
+            .buka(() -> new GrafikKeslingLimbahB3CairPertanggal(u,true));
+        m.tambah("btnGrafikLimbahB3MedisCairPerBulan", "Limbah B3 Cair Per Bulan", "1491582015_11.png", akses::getgrafik_limbahb3cair_perbulan)
+            .buka(() -> new GrafikKeslingLimbahB3CairBulan(u,true));
+    }
+
+    /** [P] Manajemen Surat Masuk & Keluar, Pengumuman E-Pasien */
+    private void kategoriP(){
+        m.kategori(15);
+        m.tambah("btnSuratIndeks", "Indeks Surat", "if_open-email_264844.png", akses::getsurat_indeks)
+            .buka(() -> new SuratIndeks(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnSuratMap", "Map Surat", "if_orange-folder-mail_25242.png", akses::getsurat_map)
+            .buka(() -> new SuratMap(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnSuratAlmari", "Almari Surat", "if_cabinet_49336.png", akses::getsurat_almari)
+            .buka(() -> new SuratAlmari(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnSuratRak", "Rak Surat", "if_shelf_104409.png", akses::getsurat_rak)
+            .buka(() -> new SuratRak(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnSuratRuang", "Ruang Surat", "if_kfm_home_18010.png", akses::getsurat_ruang)
+            .buka(() -> new SuratRuang(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnSuratKlasifikasi", "Klasifikasi Surat", "if_kontact_8762.png", akses::getsurat_klasifikasi)
+            .buka(() -> new SuratKlasifikasi(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnSuratStatus", "Status Surat", "if_26-Mail_34317.png", akses::getsurat_status)
+            .buka(() -> new SuratStatus(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnSuratSifat", "Sifat Surat", "if_private_mail_44691.png", akses::getsurat_sifat)
+            .buka(() -> new SuratSifat(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnSuratBalas", "Stts Balas Surat", "if_mail-reply-all_118782.png", akses::getsurat_balas)
+            .buka(() -> new SuratBalas(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnSuratMasuk", "Surat Masuk", "if_e-mail2 _36619.png", akses::getsurat_masuk)
+            .buka(() -> new SuratMasuk(null,false));
+        m.tambah("btnSuratKeluar", "Surat Keluar", "if_email_3327.png", akses::getsurat_keluar)
+            .buka(() -> new SuratKeluar(null,false));
+        m.tambah("btnSuratSakit", "Surat Keterangan Sakit", "iconfinder_order-history_49596.png", akses::getsurat_sakit)
+            .buka(() -> new SuratSakit(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnSuratSakitPihak2", "Surat Keterangan Sakit Pihak 2", "iconfinder_order-history_49596.png", akses::getsurat_sakit_pihak_2)
+            .buka(() -> new SuratSakitPihak2(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnSuratHamil", "Surat Hamil", "iconfinder_4_375262.png", akses::getsurat_hamil)
+            .buka(() -> new SuratTidakHamil(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnSuratCutiHamil", "Surat Cuti Hamil", "iconfinder_contact_37110.png", akses::getsurat_cuti_hamil)
+            .buka(() -> new SuratCutiHamil(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnSKDPBPJS", "Surat Kontrol", "iconfinder_vector_66_15_473627.png", akses::getskdp_bpjs)
+            .buka(() -> new SuratKontrol(u,false));
+        m.tambah("btnSuratBebasNarkoba", "Surat Bebas Narkoba", "iconfinder_Capsule-drug-medicine-pill-tablet_5994864.png", akses::getsurat_bebas_narkoba)
+            .buka(() -> new SuratBebasNarkoba(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); });
+        m.tambah("btnSuratKeteranganCovid", "Surat Keterangan Covid", "iconfinder_Microscope-Scientific-Laboratory-Test-Chemistry_5958964.png", akses::getsurat_keterangan_covid)
+            .buka(() -> new SuratKeteranganCovid(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); });
+        m.tambah("btnSuratKeteranganRawatInap", "Surat Keterangan Rawat Inap", "iconfinder_File_Files_Folder_Document_Check_Confirm_3909334.png", akses::getsurat_keterangan_rawat_inap)
+            .buka(() -> new SuratKeteranganRawatInap(u,false));
+        m.tambah("btnSuratKeteranganSehat", "Surat Keterangan Sehat", "if_Documents_Black_63760.png", akses::getsurat_keterangan_sehat)
+            .buka(() -> new SuratKeteranganSehat(u,false));
+        m.tambah("btnSuratBebasTBC", "Surat Bebas TBC", "6088716_clean_lungs_protect_icon.png", akses::getsurat_bebas_tbc)
+            .buka(() -> new SuratKeteranganBebasTBC(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); });
+        m.tambah("btnSuratButaWarna", "Surat Keterangan Buta Warna", "1994549_cmyk_color_color chart_colour_design_icon.png", akses::getsurat_buta_warna)
+            .buka(() -> new SuratButaWarna(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); });
+        m.tambah("btnSuratBebasTato", "Surat Bebas Tato", "24675_art_brush_color_drawing_paint_icon.png", akses::getsurat_bebas_tato)
+            .buka(() -> new SuratBebasTato(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); });
+        m.tambah("btnSuratKeteranganLayakTerbang", "Surat Keterangan Layak Terbang", "6088199_plane_prohibit_travel_warning_icon.png", akses::getsurat_keterangan_layak_terbang)
+            .buka(() -> new SuratKeteranganLayakTerbang(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnSuratKeteranganBerobat", "Surat Keterangan Berobat", "register_11421976.png", akses::getsurat_keterangan_berobat)
+            .buka(() -> new SuratKeteranganBerobat(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnSuratKewaspadaanKesehatan", "Surat Kewaspadaan Kesehatan", "5929237_avatar_fever_man_sick_coronavirus_icon.png", akses::getsurat_kewaspadaan_kesehatan)
+            .buka(() -> new SuratKewaspadaanKesehatan(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); });
+        m.tambah("btnPengumumanEPasien", "Pengumuman E-Pasien", "iconfinder_email-laptop_4417124.png", akses::getpengumuman_epasien)
+            .buka(() -> new PengumumanEPasien(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); });
+        m.tambah("btnTemplatePersetujuanPenolakanTindakan", "Template Persetujuan Penolakan Tindakan", "5859116_hospital_hygiene_masks_medical_surgery_icon.png", akses::gettemplate_persetujuan_penolakan_tindakan)
+            .buka(() -> new MasterTemplatePersetujuanPenolakanTindakan(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); f.setTampil(); });
+        m.tambah("btnPersetujuanPenolakanTindakan", "Persetujuan/Penolakan Tindakan", "6771569_education_learning_pencil_school_signature_icon.png", akses::getpersetujuan_penolakan_tindakan)
+            .buka(() -> new SuratPersetujuanPenolakanTindakan(u,false)).sebelum(f -> { f.isCek(); f.setTampil(); });
+        m.tambah("btnPersetujuanPulangAtasPermintanSendiri", "Pulang Atas Permintaan Sendiri", "5947112_clinic_doctor_healthcare_hospital_medical_icon.png", akses::getsurat_pulang_atas_permintaan_sendiri)
+            .buka(() -> new SuratPulangAtasPermintaanSendiri(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnPernyataanPasienUmum", "Pernyataan Pasien Umum", "Edit-Male-User.png", akses::getsurat_pernyataan_pasien_umum)
+            .buka(() -> new SuratPernyataanPasienUmum(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnPersetujuanUmum", "Persetujuan Umum", "5868931_architecture_building_coronavirus_hospital_corona_icon.png", akses::getsurat_persetujuan_umum)
+            .buka(() -> new SuratPersetujuanUmum(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); });
+        m.tambah("btnPersetujuanRawatInap", "Persetujuan Rawat Inap", "5983455_bed_hospital_medical_patient_icon.png", akses::getsurat_persetujuan_rawat_inap)
+            .buka(() -> new SuratPersetujuanRawatInap(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); });
+        m.tambah("btnPersetujuanPenundaanPelayanan", "Persetujuan Penundaan Pelayanan", "9160890_clock_commerce_shopping_online_store_icon.png", akses::getpersetujuan_penundaan_pelayanan)
+            .buka(() -> new SuratPersetujuanPenundaanPelayanan(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); });
+        m.tambah("btnMasterMenolakAnjuranMedis", "Master Menolak Anjuran Medis", "9191497_nonviolence_violence_cruelty_hit_thrash_icon.png", akses::getmaster_menolak_anjuran_medis)
+            .buka(() -> new MasterMenolakAnjuranMedis(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnPenolakanAnjuranMedis", "Penolakan Anjuran Medis", "8960611_hospitals_hospital_building_medic_health_icon.png", akses::getpenolakan_anjuran_medis)
+            .buka(() -> new SuratPenolakanAnjuranMedis(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnPersetujuanPemeriksaanHIV", "Persetujuan Pemeriksaan HIV", "6217201_corona_coronavirus_test_tube_virus_icon.png", akses::getsurat_persetujuan_pemeriksaan_hiv)
+            .buka(() -> new SuratPersetujuanPemeriksaanHIV(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnSuratPernyataanMemilihDPJP", "Surat Pernyataan Memilih DPJP", "5898997_avatar_doctor_man_mask_user_icon.png", akses::getsurat_pernyataan_memilih_dpjp)
+            .buka(() -> new SuratPernyataanMemilihDPJP(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnSuratSerahTerimaBarangAnggotaTubuh", "Serah Terima Anggota Tubuh/Barang", "file-manager.png", akses::getserah_terima_anggota_tubuh_barang)
+            .buka(() -> new SuratSerahTerimaBarangAnggotaTubuh(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnSuratPermintaanBinrohtal", "Persetujuan Bimbingan Rohani & Mental", "mental-health_18376031-2.png", akses::getpermintaan_binrohtal)
+            .buka(() -> new SuratPermintaanBinrohtal(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnSuratPermintaanPerlindunganDariKekerasan", "Permintaan Perlindungan Diri Dari Kekerasan", "boxing_2043124.png", akses::getsurat_permintaan_perlindungan_dari_kekerasan)
+            .buka(() -> new SuratPermintaanPerlindunganDariKekerasan(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnSuratPermohonanPrivasi", "Surat Permohonan Privasi", "compliant_4252354.png", akses::getsurat_permohonan_privasi)
+            .buka(() -> new SuratPermohonanPrivasi(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnSuratPermintaanSecondOpinion", "Surat Permintaan Second Opinion", "conversation_3601377.png", akses::getsurat_permintaan_second_opinion)
+            .buka(() -> new SuratPermintaanSecondOpinion(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnSuratPenolakanResusitasi", "Surat Penolakan Resusitasi", "services_6007742.png", akses::getsurat_penolakan_resusitasi)
+            .buka(() -> new SuratPenolakanResusitasi(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnSuratPengajuanCutiPerawatan", "Surat Pegajuan Cuti Perawatan", "writing_2593639.png", akses::getsurat_pengajuan_cuti_pasien)
+            .buka(() -> new SuratPengajuanCutiPerawatan(u,false)).sebelum(f -> f.isCek());
+    }
+
+    /** [Q] Manajemen Perpustakaan & Koleksi Pustaka Digital */
+    private void kategoriQ(){
+        m.kategori(16);
+        m.tambah("btnRuangPerpustakaan", "Ruang Perpustakaan", "iconfinder_City_728922.png", akses::getruang_perpustakaan)
+            .buka(() -> new PerpustakaanRuang(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); });
+        m.tambah("btnKategoriPerpustakaan", "Kategori Koleksi", "iconfinder_document-open_118911.png", akses::getkategori_perpustakaan)
+            .buka(() -> new PerpustakaanKategori(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); });
+        m.tambah("btnJenisPerpustakaan", "Jenis Koleksi", "iconfinder_Untitled-1-02_3775448.png", akses::getjenis_perpustakaan)
+            .buka(() -> new PerpustakaanJenis(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); });
+        m.tambah("btnPengarangPerpustakaan", "Pengarang/Penulis", "iconfinder_Teacher_131497.png", akses::getpengarang_perpustakaan)
+            .buka(() -> new PerpustakaanPengarang(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); });
+        m.tambah("btnPenerbitPerpustakaan", "Penerbit Koleksi", "iconfinder_package_editors_109.png", akses::getpenerbit_perpustakaan)
+            .buka(() -> new PerpustakaanPenerbit(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); });
+        m.tambah("btnKoleksiPerpustakaan", "Koleksi Perpustakaan", "iconfinder_General_Office_61_3592836.png", akses::getkoleksi_perpustakaan)
+            .buka(() -> new PerpustakaanKoleksi(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); });
+        m.tambah("btnInventarisPerpustakaan", "Inventaris Perpustakaan", "iconfinder_library_47990.png", akses::getinventaris_perpustakaan)
+            .buka(() -> new PerpustakaanInventaris(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); });
+        m.tambah("btnPengaturanPeminjamanPerpustakaan", "Pengaturan Peminjaman", "iconfinder_EditDocument_728933.png", akses::getset_peminjaman_perpustakaan)
+            .buka(() -> new PerpustakaanPengaturanPeminjaman(u,false)).sebelum(f -> f.emptTeks());
+        m.tambah("btnDendaPerpustakaan", "Denda Perpustakaan", "iconfinder_Wallet_3387286.png", akses::getdenda_perpustakaan)
+            .buka(() -> new PerpustakaanDenda(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); });
+        m.tambah("btnAnggotaPerpustakaan", "Anggota Perpustakaan", "iconfinder_website_-_male_user_3440844.png", akses::getanggota_perpustakaan)
+            .buka(() -> new PerpustakaanAnggota(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); });
+        m.tambah("btnPeminjamanPerpustakaan", "Peminjaman Koleksi Perpustakaan", "if_diagram-07_35577.png", akses::getpeminjaman_perpustakaan)
+            .buka(() -> new PerpustakaanSirkulasi(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); });
+        m.tambah("btnBayarDendaPerpustakaan", "Bayar Denda Perpustakaan", "iconfinder_wallet_money_sale_shop_4177574.png", akses::getbayar_denda_perpustakaan)
+            .buka(() -> new PerpustakaanBayarDenda(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); });
+        m.tambah("btnEbookPerpustakaan", "Data Koleksi Ebook", "iconfinder_website_-_bookmark_3440843.png", akses::getebook_perpustakaan)
+            .aksi(u::btnEbookPerpustakaanActionPerformed);
+        m.tambah("btnPenelitianPerpustakaan", "Koleksi Penelitian", "if_research_87460.png", null)
+            .aksi(u::btnPenelitianPerpustakaanActionPerformed);
+        m.tambah("btnCariEbook", "Cari Koleksi Ebook", "iconfinder_Book_728912.png", null)
+            .aksi(u::btnCariEbookActionPerformed);
+        m.tambah("btnCariInventarisPerpustakaan", "Cari Inventaris Perpustakaan", "iconfinder_data_1421637.png", null)
+            .aksi(u::btnCariInventarisPerpustakaanActionPerformed);
+    }
+
+    /** [R] Pre-Construction & Infection Control Risk Assessment */
+    private void kategoriR(){
+        m.kategori(17);
+        m.tambah("btnPCRAICRAJenisAktivitasProyek", "Jenis Aktivitas Proyek PCRA", "construction_12539761.png", akses::getpcra_icra_jenis_aktivitas_proyek)
+            .buka(() -> new PCRAICRAJenisAktivitasProyek(u,false)).sebelum(f -> f.emptTeks());
+        m.tambah("btnPCRAICRALokasiKelompokRisiko", "Lokasi & Kelompok Risiko Area PCRA", "construction_16675584.png", akses::getpcra_icra_lokasi_kelompok_risiko_area)
+            .buka(() -> new PCRAICRALokasiKelompokRisikoArea(u,false)).sebelum(f -> f.emptTeks());
+        m.tambah("btnPCRAICRAKelasRisikoPencegahan", "Kelas Risiko/Kelas Pencegahan PCRA", "construction_13585266.png", akses::getpcra_icra_kelas_risiko_pencegahan)
+            .buka(() -> new PCRAICRAKelasRisikoPencegahan(u,false)).sebelum(f -> f.emptTeks());
+        m.tambah("btnPCRAICRATindakanPengendalian", "Tindakan Pengendalian PCRA", "real-estate_3309891.png", akses::getpcra_icra_tindakan_pengendalian)
+            .buka(() -> new PCRAICRATindakanPengendalian(u,false)).sebelum(f -> f.emptTeks());
+        m.tambah("btnPCRAICRAIdentifikasiRisikoInfeksi", "Identifikasi Risiko Infeksi PCRA", "virus_3182541.png", akses::getpcra_icra_identifkasi_risiko_infeksi)
+            .buka(() -> new PCRAICRAIdentifikasiRisikoInfeksi(u,false)).sebelum(f -> f.emptTeks());
+        m.tambah("btnPCRAICRAIdentifikasiRisikoKeselamatan", "Identifikasi Risiko Keselamatan PCRA", "project-management_2422121.png", akses::getpcra_icra_identifkasi_risiko_keselamatan)
+            .buka(() -> new PCRAICRAIdentifikasiRisikoKeselamatan(u,false)).sebelum(f -> f.emptTeks());
+        m.tambah("btnPCRAICRAIdentifikasiRisikoKebakaran", "Identifikasi Risiko Kebakaran PCRA", "fire_2278480.png", akses::getpcra_icra_identifkasi_risiko_kebakaran)
+            .buka(() -> new PCRAICRAIdentifikasiRisikoKebakaran(u,false)).sebelum(f -> f.emptTeks());
+        m.tambah("btnPCRAICRAIdentifikasiRisikoUtilitas", "Identifikasi Risiko Utilitas PCRA", "repair_3899458.png", akses::getpcra_icra_identifkasi_risiko_utilitas)
+            .buka(() -> new PCRAICRAIdentifikasiRisikoUtilitas(u,false)).sebelum(f -> f.emptTeks());
+        m.tambah("btnPCRAICRAPersyaratanHarusDipenuhi", "Persyaratan Harus Dipenuhi PCRA", "hammer_10279817.png", akses::getpcra_icra_persyaratan_harus_dipenuhi)
+            .buka(() -> new PCRAICRAPersyaratanHarusDipenuhi(u,false)).sebelum(f -> f.emptTeks());
+        m.tambah("btnPCRAICRAPengkajianRisikoPraKonstruksi", "Pengkajian Risiko Pra Konstruksi/PCRA", "crane_2515356.png", akses::getpcra_icra_pengkajian_risiko_prakonstruksi)
+            .buka(() -> new PCRAICRAPengkajianRisikoPraKonstruksi(u,false)).sebelum(f -> f.setTampil());
+    }
+
+    /** [S] Toko / Minimarket / Koperasi */
+    private void kategoriS(){
+        m.kategori(18);
+        m.juga("btnSatuan");
+        m.tambah("btnSuplierToko", "Suplier Toko", "if_kde-folder-public_25193.png", akses::gettoko_suplier)
+            .buka(() -> new TokoSuplier(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); });
+        m.tambah("btnJenisToko", "Jenis Barang Toko", "cabinet.png", akses::gettoko_jenis)
+            .buka(() -> new TokoJenis(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); });
+        m.tambah("btnBarangToko", "Barang Toko", "iconfinder_eccomerce_-_shopping_cart_3440920.png", akses::gettoko_barang)
+            .buka(() -> new TokoBarang(u,false)).sebelum(f -> { f.emptTeks(); f.onCari(); });
+        m.tambah("btnStokOpnameToko", "Stok Opname Toko", "ark2.png", akses::getstok_opname_toko)
+            .buka(() -> new TokoInputStok(u,false)).sebelum(f -> { f.tampil(); f.isCek(); });
+        m.tambah("btnRiwayatBarangToko", "Riwayat Barang Toko", "iconfinder_ecommerce-21_4707177.png", akses::gettoko_riwayat_barang)
+            .buka(() -> new TokoRiwayatBarang(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnPengajuanBarangToko", "Pengajuan Barang Toko", "iconfinder_icon-45-note-list_315263.png", akses::gettoko_pengajuan_barang)
+            .buka(() -> new TokoPengajuanBarang(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnSuratPemesananToko", "Surat Pemesanan Toko", "if_internet-mail_118808.png", akses::gettoko_surat_pemesanan)
+            .buka(() -> new TokoSuratPemesanan(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnPenerimaanBarangToko", "Penerimaan Barang Toko", "iconfinder_gifts_sale_shop_4177581.png", akses::gettoko_penerimaan_barang)
+            .buka(() -> new TokoPemesanan(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnPengadaanBarangToko", "Pengadaan Barang Toko", "iconfinder_Notebook_3387299.png", akses::gettoko_pengadaan_barang)
+            .buka(() -> new TokoPembelian(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnMemberToko", "Member Toko", "iconfinder_meeting_45536.png", akses::gettoko_member)
+            .buka(() -> new TokoMember(null,false)).sebelum(f -> { f.emptTeks(); f.isCek(); });
+        m.tambah("btnPenjualanToko", "Penjualan Toko", "iconfinder_lock__payment__pay__security_2542006.png", akses::gettoko_penjualan)
+            .buka(() -> new TokoPenjualan(null,false)).sebelum(f -> f.isCek());
+        m.tambah("btnPiutangToko", "Piutang Toko", "1485357584_Calculator.png", akses::gettoko_piutang)
+            .buka(() -> new TokoPiutang(null,false)).sebelum(f -> f.isCek());
+        m.tambah("btnReturKeSuplierToko", "Retur Ke Suplier Toko", "iconfinder_Package__Package_Delivery_Truck_Shipping_Transport_Box-30_4072100.png", akses::gettoko_retur_beli)
+            .buka(() -> new TokoReturBeli(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnReturJualToko", "Retur Jual Toko", "1360486142_shopping_cart.png", akses::gettoko_retur_jual)
+            .buka(() -> new TokoReturJual(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnReturPiutangToko", "Retur Piutang Toko", "custom-reports.png", akses::gettoko_retur_piutang)
+            .buka(() -> new TokoReturPiutang(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnHutangToko", "Hutang Toko", "iconfinder_checkout_47678.png", akses::gettoko_hutang)
+            .buka(() -> new KeuanganHutangToko(u,false));
+        m.tambah("btnBayarPesanToko", "Bayar Pesan Toko", "iconfinder_checkout_47678.png", akses::gettoko_bayar_pemesanan)
+            .buka(() -> new KeuanganBayarPesanToko(u,false)).sebelum(f -> f.tampil2());
+        m.tambah("btnPendapatanHarianToko", "Pendapatan Harian Toko", "iconfinder_eccomerce_-_calculator_3440925.png", akses::gettoko_pendapatan_harian)
+            .buka(() -> new TokoPendapatanHarian(u,false));
+        m.tambah("btnPenjualanHarianToko", "Penjualan Harian Toko", "iconfinder_edit-copy_118918.png", akses::gettoko_penjualan_harian)
+            .buka(() -> new TokoPenjualanHarian(u,false));
+        m.tambah("btnPiutangHarianToko", "Piutang Harian Toko", "iconfinder_News_5947117.png", akses::gettoko_piutang_harian)
+            .buka(() -> new TokoPiutangHarian(u,false));
+        m.tambah("btnKeuntunganBarangToko", "Keuntungan Barang Toko", "coins.png", akses::gettoko_keuntungan_barang)
+            .buka(() -> new TokoKeuntunganBarang(u,false));
+        m.tambah("btnBayarPiutangToko", "Bayar Piutang Toko", "iconfinder_vector_65_04_473782.png", akses::gettoko_bayar_piutang)
+            .buka(() -> new TokoBayarPiutang(u,false)).sebelum(f -> { f.tampil(); f.emptTeks(); f.isCek(); });
+        m.tambah("btnSirkulasiBarangToko", "Sirkulasi Barang Toko", "1360487125_system-restart-panel.png", akses::gettoko_sirkulasi)
+            .buka(() -> new TokoSirkulasi(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnSirkulasiBarangToko2", "Sirkulasi Barang Toko 2", "1360487125_system-restart-panel.png", akses::gettoko_sirkulasi2)
+            .buka(() -> new TokoSirkulasi2(u,false)).sebelum(f -> f.isCek());
+    }
+
+    /** [T] Pengelolaan Data Filantropi, CSR, Zakat, Infaq & Shodaqoh */
+    private void kategoriT(){
+        m.kategori(19);
+        m.tambah("btnZISPengeluaranPenerimaDankes", "Ket Pengeluaran Penerima Dankes", "iconfinder_vector_65_04_473782.png", akses::getzis_pengeluaran_penerima_dankes)
+            .buka(() -> new ZISPengeluaranPenerimaDankes(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); });
+        m.tambah("btnZISPenghasilanPenerimaDankes", "Ket Penghasilan Penerima Dankes", "iconfinder_phonebook_17015.png", akses::getzis_penghasilan_penerima_dankes)
+            .buka(() -> new ZISPenghasilanPenerimaDankes(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); });
+        m.tambah("btnZISUkuranRumahPenerimaDankes", "Ukuran Rumah Penerima Dankes", "iconfinder_Home_34226.png", akses::getzis_ukuran_rumah_penerima_dankes)
+            .buka(() -> new ZISUkuranRumahPenerimaDankes(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); });
+        m.tambah("btnZISDindingRumahPenerimaDankes", "Dinding Rumah Penerima Dankes", "iconfinder_building_17020.png", akses::getzis_dinding_rumah_penerima_dankes)
+            .buka(() -> new ZISDindingRumahPenerimaDankes(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); });
+        m.tambah("btnZISLantaiRumahPenerimaDankes", "Lantai Rumah Penerima Dankes", "iconfinder_fence-picket-garden-yard-farm-barrier-wooden_2189586.png", akses::getzis_lantai_rumah_penerima_dankes)
+            .buka(() -> new ZISLantaiRumahPenerimaDankes(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); });
+        m.tambah("btnZISAtapRumahPenerimaDankes", "Atap Rumah Penerima Dankes", "iconfinder_home_17008.png", akses::getzis_atap_rumah_penerima_dankes)
+            .buka(() -> new ZISAtapRumahPenerimaDankes(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); });
+        m.tambah("btnZISKepemilikanRumahPenerimaDankes", "Kepemilikan Rumah Penerima Dankes", "iconfinder_Locked_Cell_Door_128415.png", akses::getzis_kepemilikan_rumah_penerima_dankes)
+            .buka(() -> new ZISAtapRumahPenerimaDankes(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); });
+        m.tambah("btnZISKamarMandiPenerimaDankes", "Kamar Mandi Penerima Dankes", "iconfinder_13-Shower_6027796.png", akses::getzis_kamar_mandi_penerima_dankes)
+            .buka(() -> new ZISKamarMandiPenerimaDankes(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); });
+        m.tambah("btnZISDapurRumahPenerimaDankes", "Dapur Rumah Penerima Dankes", "iconfinder_25-Hot_cooking_5929219.png", akses::getzis_dapur_rumah_penerima_dankes)
+            .buka(() -> new ZISDapurRumahPenerimaDankes(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); });
+        m.tambah("btnZISKursiRumahPenerimaDankes", "Kursi Rumah Penerima Dankes", "iconfinder_education-school-chair-seat-computer-study-office_5854055.png", akses::getzis_kursi_rumah_penerima_dankes)
+            .buka(() -> new ZISKursiRumahPenerimaDankes(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); });
+        m.tambah("btnZISKategoriPHBSPenerimaDankes", "Kategori PHBS Penerima Dankes", "iconfinder_house_sink_1378831.png", akses::getzis_kategori_phbs_penerima_dankes)
+            .buka(() -> new ZISKategoriPHBSPenerimaDankes(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); });
+        m.tambah("btnZISElektronikPenerimaDankes", "Elektronik Penerima Dankes", "iconfinder_Eco_bulb_energy_light_2992437.png", akses::getzis_elektronik_penerima_dankes)
+            .buka(() -> new ZISElektronikPenerimaDankes(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); });
+        m.tambah("btnZISTernakPenerimaDankes", "Ternak Penerima Dankes", "iconfinder_chicken-chickling-easter-egg-shell-spring_2189581.png", akses::getzis_ternak_penerima_dankes)
+            .buka(() -> new ZISTernakPenerimaDankes(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); });
+        m.tambah("btnZISJenisSimpananPenerimaDankes", "Jenis Simpanan Penerima Dankes", "iconfinder_gold_61617.png", akses::getzis_jenis_simpanan_penerima_dankes)
+            .buka(() -> new ZISJenisSimpananPenerimaDankes(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); });
+        m.tambah("btnZISKategoriAsnafPenerimaDankes", "Kategori Asnaf Penerima Dankes", "iconfinder_4_2716419.png", akses::getzis_kategori_asnaf_penerima_dankes)
+            .buka(() -> new ZISKategoriAsnafPenerimaDankes(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); });
+        m.tambah("btnZISPatologisPenerimaDankes", "Patologis Penerima Dankes", "iconfinder_smoke-healthcare_and_medical-no_smoking-warming-signaling-cigarette-prohibition-forbidden-security_4394848.png", akses::getzis_patologis_penerima_dankes)
+            .buka(() -> new ZISPatologisPenerimaDankes(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); });
+    }
+
+    /** [U] Pengaturan Program Aplikasi HMS */
+    private void kategoriU(){
+        m.kategori(20);
+        m.tambah("btnSetupAplikasi", "Set Aplikasi", "local_network.png", akses::getaplikasi)
+            .buka(() -> new DlgSetAplikasi(u,false)).sebelum(f -> f.emptTeks());
+        m.tambah("btnAdmin", "Set Admin", "preferences-desktop-cryptography.png", akses::getadmin)
+            .buka(() -> new DlgAdmin(u,false)).sebelum(f -> { f.tampil(); f.emptTeks(); });
+        m.tambah("btnSetPenjab", "Set P.J. Unit Penunjang", "user3.png", akses::getsetup_pjlab)
+            .buka(() -> new DlgSetPenjabLab(u,false)).sebelum(f -> f.emptTeks());
+        m.tambah("btnSetupOtoLokasi", "Set Oto Lokasi", "our_process_2.png", akses::getsetup_otolokasi)
+            .buka(() -> new DlgSetOtoLokasi(u,false));
+        m.tambah("btnSetupJamInap", "Set Kamar Inap", "Time.png", akses::getsetup_jam_kamin)
+            .buka(() -> new DlgSetKamarInap(u,false));
+        m.tambah("btnSetHargaKamar", "Set Harga Kamar", "bedroom.png", akses::getset_harga_kamar)
+            .buka(() -> new DlgSetHargaKamar(u,false));
+        m.tambah("btnSetupEmbalase", "Set Embalase & Tuslah", "Money.png", akses::getsetup_embalase)
+            .buka(() -> new DlgSetEmbalase(u,false));
+        m.tambah("btnUser", "Set User", "1360484978_application-pgp-signature.png", akses::getuser)
+            .buka(() -> new DlgUser(u,false)).sebelum(f -> f.emptTeks());
+        m.tambah("btnEEksekutif", "Set E-Eksekutif", "2169607_bar_chart_financial_graph_graphic_icon.png", akses::gete_eksekutif)
+            .buka(() -> new DlgEEksekutif(u,false)).sebelum(f -> f.emptTeks());
+        m.tambah("btnTracker", "Tracker Login", "receptionist.png", akses::gettracer_login)
+            .buka(() -> new DlgPenelusuranLogin(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnVakum", "Vakum Table", "1360486615_remove-from-database.png", akses::getvakum)
+            .buka(() -> new DlgVakum(u,false));
+        m.tambah("btnDisplay", "Display Antrian Registrasi & Poli", "find.png", akses::getdisplay)
+            .buka(() -> new DlgRunTeks(u,false)).sebelum(f -> f.emptTeks());
+        m.tambah("btnDisplayApotek", "Display Antrian Apotek", "find.png", akses::getdisplay_apotek)
+            .buka(() -> new DlgRunTeksApotek(u,false)).sebelum(f -> f.emptTeks());
+        m.tambah("btnSetupHarga", "Set Harga Obat", "1360487093_price.png", akses::getset_harga_obat)
+            .buka(() -> new DlgSetHarga(u,false)).sebelum(f -> f.emptTeks());
+        m.tambah("btnSetObatRalan", "Set Obat Ralan", "1360487093_price.png", akses::getset_harga_obat_ralan)
+            .buka(() -> new DlgSetHargaObatRalan(u,false));
+        m.tambah("btnSetObatRanap", "Set Obat Ranap", "1360487093_price.png", akses::getset_harga_obat_ranap)
+            .buka(() -> new DlgSetHargaObatRanap(u,false));
+        m.tambah("btnSetupTarif", "Set Penggunaan Tarif", "x-office-address-book.png", akses::getset_penggunaan_tarif)
+            .buka(() -> new DlgSetTarif(u,false)).sebelum(f -> f.emptTeks());
+        m.tambah("btnSetOtoRalan", "Set Oto Ralan", "stethoscope (1).png", akses::getset_oto_ralan)
+            .buka(() -> new DlgSetOtoRalan(u,false)).sebelum(f -> f.emptTeks());
+        m.tambah("btnSetBiayaHarian", "Biaya Harian", "1360486845_23.png", akses::getbiaya_harian)
+            .buka(() -> new DlgBiayaHarian(u,false)).sebelum(f -> f.emptTeks());
+        m.tambah("btnSetBiayaMasukSekali", "Biaya Masuk Sekali", "1360486845_23.png", akses::getbiaya_masuk_sekali)
+            .buka(() -> new DlgBiayaSekaliMasuk(u,false)).sebelum(f -> f.emptTeks());
+        m.tambah("btnSetupRM", "Set RM", "patient (1).png", akses::getset_no_rm)
+            .buka(() -> new DlgSetRM(u,false)).sebelum(f -> f.emptTeks());
+        m.tambah("btnSetupNota", "Set Billing", "1360485642_edit-notes.png", akses::getset_nota)
+            .buka(() -> new DlgSetNota(u,false)).sebelum(f -> f.emptTeks());
+        m.tambah("btnClosingKasir", "Closing Kasir", "1360485865_schedule.png", akses::getclosing_kasir)
+            .buka(() -> new DlgClosingKasir(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnKeterlambatanPresensi", "Set Keterlambatan Presensi", "Time.png", akses::getketerlambatan_presensi)
+            .buka(() -> new DlgSetKeterlambatan(u,false));
+        m.tambah("btnSetInputParsial", "Set Input Parsial", "if_Finance_loan_money_1889199.png", akses::getset_input_parsial)
+            .buka(() -> new DlgSetInputParsial(u,false));
+        m.tambah("btnPasswordAsuransi", "Password BPJS", "1481002113_guard.png", akses::getpassword_asuransi)
+            .buka(() -> new DlgPasswordBPJS(u,false)).sebelum(f -> f.emptTeks());
+        m.tambah("btnSetHargaToko", "Set Harga Toko", "iconfinder_Sales-by-Payment-Method-rep_49616.png", akses::gettoko_set_harga)
+            .buka(() -> new DlgSetHargaToko(u,false)).sebelum(f -> f.emptTeks());
+        m.tambah("btnJamDietPasien", "Jam Diet Pasien", "iconfinder_alarm_32381.png", akses::getjam_diet_pasien)
+            .buka(() -> new DlgJamDietPasien(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnRuangOperasi", "Ruang Operasi", "5898980_doctor_emergency_health_healthcare_healthy_icon.png", akses::getruang_ok)
+            .buka(() -> new DlgRuangOperasi(u,false)).sebelum(f -> { f.emptTeks(); f.isCek(); });
+    }
+}
