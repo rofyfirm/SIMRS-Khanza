@@ -119,6 +119,7 @@ import rekammedis.RMMonitorPANSSECRanap;
 import rekammedis.RMMonitoringAldrettePascaAnestesi;
 import rekammedis.RMMonitoringBromagePascaAnestesi;
 import rekammedis.RMMonitoringStewardPascaAnestesi;
+import rekammedis.RMPANSSRatingRanap;
 import rekammedis.RMPelaksanaanInformasiEdukasi;
 import rekammedis.RMPemantauanMEOWS;
 import rekammedis.RMPemantauanPEWS;
@@ -8451,6 +8452,23 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
         }
     }
 
+    private void BtnPANSSRatingActionPerformed(java.awt.event.ActionEvent evt) {
+        if(TPasien.getText().trim().equals("")||TNoRw.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
+            TCari.requestFocus();
+        }else{
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            RMPANSSRatingRanap form=new RMPANSSRatingRanap(null,false);
+            form.isCek();
+            form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            form.setLocationRelativeTo(internalFrame1);
+            form.setVisible(true);
+            form.emptTeks();
+            form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
+            this.setCursor(Cursor.getDefaultCursor());
+        }
+    }
+
     private void BtnCatatanObservasiVentilatorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCatatanObservasiRanapActionPerformed
         if(TPasien.getText().trim().equals("")||TNoRw.getText().trim().equals("")){
             JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
@@ -9365,6 +9383,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                           BtnPelaksanaanInformasiEdukasi,BtnCatatanObservasiHemodialisa,BtnCatatanCairanHemodialisa,BtnCatatanPengkajianPaskaOperasi,BtnCatatanObservasiBayi,BtnChecklistKesiapanAnestesi,BtnHasilPemeriksaanSlitLamp,BtnHasilPemeriksaanOCT,
                           BtnChecklistKriteriaMasukNICU,BtnChecklistKriteriaKeluarNICU,BtnAwalMedisPsikiatri,BtnChecklistKriteriaMasukPICU,BtnChecklistKriteriaKeluarPICU,BtnHasilPemeriksaanTreadmill,BtnHasilPemeriksaanECHOPediatrik,BtnAwalMedisJantung,
                           BtnSkriningGiziKehamilan,BtnPermintaanKonsultasiPerawat,BtnCatatanObservasiRuangOperasi,BtnHasilPemeriksaanUSGAbdomen,BtnIntervensiNyeriFarmakologi,BtnIntervensiNyeriNonFarmakologi,BtnChecklistKriteriaMasukIsolasi,BtnChecklistKriteriaKeluarIsolasi,BtnMonitorPANSSEC;
+    private widget.Button BtnPANSSRating;
     private javax.swing.JPopupMenu PopupSOAP,PopupPemeriksaan;
     private javax.swing.JMenuItem MnCopySOAP,MnPasteSOAP;
     
@@ -9868,6 +9887,10 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             tinggi=tinggi+24;
         }
         BtnMonitorPANSSEC.setVisible(akses.getpenilaian_awal_medis_ranap());
+        if(akses.getpenilaian_awal_medis_ranap()==true){
+            tinggi=tinggi+24;
+        }
+        BtnPANSSRating.setVisible(akses.getpenilaian_awal_medis_ranap());
         if(akses.getpenilaian_awal_medis_ranap()==true){
             tinggi=tinggi+24;
         }
@@ -11011,6 +11034,19 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
         BtnMonitorPANSSEC.setRoundRect(false);
         BtnMonitorPANSSEC.addActionListener(this::BtnMonitorPANSSECActionPerformed);
 
+        BtnPANSSRating = new widget.Button();
+        BtnPANSSRating.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png")));
+        BtnPANSSRating.setText("PANSS Rating Form");
+        BtnPANSSRating.setFocusPainted(false);
+        BtnPANSSRating.setFont(new java.awt.Font("Tahoma", 0, 11));
+        BtnPANSSRating.setGlassColor(new java.awt.Color(255, 255, 255));
+        BtnPANSSRating.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        BtnPANSSRating.setMargin(new java.awt.Insets(1, 1, 1, 1));
+        BtnPANSSRating.setName("BtnPANSSRating");
+        BtnPANSSRating.setPreferredSize(new java.awt.Dimension(190, 23));
+        BtnPANSSRating.setRoundRect(false);
+        BtnPANSSRating.addActionListener(this::BtnPANSSRatingActionPerformed);
+
         BtnCatatanObservasiVentilator = new widget.Button();
         BtnCatatanObservasiVentilator.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); 
         BtnCatatanObservasiVentilator.setText("Observasi Ventilator");
@@ -11460,6 +11496,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
         FormMenu.add(BtnCatatanObservasiBayi);
         FormMenu.add(BtnCatatanObservasiRestrainNonfarmakologi);
         FormMenu.add(BtnMonitorPANSSEC);
+        FormMenu.add(BtnPANSSRating);
         FormMenu.add(BtnCatatanObservasiVentilator);
         FormMenu.add(BtnCatatanObservasiHemodialisa);
         FormMenu.add(BtnCatatanObservasiRuangOperasi);
