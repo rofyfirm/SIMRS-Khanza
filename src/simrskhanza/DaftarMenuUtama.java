@@ -895,6 +895,7 @@ import rekammedis.RMMonitorPANSSECRanap;
 import rekammedis.RMMonitoringAldrettePascaAnestesi;
 import rekammedis.RMMonitoringBromagePascaAnestesi;
 import rekammedis.RMMonitoringStewardPascaAnestesi;
+import rekammedis.RMPANSSRatingRanap;
 import rekammedis.RMPelaksanaanInformasiEdukasi;
 import rekammedis.RMPemantauanEWSD;
 import rekammedis.RMPemantauanEWSNeonatus;
@@ -2936,6 +2937,8 @@ final class DaftarMenuUtama {
             .buka(() -> new RMMonitorPANSSECIGD(u,false)).sebelum(f -> f.isCek());
         m.tambah("btnMonitorPANSSECRanap", "Monitor PANSS EC Ranap", "mental-health_18376031-2.png", akses::getpenilaian_awal_medis_ranap)
             .buka(() -> new RMMonitorPANSSECRanap(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnPANSSRatingRanap", "PANSS Rating Form Ranap", "2730389_brain_divide_inkcontober_sains_icon.png", akses::getpenilaian_awal_medis_ranap)
+            .buka(() -> new RMPANSSRatingRanap(u,false)).sebelum(f -> f.isCek());
         m.tambah("btnCatatanObservasiVentilator", "Catatan Observasi Ventilator", "6088631_bed_hospital_icu_medical_treatment_icon.png", akses::getcatatan_observasi_ventilator)
             .buka(() -> new RMDataCatatanObservasiVentilator(u,false)).sebelum(f -> f.isCek());
         m.tambah("btnCatatanObservasiHemodialisa", "Catatan Observasi Hemodialisa", "4757453_checklist_document_file_list_paper_icon.png", akses::getcatatan_observasi_hemodialisa)
