@@ -1,0 +1,1188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rptFormulirCSSRS" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="6c2de2d4-a222-433c-aa29-d5b40149885c">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="lokal"/>
+	<parameter name="namars" class="java.lang.String"/>
+	<parameter name="alamatrs" class="java.lang.String"/>
+	<parameter name="kotars" class="java.lang.String"/>
+	<parameter name="propinsirs" class="java.lang.String"/>
+	<parameter name="kontakrs" class="java.lang.String"/>
+	<parameter name="emailrs" class="java.lang.String"/>
+	<parameter name="logo" class="java.io.InputStream"/>
+	<parameter name="finger" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[select reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,reg_periksa.umurdaftar,reg_periksa.sttsumur,pasien.jk,pasien.tgl_lahir,
+c_ssrs.tgl_perawatan,c_ssrs.jam_rawat,
+c_ssrs.berharap_mati,
+c_ssrs.frekuensi_berharap_mati,
+c_ssrs.ide_bunuh_diri,
+c_ssrs.frekuensi_ide_bunuh_diri,
+c_ssrs.rencana_spesifik,
+c_ssrs.frekuensi_rencana_spesifik,
+c_ssrs.niat_melukai_diri,
+c_ssrs.frekuensi_niat_melukai_diri,
+c_ssrs.niat_dengan_rencana,
+c_ssrs.frekuensi_niat_dengan_rencana,
+c_ssrs.percobaan_bunuh_diri,
+c_ssrs.jumlah_percobaan_bunuh_diri,
+c_ssrs.tindakan_persiapan,
+c_ssrs.jumlah_tindakan_persiapan,
+c_ssrs.ide_metode,
+c_ssrs.jumlah_ide_metode,
+c_ssrs.situasi_berisiko,
+c_ssrs.jumlah_situasi_berisiko,
+c_ssrs.nip,petugas.nama from c_ssrs 
+inner join reg_periksa on c_ssrs.no_rawat=reg_periksa.no_rawat 
+inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis 
+inner join petugas on c_ssrs.nip=petugas.nip]]>
+	</queryString>
+	<field name="no_rawat" class="java.lang.String"/>
+	<field name="no_rkm_medis" class="java.lang.String"/>
+	<field name="nm_pasien" class="java.lang.String"/>
+	<field name="umurdaftar" class="java.lang.Integer"/>
+	<field name="sttsumur" class="java.lang.String"/>
+	<field name="jk" class="java.lang.String"/>
+	<field name="tgl_lahir" class="java.sql.Date"/>
+	<field name="tgl_perawatan" class="java.sql.Date"/>
+	<field name="jam_rawat" class="java.sql.Time"/>
+	<field name="berharap_mati" class="java.lang.String"/>
+	<field name="frekuensi_berharap_mati" class="java.lang.String"/>
+	<field name="ide_bunuh_diri" class="java.lang.String"/>
+	<field name="frekuensi_ide_bunuh_diri" class="java.lang.String"/>
+	<field name="rencana_spesifik" class="java.lang.String"/>
+	<field name="frekuensi_rencana_spesifik" class="java.lang.String"/>
+	<field name="niat_melukai_diri" class="java.lang.String"/>
+	<field name="frekuensi_niat_melukai_diri" class="java.lang.String"/>
+	<field name="niat_dengan_rencana" class="java.lang.String"/>
+	<field name="frekuensi_niat_dengan_rencana" class="java.lang.String"/>
+	<field name="percobaan_bunuh_diri" class="java.lang.String"/>
+	<field name="jumlah_percobaan_bunuh_diri" class="java.lang.String"/>
+	<field name="tindakan_persiapan" class="java.lang.String"/>
+	<field name="jumlah_tindakan_persiapan" class="java.lang.String"/>
+	<field name="ide_metode" class="java.lang.String"/>
+	<field name="jumlah_ide_metode" class="java.lang.String"/>
+	<field name="situasi_berisiko" class="java.lang.String"/>
+	<field name="jumlah_situasi_berisiko" class="java.lang.String"/>
+	<field name="nip" class="java.lang.String"/>
+	<field name="nama" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="126" splitType="Stretch">
+			<textField>
+				<reportElement x="2" y="0" width="553" height="17" uuid="4024c271-2686-42e5-a517-d9db56d50687"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="12" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{namars}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="2" y="14" width="553" height="14" uuid="cf01b26e-19e3-4b5e-bc38-c3369e6857f4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{alamatrs}+", "+$P{kotars}+", "+$P{propinsirs}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="2" y="25" width="553" height="14" uuid="649ed14f-28b1-4377-b597-d98a753033bc"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{kontakrs}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="2" y="35" width="553" height="14" uuid="849e77e6-8043-40d0-ac8b-dfdccff24253"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["E-mail : "+$P{emailrs}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="48" width="555" height="1" uuid="643b490c-0d92-44b6-a24d-5cd06e2e753e"/>
+				<graphicElement>
+					<pen lineWidth="2.0" lineStyle="Double"/>
+				</graphicElement>
+			</line>
+			<image scaleImage="FillFrame" onErrorType="Blank">
+				<reportElement x="0" y="2" width="48" height="45" uuid="cb1f919b-ab2e-4523-a389-e19265322809"/>
+				<imageExpression><![CDATA[$P{logo}]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="0" y="54" width="555" height="16" uuid="3ad88012-12b1-4865-bdc4-d39440f395f6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="11" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[COLUMBIA-SUICIDE SEVERITY RATING SCALE (C-SSRS)]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement mode="Transparent" x="0" y="74" width="555" height="48" uuid="b50f7ca3-113a-4d55-bb17-87c46bbf67d3">
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="0.75"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="5" y="77" width="85" height="14" uuid="c1c326db-d1f3-4384-b548-9f5dc81f624b"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[No. RM]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="90" y="77" width="7" height="14" uuid="0609f458-72e0-48e9-a400-a079df778b7e"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="98" y="77" width="280" height="14" uuid="56929980-c230-4fe9-9b3a-4507883c094b"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{no_rkm_medis}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="5" y="91" width="85" height="14" uuid="8a939802-f49e-4153-aa63-80bdc321bd44"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Nama Pasien]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="90" y="91" width="7" height="14" uuid="783ac16b-f7e3-43c1-b429-d535892d8b38"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="98" y="91" width="280" height="14" uuid="cd4a5b67-89b2-462b-91da-f437cd4109de"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nm_pasien}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="5" y="105" width="85" height="14" uuid="8a47fc91-aa4c-484b-8fea-873be81eafd1"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Tgl. Lahir/Umur]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="90" y="105" width="7" height="14" uuid="935bc7d3-0d02-4570-8537-b5d14289315b"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="98" y="105" width="280" height="14" uuid="4ad98e03-70be-4b2f-81eb-eb277770f995"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{tgl_lahir}==null?"":new java.text.SimpleDateFormat("dd/MM/yyyy").format($F{tgl_lahir}))+" / "+$F{umurdaftar}+" "+$F{sttsumur}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="385" y="77" width="55" height="14" uuid="087f420e-e661-47c6-ae9a-5f12eb1e7efc"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[No. Rawat]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="440" y="77" width="7" height="14" uuid="edfa6f72-fb71-4e58-8415-72d51424285e"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="448" y="77" width="105" height="14" uuid="6f83cc95-d2cb-472d-8006-c1fd81235881"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{no_rawat}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="385" y="91" width="55" height="14" uuid="34b61a6a-c3d7-4e5f-adbf-f34bbd3abbab"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[JK]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="440" y="91" width="7" height="14" uuid="ea1301f9-6db2-418f-b766-de0f7620fa45"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="448" y="91" width="105" height="14" uuid="5e5e9798-7aeb-4757-9bd7-a1351d10e5ff"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{jk}.equals("L")?"Laki-Laki":"Perempuan"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="385" y="105" width="55" height="14" uuid="31ef620c-0f5e-401b-8b4c-dfe49c2d36b7"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Tanggal]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="440" y="105" width="7" height="14" uuid="267d75d8-bfbc-43f1-8f07-a38f9dc2a176"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="448" y="105" width="105" height="14" uuid="2ff066b7-6fac-4a12-b0f0-7d289f442b73"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.text.SimpleDateFormat("dd/MM/yyyy").format($F{tgl_perawatan})+" "+new java.text.SimpleDateFormat("HH:mm").format($F{jam_rawat})]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="540" splitType="Prevent">
+			<staticText>
+				<reportElement x="0" y="8" width="215" height="28" uuid="794695db-4e14-448a-9dfe-0e68b58ab7fb"/>
+				<box><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Komponen]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="215" y="8" width="115" height="28" uuid="00813454-00ef-4171-96f0-df967bc2d30f"/>
+				<box><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Panduan
+Penilaian]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="330" y="8" width="65" height="28" uuid="41fe6454-801d-4c73-ac88-222034086bbd"/>
+				<box><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Skala
+Penilaian]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="395" y="8" width="160" height="28" uuid="0dbb238e-f282-4536-a4c2-0485b0891e3e"/>
+				<box><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Frekuensi/Durasi]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement mode="Transparent" x="215" y="36" width="115" height="44" uuid="7330cfca-fcd4-4c1b-be03-dfaa2501a1d9"/>
+				<graphicElement>
+					<pen lineWidth="0.75"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="330" y="36" width="65" height="44" uuid="b131daf8-eecd-4d47-9375-2585dc920405"/>
+				<graphicElement>
+					<pen lineWidth="0.75"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="395" y="36" width="160" height="44" uuid="206fd52f-7863-4f7d-9eba-092de03bf6d0"/>
+				<graphicElement>
+					<pen lineWidth="0.75"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="36" width="215" height="44" uuid="bbc25020-3b6f-4ffb-9fb7-dae73319d7f0"/>
+				<box topPadding="3" leftPadding="4" rightPadding="4"><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="Tahoma" size="9" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Ide Bunuh Diri:
+Pernahkah Anda berharap Anda mati?]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="219" y="42" width="107" height="12" uuid="189c3fbc-b235-4279-8aad-995c556fc788"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[0: Tidak ada ide]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="219" y="56" width="107" height="24" uuid="269906f9-66d7-4196-8185-87a72d162768"/>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="Tahoma" size="9" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[1: Ada ide]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="346" y="43" width="10" height="10" uuid="21ff64b3-cfdc-4d15-955f-986ce731939c"/>
+				<box><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["0".equals($F{berharap_mati})?"√":""]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="360" y="42" width="20" height="12" uuid="abba99e7-9ab5-4b16-ae87-fda5999f90c9"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[0]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="346" y="57" width="10" height="10" uuid="bf7ebeb9-6217-4b07-8bdf-30468088c77a"/>
+				<box><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["1".equals($F{berharap_mati})?"√":""]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="360" y="56" width="20" height="12" uuid="a72368c8-ac31-4dd1-a695-9a3134e9f7a4"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[1]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="399" y="40" width="152" height="13" uuid="cd6a8e09-5246-4951-8222-518fe009b034"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Isi frekuensi jika ada ide:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="399" y="53" width="152" height="25" uuid="b64c7777-69b9-4035-9e90-df64d23a078b"/>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="Tahoma" size="9" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{frekuensi_berharap_mati}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement mode="Transparent" x="215" y="80" width="115" height="44" uuid="b960210a-d8b1-4f90-bda6-309a93fd0d8c"/>
+				<graphicElement>
+					<pen lineWidth="0.75"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="330" y="80" width="65" height="44" uuid="7744d6ce-0945-420a-90f4-0e117e2e90ad"/>
+				<graphicElement>
+					<pen lineWidth="0.75"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="395" y="80" width="160" height="44" uuid="92be8f01-3554-4d55-be18-cb11ded51936"/>
+				<graphicElement>
+					<pen lineWidth="0.75"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="80" width="215" height="44" uuid="77977d67-30e1-4e35-89cb-ea4f46e25431"/>
+				<box topPadding="3" leftPadding="4" rightPadding="4"><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="Tahoma" size="9" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Ide Bunuh Diri:
+Pernahkah Anda memiliki ide untuk bunuh diri?]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="219" y="86" width="107" height="12" uuid="606c1ec2-4a1e-4efb-a785-951049588811"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[0: Tidak ada ide]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="219" y="100" width="107" height="24" uuid="db0c060f-450d-42e8-87f0-04d95bf8bac0"/>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="Tahoma" size="9" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[1: Ada ide]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="346" y="87" width="10" height="10" uuid="2a4aaa93-40ae-41d7-be61-d62c68b60233"/>
+				<box><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["0".equals($F{ide_bunuh_diri})?"√":""]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="360" y="86" width="20" height="12" uuid="d7fb9e23-1481-4351-9c2d-b155f4c4eefe"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[0]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="346" y="101" width="10" height="10" uuid="4d3054d4-bc32-44e4-8e45-10f5a99863bf"/>
+				<box><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["1".equals($F{ide_bunuh_diri})?"√":""]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="360" y="100" width="20" height="12" uuid="16338a0a-828c-4661-9d7e-6c8e9111a15c"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[1]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="399" y="84" width="152" height="13" uuid="a2ea91d5-8907-4e9b-8f3d-d12c4ec34d69"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Isi frekuensi jika ada ide:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="399" y="97" width="152" height="25" uuid="3d999686-b34c-4a82-b513-73450b8f5d4f"/>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="Tahoma" size="9" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{frekuensi_ide_bunuh_diri}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement mode="Transparent" x="215" y="124" width="115" height="44" uuid="0fe5cfaa-0ea0-4826-ad77-c6a40f400219"/>
+				<graphicElement>
+					<pen lineWidth="0.75"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="330" y="124" width="65" height="44" uuid="b5bb2749-000c-48a9-85f9-2a8daa58a4e4"/>
+				<graphicElement>
+					<pen lineWidth="0.75"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="395" y="124" width="160" height="44" uuid="ffb1350a-ead2-4d1f-9352-a43067bb665a"/>
+				<graphicElement>
+					<pen lineWidth="0.75"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="124" width="215" height="44" uuid="309f0ed8-d350-4531-a50e-b3c25799346c"/>
+				<box topPadding="3" leftPadding="4" rightPadding="4"><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="Tahoma" size="9" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Ide Bunuh Diri:
+Apakah Anda memiliki rencana spesifik untuk bunuh diri?]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="219" y="130" width="107" height="12" uuid="f139be06-1d43-4579-a590-3675b934efab"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[0: Tidak ada ide]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="219" y="144" width="107" height="24" uuid="7ebfb20e-c5f8-4cac-8938-52feb7e282cb"/>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="Tahoma" size="9" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[1: Ada ide]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="346" y="131" width="10" height="10" uuid="473efa01-2599-4cf8-945a-b5449262001f"/>
+				<box><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["0".equals($F{rencana_spesifik})?"√":""]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="360" y="130" width="20" height="12" uuid="9ea465c7-d60a-4e3e-8812-90f7cd4cbdd0"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[0]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="346" y="145" width="10" height="10" uuid="119f2288-409e-4ba7-844d-a37fa87a5f4e"/>
+				<box><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["1".equals($F{rencana_spesifik})?"√":""]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="360" y="144" width="20" height="12" uuid="727ba3e7-f08c-4b28-8721-06f561290ede"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[1]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="399" y="128" width="152" height="13" uuid="da480c95-8dd6-4073-af48-8d81a9c511e9"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Isi frekuensi jika ada ide:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="399" y="141" width="152" height="25" uuid="b0b0e163-c68c-49e0-b2cf-336248b3fbf2"/>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="Tahoma" size="9" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{frekuensi_rencana_spesifik}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement mode="Transparent" x="215" y="168" width="115" height="44" uuid="1872cda1-fb71-4787-807f-44eb7e38f4af"/>
+				<graphicElement>
+					<pen lineWidth="0.75"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="330" y="168" width="65" height="44" uuid="b46f99c2-a3d8-4b1a-ad9c-d44e106490e8"/>
+				<graphicElement>
+					<pen lineWidth="0.75"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="395" y="168" width="160" height="44" uuid="8b67cbd3-7756-4f05-a695-f91bc8683a24"/>
+				<graphicElement>
+					<pen lineWidth="0.75"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="168" width="215" height="44" uuid="7a051d36-879c-4628-9576-74d464687321"/>
+				<box topPadding="3" leftPadding="4" rightPadding="4"><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="Tahoma" size="9" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Ide Bunuh Diri:
+Apakah Anda memiliki niat serius untuk melukai diri sendiri?]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="219" y="174" width="107" height="12" uuid="2a1e9113-2742-4661-b7d6-14a5c6bd40f9"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[0: Tidak ada niat]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="219" y="188" width="107" height="24" uuid="f1e8880e-e4ab-4542-aeb4-a22a81e942b2"/>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="Tahoma" size="9" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[1: Ada niat]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="346" y="175" width="10" height="10" uuid="e8bc1bf5-ba5c-40ff-a5b8-6c3633ff81ca"/>
+				<box><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["0".equals($F{niat_melukai_diri})?"√":""]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="360" y="174" width="20" height="12" uuid="0de22015-a753-4bda-a45b-88dfc89f118f"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[0]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="346" y="189" width="10" height="10" uuid="2b79a3db-83fa-48b3-aa9b-e493cf8ee0cf"/>
+				<box><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["1".equals($F{niat_melukai_diri})?"√":""]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="360" y="188" width="20" height="12" uuid="659070c8-19a1-4460-b7f9-7d6d1cfa02f6"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[1]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="399" y="172" width="152" height="13" uuid="cbe7d9dc-8c25-442d-884b-1a37454073da"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Isi frekuensi jika ada niat:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="399" y="185" width="152" height="25" uuid="1c3f101c-df4f-46ef-a505-d8f328e4519e"/>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="Tahoma" size="9" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{frekuensi_niat_melukai_diri}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement mode="Transparent" x="215" y="212" width="115" height="44" uuid="3e584dd9-4de2-468e-b2e3-8bff727bc896"/>
+				<graphicElement>
+					<pen lineWidth="0.75"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="330" y="212" width="65" height="44" uuid="06247d4a-0c9c-4ea8-8162-37a6f3007f7d"/>
+				<graphicElement>
+					<pen lineWidth="0.75"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="395" y="212" width="160" height="44" uuid="a8c7f135-8ae5-4914-a6f7-2750b59c05bb"/>
+				<graphicElement>
+					<pen lineWidth="0.75"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="212" width="215" height="44" uuid="757f71fe-f815-42a4-b06b-d78fb7368255"/>
+				<box topPadding="3" leftPadding="4" rightPadding="4"><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="Tahoma" size="9" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Ide Bunuh Diri:
+Apakah Anda memiliki niat dengan rencana tertentu untuk bunuh diri?]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="219" y="218" width="107" height="12" uuid="34146b94-4155-4b1e-961e-8e72b315e4ad"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[0: Tidak ada niat]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="219" y="232" width="107" height="24" uuid="93c594bf-4f8c-4507-9727-98062b531aa2"/>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="Tahoma" size="9" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[1: Ada niat dengan rencana]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="346" y="219" width="10" height="10" uuid="6e2aeaaf-f139-43cf-adbb-a73026ef1c05"/>
+				<box><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["0".equals($F{niat_dengan_rencana})?"√":""]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="360" y="218" width="20" height="12" uuid="f3ba6df4-1c2d-409f-b5b9-5bf93cf5794f"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[0]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="346" y="233" width="10" height="10" uuid="b8d26d4c-412c-4239-b4a3-392dc9b291d6"/>
+				<box><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["1".equals($F{niat_dengan_rencana})?"√":""]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="360" y="232" width="20" height="12" uuid="8a314b7e-269e-4009-8cd1-ea8493a80813"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[1]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="399" y="216" width="152" height="13" uuid="4b982d8a-0c81-422b-ac09-cd145002cc88"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Isi frekuensi jika ada niat:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="399" y="229" width="152" height="25" uuid="cb6c83a2-ed20-42d4-9d4d-6aa6fc6696c4"/>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="Tahoma" size="9" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{frekuensi_niat_dengan_rencana}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement mode="Transparent" x="215" y="256" width="115" height="44" uuid="65422432-4e17-43c3-9971-7d9f5136d4fc"/>
+				<graphicElement>
+					<pen lineWidth="0.75"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="330" y="256" width="65" height="44" uuid="9ce8379d-a223-4a8f-b5ef-5d48bb2cbd8a"/>
+				<graphicElement>
+					<pen lineWidth="0.75"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="395" y="256" width="160" height="44" uuid="c1969de5-5465-472b-84af-b96bbc1f782e"/>
+				<graphicElement>
+					<pen lineWidth="0.75"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="256" width="215" height="44" uuid="c2b23fa1-4602-4be0-87e5-0a76b23084d0"/>
+				<box topPadding="3" leftPadding="4" rightPadding="4"><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="Tahoma" size="9" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Perilaku Bunuh Diri:
+Apakah Anda pernah mencoba bunuh diri sebelumnya?]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="219" y="262" width="107" height="12" uuid="e416a51e-c424-4c7f-a635-36b92cdbbfdd"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[0: Tidak pernah]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="219" y="276" width="107" height="24" uuid="c8bfd522-65e5-48eb-a56a-df64d5a519d6"/>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="Tahoma" size="9" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[1: Pernah]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="346" y="263" width="10" height="10" uuid="f837c317-4168-4678-b8c9-1d4feaaea69d"/>
+				<box><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["0".equals($F{percobaan_bunuh_diri})?"√":""]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="360" y="262" width="20" height="12" uuid="7c715a46-6147-4f01-8eab-f7848943e9e6"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[0]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="346" y="277" width="10" height="10" uuid="a0eb1307-f393-4c1b-addf-e2e3db061e87"/>
+				<box><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["1".equals($F{percobaan_bunuh_diri})?"√":""]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="360" y="276" width="20" height="12" uuid="e074bc7c-cc88-4967-9dd8-c8c5c6f5f16e"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[1]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="399" y="260" width="152" height="13" uuid="96a36ad3-d688-41d6-864d-35ab3e0ce2f0"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Isi jumlah percobaan sebelumnya:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="399" y="273" width="152" height="25" uuid="01a3e5c5-8e6e-4cd2-97b0-30355b43349e"/>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="Tahoma" size="9" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{jumlah_percobaan_bunuh_diri}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement mode="Transparent" x="215" y="300" width="115" height="44" uuid="d0c860eb-34e2-482e-a8c6-ca60e382c309"/>
+				<graphicElement>
+					<pen lineWidth="0.75"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="330" y="300" width="65" height="44" uuid="ab59b4f2-6642-47b0-951f-716f57a0f3d0"/>
+				<graphicElement>
+					<pen lineWidth="0.75"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="395" y="300" width="160" height="44" uuid="5201e492-4bcb-4c64-8750-5f122c8ba12e"/>
+				<graphicElement>
+					<pen lineWidth="0.75"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="300" width="215" height="44" uuid="ccf2d107-2c6a-4a9f-a5b1-f60e12728e50"/>
+				<box topPadding="3" leftPadding="4" rightPadding="4"><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="Tahoma" size="9" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Perilaku Bunuh Diri:
+Apakah Anda pernah melakukan tindakan persiapan?]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="219" y="306" width="107" height="12" uuid="e5e1d41a-4fbe-42f7-a0a9-2e336b5ecc9a"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[0: Tidak pernah]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="219" y="320" width="107" height="24" uuid="c57b2e3c-316f-479c-9756-2fbdda5f6df4"/>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="Tahoma" size="9" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[1: Pernah]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="346" y="307" width="10" height="10" uuid="e794926d-5019-4c6e-8f94-39bf29f98e93"/>
+				<box><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["0".equals($F{tindakan_persiapan})?"√":""]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="360" y="306" width="20" height="12" uuid="ef94a806-05db-47f8-8cd1-f8806f676bc3"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[0]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="346" y="321" width="10" height="10" uuid="9499dc4a-1688-4a74-bdac-888843bfcda0"/>
+				<box><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["1".equals($F{tindakan_persiapan})?"√":""]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="360" y="320" width="20" height="12" uuid="7d1e44da-fe77-4fb2-8193-2fbde7e87aeb"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[1]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="399" y="304" width="152" height="13" uuid="75d1d64f-f64b-40dd-a8b7-17bc349bd974"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Isi jumlah tindakan persiapan:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="399" y="317" width="152" height="25" uuid="7af95d4f-4b22-454f-a2c4-cd0772e1890d"/>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="Tahoma" size="9" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{jumlah_tindakan_persiapan}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement mode="Transparent" x="215" y="344" width="115" height="44" uuid="78fcd90b-c647-4610-972f-09ab8e1cfa23"/>
+				<graphicElement>
+					<pen lineWidth="0.75"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="330" y="344" width="65" height="44" uuid="e569740c-2f69-4127-92e4-50d8f4d519d1"/>
+				<graphicElement>
+					<pen lineWidth="0.75"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="395" y="344" width="160" height="44" uuid="1faadc71-0dad-4744-a598-07285474a412"/>
+				<graphicElement>
+					<pen lineWidth="0.75"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="344" width="215" height="44" uuid="14b77f92-f0d8-42e4-8391-50e23eccec38"/>
+				<box topPadding="3" leftPadding="4" rightPadding="4"><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="Tahoma" size="9" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Perilaku Bunuh Diri:
+Apakah Anda pernah berpikir tentang tempat atau metode untuk melukai diri sendiri?]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="219" y="350" width="107" height="12" uuid="dc058b82-43ac-4caa-b08e-32b42f2bc14d"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[0: Tidak pernah]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="219" y="364" width="107" height="24" uuid="3d2a2194-71a2-4a47-8b9a-f6c31b441802"/>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="Tahoma" size="9" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[1: Pernah]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="346" y="351" width="10" height="10" uuid="aa12be4d-d861-4a44-8f13-51373c7b4fe4"/>
+				<box><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["0".equals($F{ide_metode})?"√":""]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="360" y="350" width="20" height="12" uuid="5314d47d-e90e-4235-941d-9f4827c213ee"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[0]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="346" y="365" width="10" height="10" uuid="b8fea79a-b325-4816-9818-10c98832e931"/>
+				<box><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["1".equals($F{ide_metode})?"√":""]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="360" y="364" width="20" height="12" uuid="e703d050-e0a5-47f5-9d02-a91561556979"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[1]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="399" y="348" width="152" height="13" uuid="75844f6a-0940-4090-8f8f-319d841370e0"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Isi jumlah ide metode:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="399" y="361" width="152" height="25" uuid="bc19f125-4232-4c15-a6a0-2eeaebc469e8"/>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="Tahoma" size="9" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{jumlah_ide_metode}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement mode="Transparent" x="215" y="388" width="115" height="44" uuid="83a6018d-a159-4147-b239-68419df70b04"/>
+				<graphicElement>
+					<pen lineWidth="0.75"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="330" y="388" width="65" height="44" uuid="40c9e1c5-d667-4058-889d-98363b204497"/>
+				<graphicElement>
+					<pen lineWidth="0.75"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Transparent" x="395" y="388" width="160" height="44" uuid="6537fc3b-e211-4861-8a58-e70646b50284"/>
+				<graphicElement>
+					<pen lineWidth="0.75"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="388" width="215" height="44" uuid="c4187547-164f-4cbb-8111-2a3bceb7a940"/>
+				<box topPadding="3" leftPadding="4" rightPadding="4"><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="Tahoma" size="9" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Perilaku Bunuh Diri:
+Apakah Anda pernah terlibat dalam situasi yang berisiko tinggi terkait bunuh diri?]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="219" y="394" width="107" height="12" uuid="a65a6988-38a2-476c-8ac7-caf341b0ea51"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[0: Tidak pernah]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="219" y="408" width="107" height="24" uuid="60d3f062-c724-4abb-a453-de83b6c6b28b"/>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="Tahoma" size="9" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[1: Pernah]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="346" y="395" width="10" height="10" uuid="5c2970eb-9701-4d6b-b048-71fd094a11be"/>
+				<box><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["0".equals($F{situasi_berisiko})?"√":""]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="360" y="394" width="20" height="12" uuid="90303a1f-f9a3-4365-9d04-572bf5b1a785"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[0]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="346" y="409" width="10" height="10" uuid="e6c75e44-868a-4987-9d67-9f2ec5e558ff"/>
+				<box><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["1".equals($F{situasi_berisiko})?"√":""]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="360" y="408" width="20" height="12" uuid="c4d88346-c177-46ff-acd8-63d7d1d62798"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[1]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="399" y="392" width="152" height="13" uuid="f99dbe59-8418-4e53-a043-3c7ef1e821c7"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Isi jumlah situasi berisiko:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="399" y="405" width="152" height="25" uuid="7bb6ba4f-19fa-4921-8fff-0e40aed0b12a"/>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="Tahoma" size="9" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{jumlah_situasi_berisiko}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="355" y="444" width="200" height="12" uuid="3c7a9ba2-33e7-492e-8f47-2caa60933dbe"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Nama Petugas dan Tanda Tangan]]></text>
+			</staticText>
+			<componentElement>
+				<reportElement x="423" y="458" width="64" height="64" uuid="a3b0264d-dc7d-4537-8b1d-35c741e1b800"/>
+				<jr:QRCode xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" errorCorrectionLevel="H">
+					<jr:codeExpression><![CDATA[$P{finger}]]></jr:codeExpression>
+				</jr:QRCode>
+			</componentElement>
+			<textField isBlankWhenNull="true">
+				<reportElement x="355" y="524" width="200" height="12" uuid="09f8647e-74d6-4c9f-a436-a1efebee544e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nama}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>
