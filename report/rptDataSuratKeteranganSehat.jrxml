@@ -49,6 +49,7 @@ inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis]]>
 	<field name="tensi" class="java.lang.String"/>
 	<field name="suhu" class="java.lang.String"/>
 	<field name="butawarna" class="java.lang.String"/>
+	<field name="gol_darah" class="java.lang.String"/>
 	<field name="keperluan" class="java.lang.String"/>
 	<field name="kesimpulan" class="java.lang.String"/>
 	<background>
@@ -130,7 +131,7 @@ inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis]]>
 				<text><![CDATA[Suhu]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="530" y="0" width="59" height="15" forecolor="#000000" backcolor="#F0F0DC" uuid="f4419229-47b7-40f6-bd14-3dd9980eb3f7"/>
+				<reportElement mode="Opaque" x="530" y="0" width="45" height="15" forecolor="#000000" backcolor="#F0F0DC" uuid="f4419229-47b7-40f6-bd14-3dd9980eb3f7"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Tahoma" size="8" isBold="false"/>
 					<paragraph lineSpacing="Single"/>
@@ -138,7 +139,15 @@ inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis]]>
 				<text><![CDATA[Buta warna]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="589" y="0" width="120" height="15" forecolor="#000000" backcolor="#F0F0DC" uuid="00abb2ea-fa28-43cd-b444-4df8c7bc5975"/>
+				<reportElement mode="Opaque" x="575" y="0" width="45" height="15" forecolor="#000000" backcolor="#F0F0DC" uuid="ac2af435-b616-4ae6-8173-ccfb93d13a96"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Gol. Darah]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="620" y="0" width="89" height="15" forecolor="#000000" backcolor="#F0F0DC" uuid="00abb2ea-fa28-43cd-b444-4df8c7bc5975"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Tahoma" size="8" isBold="false"/>
 					<paragraph lineSpacing="Single"/>
@@ -299,7 +308,7 @@ inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis]]>
 				<textFieldExpression><![CDATA[$F{suhu}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement positionType="Float" x="531" y="0" width="58" height="10" uuid="b9ae7e33-bbe5-4444-be55-32356eab72e5"/>
+				<reportElement positionType="Float" x="531" y="0" width="44" height="10" uuid="b9ae7e33-bbe5-4444-be55-32356eab72e5"/>
 				<textElement>
 					<font fontName="Tahoma" size="8"/>
 					<paragraph lineSpacing="Single"/>
@@ -307,7 +316,15 @@ inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis]]>
 				<textFieldExpression><![CDATA[$F{butawarna}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement positionType="Float" x="589" y="0" width="120" height="10" uuid="1b5e2a5d-5777-4368-9b81-b3b2e5a2bd0c"/>
+				<reportElement positionType="Float" x="575" y="0" width="45" height="10" uuid="569a65cc-ef4c-4e93-8624-ab1aa5204aeb"/>
+				<textElement>
+					<font fontName="Tahoma" size="8"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{gol_darah}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" x="620" y="0" width="89" height="10" uuid="1b5e2a5d-5777-4368-9b81-b3b2e5a2bd0c"/>
 				<textElement>
 					<font fontName="Tahoma" size="8"/>
 					<paragraph lineSpacing="Single"/>
