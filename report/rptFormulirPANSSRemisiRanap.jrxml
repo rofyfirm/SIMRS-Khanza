@@ -1,0 +1,2600 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rptFormulirPANSSRemisiRanap" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="7780c327-1874-465d-94ea-493404988e64">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="lokal"/>
+	<parameter name="namars" class="java.lang.String"/>
+	<parameter name="alamatrs" class="java.lang.String"/>
+	<parameter name="kotars" class="java.lang.String"/>
+	<parameter name="propinsirs" class="java.lang.String"/>
+	<parameter name="kontakrs" class="java.lang.String"/>
+	<parameter name="emailrs" class="java.lang.String"/>
+	<parameter name="logo" class="java.io.InputStream"/>
+	<parameter name="finger" class="java.lang.String"/>
+	<parameter name="namadokter" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[select reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,masuk.tgl_perawatan as tgl_masuk,keluar.tgl_perawatan as tgl_keluar,
+masuk.p1 as p1_masuk,masuk.p2 as p2_masuk,masuk.p3 as p3_masuk,masuk.n1 as n1_masuk,masuk.n4 as n4_masuk,masuk.n6 as n6_masuk,masuk.g5 as g5_masuk,masuk.g9 as g9_masuk,
+keluar.p1 as p1_keluar,keluar.p2 as p2_keluar,keluar.p3 as p3_keluar,keluar.n1 as n1_keluar,keluar.n4 as n4_keluar,keluar.n6 as n6_keluar,keluar.g5 as g5_keluar,keluar.g9 as g9_keluar from reg_periksa 
+inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis 
+left join panss_remisi_ranap masuk on masuk.no_rawat=reg_periksa.no_rawat and masuk.jenis='Masuk' 
+left join panss_remisi_ranap keluar on keluar.no_rawat=reg_periksa.no_rawat and keluar.jenis='Keluar']]>
+	</queryString>
+	<field name="no_rawat" class="java.lang.String"/>
+	<field name="no_rkm_medis" class="java.lang.String"/>
+	<field name="nm_pasien" class="java.lang.String"/>
+	<field name="tgl_masuk" class="java.sql.Date"/>
+	<field name="tgl_keluar" class="java.sql.Date"/>
+	<field name="p1_masuk" class="java.lang.String"/>
+	<field name="p2_masuk" class="java.lang.String"/>
+	<field name="p3_masuk" class="java.lang.String"/>
+	<field name="n1_masuk" class="java.lang.String"/>
+	<field name="n4_masuk" class="java.lang.String"/>
+	<field name="n6_masuk" class="java.lang.String"/>
+	<field name="g5_masuk" class="java.lang.String"/>
+	<field name="g9_masuk" class="java.lang.String"/>
+	<field name="p1_keluar" class="java.lang.String"/>
+	<field name="p2_keluar" class="java.lang.String"/>
+	<field name="p3_keluar" class="java.lang.String"/>
+	<field name="n1_keluar" class="java.lang.String"/>
+	<field name="n4_keluar" class="java.lang.String"/>
+	<field name="n6_keluar" class="java.lang.String"/>
+	<field name="g5_keluar" class="java.lang.String"/>
+	<field name="g9_keluar" class="java.lang.String"/>
+	<variable name="total_masuk" class="java.lang.Integer">
+		<variableExpression><![CDATA[$F{p1_masuk}==null?null:Integer.valueOf(Integer.parseInt($F{p1_masuk})+Integer.parseInt($F{p2_masuk})+Integer.parseInt($F{p3_masuk})+Integer.parseInt($F{n1_masuk})+Integer.parseInt($F{n4_masuk})+Integer.parseInt($F{n6_masuk})+Integer.parseInt($F{g5_masuk})+Integer.parseInt($F{g9_masuk}))]]></variableExpression>
+	</variable>
+	<variable name="total_keluar" class="java.lang.Integer">
+		<variableExpression><![CDATA[$F{p1_keluar}==null?null:Integer.valueOf(Integer.parseInt($F{p1_keluar})+Integer.parseInt($F{p2_keluar})+Integer.parseInt($F{p3_keluar})+Integer.parseInt($F{n1_keluar})+Integer.parseInt($F{n4_keluar})+Integer.parseInt($F{n6_keluar})+Integer.parseInt($F{g5_keluar})+Integer.parseInt($F{g9_keluar}))]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="150" splitType="Stretch">
+			<textField>
+				<reportElement x="2" y="0" width="553" height="17" uuid="0bbc55d9-4d71-4a37-8111-a928fa6f0051"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="12" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{namars}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="2" y="14" width="553" height="14" uuid="ee71a736-ead7-4331-aad4-627b65044194"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{alamatrs}+", "+$P{kotars}+", "+$P{propinsirs}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="2" y="25" width="553" height="14" uuid="b67f4395-0062-4bc0-99e1-c79bbef1ae96"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{kontakrs}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="2" y="35" width="553" height="14" uuid="a56c2263-b5ec-4225-97b5-ac3c19f04763"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["E-mail : "+$P{emailrs}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="48" width="555" height="1" uuid="4cab9cf6-1708-430c-b800-0362bf7a33c9"/>
+				<graphicElement>
+					<pen lineWidth="2.0" lineStyle="Double"/>
+				</graphicElement>
+			</line>
+			<image scaleImage="FillFrame" onErrorType="Blank">
+				<reportElement x="0" y="2" width="48" height="45" uuid="755a3c9e-6c01-49b2-913d-4b317030313a"/>
+				<imageExpression><![CDATA[$P{logo}]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="0" y="52" width="555" height="26" uuid="9cd435d8-a169-43aa-ab60-844a83a1b24f"/>
+				
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="10" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[POSITIVE AND NEGATIVE SYNDROMES SCALE QUICKSCORE FORM
+(FORM. PANSS REMISI)]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement mode="Transparent" x="0" y="80" width="555" height="66" uuid="62ab5ec8-6ec4-41cd-b0fa-87e725232e75"/>
+				<graphicElement>
+					<pen lineWidth="0.75"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="5" y="85" width="70" height="14" uuid="ce35f4f1-bd4d-4064-aec4-d9dc487ee562"/>
+				
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Nama Pasien]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="75" y="85" width="7" height="14" uuid="b762831c-7a8d-41a7-9f2d-0666250be1aa"/>
+				
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="83" y="85" width="300" height="14" uuid="13625385-1941-473b-985c-73cbb0d780fe"/>
+				
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nm_pasien}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="5" y="100" width="70" height="14" uuid="9feb002a-b64a-498c-9f3b-3110e205c9ef"/>
+				
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[No RM]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="75" y="100" width="7" height="14" uuid="3cf07dda-cdee-422a-a8b2-b477a7219722"/>
+				
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="83" y="100" width="300" height="14" uuid="89c706de-e2e9-4709-b3be-2b7e9589fc7a"/>
+				
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{no_rkm_medis}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="5" y="115" width="70" height="14" uuid="b14fcc32-ac3b-45fa-b0b3-caec4bdb2902"/>
+				
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[DPJP]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="75" y="115" width="7" height="14" uuid="f0b22277-5784-433d-8540-ac828f91a77a"/>
+				
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="83" y="115" width="300" height="14" uuid="144e7e72-13ea-4fba-b216-380e519331e5"/>
+				
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{namadokter}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="5" y="130" width="70" height="14" uuid="bab3ae3e-9f24-4b6c-b061-cf901408886b"/>
+				
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[No. Rawat]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="75" y="130" width="7" height="14" uuid="3112b1a3-f95e-40b7-80ed-8719c8cb6782"/>
+				
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="83" y="130" width="300" height="14" uuid="5b9cb2cc-dc51-48d6-95e4-8efdccde6a63"/>
+				
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{no_rawat}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="400" y="85" width="70" height="14" uuid="b85aeb4c-106b-4f03-b531-99c6f5107df9"/>
+				
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Ttd DPJP]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="470" y="85" width="7" height="14" uuid="a99d3ff5-824f-4f2d-a75e-1b1068767796"/>
+				
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<componentElement>
+				<reportElement x="487" y="83" width="60" height="60" uuid="8dc757bf-79e1-4aca-bb2c-6772658fd85d"/>
+				<jr:QRCode xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" errorCorrectionLevel="H">
+					<jr:codeExpression><![CDATA[$P{finger}]]></jr:codeExpression>
+				</jr:QRCode>
+			</componentElement>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="42" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="30" height="16" uuid="f0308bf6-1c13-433e-b69a-df23055fc742"/>
+				<box leftPadding="3" rightPadding="3" topPadding="1" bottomPadding="1"><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Skor]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="30" y="0" width="415" height="16" uuid="ce19665f-d880-4e71-ad31-01bbc57e28af"/>
+				<box leftPadding="3" rightPadding="3" topPadding="1" bottomPadding="1"><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[POSITIVE AND NEGATIVE SYNDROMES SCALE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="445" y="0" width="110" height="16" uuid="df7302a3-9a44-428d-9fc9-dd62e83ec120"/>
+				<box leftPadding="3" rightPadding="3" topPadding="1" bottomPadding="1"><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Tgl Pemeriksaan]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="16" width="30" height="26" uuid="7ca6d8a9-2246-4508-9bd6-c23079de7b0d"/>
+				<box leftPadding="3" rightPadding="3" topPadding="1" bottomPadding="1"><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="30" y="16" width="415" height="26" uuid="7e298bcf-3533-4e19-b7da-ee61222149cc"/>
+				<box leftPadding="3" rightPadding="3" topPadding="1" bottomPadding="1"><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="445" y="16" width="55" height="26" uuid="8fe9d9bb-43b1-4139-a59e-ee156dcadbbd"/>
+				<box leftPadding="3" rightPadding="3" topPadding="1" bottomPadding="1"><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Masuk\n"+($F{tgl_masuk}==null?"":new java.text.SimpleDateFormat("dd-MM-yyyy").format($F{tgl_masuk}))]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="500" y="16" width="55" height="26" uuid="d48852c3-46f6-4170-84e0-1c89836609a7"/>
+				<box leftPadding="3" rightPadding="3" topPadding="1" bottomPadding="1"><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Keluar\n"+($F{tgl_keluar}==null?"":new java.text.SimpleDateFormat("dd-MM-yyyy").format($F{tgl_keluar}))]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="14" splitType="Prevent">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="0" y="0" width="555" height="14" uuid="1fe0287e-12dc-4225-b4b7-38400d92b56c"/>
+				<box leftPadding="3" rightPadding="3" topPadding="1" bottomPadding="1"><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Justified" verticalAlignment="Top" markup="styled">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["<style isBold=\"true\">P1. WAHAM</style>\nKeyakinan yang tidak mempunyai dasar, tidak realistik dan aneh (idiosinkratik).\nDasar penilaian : Isi pikiran yang diekspresikan dalam wawancara dan pengaruhnya terhadap relasi sosial dan perilaku."]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="12" splitType="Prevent">
+			<staticText>
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="30" height="12" uuid="3253c783-35d3-4023-844a-c27a2e9cc954"/>
+				<box leftPadding="3" rightPadding="3" topPadding="1" bottomPadding="1"><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[1]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="30" y="0" width="415" height="12" uuid="6aedfe14-ef6b-427a-a95e-80eefe0a7a93"/>
+				<box leftPadding="3" rightPadding="3" bottomPadding="1"><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Justified" verticalAlignment="Top">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Tidak ada : Definisi tidak dipenuhi."]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="445" y="0" width="55" height="12" uuid="99d656bd-1421-4a09-8d33-2b549fb19c33"/>
+				<box><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["1".equals($F{p1_masuk})?"√":""]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="500" y="0" width="55" height="12" uuid="059a9d09-44fd-4dc7-9939-4234100ae0e4"/>
+				<box><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["1".equals($F{p1_keluar})?"√":""]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="12" splitType="Prevent">
+			<staticText>
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="30" height="12" uuid="eee08137-cf97-4243-9949-218ed9d33bc5"/>
+				<box leftPadding="3" rightPadding="3" topPadding="1" bottomPadding="1"><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[2]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="30" y="0" width="415" height="12" uuid="4567653c-853e-4e54-9192-5f404c5d1188"/>
+				<box leftPadding="3" rightPadding="3" bottomPadding="1"><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Justified" verticalAlignment="Top">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Minimal : Patologis diragukan; mungkin suatu ujung ekstrim dari batasan normal."]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="445" y="0" width="55" height="12" uuid="f7d37ebd-cd00-414e-a891-24bf513e5460"/>
+				<box><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["2".equals($F{p1_masuk})?"√":""]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="500" y="0" width="55" height="12" uuid="c958887d-f14f-4e5f-b2ce-b9afafe80221"/>
+				<box><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["2".equals($F{p1_keluar})?"√":""]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="12" splitType="Prevent">
+			<staticText>
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="30" height="12" uuid="c9e41c58-3997-4ef4-bd74-93f9552cfd82"/>
+				<box leftPadding="3" rightPadding="3" topPadding="1" bottomPadding="1"><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[3]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="30" y="0" width="415" height="12" uuid="6735b02f-38e5-4715-9cf4-c67133e08e71"/>
+				<box leftPadding="3" rightPadding="3" bottomPadding="1"><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Justified" verticalAlignment="Top">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Ringan : Ada satu atau dua waham yang samar-samar, tidak terkristalisasi, dan tidak bertahan. Waham tidak mempengaruhi proses pikir, relasi sosial atau perilaku."]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="445" y="0" width="55" height="12" uuid="889483da-9607-4dd1-8d71-bbb3e7ae8046"/>
+				<box><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["3".equals($F{p1_masuk})?"√":""]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="500" y="0" width="55" height="12" uuid="547cfba4-2df0-417d-918b-5fa6068937e1"/>
+				<box><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["3".equals($F{p1_keluar})?"√":""]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="12" splitType="Prevent">
+			<staticText>
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="30" height="12" uuid="a57ac6e7-e3f9-4779-93d1-508f703d218d"/>
+				<box leftPadding="3" rightPadding="3" topPadding="1" bottomPadding="1"><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[4]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="30" y="0" width="415" height="12" uuid="482d6d5d-1b78-4264-a727-a479270457b1"/>
+				<box leftPadding="3" rightPadding="3" bottomPadding="1"><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Justified" verticalAlignment="Top">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Sedang : Adanya rangkaian waham yang bentuknya kurang jelas dan tidak stabil atau beberapa waham yang berbentuk jelas, yang kadang-kadang mempengaruhi proses pikir, relasi sosial atau perilaku."]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="445" y="0" width="55" height="12" uuid="acdc44a9-18e9-4838-8d97-d50ba02ebf02"/>
+				<box><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["4".equals($F{p1_masuk})?"√":""]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="500" y="0" width="55" height="12" uuid="156a24ac-c330-4066-845c-2213d719c018"/>
+				<box><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["4".equals($F{p1_keluar})?"√":""]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="12" splitType="Prevent">
+			<staticText>
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="30" height="12" uuid="092559ba-58d8-40ef-9d57-bb6e1ddc4bc7"/>
+				<box leftPadding="3" rightPadding="3" topPadding="1" bottomPadding="1"><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[5]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="30" y="0" width="415" height="12" uuid="a05bf19b-e5d3-4aae-a0eb-8cc4fad6082f"/>
+				<box leftPadding="3" rightPadding="3" bottomPadding="1"><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Justified" verticalAlignment="Top">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Agak berat : Adanya beberapa waham yang berbentuk jelas, yang dipertahankan dan kadang-kadang mempengaruhi proses pikir, relasi sosial atau perilaku."]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="445" y="0" width="55" height="12" uuid="c211147c-cb51-40b0-b923-00b811632085"/>
+				<box><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["5".equals($F{p1_masuk})?"√":""]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="500" y="0" width="55" height="12" uuid="f1cf20be-2ce2-4c6c-8b87-19a7f4a5b55b"/>
+				<box><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["5".equals($F{p1_keluar})?"√":""]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="12" splitType="Prevent">
+			<staticText>
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="30" height="12" uuid="e050916d-696d-4d2e-a901-1a248bfcb3eb"/>
+				<box leftPadding="3" rightPadding="3" topPadding="1" bottomPadding="1"><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[6]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="30" y="0" width="415" height="12" uuid="309c5ab3-85d5-4d59-a80c-393f7121b9fd"/>
+				<box leftPadding="3" rightPadding="3" bottomPadding="1"><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Justified" verticalAlignment="Top">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Berat : Adanya suatu susunan waham yang stabil, yang terkristalisasi, mungkin sistematik, dipertahankan, dan jelas mempengaruhi proses pikir, relasi sosial dan perilaku."]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="445" y="0" width="55" height="12" uuid="69cf0a04-4465-49d3-9d2f-21881a6af5f9"/>
+				<box><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["6".equals($F{p1_masuk})?"√":""]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="500" y="0" width="55" height="12" uuid="548132c0-b7db-4c84-9c37-fac1091ce34c"/>
+				<box><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["6".equals($F{p1_keluar})?"√":""]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="12" splitType="Prevent">
+			<staticText>
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="30" height="12" uuid="f2402362-ae08-48ea-86f5-5a788ae5fb09"/>
+				<box leftPadding="3" rightPadding="3" topPadding="1" bottomPadding="1"><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[7]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="30" y="0" width="415" height="12" uuid="bc02fae9-8a71-4f8d-ac4f-8c2ac267a171"/>
+				<box leftPadding="3" rightPadding="3" bottomPadding="1"><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Justified" verticalAlignment="Top">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Sangat berat : Adanya suatu susunan waham yang stabil, sangat sistemik, atau sangat banyak, dan yang mendominasi bidang (facet) utama kehidupan pasien. Sering kali mengakibatkan tindakan yang tidak serasi dan tidak bertanggung jawab, yang bahkan membahayakan keamanan pasien atau orang lain."]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="445" y="0" width="55" height="12" uuid="a99fbf7e-28b0-4ec8-b8b0-3a2c65878581"/>
+				<box><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["7".equals($F{p1_masuk})?"√":""]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="500" y="0" width="55" height="12" uuid="0bddebaf-5346-4191-84df-d68663dc9682"/>
+				<box><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["7".equals($F{p1_keluar})?"√":""]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="14" splitType="Prevent">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="0" y="0" width="555" height="14" uuid="faccff58-39f1-47bb-9f80-fc05b76765ba"/>
+				<box leftPadding="3" rightPadding="3" topPadding="1" bottomPadding="1"><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Justified" verticalAlignment="Top" markup="styled">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["<style isBold=\"true\">P2. KEKACAUAN PROSES PIKIR (CONCEPTUAL DISORGANIZATION)</style>\nKekacauan proses pikir ditandai oleh putusnya tahapan penyampaian maksud, misalnya sirkumstansial, tangensial, asosiasi longgar, tidak berurutan, ketidaklogisan yang parah, atau putusnya arus pikir.\nDasar penilaian : Proses pikir kognitif verbal yang diamati selama wawancara."]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="12" splitType="Prevent">
+			<staticText>
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="30" height="12" uuid="cdce7c97-19d8-4e51-b332-3c40a04b3fb7"/>
+				<box leftPadding="3" rightPadding="3" topPadding="1" bottomPadding="1"><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[1]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="30" y="0" width="415" height="12" uuid="dab1fada-e465-427b-870a-6ea5e27fa8c4"/>
+				<box leftPadding="3" rightPadding="3" bottomPadding="1"><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Justified" verticalAlignment="Top">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Tidak ada : Definisi tidak dipenuhi."]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="445" y="0" width="55" height="12" uuid="f7cdb1ba-8226-40ca-8b55-ef8964b32cac"/>
+				<box><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["1".equals($F{p2_masuk})?"√":""]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="500" y="0" width="55" height="12" uuid="fe9be50d-6bfd-488d-b831-dee0c6bffad8"/>
+				<box><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["1".equals($F{p2_keluar})?"√":""]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="12" splitType="Prevent">
+			<staticText>
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="30" height="12" uuid="2f2a6da3-3253-4523-bd46-00dd583d9abc"/>
+				<box leftPadding="3" rightPadding="3" topPadding="1" bottomPadding="1"><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[2]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="30" y="0" width="415" height="12" uuid="87f5fa7b-1188-40ff-a46c-9c3d1b0e3839"/>
+				<box leftPadding="3" rightPadding="3" bottomPadding="1"><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Justified" verticalAlignment="Top">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Minimal : Patologis diragukan; mungkin suatu ujung ekstrim dari batasan normal."]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="445" y="0" width="55" height="12" uuid="4da8c77b-0456-4fa5-9e9a-a5a084ebf447"/>
+				<box><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["2".equals($F{p2_masuk})?"√":""]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="500" y="0" width="55" height="12" uuid="3c012b32-ad65-4c70-b70e-f89606449683"/>
+				<box><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["2".equals($F{p2_keluar})?"√":""]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="12" splitType="Prevent">
+			<staticText>
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="30" height="12" uuid="7f9b84a8-9e81-4743-95ba-e6b88081c038"/>
+				<box leftPadding="3" rightPadding="3" topPadding="1" bottomPadding="1"><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[3]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="30" y="0" width="415" height="12" uuid="4562cb22-2058-4f95-91a6-99d563f4fea8"/>
+				<box leftPadding="3" rightPadding="3" bottomPadding="1"><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Justified" verticalAlignment="Top">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Ringan : Proses pikir sirkumstansial, tangensial atau paralogikal. Adanya kesulitan dalam mengarahkan pikiran ke tujuan dan kadang-kadang asosiasi longgar dapat dijumpai di bawah tekanan."]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="445" y="0" width="55" height="12" uuid="6a12918f-701a-47fa-9010-2935f14136f2"/>
+				<box><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["3".equals($F{p2_masuk})?"√":""]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="500" y="0" width="55" height="12" uuid="870657e9-edef-43ba-8a47-4d94f11851ed"/>
+				<box><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["3".equals($F{p2_keluar})?"√":""]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="12" splitType="Prevent">
+			<staticText>
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="30" height="12" uuid="8238d397-e651-4540-927c-1eb702cdf5d8"/>
+				<box leftPadding="3" rightPadding="3" topPadding="1" bottomPadding="1"><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[4]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="30" y="0" width="415" height="12" uuid="6b0f07d2-ab78-4d7b-b2e0-43dfb20f7e30"/>
+				<box leftPadding="3" rightPadding="3" bottomPadding="1"><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Justified" verticalAlignment="Top">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Sedang : Mampu memusatkan pikiran bila komunikasi singkat dan terstruktur, tetapi menjadi longgar atau tidak relevan bila menghadapi komunikasi yang lebih kompleks atau bila di bawah tekanan minimal."]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="445" y="0" width="55" height="12" uuid="15fd62d8-8d51-469e-91a0-ca8da0640b18"/>
+				<box><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["4".equals($F{p2_masuk})?"√":""]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="500" y="0" width="55" height="12" uuid="f8dec021-6892-4b30-a4d1-0a9e0ab88b9b"/>
+				<box><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["4".equals($F{p2_keluar})?"√":""]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="12" splitType="Prevent">
+			<staticText>
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="30" height="12" uuid="28cce3be-78b7-4300-b387-446446e2c786"/>
+				<box leftPadding="3" rightPadding="3" topPadding="1" bottomPadding="1"><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[5]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="30" y="0" width="415" height="12" uuid="199cae0e-2009-4a1b-aeb2-214909d42ef4"/>
+				<box leftPadding="3" rightPadding="3" bottomPadding="1"><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Justified" verticalAlignment="Top">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Agak berat : Secara umum mengalami kesulitan dalam menata pikiran yang terbukti dalam bentuk sering tidak relevan, tidak ada hubungan, atau asosiasi longgar bahkan walaupun tanpa tekanan."]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="445" y="0" width="55" height="12" uuid="4d6ab2a4-c59f-4ef8-8868-f83c3dcc3cda"/>
+				<box><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["5".equals($F{p2_masuk})?"√":""]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="500" y="0" width="55" height="12" uuid="0e93e2a2-9a77-40a4-8082-5e0a513249e5"/>
+				<box><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["5".equals($F{p2_keluar})?"√":""]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="12" splitType="Prevent">
+			<staticText>
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="30" height="12" uuid="028c0cf5-6419-4ad0-a2b1-d9e99ac511b9"/>
+				<box leftPadding="3" rightPadding="3" topPadding="1" bottomPadding="1"><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[6]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="30" y="0" width="415" height="12" uuid="d20f735c-1901-40f0-8d34-8ae9c98ee94c"/>
+				<box leftPadding="3" rightPadding="3" bottomPadding="1"><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Justified" verticalAlignment="Top">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Berat : Proses pikir (thinking) sangat menyimpang dan pada dasarnya (internally) tidak konsisten, mengakibatkan tidak relevan yang parah dan kekacauan proses pikir, yang hampir terjadi terus menerus."]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="445" y="0" width="55" height="12" uuid="fb38174e-a9e1-4159-98af-9fcff5f3b884"/>
+				<box><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["6".equals($F{p2_masuk})?"√":""]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="500" y="0" width="55" height="12" uuid="defe6d22-262a-45ec-8a45-46081d66e3df"/>
+				<box><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["6".equals($F{p2_keluar})?"√":""]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="12" splitType="Prevent">
+			<staticText>
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="30" height="12" uuid="e5b7538e-7a86-4c14-95ca-3008dd928ae7"/>
+				<box leftPadding="3" rightPadding="3" topPadding="1" bottomPadding="1"><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[7]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="30" y="0" width="415" height="12" uuid="0f6b05b3-732f-46e7-bc25-6d6dba1f285b"/>
+				<box leftPadding="3" rightPadding="3" bottomPadding="1"><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Justified" verticalAlignment="Top">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Sangat berat : Pikiran (thought) sangat kacau sehingga menjadi inkoheren. Asosiasi longgar yang sangat jelas, yang mengakibatkan kegagalan total dalam komunikasi, misalnya: \"word-salad\" atau mutisme."]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="445" y="0" width="55" height="12" uuid="555caeeb-37c9-4953-b579-40b60423123c"/>
+				<box><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["7".equals($F{p2_masuk})?"√":""]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="500" y="0" width="55" height="12" uuid="bff2cbe5-d329-4d95-b8b7-212cbfc0ca60"/>
+				<box><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["7".equals($F{p2_keluar})?"√":""]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="14" splitType="Prevent">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="0" y="0" width="555" height="14" uuid="aec3ff40-eea3-4ac0-95b5-eaff36eaa1c1"/>
+				<box leftPadding="3" rightPadding="3" topPadding="1" bottomPadding="1"><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Justified" verticalAlignment="Top" markup="styled">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["<style isBold=\"true\">P3. PERILAKU HALUSINASI</style>\nLaporan secara verbal atau perilaku yang menunjukkan persepsi yang tidak dirangsang oleh stimulasi luar. Dapat terjadi halusinasi pendengaran, penglihatan, penciuman atau somatik.\nDasar penilaian : Laporan verbal dan manifestasi fisik selama wawancara, dan juga perilaku yang dilaporkan oleh perawat atau keluarga."]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="12" splitType="Prevent">
+			<staticText>
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="30" height="12" uuid="177f867f-1dfd-41da-8c36-3081d223e544"/>
+				<box leftPadding="3" rightPadding="3" topPadding="1" bottomPadding="1"><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[1]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="30" y="0" width="415" height="12" uuid="b511493b-4dcb-41fa-92e5-7a1cc415bfd6"/>
+				<box leftPadding="3" rightPadding="3" bottomPadding="1"><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Justified" verticalAlignment="Top">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Tidak ada : Definisi tidak dipenuhi."]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="445" y="0" width="55" height="12" uuid="9b4fd6ae-52cd-43c4-a27d-57472d9c09c4"/>
+				<box><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["1".equals($F{p3_masuk})?"√":""]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="500" y="0" width="55" height="12" uuid="53bf10b5-69d1-49b8-b004-633d7cefdc91"/>
+				<box><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["1".equals($F{p3_keluar})?"√":""]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="12" splitType="Prevent">
+			<staticText>
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="30" height="12" uuid="48c3736c-c628-461b-9e3d-f2d654f33297"/>
+				<box leftPadding="3" rightPadding="3" topPadding="1" bottomPadding="1"><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[2]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="30" y="0" width="415" height="12" uuid="9e5283d7-1ea7-4818-9d28-b62e91f73deb"/>
+				<box leftPadding="3" rightPadding="3" bottomPadding="1"><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Justified" verticalAlignment="Top">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Minimal : Patologis diragukan; mungkin suatu ujung ekstrim dari batasan normal."]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="445" y="0" width="55" height="12" uuid="e03db4f5-bebd-4e09-9e60-4dd3be4a1931"/>
+				<box><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["2".equals($F{p3_masuk})?"√":""]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="500" y="0" width="55" height="12" uuid="6a71e4ba-7b07-4467-8351-7d51ed5f1010"/>
+				<box><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["2".equals($F{p3_keluar})?"√":""]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="12" splitType="Prevent">
+			<staticText>
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="30" height="12" uuid="cc0cfc50-a40e-49bb-9526-8d7e8e686499"/>
+				<box leftPadding="3" rightPadding="3" topPadding="1" bottomPadding="1"><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[3]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="30" y="0" width="415" height="12" uuid="7c3fc1ee-e87f-4ac7-b0c5-f238c5b3eeee"/>
+				<box leftPadding="3" rightPadding="3" bottomPadding="1"><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Justified" verticalAlignment="Top">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Ringan : Satu atau dua halusinasi yang jelas tetapi jarang timbul, atau beberapa abnormalitas persepsi yang samar-samar lainnya yang tidak mengakibatkan penyimpangan (distorsi) proses pikir atau perilaku."]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="445" y="0" width="55" height="12" uuid="9c61bb14-2b40-4029-a311-2525b559ba54"/>
+				<box><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["3".equals($F{p3_masuk})?"√":""]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="500" y="0" width="55" height="12" uuid="2815470d-1c20-449d-b5b5-5bafa6ae617f"/>
+				<box><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["3".equals($F{p3_keluar})?"√":""]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="12" splitType="Prevent">
+			<staticText>
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="30" height="12" uuid="4a36afa9-8ee7-470e-8db2-cc32d44b89d9"/>
+				<box leftPadding="3" rightPadding="3" topPadding="1" bottomPadding="1"><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[4]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="30" y="0" width="415" height="12" uuid="29614b62-b6d2-418b-bca7-7cf50e9303b4"/>
+				<box leftPadding="3" rightPadding="3" bottomPadding="1"><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Justified" verticalAlignment="Top">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Sedang : Sering ada halusinasi tetapi tidak terus menerus, dan proses pikir serta perilaku pasien hanya sedikit terpengaruh."]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="445" y="0" width="55" height="12" uuid="4436efd3-81bd-4e24-9701-8c10b85f4bb3"/>
+				<box><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["4".equals($F{p3_masuk})?"√":""]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="500" y="0" width="55" height="12" uuid="847af332-744e-47c5-9817-dd5b4b031ff1"/>
+				<box><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["4".equals($F{p3_keluar})?"√":""]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="12" splitType="Prevent">
+			<staticText>
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="30" height="12" uuid="ddbcf3ec-6a8c-4a1a-9794-e51fac1012cc"/>
+				<box leftPadding="3" rightPadding="3" topPadding="1" bottomPadding="1"><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[5]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="30" y="0" width="415" height="12" uuid="97ce0585-9bad-419f-b9fa-f0b0d8ec782c"/>
+				<box leftPadding="3" rightPadding="3" bottomPadding="1"><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Justified" verticalAlignment="Top">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Agak berat : Halusinasi sering, dapat meliputi lebih dari satu organ sensoris dan cenderung menyimpangkan proses pikir dan/atau mengacaukan perilaku. Pasien dapat memiliki interpretasi bersifat waham atas pengalamannya ini dan bereaksi terhadapnya secara emosional, serta kadang-kadang juga secara verbal."]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="445" y="0" width="55" height="12" uuid="79df67b0-0e3a-44cf-bda7-0628d41b0bcb"/>
+				<box><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["5".equals($F{p3_masuk})?"√":""]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="500" y="0" width="55" height="12" uuid="afc09c7a-b2be-4dc1-90a7-5c9b84764d93"/>
+				<box><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["5".equals($F{p3_keluar})?"√":""]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="12" splitType="Prevent">
+			<staticText>
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="30" height="12" uuid="8adbc2db-f065-4277-b20a-6be1ef0a76f5"/>
+				<box leftPadding="3" rightPadding="3" topPadding="1" bottomPadding="1"><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[6]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="30" y="0" width="415" height="12" uuid="1be1b1fe-3e41-4efc-ad67-32f88fec8398"/>
+				<box leftPadding="3" rightPadding="3" bottomPadding="1"><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Justified" verticalAlignment="Top">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Berat : Halusinasi hampir terus menerus ada, mengakibatkan kekacauan berat pada proses pikir dan perilaku. Pasien menganggapnya sebagai persepsi nyata dan fungsinya terganggu oleh seringnya bereaksi secara emosional dan verbal terhadapnya."]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="445" y="0" width="55" height="12" uuid="64b83621-5122-4c7a-9e93-ce4b3c388caa"/>
+				<box><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["6".equals($F{p3_masuk})?"√":""]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="500" y="0" width="55" height="12" uuid="d0b5e07e-cffb-4a49-9b26-80ba65d53d7a"/>
+				<box><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["6".equals($F{p3_keluar})?"√":""]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="12" splitType="Prevent">
+			<staticText>
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="30" height="12" uuid="05ffdf02-6c1e-4ad4-b665-c31614ab7bcb"/>
+				<box leftPadding="3" rightPadding="3" topPadding="1" bottomPadding="1"><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[7]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="30" y="0" width="415" height="12" uuid="41c51b22-0dde-4503-92b9-70e93277261a"/>
+				<box leftPadding="3" rightPadding="3" bottomPadding="1"><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Justified" verticalAlignment="Top">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Sangat berat : Pasien hampir secara total mengalami preokupasi dengan halusinasi, yang jelas mendominasi proses pikir dan perilaku. Halusinasi diikuti interpretasi bersifat waham yang kaku dan memacu timbulnya respons verbal dan perilaku, termasuk kepatuhan terhadap halusinasi perintah."]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="445" y="0" width="55" height="12" uuid="31033924-be72-4555-8f8e-2a6b050bb274"/>
+				<box><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["7".equals($F{p3_masuk})?"√":""]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="500" y="0" width="55" height="12" uuid="ff2f7981-7ec2-4eb8-a269-ea88263333e6"/>
+				<box><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["7".equals($F{p3_keluar})?"√":""]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="14" splitType="Prevent">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="0" y="0" width="555" height="14" uuid="92a961c9-9040-490b-9975-61e5f0944331"/>
+				<box leftPadding="3" rightPadding="3" topPadding="1" bottomPadding="1"><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Justified" verticalAlignment="Top" markup="styled">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["<style isBold=\"true\">N1. AFEK TUMPUL</style>\nBerkurangnya respons emosional yang ditandai oleh berkurangnya ekspresi wajah, gelombang (modulation) perasaan dan gerak gerik komunikatif.\nDasar penilaian : Observasi manifestasi fisik suasana afek dan respons emosional selama wawancara."]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="12" splitType="Prevent">
+			<staticText>
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="30" height="12" uuid="6e5eed63-6620-40b8-9b0b-33684b76118e"/>
+				<box leftPadding="3" rightPadding="3" topPadding="1" bottomPadding="1"><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[1]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="30" y="0" width="415" height="12" uuid="29616cbe-ab3b-4b42-9a5c-736f91bf7c5b"/>
+				<box leftPadding="3" rightPadding="3" bottomPadding="1"><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Justified" verticalAlignment="Top">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Tidak ada : Definisi tidak dipenuhi."]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="445" y="0" width="55" height="12" uuid="88614dd3-6f90-4306-84b0-e165f349b207"/>
+				<box><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["1".equals($F{n1_masuk})?"√":""]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="500" y="0" width="55" height="12" uuid="e48702d7-47bd-4265-a3fc-fd9b79df079f"/>
+				<box><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["1".equals($F{n1_keluar})?"√":""]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="12" splitType="Prevent">
+			<staticText>
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="30" height="12" uuid="e75752bf-0d6d-4eb3-8fff-1efdba1d2870"/>
+				<box leftPadding="3" rightPadding="3" topPadding="1" bottomPadding="1"><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[2]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="30" y="0" width="415" height="12" uuid="632674bf-fe03-403f-a20c-312cb55cb2b1"/>
+				<box leftPadding="3" rightPadding="3" bottomPadding="1"><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Justified" verticalAlignment="Top">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Minimal : Patologis diragukan; mungkin suatu ujung ekstrim dari batasan normal."]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="445" y="0" width="55" height="12" uuid="a7324cfa-23c8-40b9-96c0-a0cea4ec3f44"/>
+				<box><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["2".equals($F{n1_masuk})?"√":""]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="500" y="0" width="55" height="12" uuid="928667d8-0633-4d55-80ed-2753f46330d5"/>
+				<box><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["2".equals($F{n1_keluar})?"√":""]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="12" splitType="Prevent">
+			<staticText>
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="30" height="12" uuid="cfb11032-b4f8-45b6-b6f4-c70856fc09bf"/>
+				<box leftPadding="3" rightPadding="3" topPadding="1" bottomPadding="1"><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[3]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="30" y="0" width="415" height="12" uuid="cdd6e0fa-ac55-4491-bdf3-980c2bb0f0c1"/>
+				<box leftPadding="3" rightPadding="3" bottomPadding="1"><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Justified" verticalAlignment="Top">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Ringan : Perubahan ekspresi wajah dan gerak gerik komunikatif tampak kaku, dipaksakan, dibuat-buat atau kurangnya gelombang."]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="445" y="0" width="55" height="12" uuid="75580b1d-347c-47a6-afc5-3c960242cc7d"/>
+				<box><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["3".equals($F{n1_masuk})?"√":""]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="500" y="0" width="55" height="12" uuid="755eaa73-5e07-4179-966f-250cbff4208d"/>
+				<box><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["3".equals($F{n1_keluar})?"√":""]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="12" splitType="Prevent">
+			<staticText>
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="30" height="12" uuid="3a3edf4e-8e52-49ae-bbba-1915b7a7a4d1"/>
+				<box leftPadding="3" rightPadding="3" topPadding="1" bottomPadding="1"><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[4]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="30" y="0" width="415" height="12" uuid="63a9723b-71fb-4786-a105-fde097713d55"/>
+				<box leftPadding="3" rightPadding="3" bottomPadding="1"><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Justified" verticalAlignment="Top">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Sedang : Berkurangnya corak ekspresi wajah dan sedikitnya gerak gerik ekspresif yang tampak dalam penampilan yang tumpul (dull)."]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="445" y="0" width="55" height="12" uuid="e7f135f4-d92c-4c63-acba-5896c797a79a"/>
+				<box><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["4".equals($F{n1_masuk})?"√":""]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="500" y="0" width="55" height="12" uuid="b75a6031-972b-4555-9198-d00c8aebf02e"/>
+				<box><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["4".equals($F{n1_keluar})?"√":""]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="12" splitType="Prevent">
+			<staticText>
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="30" height="12" uuid="3700258f-aa37-4b1f-bd2a-b42a271b4dff"/>
+				<box leftPadding="3" rightPadding="3" topPadding="1" bottomPadding="1"><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[5]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="30" y="0" width="415" height="12" uuid="a9d3b6f8-67e3-4d3d-ba0a-936eb40e2771"/>
+				<box leftPadding="3" rightPadding="3" bottomPadding="1"><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Justified" verticalAlignment="Top">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Agak berat : Afek umumnya datar dengan hanya sekali-sekali tampak perubahan ekspresi wajah dan gerak gerik komunikatif sedikit."]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="445" y="0" width="55" height="12" uuid="1379a9fc-3090-4452-b6a5-140b18a05376"/>
+				<box><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["5".equals($F{n1_masuk})?"√":""]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="500" y="0" width="55" height="12" uuid="c2fb6d8f-62d0-456f-b360-3817d265e0cf"/>
+				<box><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["5".equals($F{n1_keluar})?"√":""]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="12" splitType="Prevent">
+			<staticText>
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="30" height="12" uuid="dca8b408-821f-449a-8fb5-541b9c8ca49f"/>
+				<box leftPadding="3" rightPadding="3" topPadding="1" bottomPadding="1"><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[6]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="30" y="0" width="415" height="12" uuid="a24ca094-4f8d-4ae5-b598-a7ab97d009ed"/>
+				<box leftPadding="3" rightPadding="3" bottomPadding="1"><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Justified" verticalAlignment="Top">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Berat : Pendataran dan defisiensi emosi yang mencolok yang tampak hampir sepanjang waktu. Kemungkinan terdapat pelepasan afek ekstrim yang tidak bergelombang seperti \"excitement\", kemarahan atau tertawa yang tidak terkendali yang tidak serasi."]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="445" y="0" width="55" height="12" uuid="a4253646-09d6-44bb-8134-78b31b8b28ce"/>
+				<box><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["6".equals($F{n1_masuk})?"√":""]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="500" y="0" width="55" height="12" uuid="d2830b6d-2e54-4e0d-be02-8b9bfbdb63ed"/>
+				<box><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["6".equals($F{n1_keluar})?"√":""]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="12" splitType="Prevent">
+			<staticText>
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="30" height="12" uuid="a56e2a5e-eb84-4e1d-b786-905d1682f203"/>
+				<box leftPadding="3" rightPadding="3" topPadding="1" bottomPadding="1"><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[7]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="30" y="0" width="415" height="12" uuid="8f00303e-01a7-44d9-8373-5dbd34956454"/>
+				<box leftPadding="3" rightPadding="3" bottomPadding="1"><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Justified" verticalAlignment="Top">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Sangat berat : Jelas tidak tampak perubahan ekspresi wajah dan adanya gerak gerik komunikatif. Pasien terus menerus menampakkan ekspresi yang \"tidak hidup\" atau berwajah \"kayu\"."]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="445" y="0" width="55" height="12" uuid="8b2e58ef-4c0e-46af-a06c-30e10213676c"/>
+				<box><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["7".equals($F{n1_masuk})?"√":""]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="500" y="0" width="55" height="12" uuid="b7e5981c-dad9-409f-84f4-f4c5bceb4f55"/>
+				<box><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["7".equals($F{n1_keluar})?"√":""]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="14" splitType="Prevent">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="0" y="0" width="555" height="14" uuid="1072b77a-540e-4916-9372-2456b390f053"/>
+				<box leftPadding="3" rightPadding="3" topPadding="1" bottomPadding="1"><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Justified" verticalAlignment="Top" markup="styled">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["<style isBold=\"true\">N4. PENARIKAN DIRI DARI HUBUNGAN SOSIAL SECARA PASIF/APATIS</style>\nBerkurangnya minat dan inisiatif dalam interaksi sosial, yang disebabkan oleh pasivitas, apatis, anergi atau tidak ada dorongan kehendak. Hal ini mengarah pada berkurangnya keterlibatan interpersonal dan mengabaikan aktivitas kehidupan sehari-hari."]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="12" splitType="Prevent">
+			<staticText>
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="30" height="12" uuid="7d273e94-f3fc-40fb-a308-15956c131e8d"/>
+				<box leftPadding="3" rightPadding="3" topPadding="1" bottomPadding="1"><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[1]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="30" y="0" width="415" height="12" uuid="b6551c25-bac7-4142-891b-93baf386f04e"/>
+				<box leftPadding="3" rightPadding="3" bottomPadding="1"><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Justified" verticalAlignment="Top">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Tidak ada : Definisi tidak dipenuhi."]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="445" y="0" width="55" height="12" uuid="70bac8c6-518c-418c-91af-598bbf073d30"/>
+				<box><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["1".equals($F{n4_masuk})?"√":""]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="500" y="0" width="55" height="12" uuid="94b6ff99-6cd5-4234-993d-9031f6d54b98"/>
+				<box><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["1".equals($F{n4_keluar})?"√":""]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="12" splitType="Prevent">
+			<staticText>
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="30" height="12" uuid="1c6403ed-1f47-4504-b636-66dbdb1aaa56"/>
+				<box leftPadding="3" rightPadding="3" topPadding="1" bottomPadding="1"><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[2]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="30" y="0" width="415" height="12" uuid="e276222f-815c-401a-a67f-a8056571a679"/>
+				<box leftPadding="3" rightPadding="3" bottomPadding="1"><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Justified" verticalAlignment="Top">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Minimal : Patologis diragukan; mungkin suatu ujung ekstrim dari batasan normal."]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="445" y="0" width="55" height="12" uuid="1e317562-2303-48ce-bc22-da3e9d907a6d"/>
+				<box><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["2".equals($F{n4_masuk})?"√":""]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="500" y="0" width="55" height="12" uuid="0cb72520-d878-4737-8e3b-8c3568c56e46"/>
+				<box><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["2".equals($F{n4_keluar})?"√":""]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="12" splitType="Prevent">
+			<staticText>
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="30" height="12" uuid="81189fdc-d4ce-4433-bd26-bac39c4aeb50"/>
+				<box leftPadding="3" rightPadding="3" topPadding="1" bottomPadding="1"><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[3]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="30" y="0" width="415" height="12" uuid="e17e41d9-a6e6-457d-b8f2-56ea30936b42"/>
+				<box leftPadding="3" rightPadding="3" bottomPadding="1"><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Justified" verticalAlignment="Top">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Ringan : Sesekali menunjukkan minat dalam aktivitas sosial, tetapi inisiatif sangat kurang. Biasanya keterlibatan dengan orang lain hanya bila \"didekati\" oleh orang lain tersebut."]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="445" y="0" width="55" height="12" uuid="abdf0fb0-9592-49ce-92b0-c01149fb9b76"/>
+				<box><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["3".equals($F{n4_masuk})?"√":""]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="500" y="0" width="55" height="12" uuid="bf3a6211-8800-41d1-969d-0d12c3326607"/>
+				<box><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["3".equals($F{n4_keluar})?"√":""]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="12" splitType="Prevent">
+			<staticText>
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="30" height="12" uuid="e07f4062-2fb8-40a4-a8a9-1a8ece5369d1"/>
+				<box leftPadding="3" rightPadding="3" topPadding="1" bottomPadding="1"><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[4]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="30" y="0" width="415" height="12" uuid="1ba50a3b-36da-410b-a6f7-5707e508c329"/>
+				<box leftPadding="3" rightPadding="3" bottomPadding="1"><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Justified" verticalAlignment="Top">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Sedang : Secara pasif ikut dalam sebagian besar aktivitas sosial tetapi dengan cara \"ogah-ogahan\" (disinterested) atau secara mekanis. Cenderung untuk ada di baris belakang."]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="445" y="0" width="55" height="12" uuid="90cd95f2-b433-48ed-86fa-f7c2b5fe6f5d"/>
+				<box><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["4".equals($F{n4_masuk})?"√":""]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="500" y="0" width="55" height="12" uuid="04fe9266-9ed3-44e5-9306-e4c4bdee9417"/>
+				<box><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["4".equals($F{n4_keluar})?"√":""]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="12" splitType="Prevent">
+			<staticText>
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="30" height="12" uuid="2d5dd3a9-39e0-425b-a35d-f8aca2851e62"/>
+				<box leftPadding="3" rightPadding="3" topPadding="1" bottomPadding="1"><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[5]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="30" y="0" width="415" height="12" uuid="0f51507a-0223-4d4b-a57d-22d45c1ab4f1"/>
+				<box leftPadding="3" rightPadding="3" bottomPadding="1"><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Justified" verticalAlignment="Top">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Agak berat : Secara pasif berpartisipasi dalam hanya sedikit aktivitas sosial dan menunjukkan jelas tidak ada minat atau inisiatif. Umumnya menyendiri."]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="445" y="0" width="55" height="12" uuid="c3b24c5e-e0fb-471e-84a0-d9b200de2b1e"/>
+				<box><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["5".equals($F{n4_masuk})?"√":""]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="500" y="0" width="55" height="12" uuid="b52879ad-c2e3-4b90-a64b-9d9242d8f7de"/>
+				<box><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["5".equals($F{n4_keluar})?"√":""]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="12" splitType="Prevent">
+			<staticText>
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="30" height="12" uuid="c3367cc8-b424-4b4d-9451-4b212e9f9ac9"/>
+				<box leftPadding="3" rightPadding="3" topPadding="1" bottomPadding="1"><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[6]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="30" y="0" width="415" height="12" uuid="3ee4ea08-5614-4c40-9480-da4d19272287"/>
+				<box leftPadding="3" rightPadding="3" bottomPadding="1"><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Justified" verticalAlignment="Top">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Berat : Cenderung menjadi apatis dan terisolasi, sangat jarang berpartisipasi dalam aktivitas sosial dan sekali-kali mengabaikan kebutuhan pribadi, kontak sosial yang spontan sangat sedikit."]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="445" y="0" width="55" height="12" uuid="1158bc0b-44e9-4933-b67f-ceb7cdf07f7b"/>
+				<box><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["6".equals($F{n4_masuk})?"√":""]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="500" y="0" width="55" height="12" uuid="ebabbcb1-04f0-4e63-bd55-2cf1f5d25291"/>
+				<box><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["6".equals($F{n4_keluar})?"√":""]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="12" splitType="Prevent">
+			<staticText>
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="30" height="12" uuid="9b829769-94be-4baf-a4a9-efac47b37275"/>
+				<box leftPadding="3" rightPadding="3" topPadding="1" bottomPadding="1"><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[7]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="30" y="0" width="415" height="12" uuid="f40278ff-0716-4a60-b326-638f37f3cffd"/>
+				<box leftPadding="3" rightPadding="3" bottomPadding="1"><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Justified" verticalAlignment="Top">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Sangat berat : Sangat apatis, terisolasi secara sosial dan sangat mengabaikan perawatan diri."]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="445" y="0" width="55" height="12" uuid="3872aea0-3868-495f-b4cc-92569cea654f"/>
+				<box><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["7".equals($F{n4_masuk})?"√":""]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="500" y="0" width="55" height="12" uuid="66513534-46bd-4977-bc6f-5ebeb79b60a2"/>
+				<box><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["7".equals($F{n4_keluar})?"√":""]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="14" splitType="Prevent">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="0" y="0" width="555" height="14" uuid="68e76c9a-92ed-461d-8491-cfb4edf7a48f"/>
+				<box leftPadding="3" rightPadding="3" topPadding="1" bottomPadding="1"><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Justified" verticalAlignment="Top" markup="styled">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["<style isBold=\"true\">N6. KURANGNYA SPONTANITAS DAN ARUS PERCAKAPAN</style>\nBerkurangnya arus normal percakapan yang disertai dengan apatis, avolisi (tidak ada dorongan kehendak), defensif atau defisit kognitif."]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="12" splitType="Prevent">
+			<staticText>
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="30" height="12" uuid="ef02c9f5-e80c-4feb-8a48-e885de8b3c2b"/>
+				<box leftPadding="3" rightPadding="3" topPadding="1" bottomPadding="1"><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[1]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="30" y="0" width="415" height="12" uuid="8b09d82b-6faf-4754-93e1-1ea480dafff6"/>
+				<box leftPadding="3" rightPadding="3" bottomPadding="1"><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Justified" verticalAlignment="Top">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Tidak ada : Definisi tidak dipenuhi."]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="445" y="0" width="55" height="12" uuid="f03a05b7-668f-459d-a9ab-675ecf6ffe05"/>
+				<box><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["1".equals($F{n6_masuk})?"√":""]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="500" y="0" width="55" height="12" uuid="867f40eb-b0f2-4d64-8772-210eabd9b958"/>
+				<box><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["1".equals($F{n6_keluar})?"√":""]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="12" splitType="Prevent">
+			<staticText>
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="30" height="12" uuid="1d07c303-fa3c-44ac-8236-2ddcbea3109f"/>
+				<box leftPadding="3" rightPadding="3" topPadding="1" bottomPadding="1"><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[2]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="30" y="0" width="415" height="12" uuid="1caf5a0a-5047-4be3-8a04-c57b01cf1018"/>
+				<box leftPadding="3" rightPadding="3" bottomPadding="1"><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Justified" verticalAlignment="Top">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Minimal : Patologis diragukan; mungkin suatu ujung ekstrim dari batasan normal."]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="445" y="0" width="55" height="12" uuid="182c4bbe-da32-472f-8cfd-e24d4e30de2e"/>
+				<box><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["2".equals($F{n6_masuk})?"√":""]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="500" y="0" width="55" height="12" uuid="4df9a946-a48e-4439-bc1c-a575b92b681c"/>
+				<box><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["2".equals($F{n6_keluar})?"√":""]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="12" splitType="Prevent">
+			<staticText>
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="30" height="12" uuid="04607017-3600-416e-b953-71f8dd1de8fe"/>
+				<box leftPadding="3" rightPadding="3" topPadding="1" bottomPadding="1"><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[3]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="30" y="0" width="415" height="12" uuid="fbc9cd9c-6ef8-4a17-8021-752bccccefca"/>
+				<box leftPadding="3" rightPadding="3" bottomPadding="1"><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Justified" verticalAlignment="Top">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Ringan : Menunjukkan sedikit inisiatif dalam percakapan, jawaban pasien cenderung singkat dan tanpa tambahan, membutuhkan pertanyaan langsung dan pengarahan dari pewawancara."]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="445" y="0" width="55" height="12" uuid="ca36d4ea-dc9e-48ea-8f00-d719a6efaa55"/>
+				<box><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["3".equals($F{n6_masuk})?"√":""]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="500" y="0" width="55" height="12" uuid="14dc1cbf-cea2-48ed-9df1-a3e803529425"/>
+				<box><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["3".equals($F{n6_keluar})?"√":""]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="12" splitType="Prevent">
+			<staticText>
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="30" height="12" uuid="58a96c41-257c-42b4-9023-071b03b8d75f"/>
+				<box leftPadding="3" rightPadding="3" topPadding="1" bottomPadding="1"><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[4]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="30" y="0" width="415" height="12" uuid="3453fdd1-2f21-4cff-b3d3-1afadaca072d"/>
+				<box leftPadding="3" rightPadding="3" bottomPadding="1"><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Justified" verticalAlignment="Top">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Sedang : Arus percakapan kurang bebas dan tidak lancar atau terhenti-henti. Pertanyaan terarah sering dibutuhkan untuk mendapatkan respons yang adekuat dan untuk melanjutkan percakapan."]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="445" y="0" width="55" height="12" uuid="9bc76131-b40c-4b70-bf06-b17fa25bb448"/>
+				<box><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["4".equals($F{n6_masuk})?"√":""]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="500" y="0" width="55" height="12" uuid="93e1c658-9e81-412c-b20e-2cfbcf5027c4"/>
+				<box><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["4".equals($F{n6_keluar})?"√":""]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="12" splitType="Prevent">
+			<staticText>
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="30" height="12" uuid="eda5d4ef-fe24-4117-9392-f5dc41ac091c"/>
+				<box leftPadding="3" rightPadding="3" topPadding="1" bottomPadding="1"><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[5]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="30" y="0" width="415" height="12" uuid="266aa5f3-7e88-4a7a-bc55-e134439f822e"/>
+				<box leftPadding="3" rightPadding="3" bottomPadding="1"><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Justified" verticalAlignment="Top">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Agak berat : Pasien menunjukkan berkurangnya spontanitas dan keterbukaan yang mencolok, menjawab pertanyaan pewawancara dengan hanya 1 atau 2 kalimat singkat."]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="445" y="0" width="55" height="12" uuid="43b635d8-45c9-45ee-b35a-96c05b0c602d"/>
+				<box><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["5".equals($F{n6_masuk})?"√":""]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="500" y="0" width="55" height="12" uuid="902d7a34-a21f-494a-bb55-a11d8ede2989"/>
+				<box><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["5".equals($F{n6_keluar})?"√":""]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="12" splitType="Prevent">
+			<staticText>
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="30" height="12" uuid="f5274a09-17a2-441c-96b8-5cbc306e7670"/>
+				<box leftPadding="3" rightPadding="3" topPadding="1" bottomPadding="1"><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[6]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="30" y="0" width="415" height="12" uuid="a4a7446c-81cc-4081-bd56-07482f3846a3"/>
+				<box leftPadding="3" rightPadding="3" bottomPadding="1"><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Justified" verticalAlignment="Top">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Berat : Respons pasien hanya terbatas terutama pada beberapa kata atau kalimat pendek untuk menghindari atau mempersingkat komunikasi (misalnya \"saya tidak tahu\", \"saya sedang tidak bebas berbicara\"), akibatnya terdapat hendaya berat dalam percakapan, dan wawancara sangat tidak produktif."]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="445" y="0" width="55" height="12" uuid="1262eb93-d8fc-48ab-a37c-06cad89d1ec3"/>
+				<box><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["6".equals($F{n6_masuk})?"√":""]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="500" y="0" width="55" height="12" uuid="6eb72d9d-b88d-4c12-87f7-62fe76339fdf"/>
+				<box><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["6".equals($F{n6_keluar})?"√":""]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="12" splitType="Prevent">
+			<staticText>
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="30" height="12" uuid="655a4526-e4fc-4d72-a15a-febadbce2e07"/>
+				<box leftPadding="3" rightPadding="3" topPadding="1" bottomPadding="1"><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[7]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="30" y="0" width="415" height="12" uuid="84d71657-202c-4567-bf33-c7fa268367b2"/>
+				<box leftPadding="3" rightPadding="3" bottomPadding="1"><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Justified" verticalAlignment="Top">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Sangat berat : Kata-kata yang diucapkan sangat terbatas, paling banter sekali-kali ada ungkapan sehingga percakapan tidak mungkin terjadi."]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="445" y="0" width="55" height="12" uuid="7305d1e5-fbd7-4fbe-b8ac-34bee26a17f7"/>
+				<box><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["7".equals($F{n6_masuk})?"√":""]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="500" y="0" width="55" height="12" uuid="ee5776ad-2800-4aa4-a88a-3111acd99543"/>
+				<box><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["7".equals($F{n6_keluar})?"√":""]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="14" splitType="Prevent">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="0" y="0" width="555" height="14" uuid="9811e836-6522-4738-bd41-8a60390c835d"/>
+				<box leftPadding="3" rightPadding="3" topPadding="1" bottomPadding="1"><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Justified" verticalAlignment="Top" markup="styled">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["<style isBold=\"true\">G5. MANNERISME DAN SIKAP TUBUH</style>\nGerakan atau sikap tubuh yang tidak wajar seperti yang ditandai oleh kejanggalan, kaku, disorganisasi, atau penampilan yang bizar.\nDasar penilaian : Observasi tentang manifestasi fisik selama wawancara dan laporan dari perawat atau keluarga."]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="12" splitType="Prevent">
+			<staticText>
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="30" height="12" uuid="fe5ab05a-23d4-43a7-92a1-e6de9507de96"/>
+				<box leftPadding="3" rightPadding="3" topPadding="1" bottomPadding="1"><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[1]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="30" y="0" width="415" height="12" uuid="944ba4f3-5089-4e09-8b28-dc7db4c72631"/>
+				<box leftPadding="3" rightPadding="3" bottomPadding="1"><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Justified" verticalAlignment="Top">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Tidak ada : Definisi tidak dipenuhi."]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="445" y="0" width="55" height="12" uuid="bf7b1357-8497-42c2-86d4-8504e6877e51"/>
+				<box><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["1".equals($F{g5_masuk})?"√":""]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="500" y="0" width="55" height="12" uuid="0f14e8df-79ed-4445-b0a8-62a7ce5409f4"/>
+				<box><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["1".equals($F{g5_keluar})?"√":""]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="12" splitType="Prevent">
+			<staticText>
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="30" height="12" uuid="97c1aecd-3fb3-4ed1-ac88-d6c66751d9f6"/>
+				<box leftPadding="3" rightPadding="3" topPadding="1" bottomPadding="1"><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[2]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="30" y="0" width="415" height="12" uuid="55d45083-1cc8-4c1d-800e-d7f56b0fc429"/>
+				<box leftPadding="3" rightPadding="3" bottomPadding="1"><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Justified" verticalAlignment="Top">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Minimal : Patologis diragukan; mungkin suatu ujung ekstrim dari batas-batas normal."]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="445" y="0" width="55" height="12" uuid="40d562a1-f85c-4a7e-a235-85f930c3aba1"/>
+				<box><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["2".equals($F{g5_masuk})?"√":""]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="500" y="0" width="55" height="12" uuid="b62bc883-c1a4-4e8d-8b53-e77c2bda137f"/>
+				<box><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["2".equals($F{g5_keluar})?"√":""]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="12" splitType="Prevent">
+			<staticText>
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="30" height="12" uuid="2b9da8b0-1135-43b1-afee-3498b48160a3"/>
+				<box leftPadding="3" rightPadding="3" topPadding="1" bottomPadding="1"><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[3]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="30" y="0" width="415" height="12" uuid="3bc3cede-7985-4c19-ac80-5a390f0bb4a1"/>
+				<box leftPadding="3" rightPadding="3" bottomPadding="1"><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Justified" verticalAlignment="Top">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Ringan : Kejanggalan ringan dalam pergerakan atau kekakuan sikap tubuh yang ringan."]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="445" y="0" width="55" height="12" uuid="4196e76e-d899-46e2-9cc8-269ed602c081"/>
+				<box><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["3".equals($F{g5_masuk})?"√":""]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="500" y="0" width="55" height="12" uuid="a6593106-e425-4ad1-afce-d59bdbe82a0a"/>
+				<box><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["3".equals($F{g5_keluar})?"√":""]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="12" splitType="Prevent">
+			<staticText>
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="30" height="12" uuid="65620134-140b-4605-924e-8d1983d3dc40"/>
+				<box leftPadding="3" rightPadding="3" topPadding="1" bottomPadding="1"><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[4]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="30" y="0" width="415" height="12" uuid="d2c01acc-5c56-4cec-8a2f-9bb0e14d979e"/>
+				<box leftPadding="3" rightPadding="3" bottomPadding="1"><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Justified" verticalAlignment="Top">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Sedang : Gerakan janggal yang khusus atau terputus-putus, atau sikap tubuh tidak wajar yang dipertahankan untuk periode yang singkat."]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="445" y="0" width="55" height="12" uuid="c772c11c-598c-495e-9cad-122563e8a219"/>
+				<box><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["4".equals($F{g5_masuk})?"√":""]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="500" y="0" width="55" height="12" uuid="63c2f228-df35-483a-8680-6dae7717e261"/>
+				<box><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["4".equals($F{g5_keluar})?"√":""]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="12" splitType="Prevent">
+			<staticText>
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="30" height="12" uuid="54a46069-00b5-4c00-897b-d4e4723f74d6"/>
+				<box leftPadding="3" rightPadding="3" topPadding="1" bottomPadding="1"><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[5]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="30" y="0" width="415" height="12" uuid="5f665508-8c25-4d18-8dba-0484caa10e16"/>
+				<box leftPadding="3" rightPadding="3" bottomPadding="1"><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Justified" verticalAlignment="Top">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Agak berat : Sesekali tampak ritual bizar, atau sikap tubuh yang berubah-ubah (contorted), atau suatu posisi abnormal yang dipertahankan terus menerus untuk waktu yang agak lama."]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="445" y="0" width="55" height="12" uuid="15889a70-a188-43e9-af8a-0374d130833c"/>
+				<box><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["5".equals($F{g5_masuk})?"√":""]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="500" y="0" width="55" height="12" uuid="39ca0adf-b304-4c3a-9361-7d242aa3f358"/>
+				<box><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["5".equals($F{g5_keluar})?"√":""]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="12" splitType="Prevent">
+			<staticText>
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="30" height="12" uuid="fac191f5-3308-4e60-b6e1-226c44be4a79"/>
+				<box leftPadding="3" rightPadding="3" topPadding="1" bottomPadding="1"><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[6]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="30" y="0" width="415" height="12" uuid="0b8bdbb6-2254-4ea2-a0fc-7a5ef459a8a4"/>
+				<box leftPadding="3" rightPadding="3" bottomPadding="1"><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Justified" verticalAlignment="Top">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Berat : Sering tampak pengulangan ritual bizar, mannerisme, atau gerak-gerakan stereotipik, atau sikap tubuh yang berubah-ubah yang dipertahankan terus menerus untuk waktu yang agak lama."]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="445" y="0" width="55" height="12" uuid="9fe5bdea-1f20-4828-883f-2ad66017d8e1"/>
+				<box><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["6".equals($F{g5_masuk})?"√":""]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="500" y="0" width="55" height="12" uuid="4712af37-650a-49f5-b279-5545011be3a4"/>
+				<box><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["6".equals($F{g5_keluar})?"√":""]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="12" splitType="Prevent">
+			<staticText>
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="30" height="12" uuid="99c187ef-eb48-47db-9438-3d2fcc1b3a92"/>
+				<box leftPadding="3" rightPadding="3" topPadding="1" bottomPadding="1"><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[7]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="30" y="0" width="415" height="12" uuid="274e13f7-28e4-458a-8e93-022abf163d6a"/>
+				<box leftPadding="3" rightPadding="3" bottomPadding="1"><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Justified" verticalAlignment="Top">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Sangat berat : Fungsi terganggu berat oleh keterlibatan terus menerus yang jelas dalam ritual, mannerisme atau gerakan-gerakan stereotipik atau suatu sikap tubuh tidak wajar tertentu yang dipertahankan terus menerus dalam sebagian besar waktu."]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="445" y="0" width="55" height="12" uuid="8440e994-2d36-42e3-a3cf-ee812afc3aaa"/>
+				<box><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["7".equals($F{g5_masuk})?"√":""]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="500" y="0" width="55" height="12" uuid="a6b19bff-2540-469a-ac30-bfaf7b003dcb"/>
+				<box><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["7".equals($F{g5_keluar})?"√":""]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="14" splitType="Prevent">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="0" y="0" width="555" height="14" uuid="1e51e1ac-ac7b-4f91-bf08-798af54ff8eb"/>
+				<box leftPadding="3" rightPadding="3" topPadding="1" bottomPadding="1"><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Justified" verticalAlignment="Top" markup="styled">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["<style isBold=\"true\">G9. ISI PIKIRAN YANG TIDAK BIASA</style>\nProses pikir ditandai oleh ide-ide yang asing, fantastik, atau bizar, berkisar dari yang ringan atau atipikal sampai distorsi, tidak logis dan sangat tidak masuk akal.\nDasar penilaian : Isi pikir yang diekspresikan selama wawancara."]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="12" splitType="Prevent">
+			<staticText>
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="30" height="12" uuid="909e31ee-3749-44e9-acff-41a610fb801a"/>
+				<box leftPadding="3" rightPadding="3" topPadding="1" bottomPadding="1"><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[1]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="30" y="0" width="415" height="12" uuid="cad87074-fe02-45da-b65f-c1943aed4a95"/>
+				<box leftPadding="3" rightPadding="3" bottomPadding="1"><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Justified" verticalAlignment="Top">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Tidak ada : Definisi tidak dipenuhi."]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="445" y="0" width="55" height="12" uuid="ccde206a-c4a6-4d8f-b038-544b0e241412"/>
+				<box><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["1".equals($F{g9_masuk})?"√":""]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="500" y="0" width="55" height="12" uuid="9919e00a-b95a-4451-b24b-12662a77f130"/>
+				<box><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["1".equals($F{g9_keluar})?"√":""]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="12" splitType="Prevent">
+			<staticText>
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="30" height="12" uuid="d743b1bd-76c9-4fbc-a80b-d7a334322f14"/>
+				<box leftPadding="3" rightPadding="3" topPadding="1" bottomPadding="1"><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[2]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="30" y="0" width="415" height="12" uuid="6bf50ef3-1eab-4eef-bf58-b0450c92738a"/>
+				<box leftPadding="3" rightPadding="3" bottomPadding="1"><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Justified" verticalAlignment="Top">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Minimal : Patologis diragukan; mungkin suatu ujung ekstrim dari batasan normal."]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="445" y="0" width="55" height="12" uuid="33d32ed7-025c-47cb-aec8-8eaa7dfd015f"/>
+				<box><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["2".equals($F{g9_masuk})?"√":""]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="500" y="0" width="55" height="12" uuid="d5418f69-3067-42ee-ad2b-5804d5e1509d"/>
+				<box><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["2".equals($F{g9_keluar})?"√":""]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="12" splitType="Prevent">
+			<staticText>
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="30" height="12" uuid="34b15f81-8cd9-4184-850e-103cc68829b2"/>
+				<box leftPadding="3" rightPadding="3" topPadding="1" bottomPadding="1"><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[3]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="30" y="0" width="415" height="12" uuid="ee50feda-7624-4e9e-a9c2-e7051ebe94b5"/>
+				<box leftPadding="3" rightPadding="3" bottomPadding="1"><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Justified" verticalAlignment="Top">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Ringan : Isi pikir ganjil atau idiosinkratik, atau ide yang lazim dalam konteks yang aneh."]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="445" y="0" width="55" height="12" uuid="4948c180-6913-4e6d-ba21-da83231621b8"/>
+				<box><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["3".equals($F{g9_masuk})?"√":""]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="500" y="0" width="55" height="12" uuid="9dc9f028-adb6-4628-bb19-81a92ef9c7fb"/>
+				<box><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["3".equals($F{g9_keluar})?"√":""]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="12" splitType="Prevent">
+			<staticText>
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="30" height="12" uuid="19dc2dcb-1b80-4d61-bad6-e3643b807674"/>
+				<box leftPadding="3" rightPadding="3" topPadding="1" bottomPadding="1"><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[4]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="30" y="0" width="415" height="12" uuid="3edeb8f4-6c60-4d0f-b4b9-7355cd523530"/>
+				<box leftPadding="3" rightPadding="3" bottomPadding="1"><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Justified" verticalAlignment="Top">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Sedang : Ide-ide seringkali mengalami distorsi dan sekali-sekali cukup bizar."]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="445" y="0" width="55" height="12" uuid="9c69bf04-ea37-45ff-929b-3b0120f5e914"/>
+				<box><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["4".equals($F{g9_masuk})?"√":""]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="500" y="0" width="55" height="12" uuid="92e27e95-fdb6-4840-addf-a347d7fd7459"/>
+				<box><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["4".equals($F{g9_keluar})?"√":""]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="12" splitType="Prevent">
+			<staticText>
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="30" height="12" uuid="04723eb5-a69a-463e-952d-925317ae8d30"/>
+				<box leftPadding="3" rightPadding="3" topPadding="1" bottomPadding="1"><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[5]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="30" y="0" width="415" height="12" uuid="7cc40419-8b54-4365-a1ae-dfde628c5acf"/>
+				<box leftPadding="3" rightPadding="3" bottomPadding="1"><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Justified" verticalAlignment="Top">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Agak berat : Pasien mengekspresikan banyak pikiran-pikiran asing dan fantastik (misalnya menjadi anak angkat raja, orang yang berhasil lolos dalam kematian) atau beberapa pikiran yang sangat tidak masuk akal (misalnya mempunyai ratusan anak, menerima pesan radio dari angkasa luar melalui sebuah tambalan gigi)."]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="445" y="0" width="55" height="12" uuid="8bbb022b-e0ab-41d0-aa5a-d7b19de9d216"/>
+				<box><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["5".equals($F{g9_masuk})?"√":""]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="500" y="0" width="55" height="12" uuid="6d99aa2b-b4e5-4241-966c-1fdec7bc7aa9"/>
+				<box><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["5".equals($F{g9_keluar})?"√":""]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="12" splitType="Prevent">
+			<staticText>
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="30" height="12" uuid="37e7ad14-bc7a-482c-9ec8-f2ed11d3d9a9"/>
+				<box leftPadding="3" rightPadding="3" topPadding="1" bottomPadding="1"><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[6]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="30" y="0" width="415" height="12" uuid="1f577b5f-59a9-4145-8e0c-7da980951b8a"/>
+				<box leftPadding="3" rightPadding="3" bottomPadding="1"><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Justified" verticalAlignment="Top">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Berat : Pasien mengekspresikan banyak ide yang tidak logis atau tidak masuk akal atau beberapa ide yang jelas berkualitas bizar (misalnya mempunyai 3 kepala, menjadi seorang pengunjung dari planet lain)."]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="445" y="0" width="55" height="12" uuid="d5c0046e-a120-41c7-9769-a19d2a8bc551"/>
+				<box><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["6".equals($F{g9_masuk})?"√":""]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="500" y="0" width="55" height="12" uuid="ca525277-5312-4997-b9af-007454f8d0ba"/>
+				<box><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["6".equals($F{g9_keluar})?"√":""]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="12" splitType="Prevent">
+			<staticText>
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="0" width="30" height="12" uuid="87708591-9286-490f-a7a6-63ae3396c192"/>
+				<box leftPadding="3" rightPadding="3" topPadding="1" bottomPadding="1"><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[7]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="30" y="0" width="415" height="12" uuid="8e68726f-a427-4638-9ac2-529ac9a7439e"/>
+				<box leftPadding="3" rightPadding="3" bottomPadding="1"><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Justified" verticalAlignment="Top">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Sangat berat : Proses pikir dipenuhi dengan ide-ide yang tidak masuk akal (absurd), bizar, dan aneh sekali (grotesque)."]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="445" y="0" width="55" height="12" uuid="e67093a4-fafa-44ce-b329-91d43f4cda69"/>
+				<box><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["7".equals($F{g9_masuk})?"√":""]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToBandHeight" x="500" y="0" width="55" height="12" uuid="844ea39c-5738-48d2-b674-fe0c674a547d"/>
+				<box><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA["7".equals($F{g9_keluar})?"√":""]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="18" splitType="Prevent">
+			<staticText>
+				<reportElement x="0" y="0" width="30" height="18" uuid="52b6f746-1d7d-4e77-96b6-9a3541f8aee6"/>
+				<box leftPadding="3" rightPadding="3" topPadding="1" bottomPadding="1"><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="30" y="0" width="415" height="18" uuid="960c05d7-0b5e-4454-b3f0-6aa607e54358"/>
+				<box leftPadding="3" rightPadding="3" topPadding="1" bottomPadding="1"><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Total Skor]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="445" y="0" width="55" height="18" uuid="e279013b-2d25-4492-9542-5ee912245a1a"/>
+				<box leftPadding="3" rightPadding="3" topPadding="1" bottomPadding="1"><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{total_masuk}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="500" y="0" width="55" height="18" uuid="9e8ae279-a6af-4dac-8a25-c9704e46333c"/>
+				<box leftPadding="3" rightPadding="3" topPadding="1" bottomPadding="1"><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{total_keluar}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="18" splitType="Prevent">
+			<staticText>
+				<reportElement x="0" y="0" width="30" height="18" uuid="2be1b805-be08-4606-abb7-06c3baf01329"/>
+				<box leftPadding="3" rightPadding="3" topPadding="1" bottomPadding="1"><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="30" y="0" width="415" height="18" uuid="bf908c86-5c40-4e52-b6a5-00e52203b4bc"/>
+				<box leftPadding="3" rightPadding="3" topPadding="1" bottomPadding="1"><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Persen Peningkatan Skor]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="445" y="0" width="110" height="18" uuid="97af2224-4941-4221-98c3-2e2bd2016ac2"/>
+				<box leftPadding="3" rightPadding="3" topPadding="1" bottomPadding="1"><pen lineWidth="0.75"/></box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Tahoma" size="9" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($V{total_masuk}==null||$V{total_keluar}==null||$V{total_masuk}.intValue()==8)?"":new java.text.DecimalFormat("0.##").format(($V{total_masuk}.intValue()-$V{total_keluar}.intValue())*100.0/($V{total_masuk}.intValue()-8))+" %"]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

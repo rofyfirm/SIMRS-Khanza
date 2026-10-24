@@ -897,6 +897,7 @@ import rekammedis.RMMonitoringAldrettePascaAnestesi;
 import rekammedis.RMMonitoringBromagePascaAnestesi;
 import rekammedis.RMMonitoringStewardPascaAnestesi;
 import rekammedis.RMPANSSRatingRanap;
+import rekammedis.RMPANSSRemisiRanap;
 import rekammedis.RMPelaksanaanInformasiEdukasi;
 import rekammedis.RMPemantauanEWSD;
 import rekammedis.RMPemantauanEWSNeonatus;
@@ -2940,6 +2941,8 @@ final class DaftarMenuUtama {
             .buka(() -> new RMMonitorPANSSECRanap(u,false)).sebelum(f -> f.isCek());
         m.tambah("btnPANSSRatingRanap", "PANSS Score Ranap", "2730389_brain_divide_inkcontober_sains_icon.png", akses::getpenilaian_awal_medis_ranap)
             .buka(() -> new RMPANSSRatingRanap(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnPANSSRemisiRanap", "PANSS Remisi Ranap", "5972305_healthy_immune_recovered_revive_strong_icon.png", akses::getpenilaian_awal_medis_ranap)
+            .buka(() -> new RMPANSSRemisiRanap(u,false)).sebelum(f -> f.isCek());
         m.tambah("btnCSSRS", "Columbia Suicide Severity Rating Scale (C-SSRS)", "3380376_analytical_brain_creative_intelligence_mindset_icon.png", akses::getpenilaian_tambahan_bunuh_diri)
             .buka(() -> new RMCSSRS(u,false)).sebelum(f -> f.isCek());
         m.tambah("btnCatatanObservasiVentilator", "Catatan Observasi Ventilator", "6088631_bed_hospital_icu_medical_treatment_icon.png", akses::getcatatan_observasi_ventilator)
