@@ -479,6 +479,7 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
         chkPengkajianRestrain = new widget.CekBox();
         chkAsuhanTambahanGeriatri = new widget.CekBox();
         chkAsuhanTambahanBunuhDiri = new widget.CekBox();
+        chkCSSRS = new widget.CekBox();
         chkAsuhanTambahanPerilakuKekerasan = new widget.CekBox();
         chkAsuhanTambahanMelarikanDiri = new widget.CekBox();
         chkPenilaianPasienTerminal = new widget.CekBox();
@@ -2486,6 +2487,14 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
         chkAsuhanTambahanBunuhDiri.setPreferredSize(new java.awt.Dimension(245, 22));
         FormMenu.add(chkAsuhanTambahanBunuhDiri);
 
+        chkCSSRS.setSelected(true);
+        chkCSSRS.setText("Skrining Risiko Bunuh Diri (C-SSRS)");
+        chkCSSRS.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        chkCSSRS.setName("chkCSSRS"); // NOI18N
+        chkCSSRS.setOpaque(false);
+        chkCSSRS.setPreferredSize(new java.awt.Dimension(245, 22));
+        FormMenu.add(chkCSSRS);
+
         chkAsuhanTambahanPerilakuKekerasan.setSelected(true);
         chkAsuhanTambahanPerilakuKekerasan.setText("Tambahan Perilaku Kekerasan");
         chkAsuhanTambahanPerilakuKekerasan.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -3801,6 +3810,7 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
     private widget.CekBox chkAsuhanPsikologiKlinis;
     private widget.CekBox chkAsuhanRisikoDekubitus;
     private widget.CekBox chkAsuhanTambahanBunuhDiri;
+    private widget.CekBox chkCSSRS;
     private widget.CekBox chkAsuhanTambahanGeriatri;
     private widget.CekBox chkAsuhanTambahanMelarikanDiri;
     private widget.CekBox chkAsuhanTambahanPerilakuKekerasan;
@@ -4455,6 +4465,7 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                     menampilkanAsuhanResikoDekubitus(rs.getString("no_rawat"));
                     menampilkanTambahanGeriatri(rs.getString("no_rawat"));
                     menampilkanTambahanBunuhDiri(rs.getString("no_rawat"));
+                    menampilkanCSSRS(rs.getString("no_rawat"));
                     menampilkanTambahanPerilakuKekerasan(rs.getString("no_rawat"));
                     menampilkanTambahanMelarikanDiri(rs.getString("no_rawat"));
                     menampilkanEWS(rs.getString("no_rawat"));
@@ -21187,6 +21198,114 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
         }
     }
     
+    private void menampilkanCSSRS(String norawat) {
+        try {
+            if(chkCSSRS.isSelected()==true){
+                String[] kolom={
+                    "berharap_mati","ide_bunuh_diri","rencana_spesifik","niat_melukai_diri","niat_dengan_rencana",
+                    "percobaan_bunuh_diri","tindakan_persiapan","ide_metode","situasi_berisiko"
+                };
+                String[] isian={
+                    "frekuensi_berharap_mati","frekuensi_ide_bunuh_diri","frekuensi_rencana_spesifik","frekuensi_niat_melukai_diri","frekuensi_niat_dengan_rencana",
+                    "jumlah_percobaan_bunuh_diri","jumlah_tindakan_persiapan","jumlah_ide_metode","jumlah_situasi_berisiko"
+                };
+                String[] komponen={
+                    "Pernahkah Anda berharap Anda mati?",
+                    "Pernahkah Anda memiliki ide untuk bunuh diri?",
+                    "Apakah Anda memiliki rencana spesifik untuk bunuh diri?",
+                    "Apakah Anda memiliki niat serius untuk melukai diri sendiri?",
+                    "Apakah Anda memiliki niat dengan rencana tertentu untuk bunuh diri?",
+                    "Apakah Anda pernah mencoba bunuh diri sebelumnya?",
+                    "Apakah Anda pernah melakukan tindakan persiapan?",
+                    "Apakah Anda pernah berpikir tentang tempat atau metode untuk melukai diri sendiri?",
+                    "Apakah Anda pernah terlibat dalam situasi yang berisiko tinggi terkait bunuh diri?"
+                };
+                String[] panduan={
+                    "0 : Tidak ada ide, 1 : Ada ide","0 : Tidak ada ide, 1 : Ada ide","0 : Tidak ada ide, 1 : Ada ide",
+                    "0 : Tidak ada niat, 1 : Ada niat","0 : Tidak ada niat, 1 : Ada niat dengan rencana",
+                    "0 : Tidak pernah, 1 : Pernah","0 : Tidak pernah, 1 : Pernah","0 : Tidak pernah, 1 : Pernah","0 : Tidak pernah, 1 : Pernah"
+                };
+                try {
+                    rs2=koneksi.prepareStatement(
+                            "select c_ssrs.tgl_perawatan,c_ssrs.jam_rawat,"+
+                            "c_ssrs.berharap_mati,c_ssrs.frekuensi_berharap_mati,c_ssrs.ide_bunuh_diri,c_ssrs.frekuensi_ide_bunuh_diri,c_ssrs.rencana_spesifik,c_ssrs.frekuensi_rencana_spesifik,"+
+                            "c_ssrs.niat_melukai_diri,c_ssrs.frekuensi_niat_melukai_diri,c_ssrs.niat_dengan_rencana,c_ssrs.frekuensi_niat_dengan_rencana,c_ssrs.percobaan_bunuh_diri,c_ssrs.jumlah_percobaan_bunuh_diri,"+
+                            "c_ssrs.tindakan_persiapan,c_ssrs.jumlah_tindakan_persiapan,c_ssrs.ide_metode,c_ssrs.jumlah_ide_metode,c_ssrs.situasi_berisiko,c_ssrs.jumlah_situasi_berisiko,"+
+                            "c_ssrs.nip,petugas.nama from c_ssrs inner join petugas on c_ssrs.nip=petugas.nip where "+
+                            "c_ssrs.no_rawat='"+norawat+"' order by c_ssrs.tgl_perawatan,c_ssrs.jam_rawat").executeQuery();
+                    if(rs2.next()){
+                        htmlContent.append(
+                          "<tr class='isi'>").append(
+                            "<td valign='top' width='2%'></td>").append(
+                            "<td valign='top' width='18%'>Skrining Risiko Bunuh Diri (C-SSRS)</td>").append(
+                            "<td valign='top' width='1%' align='center'>:</td>").append(
+                            "<td valign='top' width='79%'>").append(
+                              "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"
+                        );
+                        do{
+                            htmlContent.append(
+                                 "<tr>").append(
+                                    "<td valign='top'>").append(
+                                       "YANG MELAKUKAN PENGKAJIAN").append(
+                                       "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0px' class='tbl_form'>").append(
+                                          "<tr>").append(
+                                              "<td width='33%' border='0'>Tanggal : ").append(rs2.getString("tgl_perawatan")).append(" ").append(rs2.getString("jam_rawat")).append("</td>").append(
+                                              "<td width='67%' border='0'>Petugas : ").append(rs2.getString("nip")).append(" ").append(rs2.getString("nama")).append("</td>").append(
+                                          "</tr>").append(
+                                       "</table>").append(
+                                    "</td>").append(
+                                 "</tr>"
+                            );
+                            for(int k=0;k<kolom.length;k++){
+                                if((k==0)||(k==5)){
+                                    htmlContent.append(
+                                         "<tr>").append(
+                                            "<td valign='top'>").append(
+                                               k==0?"IDE BUNUH DIRI":"PERILAKU BUNUH DIRI").append(
+                                               "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0px' class='tbl_form'>").append(
+                                                  "<tr>").append(
+                                                      "<td width='50%' bgcolor='#FFFAF8' align='center'>Komponen</td>").append(
+                                                      "<td width='8%' bgcolor='#FFFAF8' align='center'>Skala</td>").append(
+                                                      "<td width='27%' bgcolor='#FFFAF8' align='center'>Panduan Penilaian</td>").append(
+                                                      "<td width='15%' bgcolor='#FFFAF8' align='center'>").append(k==0?"Frekuensi/Durasi":"Jumlah").append("</td>").append(
+                                                  "</tr>"
+                                    );
+                                }
+                                htmlContent.append(
+                                                  "<tr>").append(
+                                                      "<td width='50%'>").append(komponen[k]).append("</td>").append(
+                                                      "<td width='8%' align='center'>").append(rs2.getString(kolom[k])).append("</td>").append(
+                                                      "<td width='27%'>").append(panduan[k]).append("</td>").append(
+                                                      "<td width='15%'>").append(rs2.getString(isian[k])).append("</td>").append(
+                                                  "</tr>"
+                                );
+                                if((k==4)||(k==8)){
+                                    htmlContent.append(
+                                               "</table>").append(
+                                            "</td>").append(
+                                         "</tr>"
+                                    );
+                                }
+                            }
+                        }while(rs2.next());
+                        htmlContent.append(
+                              "</table>").append(
+                            "</td>").append(
+                          "</tr>");
+                    }
+                } catch (Exception e) {
+                    System.out.println("Notifikasi : "+e);
+                } finally{
+                    if(rs2!=null){
+                        rs2.close();
+                    }
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Notif C-SSRS : "+e);
+        }
+    }
+
     private void menampilkanTambahanPerilakuKekerasan(String norawat) {
         try {
             if(chkAsuhanTambahanPerilakuKekerasan.isSelected()==true){

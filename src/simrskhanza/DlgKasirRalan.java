@@ -207,6 +207,7 @@ import rekammedis.RMPenilaianPsikologi;
 import rekammedis.RMPenilaianPsikologiKlinis;
 import rekammedis.RMPenilaianRisikoJatuhNeonatus;
 import rekammedis.RMPenilaianTambahanBunuhDiri;
+import rekammedis.RMCSSRS;
 import rekammedis.RMPenilaianTambahanGeriatri;
 import rekammedis.RMPenilaianTambahanMelarikanDiri;
 import rekammedis.RMPenilaianTambahanPerilakuKekerasan;
@@ -543,6 +544,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         MnPenilaianLain = new javax.swing.JMenu();
         MnPenilaianTambahanGeriatri = new javax.swing.JMenuItem();
         MnPenilaianTambahanBunuhDiri = new javax.swing.JMenuItem();
+        MnCSSRS = new javax.swing.JMenuItem();
         MnPenilaianTambahanPerilakuKekerasan = new javax.swing.JMenuItem();
         MnPenilaianTambahanMelarikanDiri = new javax.swing.JMenuItem();
         MnPenilaianPasienTerminal = new javax.swing.JMenuItem();
@@ -1909,6 +1911,21 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         MnPenilaianTambahanBunuhDiri.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 MnPenilaianTambahanBunuhDiriActionPerformed(evt);
+            }
+        });
+
+        MnCSSRS.setBackground(new java.awt.Color(255, 255, 254));
+        MnCSSRS.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        MnCSSRS.setForeground(new java.awt.Color(50, 50, 50));
+        MnCSSRS.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        MnCSSRS.setText("Skrining Risiko Bunuh Diri (C-SSRS)");
+        MnCSSRS.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        MnCSSRS.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        MnCSSRS.setName("MnCSSRS"); // NOI18N
+        MnCSSRS.setPreferredSize(new java.awt.Dimension(250, 26));
+        MnCSSRS.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MnCSSRSActionPerformed(evt);
             }
         });
 
@@ -13379,6 +13396,28 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
         }
     }//GEN-LAST:event_MnPenilaianTambahanBunuhDiriActionPerformed
 
+    private void MnCSSRSActionPerformed(java.awt.event.ActionEvent evt) {
+        if(tabModekasir.getRowCount()==0){
+            JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
+            //TNoReg.requestFocus();
+        }else if(TNoRw.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
+            tbKasirRalan.requestFocus();
+        }else{
+            if(tbKasirRalan.getSelectedRow()!= -1){
+                this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                RMCSSRS form=new RMCSSRS(null,false);
+                form.isCek();
+                form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+                form.setLocationRelativeTo(internalFrame1);
+                form.setVisible(true);
+                form.emptTeks();
+                form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
+                this.setCursor(Cursor.getDefaultCursor());
+            }
+        }
+    }
+
     private void MnPenilaianTambahanPerilakuKekerasanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPenilaianTambahanPerilakuKekerasanActionPerformed
         if(tabModekasir.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
@@ -16320,6 +16359,7 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
     private javax.swing.JMenuItem MnPenilaianRisikoJatuhNeonatus;
     private javax.swing.JMenuItem MnPenilaianRisikoJatuhPsikiatri;
     private javax.swing.JMenuItem MnPenilaianTambahanBunuhDiri;
+    private javax.swing.JMenuItem MnCSSRS;
     private javax.swing.JMenuItem MnPenilaianTambahanGeriatri;
     private javax.swing.JMenuItem MnPenilaianTambahanMelarikanDiri;
     private javax.swing.JMenuItem MnPenilaianTambahanPerilakuKekerasan;
@@ -16908,6 +16948,7 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
         MnEdukasiPasienKeluarga.setEnabled(akses.getedukasi_pasien_keluarga_rj());
         MnPemantauanPEWSDewasa.setEnabled(akses.getpemantauan_pews_dewasa());
         MnPenilaianTambahanBunuhDiri.setEnabled(akses.getpenilaian_tambahan_bunuh_diri());
+        MnCSSRS.setEnabled(akses.getpenilaian_tambahan_bunuh_diri());
         MnPenilaianTambahanPerilakuKekerasan.setEnabled(akses.getpenilaian_tambahan_perilaku_kekerasan());
         MnPenilaianTambahanMelarikanDiri.setEnabled(akses.getpenilaian_tambahan_beresiko_melarikan_diri());
         MnPersetujuanPenundaanPelayanan.setEnabled(akses.getpersetujuan_penundaan_pelayanan());
@@ -18969,6 +19010,7 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
         
         MnPenilaianLain.add(MnPenilaianTambahanGeriatri);
         MnPenilaianLain.add(MnPenilaianTambahanBunuhDiri);
+        MnPenilaianLain.add(MnCSSRS);
         MnPenilaianLain.add(MnPenilaianTambahanPerilakuKekerasan);
         MnPenilaianLain.add(MnPenilaianTambahanMelarikanDiri);
         MnPenilaianLain.add(MnPenilaianPasienTerminal);
