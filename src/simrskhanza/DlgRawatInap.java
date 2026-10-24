@@ -158,6 +158,7 @@ import rekammedis.RMPenilaianPsikologiKlinis;
 import rekammedis.RMPenilaianRisikoDekubitus;
 import rekammedis.RMPenilaianRisikoJatuhNeonatus;
 import rekammedis.RMPenilaianTambahanBunuhDiri;
+import rekammedis.RMCSSRS;
 import rekammedis.RMPenilaianTambahanGeriatri;
 import rekammedis.RMPenilaianTambahanMelarikanDiri;
 import rekammedis.RMPenilaianTambahanPerilakuKekerasan;
@@ -1075,6 +1076,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         BtnPenilaianPasienPenyakitMenular = new widget.Button();
         BtnPenilaianTambahanGeriatri = new widget.Button();
         BtnPenilaianTambahanBunuhDiri = new widget.Button();
+        BtnCSSRS = new widget.Button();
         BtnPenilaianTambahanPerilakuKekerasan = new widget.Button();
         BtnPenilaianTambahanMelarikanDiri = new widget.Button();
 
@@ -4293,6 +4295,22 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         BtnPenilaianTambahanBunuhDiri.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnPenilaianTambahanBunuhDiriActionPerformed(evt);
+            }
+        });
+
+        BtnCSSRS.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
+        BtnCSSRS.setText("Skrining Bunuh Diri (C-SSRS)");
+        BtnCSSRS.setFocusPainted(false);
+        BtnCSSRS.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        BtnCSSRS.setGlassColor(new java.awt.Color(255, 255, 255));
+        BtnCSSRS.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        BtnCSSRS.setMargin(new java.awt.Insets(1, 1, 1, 1));
+        BtnCSSRS.setName("BtnCSSRS"); // NOI18N
+        BtnCSSRS.setPreferredSize(new java.awt.Dimension(190, 23));
+        BtnCSSRS.setRoundRect(false);
+        BtnCSSRS.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnCSSRSActionPerformed(evt);
             }
         });
 
@@ -7727,6 +7745,23 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
         }
     }//GEN-LAST:event_BtnPenilaianTambahanBunuhDiriActionPerformed
 
+    private void BtnCSSRSActionPerformed(java.awt.event.ActionEvent evt) {
+        if(TPasien.getText().trim().equals("")||TNoRw.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
+            TCari.requestFocus();
+        }else{
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            RMCSSRS form=new RMCSSRS(null,false);
+            form.isCek();
+            form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            form.setLocationRelativeTo(internalFrame1);
+            form.setVisible(true);
+            form.emptTeks();
+            form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
+            this.setCursor(Cursor.getDefaultCursor());
+        }
+    }
+
     private void BtnPenilaianTambahanPerilakuKekerasanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPenilaianTambahanPerilakuKekerasanActionPerformed
         if(TPasien.getText().trim().equals("")||TNoRw.getText().trim().equals("")){
             JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
@@ -9129,6 +9164,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
     private widget.Button BtnPenilaianPsikolog;
     private widget.Button BtnPenilaianResikoDekubitus;
     private widget.Button BtnPenilaianTambahanBunuhDiri;
+    private widget.Button BtnCSSRS;
     private widget.Button BtnPenilaianTambahanGeriatri;
     private widget.Button BtnPenilaianTambahanMelarikanDiri;
     private widget.Button BtnPenilaianTambahanPerilakuKekerasan;
@@ -10035,6 +10071,10 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             tinggi=tinggi+24;
         }
         BtnPenilaianTambahanBunuhDiri.setVisible(akses.getpenilaian_tambahan_bunuh_diri()); 
+        if(akses.getpenilaian_tambahan_bunuh_diri()==true){
+            tinggi=tinggi+24;
+        }
+        BtnCSSRS.setVisible(akses.getpenilaian_tambahan_bunuh_diri());
         if(akses.getpenilaian_tambahan_bunuh_diri()==true){
             tinggi=tinggi+24;
         }
@@ -11546,6 +11586,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
         FormMenu.add(BtnPenilaianPasienImunitasRendah);
         FormMenu.add(BtnPenilaianTambahanGeriatri);
         FormMenu.add(BtnPenilaianTambahanBunuhDiri);
+        FormMenu.add(BtnCSSRS);
         FormMenu.add(BtnPenilaianTambahanPerilakuKekerasan);
         FormMenu.add(BtnPenilaianTambahanMelarikanDiri);
         FormMenu.add(BtnPenilaianDerajatDehidrasi);
