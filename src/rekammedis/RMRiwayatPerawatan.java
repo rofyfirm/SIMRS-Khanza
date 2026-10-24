@@ -358,6 +358,7 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
         chkCatatanObservasiRanapPostPartum = new widget.CekBox();
         chkMonitorPANSSECIGD = new widget.CekBox();
         chkMonitorPANSSECRanap = new widget.CekBox();
+        chkPANSSRemisi = new widget.CekBox();
         chkCatatanObservasiBayi = new widget.CekBox();
         chkCatatanObservasiRestrainNonFarmakologi = new widget.CekBox();
         chkCatatanObservasiVentilator = new widget.CekBox();
@@ -1516,6 +1517,14 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
         chkMonitorPANSSECRanap.setOpaque(false);
         chkMonitorPANSSECRanap.setPreferredSize(new java.awt.Dimension(245, 22));
         FormMenu.add(chkMonitorPANSSECRanap);
+
+        chkPANSSRemisi.setSelected(true);
+        chkPANSSRemisi.setText("PANSS Remisi");
+        chkPANSSRemisi.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        chkPANSSRemisi.setName("chkPANSSRemisi"); // NOI18N
+        chkPANSSRemisi.setOpaque(false);
+        chkPANSSRemisi.setPreferredSize(new java.awt.Dimension(245, 22));
+        FormMenu.add(chkPANSSRemisi);
 
         chkCatatanObservasiBayi.setSelected(true);
         chkCatatanObservasiBayi.setText("Catatan Observasi Bayi");
@@ -3865,6 +3874,7 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
     private widget.CekBox chkMonitoringGizi;
     private widget.CekBox chkMonitoringReaksiTranfusi;
     private widget.CekBox chkOperasiVK;
+    private widget.CekBox chkPANSSRemisi;
     private widget.CekBox chkPelayananInformasiObat;
     private widget.CekBox chkPemantauanEWSNeonatus;
     private widget.CekBox chkPemantauanMOEWSObstetri;
@@ -4428,6 +4438,7 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                     menampilkanCatatanObservasi(rs.getString("no_rawat"));
                     menampilkanMonitorPANSSECIGD(rs.getString("no_rawat"));
                     menampilkanMonitorPANSSECRanap(rs.getString("no_rawat"));
+                    menampilkanPANSSRemisi(rs.getString("no_rawat"));
                     menampilkanPemeriksaanRanap(rs.getString("no_rawat"));
                     menampilkanEdukasiPasienTerintegrasiRawatInap(rs.getString("no_rawat"));
                     menampilkanKonsultasiMedik(rs.getString("no_rawat"));
@@ -11247,6 +11258,88 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
             }
         } catch (Exception e) {
             System.out.println("Notif Monitor PANSS EC : "+e);
+        }
+    }
+    
+    private void menampilkanPANSSRemisi(String norawat) {
+        try {
+            if(chkPANSSRemisi.isSelected()==true){
+                String[] butir={"P1 - Waham","P2 - Kekacauan Proses Pikir","P3 - Perilaku Halusinasi","N1 - Afek Tumpul","N4 - Penarikan Diri dari Hubungan Sosial secara Pasif/Apatis",
+                                "N6 - Kurangnya Spontanitas dan Arus Percakapan","G5 - Mannerisme dan Sikap Tubuh","G9 - Isi Pikiran yang Tidak Biasa"};
+                String[] kolom={"p1","p2","p3","n1","n4","n6","g5","g9"};
+                String[][] nilai=new String[2][kolom.length];
+                String[] waktu={"",""},dokter={"",""};
+                int[] total={0,0};
+                boolean[] ada={false,false};
+                try {
+                    rs2=koneksi.prepareStatement(
+                        "select panss_remisi_ranap.jenis,panss_remisi_ranap.tgl_perawatan,panss_remisi_ranap.jam_rawat,panss_remisi_ranap.p1,panss_remisi_ranap.p2,panss_remisi_ranap.p3,"+
+                        "panss_remisi_ranap.n1,panss_remisi_ranap.n4,panss_remisi_ranap.n6,panss_remisi_ranap.g5,panss_remisi_ranap.g9,dokter.nm_dokter from panss_remisi_ranap "+
+                        "inner join dokter on panss_remisi_ranap.kd_dokter=dokter.kd_dokter where panss_remisi_ranap.no_rawat='"+norawat+"'").executeQuery();
+                    while(rs2.next()){
+                        int j=rs2.getString("jenis").equals("Masuk")?0:1;
+                        ada[j]=true;
+                        waktu[j]=rs2.getString("tgl_perawatan")+" "+rs2.getString("jam_rawat");
+                        dokter[j]=rs2.getString("nm_dokter");
+                        for(int i=0;i<kolom.length;i++){
+                            nilai[j][i]=rs2.getString(kolom[i]);
+                            total[j]=total[j]+Integer.parseInt(nilai[j][i]);
+                        }
+                    }
+                } catch (Exception e) {
+                    System.out.println("Notifikasi : "+e);
+                } finally{
+                    if(rs2!=null){
+                        rs2.close();
+                    }
+                }
+                if(ada[0]||ada[1]){
+                    htmlContent.append(
+                      "<tr class='isi'>").append(
+                        "<td valign='top' width='2%'></td>").append(
+                        "<td valign='top' width='18%'>PANSS Remisi</td>").append(
+                        "<td valign='top' width='1%' align='center'>:</td>").append(
+                        "<td valign='top' width='79%'>").append(
+                          "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>").append(
+                             "<tr>").append(
+                                 "<td width='46%' border='0'>Butir Penilaian</td>").append(
+                                 "<td width='27%' border='0' align='center'>Masuk</td>").append(
+                                 "<td width='27%' border='0' align='center'>Keluar</td>").append(
+                             "</tr>").append(
+                             "<tr>").append(
+                                 "<td border='0'>Tanggal</td>").append(
+                                 "<td border='0' align='center'>").append(waktu[0]).append("</td>").append(
+                                 "<td border='0' align='center'>").append(waktu[1]).append("</td>").append(
+                             "</tr>").append(
+                             "<tr>").append(
+                                 "<td border='0'>Dokter</td>").append(
+                                 "<td border='0' align='center'>").append(dokter[0]).append("</td>").append(
+                                 "<td border='0' align='center'>").append(dokter[1]).append("</td>").append(
+                             "</tr>");
+                    for(int i=0;i<butir.length;i++){
+                        htmlContent.append("<tr><td border='0' valign='top'>").append(butir[i]).append("</td>");
+                        for(int j=0;j<2;j++){
+                            htmlContent.append("<td border='0' align='center'>").append(nilai[j][i]==null?"":nilai[j][i]).append("</td>");
+                        }
+                        htmlContent.append("</tr>");
+                    }
+                    htmlContent.append(
+                             "<tr>").append(
+                                 "<td border='0'>Total Skor</td>").append(
+                                 "<td border='0' align='center'>").append(ada[0]?""+total[0]:"").append("</td>").append(
+                                 "<td border='0' align='center'>").append(ada[1]?""+total[1]:"").append("</td>").append(
+                             "</tr>").append(
+                             "<tr>").append(
+                                 "<td border='0'>Persen Peningkatan Skor</td>").append(
+                                 "<td border='0' align='center' colspan='2'>").append(ada[0]&&ada[1]&&total[0]!=8?new java.text.DecimalFormat("0.##").format((total[0]-total[1])*100.0/(total[0]-8))+" %":"").append("</td>").append(
+                             "</tr>").append(
+                          "</table>").append(
+                        "</td>").append(
+                      "</tr>");
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Notif PANSS Remisi : "+e);
         }
     }
     
