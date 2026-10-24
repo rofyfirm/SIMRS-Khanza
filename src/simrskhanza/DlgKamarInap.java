@@ -21127,7 +21127,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         MnPANSSRating.setFont(new java.awt.Font("Tahoma", 0, 11));
         MnPANSSRating.setForeground(new java.awt.Color(50, 50, 50));
         MnPANSSRating.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png")));
-        MnPANSSRating.setText("PANSS Rating Form");
+        MnPANSSRating.setText("PANSS Score");
         MnPANSSRating.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         MnPANSSRating.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnPANSSRating.setName("MnPANSSRating");

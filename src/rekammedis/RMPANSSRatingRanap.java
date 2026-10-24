@@ -274,7 +274,7 @@ public final class RMPANSSRatingRanap extends javax.swing.JDialog {
             }
         });
 
-        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ PANSS Rating Form Ranap ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
+        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ PANSS Score Ranap ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
         internalFrame1.setFont(new java.awt.Font("Tahoma", 2, 12)); // NOI18N
         internalFrame1.setName("internalFrame1"); // NOI18N
         internalFrame1.setLayout(new java.awt.BorderLayout(1, 1));
@@ -1534,7 +1534,7 @@ public final class RMPANSSRatingRanap extends javax.swing.JDialog {
             param.put("namadokter",tbObat.getValueAt(tbObat.getSelectedRow(),41).toString());
             param.put("totalskor",Integer.valueOf(tbObat.getValueAt(tbObat.getSelectedRow(),38).toString()));
             param.put("derajat",tbObat.getValueAt(tbObat.getSelectedRow(),39).toString());
-            Valid.MyReportqry("rptFormulirPANSSRatingRanap.jasper","report","::[ PANSS Rating Form Ranap ]::",
+            Valid.MyReportqry("rptFormulirPANSSRatingRanap.jasper","report","::[ PANSS Score Ranap ]::",
                     "select reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,reg_periksa.umurdaftar,reg_periksa.sttsumur,pasien.jk,pasien.tgl_lahir,"+
                     "panss_rating_ranap.tgl_perawatan,panss_rating_ranap.jam_rawat,"+
                     "panss_rating_ranap.p1,panss_rating_ranap.p2,panss_rating_ranap.p3,panss_rating_ranap.p4,panss_rating_ranap.p5,panss_rating_ranap.p6,panss_rating_ranap.p7,panss_rating_ranap.n1,panss_rating_ranap.n2,panss_rating_ranap.n3,"+

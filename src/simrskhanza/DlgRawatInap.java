@@ -11036,7 +11036,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
 
         BtnPANSSRating = new widget.Button();
         BtnPANSSRating.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png")));
-        BtnPANSSRating.setText("PANSS Rating Form");
+        BtnPANSSRating.setText("PANSS Score");
         BtnPANSSRating.setFocusPainted(false);
         BtnPANSSRating.setFont(new java.awt.Font("Tahoma", 0, 11));
         BtnPANSSRating.setGlassColor(new java.awt.Color(255, 255, 255));
