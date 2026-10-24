@@ -358,6 +358,7 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
         chkCatatanObservasiRanapPostPartum = new widget.CekBox();
         chkMonitorPANSSECIGD = new widget.CekBox();
         chkMonitorPANSSECRanap = new widget.CekBox();
+        chkPANSSScore = new widget.CekBox();
         chkPANSSRemisi = new widget.CekBox();
         chkCatatanObservasiBayi = new widget.CekBox();
         chkCatatanObservasiRestrainNonFarmakologi = new widget.CekBox();
@@ -1517,6 +1518,14 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
         chkMonitorPANSSECRanap.setOpaque(false);
         chkMonitorPANSSECRanap.setPreferredSize(new java.awt.Dimension(245, 22));
         FormMenu.add(chkMonitorPANSSECRanap);
+
+        chkPANSSScore.setSelected(true);
+        chkPANSSScore.setText("PANSS Score");
+        chkPANSSScore.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        chkPANSSScore.setName("chkPANSSScore"); // NOI18N
+        chkPANSSScore.setOpaque(false);
+        chkPANSSScore.setPreferredSize(new java.awt.Dimension(245, 22));
+        FormMenu.add(chkPANSSScore);
 
         chkPANSSRemisi.setSelected(true);
         chkPANSSRemisi.setText("PANSS Remisi");
@@ -3875,6 +3884,7 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
     private widget.CekBox chkMonitoringReaksiTranfusi;
     private widget.CekBox chkOperasiVK;
     private widget.CekBox chkPANSSRemisi;
+    private widget.CekBox chkPANSSScore;
     private widget.CekBox chkPelayananInformasiObat;
     private widget.CekBox chkPemantauanEWSNeonatus;
     private widget.CekBox chkPemantauanMOEWSObstetri;
@@ -4438,6 +4448,7 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                     menampilkanCatatanObservasi(rs.getString("no_rawat"));
                     menampilkanMonitorPANSSECIGD(rs.getString("no_rawat"));
                     menampilkanMonitorPANSSECRanap(rs.getString("no_rawat"));
+                    menampilkanPANSSScore(rs.getString("no_rawat"));
                     menampilkanPANSSRemisi(rs.getString("no_rawat"));
                     menampilkanPemeriksaanRanap(rs.getString("no_rawat"));
                     menampilkanEdukasiPasienTerintegrasiRawatInap(rs.getString("no_rawat"));
@@ -11258,6 +11269,121 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
             }
         } catch (Exception e) {
             System.out.println("Notif Monitor PANSS EC : "+e);
+        }
+    }
+    
+    private void menampilkanPANSSScore(String norawat) {
+        try {
+            if(chkPANSSScore.isSelected()==true){
+                String[] kolom={"p1","p2","p3","p4","p5","p6","p7","n1","n2","n3","n4","n5","n6","n7",
+                    "g1","g2","g3","g4","g5","g6","g7","g8","g9","g10","g11","g12","g13","g14","g15","g16"};
+                String[] butir={"P1 - Waham","P2 - Kekacauan Proses Pikir","P3 - Perilaku Halusinasi","P4 - Gaduh Gelisah",
+                    "P5 - Waham Kebesaran","P6 - Kecurigaan/Kejaran","P7 - Permusuhan",
+                    "N1 - Afek Tumpul","N2 - Keruntunan Emosional","N3 - Kemiskinan Rapport","N4 - Penarikan Diri Dari Hub. Sosial Secara Pasif/Apatis",
+                    "N5 - Kesulitan Pemikiran Abstrak","N6 - Kurangnya Spontanitas & Arus Percakapan","N7 - Pemikiran Stereotipik",
+                    "G1 - Kekawatiran Somatik","G2 - Anxiety/Kecemasan","G3 - Rasa Bersalah","G4 - Ketegangan",
+                    "G5 - Manerisme & Posturing","G6 - Depresi","G7 - Kelambanan Motorik","G8 - Ketidak Kooperatifan",
+                    "G9 - Isi Pikiran Yg Tdk Biasa","G10 - Disorientasi","G11 - Perhatian Yang Buruk","G12 - Kurangnya Daya Nilai & Tilikan",
+                    "G13 - Ggn. Dorongan Kehendak","G14 - Pengendalian Impuls Yg Buruk","G15 - Preokupasi","G16 - Penghindaran Sosial Secara Aktif"};
+                int[] awal={0,7,14},jumlah={7,7,16};
+                try {
+                    rs2=koneksi.prepareStatement(
+                        "select panss_rating_ranap.tgl_perawatan,panss_rating_ranap.jam_rawat,"+
+                        "panss_rating_ranap.p1,panss_rating_ranap.p2,panss_rating_ranap.p3,panss_rating_ranap.p4,panss_rating_ranap.p5,panss_rating_ranap.p6,panss_rating_ranap.p7,panss_rating_ranap.n1,panss_rating_ranap.n2,panss_rating_ranap.n3,"+
+                        "panss_rating_ranap.n4,panss_rating_ranap.n5,panss_rating_ranap.n6,panss_rating_ranap.n7,panss_rating_ranap.g1,panss_rating_ranap.g2,panss_rating_ranap.g3,panss_rating_ranap.g4,panss_rating_ranap.g5,panss_rating_ranap.g6,"+
+                        "panss_rating_ranap.g7,panss_rating_ranap.g8,panss_rating_ranap.g9,panss_rating_ranap.g10,panss_rating_ranap.g11,panss_rating_ranap.g12,panss_rating_ranap.g13,panss_rating_ranap.g14,panss_rating_ranap.g15,panss_rating_ranap.g16,"+
+                        "dokter.nm_dokter from panss_rating_ranap inner join dokter on panss_rating_ranap.kd_dokter=dokter.kd_dokter "+
+                        "where panss_rating_ranap.no_rawat='"+norawat+"' order by panss_rating_ranap.tgl_perawatan,panss_rating_ranap.jam_rawat").executeQuery();
+                    if(rs2.next()){
+                        htmlContent.append(
+                          "<tr class='isi'>").append(
+                            "<td valign='top' width='2%'></td>").append(
+                            "<td valign='top' width='18%'>PANSS Score</td>").append(
+                            "<td valign='top' width='1%' align='center'>:</td>").append(
+                            "<td valign='top' width='79%'>").append(
+                              "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"
+                        );
+                        do{
+                            int total=0;
+                            for(String item:kolom){
+                                total=total+Integer.parseInt(rs2.getString(item));
+                            }
+                            htmlContent.append(
+                                 "<tr>").append(
+                                    "<td valign='top'>").append(
+                                       "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0px' class='tbl_form'>").append(
+                                          "<tr>").append(
+                                              "<td width='33%' border='0'>Tanggal : ").append(rs2.getString("tgl_perawatan")).append(" ").append(rs2.getString("jam_rawat")).append("</td>").append(
+                                              "<td width='67%' border='0'>Dokter : ").append(rs2.getString("nm_dokter")).append("</td>").append(
+                                          "</tr>").append(
+                                       "</table>").append(
+                                       "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0px' class='tbl_form'>").append(
+                                          "<tr>").append(
+                                              "<td width='28%' border='0'>Skala Positif</td>").append(
+                                              "<td width='5%' border='0' align='center'>Skor</td>").append(
+                                              "<td width='28%' border='0'>Skala Negatif</td>").append(
+                                              "<td width='5%' border='0' align='center'>Skor</td>").append(
+                                              "<td width='29%' border='0'>Psikopatologi Umum</td>").append(
+                                              "<td width='5%' border='0' align='center'>Skor</td>").append(
+                                          "</tr>"
+                            );
+                            for(int i=0;i<16;i++){
+                                htmlContent.append("<tr>");
+                                for(int k=0;k<awal.length;k++){
+                                    if(i<jumlah[k]){
+                                        htmlContent.append("<td border='0' valign='top'>").append(butir[awal[k]+i]).append("</td>").append(
+                                            "<td border='0' align='center' valign='top'>").append(rs2.getString(kolom[awal[k]+i])).append("</td>");
+                                    }else{
+                                        htmlContent.append("<td border='0'></td><td border='0'></td>");
+                                    }
+                                }
+                                htmlContent.append("</tr>");
+                            }
+                            htmlContent.append(
+                                       "</table>").append(
+                                       "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0px' class='tbl_form'>").append(
+                                          "<tr>").append(
+                                              "<td width='33%' border='0'>Total Skor : ").append(total).append("</td>").append(
+                                              "<td width='67%' border='0'>Derajat Kesakitan : ").append(derajatPANSSScore(total)).append("</td>").append(
+                                          "</tr>").append(
+                                       "</table>").append(
+                                    "</td>").append(
+                                 "</tr>"
+                            );
+                        }while(rs2.next());
+                        htmlContent.append(
+                              "</table>").append(
+                            "</td>").append(
+                          "</tr>");
+                    }
+                } catch (Exception e) {
+                    System.out.println("Notifikasi : "+e);
+                } finally{
+                    if(rs2!=null){
+                        rs2.close();
+                    }
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Notif PANSS Score : "+e);
+        }
+    }
+    
+    private String derajatPANSSScore(int total) {
+        if(total<=30){
+            return "Tidak Sakit";
+        }else if(total<=60){
+            return "Minimal/Patologi Diragukan";
+        }else if(total<=90){
+            return "Sakit Ringan";
+        }else if(total<=120){
+            return "Sakit Sedang";
+        }else if(total<=150){
+            return "Sakit Agak Berat";
+        }else if(total<=180){
+            return "Sakit Berat";
+        }else{
+            return "Sakit Sangat Berat";
         }
     }
     

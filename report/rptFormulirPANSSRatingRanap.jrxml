@@ -146,7 +146,7 @@ inner join dokter on panss_rating_ranap.kd_dokter=dokter.kd_dokter]]>
 					<font fontName="Tahoma" size="11" isBold="false"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
-				<text><![CDATA[PANSS RATING FORM]]></text>
+				<text><![CDATA[PANSS SCORE]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="470" y="54" width="85" height="16" uuid="178d21cd-df69-415d-b39c-0353c001b60b"/>

@@ -2939,7 +2939,7 @@ final class DaftarMenuUtama {
             .buka(() -> new RMMonitorPANSSECIGD(u,false)).sebelum(f -> f.isCek());
         m.tambah("btnMonitorPANSSECRanap", "Monitor PANSS EC Ranap", "mental-health_18376031-2.png", akses::getpenilaian_awal_medis_ranap)
             .buka(() -> new RMMonitorPANSSECRanap(u,false)).sebelum(f -> f.isCek());
-        m.tambah("btnPANSSRatingRanap", "PANSS Rating Form Ranap", "2730389_brain_divide_inkcontober_sains_icon.png", akses::getpenilaian_awal_medis_ranap)
+        m.tambah("btnPANSSRatingRanap", "PANSS Score Ranap", "2730389_brain_divide_inkcontober_sains_icon.png", akses::getpenilaian_awal_medis_ranap)
             .buka(() -> new RMPANSSRatingRanap(u,false)).sebelum(f -> f.isCek());
         m.tambah("btnPANSSRemisiRanap", "PANSS Remisi Ranap", "5972305_healthy_immune_recovered_revive_strong_icon.png", akses::getpenilaian_awal_medis_ranap)
             .buka(() -> new RMPANSSRemisiRanap(u,false)).sebelum(f -> f.isCek());
