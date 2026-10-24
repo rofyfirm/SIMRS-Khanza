@@ -144,6 +144,7 @@ import rekammedis.RMKonselingFarmasi;
 import rekammedis.RMLaporanTindakan;
 import rekammedis.RMLayananKedokteranFisikRehabilitasi;
 import rekammedis.RMMCU;
+import rekammedis.RMMonitorPANSSECIGD;
 import rekammedis.RMMonitoringAldrettePascaAnestesi;
 import rekammedis.RMMonitoringBromagePascaAnestesi;
 import rekammedis.RMMonitoringStewardPascaAnestesi;
@@ -14842,6 +14843,28 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
         }
     }
     
+    private void MnMonitorPANSSECActionPerformed(java.awt.event.ActionEvent evt) {
+        if(tabModekasir.getRowCount()==0){
+            JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
+            TCari.requestFocus();
+        }else if(TNoRw.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
+            tbKasirRalan.requestFocus();
+        }else{
+            if(tbKasirRalan.getSelectedRow()!= -1){
+                this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                RMMonitorPANSSECIGD form=new RMMonitorPANSSECIGD(null,false);
+                form.isCek();
+                form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+                form.setLocationRelativeTo(internalFrame1);
+                form.setVisible(true);
+                form.emptTeks();
+                form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
+                this.setCursor(Cursor.getDefaultCursor());
+            }
+        }
+    }
+    
     private void MnSkriningKankerKolorektalActionPerformed(java.awt.event.ActionEvent evt) {
        if(tabModekasir.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
@@ -16522,6 +16545,7 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
                                   MnHasilEndoskopiFaringLaring,MnHasilEndoskopiHidung,MnHasilEndoskopiTelinga,MnPenilaianPasienImunitasRendah,MnCatatanKeseimbanganCairan,MnCatatanObservasiCHBP,MnCatatanObservasiInduksiPersalinan,
                                   MnPermintaanKonsultasiMedik,MnDataOperasi,MnDataKonsultasiMedik,MnSkriningMerokokUsiaSekolahRemaja,MnSkriningKekerasanPadaWanita,MnSkriningObesitas,MnSkriningRisikoKankerPayudara,MnSkriningRisikoKankerParu,
                                   MnSkriningKesehatanGigiMulutRemaja,MnSkriningTBC,MnCatatanAnastesiSedasi,MnSkriningPUMA,MnSkriningAdiksiNikotin,MnSkriningThalassemia,MnSkriningInstrumenSDQ,MnSkriningInstrumenSRQ,MnChecklistPemberianFibrinolitik,
+                                  MnMonitorPANSSEC,
                                   MnSkriningKankerKolorektal,MnPenilaianPsikologKlinis,MnPenilaianDerajatDehidrasi,MnHasilPemeriksaanECHO,MnPenilaianBayiBaruLahir,MnSkriningDiabetesMelitus,MnLaporanTindakan,MnPelaksanaanInformasiEdukasi,
                                   MnLayananKedokteranFisikRehabilitasi,MnSkriningKesehatanGigiMulutBalita,MnSkriningAnemia,MnSkriningHipertensi,MnSkriningKesehatanPenglihatan,MnCatatanObservasiHemodialisa,MnSkriningKesehatanGigiMulutDewasa,
                                   MnSkriningRisikoKankerServiks,MnCatatanCairanHemodialisa,MnSkriningKesehatanGigiMulutLansia,MnSkriningIndraPendengaran,MnCatatanPengkajianPaskaOperasi,MnSkriningFrailtySyndrome,MnCatatanObservasiBayi,
@@ -16938,6 +16962,7 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
         MnCatatanObservasiHemodialisa.setEnabled(akses.getcatatan_observasi_hemodialisa());
         MnCatatanCairanHemodialisa.setEnabled(akses.getcatatan_cairan_hemodialisa());
         MnChecklistPemberianFibrinolitik.setEnabled(akses.getchecklist_pemberian_fibrinolitik());
+        MnMonitorPANSSEC.setEnabled(akses.getpenilaian_awal_medis_ranap());
         MnPermintaanKonsultasiMedik.setEnabled(akses.getkonsultasi_medik());
         MnDataKonsultasiMedik.setEnabled(akses.getjawaban_konsultasi_medik());
         MnSkriningMerokokUsiaSekolahRemaja.setEnabled(akses.getskrining_perilaku_merokok_sekolah_remaja());
@@ -17957,6 +17982,18 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
         MnChecklistPemberianFibrinolitik.setPreferredSize(new java.awt.Dimension(210, 26));
         MnChecklistPemberianFibrinolitik.addActionListener(this::MnChecklistPemberianFibrinolitikActionPerformed);
         
+        MnMonitorPANSSEC = new javax.swing.JMenuItem();
+        MnMonitorPANSSEC.setBackground(new java.awt.Color(255, 255, 254));
+        MnMonitorPANSSEC.setFont(new java.awt.Font("Tahoma", 0, 11));
+        MnMonitorPANSSEC.setForeground(new java.awt.Color(50, 50, 50));
+        MnMonitorPANSSEC.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); 
+        MnMonitorPANSSEC.setText("Monitor PANSS EC");
+        MnMonitorPANSSEC.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        MnMonitorPANSSEC.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        MnMonitorPANSSEC.setName("MnMonitorPANSSEC");
+        MnMonitorPANSSEC.setPreferredSize(new java.awt.Dimension(210, 26));
+        MnMonitorPANSSEC.addActionListener(this::MnMonitorPANSSECActionPerformed);
+        
         MnPermintaanKonsultasiMedik = new javax.swing.JMenuItem();
         MnPermintaanKonsultasiMedik.setBackground(new java.awt.Color(255, 255, 254));
         MnPermintaanKonsultasiMedik.setFont(new java.awt.Font("Tahoma", 0, 11));
@@ -18958,6 +18995,7 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
         MnRMCatatanMonitoring.add(MnCatatanObservasiHemodialisa);
         MnRMCatatanMonitoring.add(MnCatatanCairanHemodialisa);
         MnRMCatatanMonitoring.add(MnChecklistPemberianFibrinolitik);
+        MnRMCatatanMonitoring.add(MnMonitorPANSSEC);
         MnRMCatatanMonitoring.add(MnLaporanTindakan);
         
         MnRMSkrining.add(MnSkriningMerokokUsiaSekolahRemaja);
