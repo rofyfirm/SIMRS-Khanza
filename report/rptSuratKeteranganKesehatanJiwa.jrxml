@@ -11,6 +11,7 @@
 	<parameter name="kontakrs" class="java.lang.String"/>
 	<parameter name="emailrs" class="java.lang.String"/>
 	<parameter name="logo" class="java.io.InputStream"/>
+	<parameter name="finger" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[select surat_keterangan_kesehatan_jiwa.no_surat,concat(DAY(surat_keterangan_kesehatan_jiwa.tanggalperiksa),' ',ELT(MONTH(surat_keterangan_kesehatan_jiwa.tanggalperiksa),'Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'),' ',YEAR(surat_keterangan_kesehatan_jiwa.tanggalperiksa)) as tglperiksa,
 concat(DAY(surat_keterangan_kesehatan_jiwa.tanggalsurat),' ',ELT(MONTH(surat_keterangan_kesehatan_jiwa.tanggalsurat),'Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'),' ',YEAR(surat_keterangan_kesehatan_jiwa.tanggalsurat)) as tglsurat,surat_keterangan_kesehatan_jiwa.kesimpulan,surat_keterangan_kesehatan_jiwa.keperluan,
@@ -358,6 +359,12 @@ $F{pnd}]]></textFieldExpression>
 				</textElement>
 				<text><![CDATA[Dokter Pemeriksa,]]></text>
 			</staticText>
+			<componentElement>
+				<reportElement positionType="Float" x="366" y="530" width="74" height="74" uuid="5e0d7c1a-3b8f-4c62-9a41-7f2d6b8e1c35"/>
+				<jr:QRCode xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" errorCorrectionLevel="H">
+					<jr:codeExpression><![CDATA[$P{finger}]]></jr:codeExpression>
+				</jr:QRCode>
+			</componentElement>
 			<textField isBlankWhenNull="true">
 				<reportElement positionType="Float" x="290" y="609" width="225" height="16" uuid="b26941c7-a7b1-4d0a-b44d-740d470ee7d5"/>
 				<textElement textAlignment="Center">

@@ -46,7 +46,7 @@ public final class SuratKeteranganKesehatanJiwa extends javax.swing.JDialog {
     private PreparedStatement ps;
     private ResultSet rs;
     private int i=0;
-    private String nosurat="";
+    private String nosurat="",finger="",kodedokter="";
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
     private volatile boolean ceksukses = false;
 
@@ -815,6 +815,9 @@ public final class SuratKeteranganKesehatanJiwa extends javax.swing.JDialog {
             param.put("kontakrs",akses.getkontakrs());
             param.put("emailrs",akses.getemailrs());
             param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+            kodedokter=Sequel.cariIsi("select surat_keterangan_kesehatan_jiwa.kd_dokter from surat_keterangan_kesehatan_jiwa where surat_keterangan_kesehatan_jiwa.no_surat=?",nosurat);
+            finger=Sequel.cariIsi("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id=sidikjari.id where pegawai.nik=?",kodedokter);
+            param.put("finger","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh "+Sequel.cariIsi("select dokter.nm_dokter from dokter where dokter.kd_dokter=?",kodedokter)+"\nID "+(finger.equals("")?kodedokter:finger)+"\n"+Sequel.cariIsi("select DATE_FORMAT(surat_keterangan_kesehatan_jiwa.tanggalsurat,'%d-%m-%Y') from surat_keterangan_kesehatan_jiwa where surat_keterangan_kesehatan_jiwa.no_surat=?",nosurat));
             Valid.MyReportqry("rptSuratKeteranganKesehatanJiwa.jasper","report","::[ Surat Keterangan Kesehatan Jiwa ]::",
                 "select surat_keterangan_kesehatan_jiwa.no_surat,"+tglIndo("surat_keterangan_kesehatan_jiwa.tanggalperiksa")+" as tglperiksa,"+
                 tglIndo("surat_keterangan_kesehatan_jiwa.tanggalsurat")+" as tglsurat,surat_keterangan_kesehatan_jiwa.kesimpulan,surat_keterangan_kesehatan_jiwa.keperluan,"+
