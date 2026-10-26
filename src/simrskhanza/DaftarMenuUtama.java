@@ -2935,7 +2935,7 @@ final class DaftarMenuUtama {
             .buka(() -> new RMDataCatatanObservasiInduksiPersalinan(u,false)).sebelum(f -> f.isCek());
         m.tambah("btnCatatanObservasiRestrainNonFramakologi", "Catatan Observasi Restrain Nonfarmakologi", "10447_chain_link_web_icon.png", akses::getcatatan_observasi_restrain_nonfarma)
             .buka(() -> new RMDataCatatanObservasiRestrainNonFarmakologi(u,false)).sebelum(f -> f.isCek());
-        m.tambah("btnMonitorPANSSECIGD", "Monitor PANSS EC IGD", "5859961_depression_disorder_health_mental_psychology_icon.png", akses::getpenilaian_awal_medis_ranap)
+        m.tambah("btnMonitorPANSSECIGD", "Monitor PANSS EC Ralan", "5859961_depression_disorder_health_mental_psychology_icon.png", akses::getpenilaian_awal_medis_ranap)
             .buka(() -> new RMMonitorPANSSECIGD(u,false)).sebelum(f -> f.isCek());
         m.tambah("btnMonitorPANSSECRanap", "Monitor PANSS EC Ranap", "mental-health_18376031-2.png", akses::getpenilaian_awal_medis_ranap)
             .buka(() -> new RMMonitorPANSSECRanap(u,false)).sebelum(f -> f.isCek());

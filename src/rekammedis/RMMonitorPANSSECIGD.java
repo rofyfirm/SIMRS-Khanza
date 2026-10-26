@@ -222,7 +222,7 @@ public final class RMMonitorPANSSECIGD extends javax.swing.JDialog {
             }
         });
 
-        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Monitor PANSS EC IGD ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
+        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Monitor PANSS EC Ralan ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
         internalFrame1.setFont(new java.awt.Font("Tahoma", 2, 12)); // NOI18N
         internalFrame1.setName("internalFrame1"); // NOI18N
         internalFrame1.setLayout(new java.awt.BorderLayout(1, 1));
@@ -921,7 +921,7 @@ public final class RMMonitorPANSSECIGD extends javax.swing.JDialog {
             param.put("namadokter",tbObat.getValueAt(tbObat.getSelectedRow(),16).toString());
             param.put("diagnosamasuk",Sequel.cariIsi("select kamar_inap.diagnosa_awal from kamar_inap where kamar_inap.diagnosa_awal<>'' and kamar_inap.no_rawat=? ",tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()));
             param.put("diagnosakeluar",Sequel.cariIsi("select kamar_inap.diagnosa_akhir from kamar_inap where kamar_inap.diagnosa_akhir<>'' and kamar_inap.no_rawat=? ",tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()));
-            Valid.MyReportqry("rptFormulirMonitorPANSSECIGD.jasper","report","::[ Monitor PANSS EC IGD ]::",
+            Valid.MyReportqry("rptFormulirMonitorPANSSECIGD.jasper","report","::[ Monitor PANSS EC Ralan ]::",
                     "select reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,reg_periksa.umurdaftar,reg_periksa.sttsumur,pasien.jk,pasien.tgl_lahir,"+
                     "monitor_panss_ec_igd.tgl_perawatan,monitor_panss_ec_igd.jam_rawat,"+kolomWaktuEvaluasi()+
                     "group_concat(distinct dokter.nm_dokter order by dokter.nm_dokter separator ', ') as pemeriksa from monitor_panss_ec_igd "+

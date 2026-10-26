@@ -1505,7 +1505,7 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
         FormMenu.add(chkCatatanObservasiRanapPostPartum);
 
         chkMonitorPANSSECIGD.setSelected(true);
-        chkMonitorPANSSECIGD.setText("Monitor PANSS EC IGD");
+        chkMonitorPANSSECIGD.setText("Monitor PANSS EC Ralan");
         chkMonitorPANSSECIGD.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         chkMonitorPANSSECIGD.setName("chkMonitorPANSSECIGD"); // NOI18N
         chkMonitorPANSSECIGD.setOpaque(false);
@@ -11176,7 +11176,7 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
     
     private void menampilkanMonitorPANSSECIGD(String norawat) {
         if(chkMonitorPANSSECIGD.isSelected()==true){
-            menampilkanMonitorPANSSEC(norawat,"monitor_panss_ec_igd","Monitor PANSS EC IGD");
+            menampilkanMonitorPANSSEC(norawat,"monitor_panss_ec_igd","Monitor PANSS EC Ralan");
         }
     }
     
