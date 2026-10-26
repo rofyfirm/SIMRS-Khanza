@@ -176,7 +176,7 @@ monitor_panss_ec_igd.tgl_perawatan,monitor_panss_ec_igd.jam_rawat]]>
 					<font fontName="Tahoma" size="11" isBold="false"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
-				<text><![CDATA[MONITOR PANSS EC IGD]]></text>
+				<text><![CDATA[MONITOR PANSS EC RAWAT JALAN]]></text>
 			</staticText>
 			<rectangle>
 				<reportElement mode="Transparent" x="0" y="24" width="555" height="90" uuid="0f17c056-2b19-4628-8375-e924984d4f73"/>

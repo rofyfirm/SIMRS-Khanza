@@ -13261,7 +13261,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
     private void initRawatJalan(){
         BtnMonitorPANSSECIGD = new widget.Button();
         BtnMonitorPANSSECIGD.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png")));
-        BtnMonitorPANSSECIGD.setText("Monitor PANSS EC IGD");
+        BtnMonitorPANSSECIGD.setText("Monitor PANSS EC Ralan");
         BtnMonitorPANSSECIGD.setFocusPainted(false);
         BtnMonitorPANSSECIGD.setFont(new java.awt.Font("Tahoma", 0, 11));
         BtnMonitorPANSSECIGD.setGlassColor(new java.awt.Color(255, 255, 255));
