@@ -1730,7 +1730,7 @@
                             <Component class="widget.CekBox" name="chkMonitorPANSSECIGD">
                               <Properties>
                                 <Property name="selected" type="boolean" value="true"/>
-                                <Property name="text" type="java.lang.String" value="Monitor PANSS EC IGD"/>
+                                <Property name="text" type="java.lang.String" value="Monitor PANSS EC Ralan"/>
                                 <Property name="horizontalAlignment" type="int" value="2"/>
                                 <Property name="name" type="java.lang.String" value="chkMonitorPANSSECIGD" noResource="true"/>
                                 <Property name="opaque" type="boolean" value="false"/>
