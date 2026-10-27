@@ -203,6 +203,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
     private PreparedStatement ps,ps2,ps3,ps4,ps5,ps6;
     private ResultSet rs;
     private int i=0,tinggi=0;
+    private widget.FilterMenu TCariMenu;
     private boolean sukses=false;  
     private double ttljmdokter=0,ttljmperawat=0,ttlkso=0,ttlpendapatan=0,ttljasasarana=0,ttlbhp=0,ttlmenejemen=0;
     private String kode_poli="",kamar="",jenisbayar="",TANGGALMUNDUR="yes";
@@ -746,6 +747,8 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         isForm2();
         ChkInput2.setSelected(false);
         isForm3(); 
+        TCariMenu=new widget.FilterMenu(FormMenu);
+        PanelAccor.add(TCariMenu,java.awt.BorderLayout.NORTH);
         ChkAccor.setSelected(true);
         isMenu();
         jam();
@@ -9817,6 +9820,7 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
     }
     
     public void isCek(){
+        TCariMenu.setText("");
         tinggi=0;
         BtnSimpan.setEnabled(akses.gettindakan_ranap());
         BtnHapus.setEnabled(akses.gettindakan_ranap());
@@ -10749,11 +10753,13 @@ private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             ChkAccor.setVisible(false);
             PanelAccor.setPreferredSize(new Dimension(205,HEIGHT));
             FormMenu.setVisible(true); 
+            TCariMenu.setVisible(true);
             ChkAccor.setVisible(true);
         }else if(ChkAccor.isSelected()==false){  
             ChkAccor.setVisible(false);
             PanelAccor.setPreferredSize(new Dimension(15,HEIGHT));
             FormMenu.setVisible(false);    
+            TCariMenu.setVisible(false);
             ChkAccor.setVisible(true);
         }
     }
