@@ -2943,7 +2943,7 @@ final class DaftarMenuUtama {
             .buka(() -> new RMPANSSRatingRanap(u,false)).sebelum(f -> f.isCek());
         m.tambah("btnPANSSRemisiRanap", "PANSS Remisi Ranap", "5972305_healthy_immune_recovered_revive_strong_icon.png", akses::getpenilaian_awal_medis_ranap)
             .buka(() -> new RMPANSSRemisiRanap(u,false)).sebelum(f -> f.isCek());
-        m.tambah("btnCSSRS", "Columbia Suicide Severity Rating Scale (C-SSRS)", "3380376_analytical_brain_creative_intelligence_mindset_icon.png", akses::getpenilaian_tambahan_bunuh_diri)
+        m.tambah("btnCSSRS", "Skrining Risiko Bunuh Diri (C-SSRS)", "3380376_analytical_brain_creative_intelligence_mindset_icon.png", akses::getpenilaian_tambahan_bunuh_diri)
             .buka(() -> new RMCSSRS(u,false)).sebelum(f -> f.isCek());
         m.tambah("btnCatatanObservasiVentilator", "Catatan Observasi Ventilator", "6088631_bed_hospital_icu_medical_treatment_icon.png", akses::getcatatan_observasi_ventilator)
             .buka(() -> new RMDataCatatanObservasiVentilator(u,false)).sebelum(f -> f.isCek());
