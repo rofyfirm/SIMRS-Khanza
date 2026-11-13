@@ -178,6 +178,34 @@
                     </Property>
                   </Properties>
                 </Component>
+                <Component class="widget.Label" name="jLabel19">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Pasien :"/>
+                    <Property name="name" type="java.lang.String" value="jLabel19" noResource="true"/>
+                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[50, 23]"/>
+                    </Property>
+                  </Properties>
+                </Component>
+                <Component class="widget.ComboBox" name="cmbStatusRawat">
+                  <Properties>
+                    <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                      <StringArray count="3">
+                        <StringItem index="0" value="Masih Dirawat"/>
+                        <StringItem index="1" value="Sudah Pulang"/>
+                        <StringItem index="2" value="Semua"/>
+                      </StringArray>
+                    </Property>
+                    <Property name="toolTipText" type="java.lang.String" value="Resep pasien yang masih dirawat, sudah pulang, atau semua"/>
+                    <Property name="name" type="java.lang.String" value="cmbStatusRawat" noResource="true"/>
+                    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                      <Dimension value="[125, 23]"/>
+                    </Property>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="cmbStatusRawatItemStateChanged"/>
+                  </Events>
+                </Component>
                 <Component class="widget.Label" name="label9">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Key Word :"/>
@@ -987,6 +1015,89 @@
                       </Properties>
                       <Events>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnSeek6ActionPerformed"/>
+                      </Events>
+                    </Component>
+                    <Component class="widget.Label" name="jLabel18">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Tampil :"/>
+                        <Property name="name" type="java.lang.String" value="jLabel18" noResource="true"/>
+                        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                          <Dimension value="[50, 23]"/>
+                        </Property>
+                      </Properties>
+                    </Component>
+                    <Component class="widget.ComboBox" name="cmbBarisRanap">
+                      <Properties>
+                        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                          <StringArray count="4">
+                            <StringItem index="0" value="100"/>
+                            <StringItem index="1" value="200"/>
+                            <StringItem index="2" value="500"/>
+                            <StringItem index="3" value="1000"/>
+                          </StringArray>
+                        </Property>
+                        <Property name="toolTipText" type="java.lang.String" value="Jumlah resep per halaman"/>
+                        <Property name="name" type="java.lang.String" value="cmbBarisRanap" noResource="true"/>
+                        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                          <Dimension value="[70, 23]"/>
+                        </Property>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="cmbBarisRanapItemStateChanged"/>
+                      </Events>
+                    </Component>
+                    <Component class="widget.Button" name="BtnHalSebelum">
+                      <Properties>
+                        <Property name="icon" type="javax.swing.Icon" noResource="true" editor="org.netbeans.modules.form.editors2.IconEditor">
+                          <Image iconType="3" name="/picture/2leftarrow.png"/>
+                        </Property>
+                        <Property name="toolTipText" type="java.lang.String" value="Halaman Sebelumnya"/>
+                        <Property name="name" type="java.lang.String" value="BtnHalSebelum" noResource="true"/>
+                        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                          <Dimension value="[28, 23]"/>
+                        </Property>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnHalSebelumActionPerformed"/>
+                      </Events>
+                    </Component>
+                    <Component class="widget.TextBox" name="TxtHalaman">
+                      <Properties>
+                        <Property name="horizontalAlignment" type="int" value="0"/>
+                        <Property name="text" type="java.lang.String" value="1"/>
+                        <Property name="toolTipText" type="java.lang.String" value="Ketik nomor halaman lalu tekan Enter"/>
+                        <Property name="name" type="java.lang.String" value="TxtHalaman" noResource="true"/>
+                        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                          <Dimension value="[40, 23]"/>
+                        </Property>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="TxtHalamanKeyPressed"/>
+                      </Events>
+                    </Component>
+                    <Component class="widget.Label" name="LHalaman">
+                      <Properties>
+                        <Property name="horizontalAlignment" type="int" value="2"/>
+                        <Property name="text" type="java.lang.String" value="/ 1"/>
+                        <Property name="name" type="java.lang.String" value="LHalaman" noResource="true"/>
+                        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                          <Dimension value="[55, 23]"/>
+                        </Property>
+                      </Properties>
+                    </Component>
+                    <Component class="widget.Button" name="BtnHalBerikut">
+                      <Properties>
+                        <Property name="icon" type="javax.swing.Icon" noResource="true" editor="org.netbeans.modules.form.editors2.IconEditor">
+                          <Image iconType="3" name="/picture/2rightarrow.png"/>
+                        </Property>
+                        <Property name="toolTipText" type="java.lang.String" value="Halaman Berikutnya"/>
+                        <Property name="name" type="java.lang.String" value="BtnHalBerikut" noResource="true"/>
+                        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                          <Dimension value="[28, 23]"/>
+                        </Property>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnHalBerikutActionPerformed"/>
                       </Events>
                     </Component>
                   </SubComponents>
