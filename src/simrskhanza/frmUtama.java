@@ -38,7 +38,11 @@ import inventory.DlgPenjualan;
 import inventory.DlgReturJual;
 import java.awt.Cursor;
 import java.awt.Dimension;
+import java.awt.Frame;
 import java.awt.GridLayout;
+import java.awt.KeyboardFocusManager;
+import java.awt.Point;
+import java.awt.Window;
 import java.awt.event.KeyEvent;
 import java.io.FileInputStream;
 import java.sql.Blob;
@@ -47,7 +51,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.Properties;
 import javax.swing.ImageIcon;
+import javax.swing.JDialog;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 import informasi.InformasiTelusurKunjunganPasien;
 import inventory.DlgDaftarPermintaanResep;
 import inventory.DlgPengeluaranApotek;
@@ -3155,7 +3161,55 @@ private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt
             }
         }
     }
-    
+
+    private void sembunyikanDialog() {
+        FlayMenu.setVisible(false);
+        if (!dialogTersembunyi.isEmpty()) {
+            return;
+        }
+
+        dialogAktifSebelumnya = KeyboardFocusManager.getCurrentKeyboardFocusManager().getActiveWindow();
+        for (Window win : Window.getWindows()) {
+            if (!(win instanceof JDialog) || !win.isVisible()) {
+                continue;
+            }
+
+            JDialog dlg = (JDialog) win;
+            if (dlg.isModal()) {
+                posisiDialogModal.put(dlg, dlg.getLocation());
+                dlg.setLocation(-20000, -20000);
+            } else {
+                dlg.setVisible(false);
+            }
+            dialogTersembunyi.add(dlg);
+        }
+    }
+
+    private void tampilkanDialog() {
+        for (Window win : dialogTersembunyi) {
+            if (!win.isDisplayable()) {
+                continue;
+            }
+
+            Point asli = posisiDialogModal.get(win);
+            if (asli != null) {
+                win.setLocation(asli);
+            } else {
+                win.setVisible(true);
+            }
+        }
+
+        if (dialogAktifSebelumnya != null && dialogTersembunyi.contains(dialogAktifSebelumnya)
+                && dialogAktifSebelumnya.isDisplayable()) {
+            dialogAktifSebelumnya.toFront();
+            dialogAktifSebelumnya.requestFocus();
+        }
+
+        dialogTersembunyi.clear();
+        posisiDialogModal.clear();
+        dialogAktifSebelumnya = null;
+    }
+
     private void setToolbar(){
         if(internalFrame1.getWidth()<(BtnMenu.getWidth()+BtnToolReg.getWidth()+btnToolIGD.getWidth()+
                 btnToolLab.getWidth()+btnToolRad.getWidth()+BtnToolJualObat.getWidth()+BtnToolKamnap.getWidth()+

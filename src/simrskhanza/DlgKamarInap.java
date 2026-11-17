@@ -509,7 +509,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         MnPenilaianLain = new widget.Menu();
         MnPenilaianTambahanGeriatri = new widget.MenuItem();
         MnPenilaianTambahanBunuhDiri = new widget.MenuItem();
-        MnCSSRS = new javax.swing.JMenuItem();
+        MnCSSRS = new widget.MenuItem();
         MnPenilaianTambahanPerilakuKekerasan = new widget.MenuItem();
         MnPenilaianTambahanMalarikanDiri = new widget.MenuItem();
         MnPenilaianPasienTerminal = new widget.MenuItem();
@@ -686,7 +686,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
         MnUrutKamarAsc = new widget.MenuItem();
         MnUrutTanggalMasukAsc = new widget.MenuItem();
         MnUrutTanggalMasukDesc = new widget.MenuItem();
-        MnEdukasiPasienKeluarga = new javax.swing.JMenuItem();
+        MnEdukasiPasienKeluarga = new widget.MenuItem();
         buttonGroup1 = new javax.swing.ButtonGroup();
         JamMasuk = new widget.TextBox();
         WindowPindahKamar = new javax.swing.JDialog();
@@ -20467,7 +20467,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
                                   MnCheckListKriteriaMasukPICU,MnCheckListKriteriaKeluarPICU,MnHasilPemeriksaanTreadmill,MnHasilPemeriksaanECHOPediatrik,MnPenilaianAwalMedisJantung,MnSkriningGiziKehamilan,MnSerahTerimaBarangAnggotaTubuh,MnPermintaanKonsultasiPerawat,
                                   MnPersetujuanBimbinganRohani,MnPermintaanPerlindunganDariKekerasan,MnSuratPermohonanPrivasi,MnSuratPermintaanSecondOpinion,MnSuratPenolakanResusitasi,MnCatatanObservasiRuangOperasi,MnHasilPemeriksaanUSGAbdomen,MnIntervensiNyeriFarmakologi,
                                   MnIntervensiNyeriNonFarmakologi,MnPengajuanCutiPerawatanPasien,MnCheckListKriteriaMasukIsolasi,MnCheckListKriteriaKeluarIsolasi,MnAdmisiSkoringTOLAC,MnMonitoringTOLAC,MnHasilPersalinanTOLAC,MnLaporanReaksiTranfusi,MnPenilaianBISHOPScore,
-                                  MnMonitorPANSSEC,MnPANSSRating,MnPANSSRemisi;
+                                  MnMonitorPANSSEC,MnPANSSRating,MnPANSSRemisi,MnEdukasiPasienKeluarga;
     private widget.Menu MnHasilUSG,MnHasilEndoskopi,MnCatatanObservasi,MnEdukasi,MnSuratPersetujuan,MnHasilPemeriksaanAlat;
 
     private void tampil() {

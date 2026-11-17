@@ -641,7 +641,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         MnCetakSuratBebasTBC = new widget.MenuItem();
         MnCetakSuratSehat = new widget.MenuItem();
         MnCetakSuratSehat1 = new widget.MenuItem();
-        MnCetakSuratSehat2 = new javax.swing.JMenuItem();
+        MnCetakSuratSehat2 = new widget.MenuItem();
         MnCetakSuratKesehatanJiwa = new widget.MenuItem();
         MnCetakBebasNarkoba = new widget.MenuItem();
         MnCetakSuratSakit = new widget.MenuItem();
@@ -1726,7 +1726,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         });
 
         // CUSTOM REHAB MEDIK: Inisialisasi menu item Form Re-Assessment Rehabilitasi Medik
-        MnFormReAssessment = new javax.swing.JMenuItem();
+        MnFormReAssessment = new widget.MenuItem();
         MnFormReAssessment.setBackground(new java.awt.Color(255, 255, 254));
         MnFormReAssessment.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         MnFormReAssessment.setForeground(new java.awt.Color(50, 50, 50));
@@ -1743,7 +1743,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         });
 
         // CUSTOM REHAB MEDIK: Inisialisasi menu item Form Lembar Program Terapi Rehabilitasi Medik
-        MnFormLembarTerapi = new javax.swing.JMenuItem();
+        MnFormLembarTerapi = new widget.MenuItem();
         MnFormLembarTerapi.setBackground(new java.awt.Color(255, 255, 254));
         MnFormLembarTerapi.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         MnFormLembarTerapi.setForeground(new java.awt.Color(50, 50, 50));
@@ -18213,7 +18213,7 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
         MnChecklistPemberianFibrinolitik.setPreferredSize(new java.awt.Dimension(210, 26));
         MnChecklistPemberianFibrinolitik.addActionListener(this::MnChecklistPemberianFibrinolitikActionPerformed);
         
-        MnMonitorPANSSEC = new javax.swing.JMenuItem();
+        MnMonitorPANSSEC = new widget.MenuItem();
         MnMonitorPANSSEC.setBackground(new java.awt.Color(255, 255, 254));
         MnMonitorPANSSEC.setFont(new java.awt.Font("Tahoma", 0, 11));
         MnMonitorPANSSEC.setForeground(new java.awt.Color(50, 50, 50));
@@ -18717,7 +18717,7 @@ private void MnDataPemberianObatActionPerformed(java.awt.event.ActionEvent evt) 
         MnSkriningFrailtySyndrome.setPreferredSize(new java.awt.Dimension(150, 26));
         MnSkriningFrailtySyndrome.addActionListener(this::MnSkriningFrailtySyndromeActionPerformed);
         
-        MnSkriningMPP = new javax.swing.JMenuItem();
+        MnSkriningMPP = new widget.MenuItem();
         MnSkriningMPP.setBackground(new java.awt.Color(255, 255, 254));
         MnSkriningMPP.setFont(new java.awt.Font("Tahoma", 0, 11));
         MnSkriningMPP.setForeground(new java.awt.Color(50, 50, 50));

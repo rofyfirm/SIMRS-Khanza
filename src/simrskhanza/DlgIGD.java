@@ -584,7 +584,7 @@ public final class DlgIGD extends javax.swing.JDialog {
         MnPenilaianLain = new widget.Menu();
         MnPenilaianTambahanGeriatri = new widget.MenuItem();
         MnPenilaianTambahanBunuhDiri = new widget.MenuItem();
-        MnCSSRS = new javax.swing.JMenuItem();
+        MnCSSRS = new widget.MenuItem();
         MnPenilaianTambahanPerilakuKekerasan = new widget.MenuItem();
         MnPenilaianTambahanMelarikanDiri = new widget.MenuItem();
         MnPenilaianPasienTerminal = new widget.MenuItem();

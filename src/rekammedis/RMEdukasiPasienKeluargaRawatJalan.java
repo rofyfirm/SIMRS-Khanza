@@ -53,7 +53,7 @@ public class RMEdukasiPasienKeluargaRawatJalan extends javax.swing.JDialog {
     protected validasi Valid=new validasi();
     protected PreparedStatement ps;
     protected ResultSet rs;
-    protected int i=0;
+    protected int i=0;    
     protected DlgCariPetugas petugas=new DlgCariPetugas(null,false);
     protected String finger="";
     protected StringBuilder htmlContent;
@@ -217,7 +217,7 @@ public class RMEdukasiPasienKeluargaRawatJalan extends javax.swing.JDialog {
                 }
             });
         }
-
+        
         petugas.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -225,10 +225,10 @@ public class RMEdukasiPasienKeluargaRawatJalan extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(petugas.getTable().getSelectedRow()!= -1){
+                if(petugas.getTable().getSelectedRow()!= -1){                   
                     NIP.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),0).toString());
                     NamaPetugas.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),1).toString());
-                }
+                }  
                 NIP.requestFocus();
             }
             @Override
@@ -239,8 +239,8 @@ public class RMEdukasiPasienKeluargaRawatJalan extends javax.swing.JDialog {
             public void windowActivated(WindowEvent e) {}
             @Override
             public void windowDeactivated(WindowEvent e) {}
-        });
-
+        }); 
+        
         ChkInput.setSelected(false);
         isForm();
         jam();
@@ -1358,7 +1358,7 @@ public class RMEdukasiPasienKeluargaRawatJalan extends javax.swing.JDialog {
 }//GEN-LAST:event_BtnSimpanKeyPressed
 
     //eko
-
+    
     private void BtnBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBatalActionPerformed
         emptTeks();
         ChkInput.setSelected(true);
@@ -1982,116 +1982,115 @@ public class RMEdukasiPasienKeluargaRawatJalan extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private widget.ComboBox AspekKeyakinan;
-    private widget.TextBox Bahasa;
-    private widget.ComboBox BahasaIsyarat;
-    private widget.ComboBox Bicara;
-    private widget.Button BtnAll;
-    private widget.Button BtnBatal;
-    private widget.Button BtnCari;
-    private widget.Button BtnEdit;
-    private widget.Button BtnHapus;
-    private widget.Button BtnKeluar;
-    private widget.Button BtnPrint;
-    private widget.Button BtnSimpan;
-    private widget.ComboBox CaraBelajar;
-    private widget.CekBox ChkInput;
-    private widget.CekBox ChkKejadian;
-    private widget.Tanggal DTPCari1;
-    private widget.Tanggal DTPCari2;
-    private widget.ComboBox Detik;
-    private widget.PanelBiasa FormInput;
-    private widget.ComboBox HambatanBelajar;
-    private widget.ComboBox HasilLayanan;
-    private widget.TextBox JK;
-    private widget.ComboBox Jam;
-    private widget.TextBox KdPetugas;
-    private widget.ComboBox KemampuanBelajar;
-    private widget.ComboBox KeputusanMemilihLayanan;
-    private widget.ComboBox KesediaanInformasi;
-    private widget.TextBox KeteranganAspekKeyakinan;
-    private widget.TextBox KeteranganBahasa;
-    private widget.TextBox KeteranganBicara;
-    private widget.TextBox KeteranganHambatanBelajar;
-    private widget.TextBox KeteranganKemampuanBelajar;
-    private widget.TextBox KeteranganKeputusanMemilihLayanan;
-    private widget.TextBox KeteranganKeyakinanTerhadapHasil;
-    private widget.TextBox KeteranganPenerjemah;
-    private widget.TextBox KeteranganPenyakitnyaMerupakan;
-    private widget.ComboBox KeyakinanTerhadapHasil;
-    private widget.Label LCount;
-    private widget.editorpane LoadHTML;
-    private widget.ComboBox Menit;
-    private widget.MenuItem MnEdukasiPasienKeluarga;
+    protected widget.ComboBox AspekKeyakinan;
+    protected widget.TextBox Bahasa;
+    protected widget.ComboBox BahasaIsyarat;
+    protected widget.ComboBox Bicara;
+    protected widget.Button BtnAll;
+    protected widget.Button BtnBatal;
+    protected widget.Button BtnCari;
+    protected widget.Button BtnEdit;
+    protected widget.Button BtnHapus;
+    protected widget.Button BtnKeluar;
+    protected widget.Button BtnPrint;
+    protected widget.Button BtnSimpan;
+    protected widget.ComboBox CaraBelajar;
+    protected widget.CekBox ChkInput;
+    protected widget.CekBox ChkKejadian;
+    protected widget.Tanggal DTPCari1;
+    protected widget.Tanggal DTPCari2;
+    protected widget.ComboBox Detik;
+    protected widget.PanelBiasa FormInput;
+    protected widget.ComboBox HambatanBelajar;
+    protected widget.ComboBox HasilLayanan;
+    protected widget.TextBox JK;
+    protected widget.ComboBox Jam;
+    protected widget.ComboBox KemampuanBelajar;
+    protected widget.ComboBox KeputusanMemilihLayanan;
+    protected widget.ComboBox KesediaanInformasi;
+    protected widget.TextBox KeteranganAspekKeyakinan;
+    protected widget.TextBox KeteranganBahasa;
+    protected widget.TextBox KeteranganBicara;
+    protected widget.TextBox KeteranganHambatanBelajar;
+    protected widget.TextBox KeteranganKemampuanBelajar;
+    protected widget.TextBox KeteranganKeputusanMemilihLayanan;
+    protected widget.TextBox KeteranganKeyakinanTerhadapHasil;
+    protected widget.TextBox KeteranganPenerjemah;
+    protected widget.TextBox KeteranganPenyakitnyaMerupakan;
+    protected widget.ComboBox KeyakinanTerhadapHasil;
+    protected widget.Label LCount;
+    protected widget.editorpane LoadHTML;
+    protected widget.ComboBox Menit;
+    protected widget.MenuItem MnEdukasiPasienKeluarga;
     protected widget.TextBox NIP;
     protected widget.TextBox NamaPetugas;
-    private javax.swing.JPanel PanelInput;
-    private widget.TextBox Pendidikan;
-    private widget.ComboBox Penerjemah;
-    private widget.ComboBox PengobatanProsedur;
-    private widget.ComboBox PenyakitYangDiderita;
-    private widget.ComboBox PenyakitnyaMerupakan;
-    private widget.ComboBox RencanaTindakan;
+    protected javax.swing.JPanel PanelInput;
+    protected widget.TextBox Pendidikan;
+    protected widget.ComboBox Penerjemah;
+    protected widget.ComboBox PengobatanProsedur;
+    protected widget.ComboBox PenyakitYangDiderita;
+    protected widget.ComboBox PenyakitnyaMerupakan;
+    protected widget.ComboBox RencanaTindakan;
     protected widget.ComboBox RencanaTindakankep;
-    private widget.ScrollPane Scroll;
-    private widget.TextBox TCari;
-    private widget.TextBox TNoRM;
-    private widget.TextBox TNoRw;
-    private widget.TextBox TPasien;
-    private widget.Tanggal Tanggal;
-    private widget.TextBox TanggalRegistrasi;
-    private widget.TextBox TglLahir;
-    private widget.Button btnPetugas;
-    private widget.InternalFrame internalFrame1;
-    private widget.Label jLabel100;
-    private widget.Label jLabel16;
-    private widget.Label jLabel18;
-    private widget.Label jLabel19;
-    private widget.Label jLabel21;
-    private widget.Label jLabel4;
-    private widget.Label jLabel45;
-    private widget.Label jLabel46;
-    private widget.Label jLabel47;
-    private widget.Label jLabel48;
-    private widget.Label jLabel49;
-    private widget.Label jLabel50;
-    private widget.Label jLabel51;
-    private widget.Label jLabel52;
-    private widget.Label jLabel53;
-    private widget.Label jLabel54;
-    private widget.Label jLabel55;
-    private widget.Label jLabel56;
-    private widget.Label jLabel57;
-    private widget.Label jLabel58;
-    private widget.Label jLabel59;
-    private widget.Label jLabel6;
-    private widget.Label jLabel60;
-    private widget.Label jLabel61;
-    private widget.Label jLabel62;
-    private widget.Label jLabel63;
-    private widget.Label jLabel64;
-    private widget.Label jLabel65;
-    private widget.Label jLabel66;
-    private widget.Label jLabel67;
-    private widget.Label jLabel68;
-    private widget.Label jLabel69;
-    private widget.Label jLabel7;
-    private widget.Label jLabel70;
-    private widget.Label jLabel71;
-    private widget.Label jLabel72;
-    private widget.Label jLabel73;
-    private widget.Label jLabel74kep;;
-    private widget.Label jLabel8;
-    private widget.Label jLabel9;
-    private widget.Label jLabel99;
-    private javax.swing.JPanel jPanel3;
-    private widget.PopupMenu jPopupMenu1;
-    private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JSeparator jSeparator3;
-    private widget.panelisi panelGlass8;
-    private widget.panelisi panelGlass9;
-    private widget.ScrollPane scrollInput;
-    private widget.Table tbObat;
+    protected widget.ScrollPane Scroll;
+    protected widget.TextBox TCari;
+    protected widget.TextBox TNoRM;
+    protected widget.TextBox TNoRw;
+    protected widget.TextBox TPasien;
+    protected widget.Tanggal Tanggal;
+    protected widget.TextBox TanggalRegistrasi;
+    protected widget.TextBox TglLahir;
+    protected widget.Button btnPetugas;
+    protected widget.InternalFrame internalFrame1;
+    protected widget.Label jLabel100;
+    protected widget.Label jLabel16;
+    protected widget.Label jLabel18;
+    protected widget.Label jLabel19;
+    protected widget.Label jLabel21;
+    protected widget.Label jLabel4;
+    protected widget.Label jLabel45;
+    protected widget.Label jLabel46;
+    protected widget.Label jLabel47;
+    protected widget.Label jLabel48;
+    protected widget.Label jLabel49;
+    protected widget.Label jLabel50;
+    protected widget.Label jLabel51;
+    protected widget.Label jLabel52;
+    protected widget.Label jLabel53;
+    protected widget.Label jLabel54;
+    protected widget.Label jLabel55;
+    protected widget.Label jLabel56;
+    protected widget.Label jLabel57;
+    protected widget.Label jLabel58;
+    protected widget.Label jLabel59;
+    protected widget.Label jLabel6;
+    protected widget.Label jLabel60;
+    protected widget.Label jLabel61;
+    protected widget.Label jLabel62;
+    protected widget.Label jLabel63;
+    protected widget.Label jLabel64;
+    protected widget.Label jLabel65;
+    protected widget.Label jLabel66;
+    protected widget.Label jLabel67;
+    protected widget.Label jLabel68;
+    protected widget.Label jLabel69;
+    protected widget.Label jLabel7;
+    protected widget.Label jLabel70;
+    protected widget.Label jLabel71;
+    protected widget.Label jLabel72;
+    protected widget.Label jLabel73;
+    protected widget.Label jLabel74kep;
+    protected widget.Label jLabel8;
+    protected widget.Label jLabel9;
+    protected widget.Label jLabel99;
+    protected javax.swing.JPanel jPanel3;
+    protected widget.PopupMenu jPopupMenu1;
+    protected javax.swing.JSeparator jSeparator2;
+    protected javax.swing.JSeparator jSeparator3;
+    protected widget.panelisi panelGlass8;
+    protected widget.panelisi panelGlass9;
+    protected widget.ScrollPane scrollInput;
+    protected widget.Table tbObat;
     // End of variables declaration//GEN-END:variables
     
     public void tampil() {
@@ -2246,7 +2245,7 @@ public class RMEdukasiPasienKeluargaRawatJalan extends javax.swing.JDialog {
             RencanaTindakankep.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),32).toString());
             NIP.setText(tbObat.getValueAt(tbObat.getSelectedRow(),33).toString());
             NamaPetugas.setText(tbObat.getValueAt(tbObat.getSelectedRow(),34).toString());
-
+      
             Jam.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),5).toString().substring(11,13));
             Menit.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),5).toString().substring(14,16));
             Detik.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),5).toString().substring(17,19));
@@ -2324,7 +2323,7 @@ public class RMEdukasiPasienKeluargaRawatJalan extends javax.swing.JDialog {
         BtnSimpan.setEnabled(getHakAksesEdukasi());
         BtnHapus.setEnabled(getHakAksesEdukasi());
         BtnEdit.setEnabled(getHakAksesEdukasi());
-        BtnPrint.setEnabled(getHakAksesEdukasi());
+        BtnPrint.setEnabled(getHakAksesEdukasi()); 
         if(akses.getjml2()>=1){
             NIP.setEditable(false);
             btnPetugas.setEnabled(false);
@@ -2492,5 +2491,5 @@ public class RMEdukasiPasienKeluargaRawatJalan extends javax.swing.JDialog {
             emptTeks();
         } 
     }
-
+    
 }
