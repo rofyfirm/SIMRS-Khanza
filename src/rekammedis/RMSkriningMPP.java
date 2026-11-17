@@ -153,10 +153,10 @@ public class RMSkriningMPP extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPopupMenu1 = new javax.swing.JPopupMenu();
-        MnCetakLembarSkrining = new javax.swing.JMenuItem();
-        MnEvaluasiFormA = new javax.swing.JMenuItem();
-        MnEvaluasiFormB = new javax.swing.JMenuItem();
+        jPopupMenu1 = new widget.PopupMenu();
+        MnCetakLembarSkrining = new widget.MenuItem();
+        MnEvaluasiFormA = new widget.MenuItem();
+        MnEvaluasiFormB = new widget.MenuItem();
         buttonGroup1 = new javax.swing.ButtonGroup();
         buttonGroup2 = new javax.swing.ButtonGroup();
         buttonGroup3 = new javax.swing.ButtonGroup();
@@ -351,7 +351,7 @@ public class RMSkriningMPP extends javax.swing.JDialog {
         Scroll.setOpaque(true);
         Scroll.setPreferredSize(new java.awt.Dimension(452, 200));
 
-        tbObat.setAutoCreateRowSorter(true);
+        tbObat.setAutoCreateRowSorter(false);
         tbObat.setToolTipText("Silahkan klik untuk memilih data yang mau diedit ataupun dihapus");
         tbObat.setComponentPopupMenu(jPopupMenu1);
         tbObat.setName("tbObat"); // NOI18N
@@ -1660,9 +1660,9 @@ public class RMSkriningMPP extends javax.swing.JDialog {
     private widget.TextBox JK;
     private widget.TextBox KdPetugas;
     private widget.Label LCount;
-    private javax.swing.JMenuItem MnCetakLembarSkrining;
-    private javax.swing.JMenuItem MnEvaluasiFormA;
-    private javax.swing.JMenuItem MnEvaluasiFormB;
+    private widget.MenuItem MnCetakLembarSkrining;
+    private widget.MenuItem MnEvaluasiFormA;
+    private widget.MenuItem MnEvaluasiFormB;
     private widget.TextBox NmPetugas;
     private javax.swing.JPanel PanelInput;
     private widget.RadioButton Param10Tidak;
@@ -1768,7 +1768,7 @@ public class RMSkriningMPP extends javax.swing.JDialog {
     private widget.Label jLabel77;
     private widget.Label jLabel8;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPopupMenu jPopupMenu1;
+    private widget.PopupMenu jPopupMenu1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private widget.Label label11;

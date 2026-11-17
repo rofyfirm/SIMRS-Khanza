@@ -280,8 +280,8 @@ public class RMEdukasiPasienKeluargaRawatJalan extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPopupMenu1 = new javax.swing.JPopupMenu();
-        MnEdukasiPasienKeluarga = new javax.swing.JMenuItem();
+        jPopupMenu1 = new widget.PopupMenu();
+        MnEdukasiPasienKeluarga = new widget.MenuItem();
         LoadHTML = new widget.editorpane();
         JK = new widget.TextBox();
         TanggalRegistrasi = new widget.TextBox();
@@ -2021,7 +2021,7 @@ public class RMEdukasiPasienKeluargaRawatJalan extends javax.swing.JDialog {
     protected widget.Label LCount;
     protected widget.editorpane LoadHTML;
     protected widget.ComboBox Menit;
-    protected javax.swing.JMenuItem MnEdukasiPasienKeluarga;
+    protected widget.MenuItem MnEdukasiPasienKeluarga;
     protected widget.TextBox NIP;
     protected widget.TextBox NamaPetugas;
     protected javax.swing.JPanel PanelInput;
@@ -2084,7 +2084,7 @@ public class RMEdukasiPasienKeluargaRawatJalan extends javax.swing.JDialog {
     protected widget.Label jLabel9;
     protected widget.Label jLabel99;
     protected javax.swing.JPanel jPanel3;
-    protected javax.swing.JPopupMenu jPopupMenu1;
+    protected widget.PopupMenu jPopupMenu1;
     protected javax.swing.JSeparator jSeparator2;
     protected javax.swing.JSeparator jSeparator3;
     protected widget.panelisi panelGlass8;

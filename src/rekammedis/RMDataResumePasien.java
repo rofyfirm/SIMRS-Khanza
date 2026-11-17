@@ -193,12 +193,12 @@ public final class RMDataResumePasien extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPopupMenu1 = new javax.swing.JPopupMenu();
-        MnLaporanResume = new javax.swing.JMenuItem();
-        MnInputDiagnosa = new javax.swing.JMenuItem();
-        ppBerkasDigital = new javax.swing.JMenuItem();
-        MnSPBK = new javax.swing.JMenuItem();
-        MnSPBK2 = new javax.swing.JMenuItem();
+        jPopupMenu1 = new widget.PopupMenu();
+        MnLaporanResume = new widget.MenuItem();
+        MnInputDiagnosa = new widget.MenuItem();
+        ppBerkasDigital = new widget.MenuItem();
+        MnSPBK = new widget.MenuItem();
+        MnSPBK2 = new widget.MenuItem();
         Tanggal = new widget.TextBox();
         internalFrame1 = new widget.InternalFrame();
         Scroll = new widget.ScrollPane();
@@ -386,7 +386,7 @@ public final class RMDataResumePasien extends javax.swing.JDialog {
         Scroll.setOpaque(true);
         Scroll.setPreferredSize(new java.awt.Dimension(452, 200));
 
-        tbObat.setAutoCreateRowSorter(true);
+        tbObat.setAutoCreateRowSorter(false);
         tbObat.setToolTipText("Silahkan klik untuk memilih data yang mau diedit ataupun dihapus");
         tbObat.setComponentPopupMenu(jPopupMenu1);
         tbObat.setName("tbObat"); // NOI18N
@@ -1659,7 +1659,6 @@ public final class RMDataResumePasien extends javax.swing.JDialog {
                 public void windowDeactivated(WindowEvent e) {}
             });
             carikeluhan.setNoRawat(TNoRw.getText());
-            carikeluhan.tampil();
             carikeluhan.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
             carikeluhan.setLocationRelativeTo(internalFrame1);
             carikeluhan.setVisible(true);
@@ -1995,7 +1994,6 @@ public final class RMDataResumePasien extends javax.swing.JDialog {
                 public void windowDeactivated(WindowEvent e) {}
             });
             caripemeriksaan.setNoRawat(TNoRw.getText());
-            caripemeriksaan.tampil();
             caripemeriksaan.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
             caripemeriksaan.setLocationRelativeTo(internalFrame1);
             caripemeriksaan.setVisible(true);
@@ -2094,10 +2092,10 @@ public final class RMDataResumePasien extends javax.swing.JDialog {
     private widget.TextBox KodeProsedurUtama;
     private widget.ComboBox Kondisi;
     private widget.Label LCount;
-    private javax.swing.JMenuItem MnInputDiagnosa;
-    private javax.swing.JMenuItem MnLaporanResume;
-    private javax.swing.JMenuItem MnSPBK;
-    private javax.swing.JMenuItem MnSPBK2;
+    private widget.MenuItem MnInputDiagnosa;
+    private widget.MenuItem MnLaporanResume;
+    private widget.MenuItem MnSPBK;
+    private widget.MenuItem MnSPBK2;
     private widget.TextBox NmDokter;
     private widget.TextArea Obat2an;
     private javax.swing.JPanel PanelInput;
@@ -2136,11 +2134,11 @@ public final class RMDataResumePasien extends javax.swing.JDialog {
     private widget.Label jLabel8;
     private widget.Label jLabel9;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPopupMenu jPopupMenu1;
+    private widget.PopupMenu jPopupMenu1;
     private widget.Label label14;
     private widget.panelisi panelGlass8;
     private widget.panelisi panelGlass9;
-    private javax.swing.JMenuItem ppBerkasDigital;
+    private widget.MenuItem ppBerkasDigital;
     private widget.ScrollPane scrollInput;
     private widget.ScrollPane scrollPane2;
     private widget.ScrollPane scrollPane3;

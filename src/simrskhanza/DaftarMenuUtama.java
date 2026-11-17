@@ -634,6 +634,8 @@ import keuangan.KeuanganRekapPengajuanBiaya;
 import keuangan.KeuanganRekapPoliAnak;
 import keuangan.KeuanganRincianPiutangPasien;
 import keuangan.KeuanganRingkasanHutangVendorDapur;
+import keuangan.KeuanganRingkasanBebanHutangLain;
+import keuangan.KeuanganRingkasanHutangVendorAsetInventaris;
 import keuangan.KeuanganRingkasanHutangVendorFarmasi;
 import keuangan.KeuanganRingkasanHutangVendorNonMedis;
 import keuangan.KeuanganRingkasanJasaTindakan;
@@ -980,6 +982,13 @@ import rekammedis.RMSkriningAnemia;
 import rekammedis.RMSkriningCURB65;
 import rekammedis.RMSkriningDiabetesMelitus;
 import rekammedis.RMSkriningFrailtySyndrome;
+import rekammedis.RMSkriningTOLAC;
+import rekammedis.RMAdmisiSkoringTOLAC;
+import rekammedis.RMDataMonitoringTOLAC;
+import rekammedis.RMHasilPersalinanTOLAC;
+import rekammedis.RMReaksiTransfusi;
+import rekammedis.RMPenilaianGRACE;
+import rekammedis.RMPenilaianBishop;
 import rekammedis.RMSkriningHipertensi;
 import rekammedis.RMSkriningIndraPendengaran;
 import rekammedis.RMSkriningInstrumenACRS;
@@ -1026,6 +1035,7 @@ import setting.DlgJamDietPasien;
 import setting.DlgPasswordBPJS;
 import setting.DlgPenelusuranLogin;
 import setting.DlgRuangOperasi;
+import setting.DlgSetResepPerCaraBayar;
 import setting.DlgRunTeks;
 import setting.DlgRunTeksApotek;
 import setting.DlgSetAplikasi;
@@ -2227,6 +2237,8 @@ final class DaftarMenuUtama {
             .buka(() -> new KeuanganValidasiTagihanAset(u,false));
         m.tambah("btnBayarPemesananInventaris", "Bayar Pesan Aset/Inventaris", "iconfinder_10998_cash_money_icon_48px.png", akses::getbayar_pemesanan_iventaris)
             .buka(() -> new KeuanganBayarPemesananAset(u,false));
+        m.tambah("btnRingkasanHutangVendorAsetInventaris", "Ringkasan Hutang Vendor Aset/Inventaris", "9016847_cleaning_kitchen_covid-19_virus_pandemic_icon.png", akses::getringkasan_hutang_vendor_inventaris)
+            .buka(() -> new KeuanganRingkasanHutangVendorAsetInventaris(u,true));
         m.tambah("btnRingkasanHutangVendorBarangDapur", "Ringkasan Hutang Vendor Dapur", "2151697_bread_cutting_food_knife_rye_icon.png", akses::getringkasan_hutang_vendor_dapur)
             .buka(() -> new KeuanganRingkasanHutangVendorDapur(u,true));
         m.tambah("btnHutangDapur", "Hutang Barang Dapur", "2620509_employee_job_note_seeker_unemployee_icon.png", akses::gethutang_dapur)
@@ -2249,6 +2261,8 @@ final class DaftarMenuUtama {
             .buka(() -> new KeuanganPemberiHutangLain(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); });
         m.tambah("btnBebanHutangLain", "Beban Hutang Lain", "9554836_finance_business_marketing_chart_office_icon.png", akses::getbeban_hutang_lain)
             .buka(() -> new KeuanganBebanHutangLain(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnRingkasanBebanHutangLain", "Ringkasan Beban Hutang Lain", "debt_2780190.png", akses::getringkasan_beban_hutang_lain)
+            .buka(() -> new KeuanganRingkasanBebanHutangLain(u,true));
         m.tambah("btnBayarBebanHutangLain", "Bayar Beban Hutang Lain", "9554841_finance_business_office_marketing_chart_icon.png", akses::getbayar_beban_hutang_lain)
             .buka(() -> new KeuanganBayarBebanHutangLain(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); });
         m.tambah("btnBayarJMDokter", "Bayar JM Dokter", "4852541_doc_docx_files_odt_rtf_icon.png", akses::getbayar_jm_dokter)
@@ -2963,6 +2977,12 @@ final class DaftarMenuUtama {
             .buka(() -> new RMCatatanPersalinan(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); f.setTampil(); });
         m.tambah("btnMonitoringReaksiTranfusi", "Monitoring Reaksi Tranfusi", "6088722_blood_bottle_packet_icon.png", akses::getmonitoring_reaksi_tranfusi)
             .buka(() -> new RMDataMonitoringReaksiTranfusi(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); });
+        m.tambah("btnLaporanReaksiTranfusi", "Laporan Reaksi Tranfusi", "blood-transfusion_1225585.png", akses::getlaporan_reaksi_transfusi)
+            .buka(() -> new RMReaksiTransfusi(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); });
+        m.tambah("btnPenilaianGRACEScore", "Penilaian GRACE Score", "broken-heart_301940.png", akses::getpenilaian_grace_scor)
+            .buka(() -> new RMPenilaianGRACE(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); });
+        m.tambah("btnPenilaianBISHOPScore", "Penilaian BISHOP Score", "pregnant_5390232.png", akses::getpenilaian_bishop_scor)
+            .buka(() -> new RMPenilaianBishop(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); });
         m.tambah("btnPemantauanPEWSAnak", "Pemantauan PEWS Pasien Anak", "7744788_mom_children_mothers day_mother_love_icon.png", akses::getpemantauan_pews_anak)
             .buka(() -> new RMPemantauanPEWS(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); });
         m.tambah("btnPemantauanPEWSDewasa", "Pemantauan EWS Pasien Dewasa", "5928521_disease_fever_high_symptom_temperature_icon.png", akses::getpemantauan_pews_dewasa)
@@ -3159,6 +3179,14 @@ final class DaftarMenuUtama {
             .buka(() -> new RMSkriningDiabetesMelitus(u,false)).sebelum(f -> f.isCek());
         m.tambah("btnSkriningFrailtySyndrome", "Skrining Frailty Syndrome", "6217215_bacteria_people_virus_woman_icon.png", akses::getskrining_frailty_syndrome)
             .buka(() -> new RMSkriningFrailtySyndrome(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnSkriningTOLAC", "Skrining TOLAC", "pregnant-woman_14373989.png", akses::getskrining_tolac)
+            .buka(() -> new RMSkriningTOLAC(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnAdmisiSkoringTOLAC", "Admisi & Skoring TOLAC", "pregnant_4829967.png", akses::getadmisi_skoring_tolac)
+            .buka(() -> new RMAdmisiSkoringTOLAC(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnMonitoringTOLAC", "Monitoring Selama TOLAC", "birth_9581389.png", akses::getmonitoring_tolac)
+            .buka(() -> new RMDataMonitoringTOLAC(u,false)).sebelum(f -> f.isCek());
+        m.tambah("btnHasilPersalinanTOLAC", "Resume Hasil Persalinan TOLAC", "baby_864560.png", akses::gethasil_persalinan_tolac)
+            .buka(() -> new RMHasilPersalinanTOLAC(u,false)).sebelum(f -> f.isCek());
         m.tambah("btnLaporanTindakan", "Laporan Tindakan Medis", "5929215_avatar_doctor_health_hospital_man_icon.png", akses::getlaporan_tindakan)
             .buka(() -> new RMLaporanTindakan(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); f.setTampil(); });
     }
@@ -3730,5 +3758,7 @@ final class DaftarMenuUtama {
             .buka(() -> new DlgJamDietPasien(u,false)).sebelum(f -> f.isCek());
         m.tambah("btnRuangOperasi", "Ruang Operasi", "5898980_doctor_emergency_health_healthcare_healthy_icon.png", akses::getruang_ok)
             .buka(() -> new DlgRuangOperasi(u,false)).sebelum(f -> { f.emptTeks(); f.isCek(); });
+        m.tambah("btnSetResepPerCaraBayar", "Set Resep Per Cara Bayar", "medicament_18179836.png", akses::getset_resep_per_cara_bayar)
+            .buka(() -> new DlgSetResepPerCaraBayar(u,false));
     }
 }
