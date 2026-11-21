@@ -926,6 +926,7 @@ import rekammedis.RMPenilaianAwalMedisRalanBedah;
 import rekammedis.RMPenilaianAwalMedisRalanBedahMulut;
 import rekammedis.RMPenilaianAwalMedisRalanDewasa;
 import rekammedis.RMPenilaianAwalMedisRalanGeriatri;
+import rekammedis.RMPenilaianAwalMedisRalanGigi;
 import rekammedis.RMPenilaianAwalMedisRalanJantung;
 import rekammedis.RMPenilaianAwalMedisRalanKandungan;
 import rekammedis.RMPenilaianAwalMedisRalanKulitDanKelamin;
@@ -2853,6 +2854,8 @@ final class DaftarMenuUtama {
             .buka(() -> new RMPenilaianAwalMedisRanapJantung(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); f.setTampil(); });
         m.tambah("btnPenilaianAwalMedisRalanUrologi", "Awal Medis Ralan Urologi", "12321086_kidney_medical_health_organ_care_icon.png", akses::getpenilaian_awal_medis_ralan_urologi)
             .buka(() -> new RMPenilaianAwalMedisRalanUrologi(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); f.setTampil(); });
+        m.tambah("btnPenilaianAwalMedisRalanGigi", "Awal Medis Ralan Gigi", "tooth_1225584.png", akses::getpenilaian_awal_medis_gigi_mulut)
+            .buka(() -> new RMPenilaianAwalMedisRalanGigi(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); f.setTampil(); });
         m.tambah("btnHasilPemeriksaanUSG", "Hasil USG Kandungan", "375263_scan_scans_ultra sound_ultrasound_icon.png", akses::gethasil_pemeriksaan_usg)
             .buka(() -> new RMHasilPemeriksaanUSG(u,false)).sebelum(f -> { f.isCek(); f.emptTeks(); f.setTampil(); });
         m.tambah("btnHasilUSGUrologi", "Hasil USG Urologi", "6088090_disease_infected_infection_kidney_icon.png", akses::gethasil_usg_urologi)

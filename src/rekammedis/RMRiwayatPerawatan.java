@@ -335,6 +335,7 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
         chkAsuhanMedisRalanParu = new widget.CekBox();
         chkAsuhanMedisRalanJantung = new widget.CekBox();
         chkAsuhanMedisRalanUrologi = new widget.CekBox();
+        chkAsuhanMedisRalanGigi = new widget.CekBox();
         chkAsuhanMedisRalanKedokteranFisik = new widget.CekBox();
         chkAsuhanMedisRanap = new widget.CekBox();
         chkAsuhanMedisRanapKandungan = new widget.CekBox();
@@ -1255,6 +1256,13 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
         chkAsuhanMedisRalanUrologi.setName("chkAsuhanMedisRalanUrologi"); // NOI18N
         chkAsuhanMedisRalanUrologi.setPreferredSize(new java.awt.Dimension(245, 22));
         FormMenu.add(chkAsuhanMedisRalanUrologi);
+
+        chkAsuhanMedisRalanGigi.setSelected(true);
+        chkAsuhanMedisRalanGigi.setText("Awal Medis Ralan Gigi");
+        chkAsuhanMedisRalanGigi.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        chkAsuhanMedisRalanGigi.setName("chkAsuhanMedisRalanGigi"); // NOI18N
+        chkAsuhanMedisRalanGigi.setPreferredSize(new java.awt.Dimension(245, 22));
+        FormMenu.add(chkAsuhanMedisRalanGigi);
 
         chkAsuhanMedisRalanKedokteranFisik.setSelected(true);
         chkAsuhanMedisRalanKedokteranFisik.setText("Awal Medis Ralan Fisik & Rehabilitasi");
@@ -3615,6 +3623,7 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
     private widget.CekBox chkAsuhanMedisRalanBedah;
     private widget.CekBox chkAsuhanMedisRalanBedahMulut;
     private widget.CekBox chkAsuhanMedisRalanGeriatri;
+    private widget.CekBox chkAsuhanMedisRalanGigi;
     private widget.CekBox chkAsuhanMedisRalanJantung;
     private widget.CekBox chkAsuhanMedisRalanKandungan;
     private widget.CekBox chkAsuhanMedisRalanKedokteranFisik;
@@ -4263,6 +4272,7 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                     menampilkanAsuhanMedisRawatJalanParu(rs.getString("no_rawat"));
                     menampilkanAsuhanMedisRawatJalanJantung(rs.getString("no_rawat"));
                     menampilkanAsuhanMedisRawatJalanUrologi(rs.getString("no_rawat"));
+                    menampilkanAsuhanMedisRawatJalanGigi(rs.getString("no_rawat"));
                     menampilkanAsuhanMedisRawatJalanKedokteranFisikRehabilitasi(rs.getString("no_rawat"));
                     menampilkanLayananKedokteranFisikRehabilitasi(rs.getString("no_rawat"));
                     menampilkanLayananProgramKFR(rs.getString("no_rawat"));
@@ -36483,6 +36493,205 @@ private void BtnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
             }
         } catch (Exception e) {
             System.out.println("Notif Asuhan Medis Rawat Jalan Urologi : "+e);
+        }
+    }
+    
+    private void menampilkanAsuhanMedisRawatJalanGigi(String norawat) {
+        try {
+            if(chkAsuhanMedisRalanGigi.isSelected()==true){
+                try {
+                    rs2=koneksi.prepareStatement(
+                        "select penilaian_awal_medis_gigi_mulut.tanggal,penilaian_awal_medis_gigi_mulut.kd_dokter,dokter.nm_dokter,penilaian_awal_medis_gigi_mulut.anamnesis,penilaian_awal_medis_gigi_mulut.hubungan,"+
+                        "penilaian_awal_medis_gigi_mulut.keluhan_utama,penilaian_awal_medis_gigi_mulut.rps,penilaian_awal_medis_gigi_mulut.rpd,penilaian_awal_medis_gigi_mulut.rpo,penilaian_awal_medis_gigi_mulut.alergi,"+
+                        "penilaian_awal_medis_gigi_mulut.riwayat_keluarga,penilaian_awal_medis_gigi_mulut.occlusi,penilaian_awal_medis_gigi_mulut.torus_palatinus,penilaian_awal_medis_gigi_mulut.torus_mandibularis,"+
+                        "penilaian_awal_medis_gigi_mulut.supernumerary,penilaian_awal_medis_gigi_mulut.ket_supernumerary,penilaian_awal_medis_gigi_mulut.gigi_anomali,penilaian_awal_medis_gigi_mulut.ket_gigi_anomali,"+
+                        "penilaian_awal_medis_gigi_mulut.diastema,penilaian_awal_medis_gigi_mulut.ket_diastema,penilaian_awal_medis_gigi_mulut.lain_lain,penilaian_awal_medis_gigi_mulut.data_penunjang,"+
+                        "penilaian_awal_medis_gigi_mulut.diagnosa,penilaian_awal_medis_gigi_mulut.masalah_keperawatan,penilaian_awal_medis_gigi_mulut.terapi from penilaian_awal_medis_gigi_mulut "+
+                        "inner join dokter on penilaian_awal_medis_gigi_mulut.kd_dokter=dokter.kd_dokter where penilaian_awal_medis_gigi_mulut.no_rawat='"+norawat+"'").executeQuery();
+                    if(rs2.next()){
+                        htmlContent.append(
+                          "<tr class='isi'>").append( 
+                            "<td valign='top' width='2%'></td>").append(        
+                            "<td valign='top' width='18%'>Pengkajian Awal Medis Rawat Jalan Gigi</td>").append(
+                            "<td valign='top' width='1%' align='center'>:</td>").append(
+                            "<td valign='top' width='79%'>").append(
+                              "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"
+                        );
+                        do{
+                            htmlContent.append(
+                                 "<tr>").append(
+                                    "<td valign='top'>").append(
+                                       "YANG MELAKUKAN PENGKAJIAN").append(  
+                                       "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0px' class='tbl_form'>").append(
+                                          "<tr>").append(
+                                              "<td width='33%' border='0'>Tanggal : ").append(rs2.getString("tanggal")).append("</td>").append(
+                                              "<td width='33%' border='0'>Dokter : ").append(rs2.getString("kd_dokter")).append(" ").append(rs2.getString("nm_dokter")).append("</td>").append(
+                                              "<td width='33%' border='0'>Anamnesis : ").append(rs2.getString("anamnesis")).append((rs2.getString("hubungan").equals("")?"":", "+rs2.getString("hubungan"))).append("</td>").append(
+                                          "</tr>").append(
+                                       "</table>").append(
+                                    "</td>").append(
+                                 "</tr>").append(
+                                 "<tr>").append(
+                                    "<td valign='top'>").append(
+                                       "I. RIWAYAT KESEHATAN").append(  
+                                       "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0px' class='tbl_form'>").append(
+                                          "<tr>").append(
+                                              "<td colspan='2'>Keluhan Utama : ").append(rs2.getString("keluhan_utama").replaceAll("(\r\n|\r|\n|\n\r)","<br>")).append("</td>").append(
+                                          "</tr>").append(
+                                          "<tr>").append(
+                                              "<td colspan='2'>Riwayat Penyakit Sekarang : ").append(rs2.getString("rps").replaceAll("(\r\n|\r|\n|\n\r)","<br>")).append("</td>").append(
+                                          "</tr>").append(
+                                          "<tr>").append(
+                                              "<td width='50%'>Riwayat Penyakit Dahulu : ").append(rs2.getString("rpd").replaceAll("(\r\n|\r|\n|\n\r)","<br>")).append("</td>").append(
+                                              "<td width='50%'>Riwayat Alergi : ").append(rs2.getString("alergi")).append("</td>").append(
+                                          "</tr>").append(
+                                          "<tr>").append(
+                                              "<td width='50%'>Riwayat Penyakit Keluarga : ").append(rs2.getString("riwayat_keluarga").replaceAll("(\r\n|\r|\n|\n\r)","<br>")).append("</td>").append(
+                                              "<td width='50%'>Riwayat Penggunaan Obat : ").append(rs2.getString("rpo").replaceAll("(\r\n|\r|\n|\n\r)","<br>")).append("</td>").append(
+                                          "</tr>").append(
+                                       "</table>").append(
+                                    "</td>").append(
+                                 "</tr>"
+                            );
+
+                            int a,b;
+                            String[] urut={"18","17","16","15","14","13","12","11","21","22","23","24","25","26","27","28","55","54","53","52","51","61","62","63","64","65","85","84","83","82","81","71","72","73","74","75","48","47","46","45","44","43","42","41","31","32","33","34","35","36","37","38"};
+                            int[] awal={0,16,26,36},akhir={16,26,36,52};
+                            String[] kondisiGigi=new String[urut.length],ketGigi=new String[urut.length];
+                            
+                            try {
+                                rs3=koneksi.prepareStatement("select penilaian_awal_medis_gigi_odontogram.no_gigi,penilaian_awal_medis_gigi_odontogram.kondisi,penilaian_awal_medis_gigi_odontogram.keterangan from penilaian_awal_medis_gigi_odontogram where penilaian_awal_medis_gigi_odontogram.no_rawat='"+norawat+"'").executeQuery();
+                                while(rs3.next()){
+                                    for(a=0;a<urut.length;a++){
+                                        if(urut[a].equals(rs3.getString("no_gigi"))){
+                                            kondisiGigi[a]=rs3.getString("kondisi");
+                                            ketGigi[a]=rs3.getString("keterangan");
+                                        }
+                                    }
+                                }
+                            } catch (Exception e) {
+                                System.out.println("Notif : "+e);
+                            } finally{
+                                if(rs3!=null){
+                                    rs3.close();
+                                }
+                            }
+                            
+                            htmlContent.append(
+                                 "<tr>").append(
+                                    "<td valign='top'>").append(
+                                       "II. STATUS ODONTOGRAM").append(
+                                       "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0px' class='tbl_form'>"
+                            );
+                            for(a=0;a<awal.length;a++){
+                                htmlContent.append(
+                                     "<tr>").append(
+                                        "<td border='0' align='center'>").append(
+                                           "<table border='0' align='center' cellpadding='0' cellspacing='1' bgcolor='#8c8c8c'>").append(
+                                              "<tr>"
+                                );
+                                for(b=awal[a];b<akhir[a];b++){
+                                    htmlContent.append("<td width='34' height='30' align='center' style='border-right:0px;border-bottom:0px' bgcolor='").append(kondisiGigi[b]==null?"#FFFFFF":"#FFF4BE").append("'>").append(urut[b]).append("<br>").append(kondisiGigi[b]==null?"&nbsp;":kondisiGigi[b].substring(0,3)).append("</td>");
+                                }
+                                htmlContent.append(
+                                              "</tr>").append(
+                                           "</table>").append(
+                                        "</td>").append(
+                                     "</tr>"
+                                );
+                            }
+                            htmlContent.append(
+                                 "<tr>").append(
+                                    "<td bgcolor='#FFFAF8' align='center'>No. Gigi - Kondisi - Keterangan</td>").append(
+                                 "</tr>"
+                            );
+                            for(a=0;a<urut.length;a++){
+                                if(kondisiGigi[a]!=null){
+                                    htmlContent.append(
+                                         "<tr>").append(
+                                            "<td>Gigi ").append(urut[a]).append(" : ").append(kondisiGigi[a]).append(ketGigi[a].equals("")?"":" ("+ketGigi[a]+")").append("</td>").append(
+                                         "</tr>"
+                                    );
+                                }
+                            }
+                            htmlContent.append(
+                                       "</table>").append(
+                                    "</td>").append(
+                                 "</tr>").append(
+                                 "<tr>").append(
+                                    "<td valign='top'>").append(
+                                       "III. PEMERIKSAAN GIGI DAN MULUT").append(
+                                       "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0px' class='tbl_form'>").append(
+                                          "<tr>").append(
+                                              "<td width='50%'>Occlusi : ").append(rs2.getString("occlusi")).append("</td>").append(
+                                              "<td width='50%'>Torus Palatinus : ").append(rs2.getString("torus_palatinus")).append("</td>").append(
+                                          "</tr>").append(
+                                          "<tr>").append(
+                                              "<td width='50%'>Torus Mandibularis : ").append(rs2.getString("torus_mandibularis")).append("</td>").append(
+                                              "<td width='50%'>Supernumerary Teeth : ").append(rs2.getString("supernumerary")).append((rs2.getString("ket_supernumerary").equals("")?"":", "+rs2.getString("ket_supernumerary"))).append("</td>").append(
+                                          "</tr>").append(
+                                          "<tr>").append(
+                                              "<td width='50%'>Gigi Anomali : ").append(rs2.getString("gigi_anomali")).append((rs2.getString("ket_gigi_anomali").equals("")?"":", "+rs2.getString("ket_gigi_anomali"))).append("</td>").append(
+                                              "<td width='50%'>Diastema : ").append(rs2.getString("diastema")).append((rs2.getString("ket_diastema").equals("")?"":", "+rs2.getString("ket_diastema"))).append("</td>").append(
+                                          "</tr>").append(
+                                          "<tr>").append(
+                                              "<td colspan='2'>Lain-lain : ").append(rs2.getString("lain_lain").replaceAll("(\r\n|\r|\n|\n\r)","<br>")).append("</td>").append(
+                                          "</tr>").append(
+                                       "</table>").append(
+                                    "</td>").append(
+                                 "</tr>").append(
+                                 "<tr>").append(
+                                    "<td valign='top'>").append(
+                                       "IV. PEMERIKSAAN/DATA PENUNJANG").append(
+                                       "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0px' class='tbl_form'>").append(
+                                          "<tr>").append(
+                                              "<td width='100%'>").append(rs2.getString("data_penunjang").replaceAll("(\r\n|\r|\n|\n\r)","<br>")).append("</td>").append(
+                                          "</tr>").append(
+                                       "</table>").append(
+                                    "</td>").append(
+                                 "</tr>").append(
+                                 "<tr>").append(
+                                    "<td valign='top'>").append(
+                                       "V. DIAGNOSIS/ASESMEN").append(
+                                       "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0px' class='tbl_form'>").append(
+                                          "<tr>").append(
+                                              "<td width='100%'>Diagnosa : ").append(rs2.getString("diagnosa").replaceAll("(\r\n|\r|\n|\n\r)","<br>")).append("</td>").append(
+                                          "</tr>").append(
+                                          "<tr>").append(
+                                              "<td width='100%'>Masalah Keperawatan : ").append(rs2.getString("masalah_keperawatan").replaceAll("(\r\n|\r|\n|\n\r)","<br>")).append("</td>").append(
+                                          "</tr>").append(
+                                       "</table>").append(
+                                    "</td>").append(
+                                 "</tr>").append(
+                                 "<tr>").append(
+                                    "<td valign='top'>").append(
+                                       "VI. TATALAKSANA/TERAPI").append(
+                                       "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0px' class='tbl_form'>").append(
+                                          "<tr>").append(
+                                              "<td width='100%'>").append(rs2.getString("terapi").replaceAll("(\r\n|\r|\n|\n\r)","<br>")).append("</td>").append(
+                                          "</tr>").append(
+                                       "</table>").append(
+                                    "</td>").append(
+                                 "</tr>");
+                        }while(rs2.next());
+                        htmlContent.append(
+                              "</table>").append(
+                            "</td>").append(
+                          "</tr>");
+                    }
+                } catch (Exception e) {
+                    System.out.println("Notifikasi : "+e);
+                } finally{
+                    if(rs3!=null){
+                        rs3.close();
+                    }
+                    if(rs2!=null){
+                        rs2.close();
+                    }
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Notif Pengkajian Awal Medis Rawat Jalan Gigi : "+e);
         }
     }
     
